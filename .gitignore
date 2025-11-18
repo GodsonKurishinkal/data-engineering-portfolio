@@ -24,3 +24,6 @@ credentials/
 
 # Logs
 *.log
+
+# AI Agent Instructions (local development only)
+.github/copilot-instructions.md
