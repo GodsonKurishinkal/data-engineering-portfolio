@@ -53,16 +53,12 @@ I build enterprise data pipelines and ML systems for supply chain operations. No
 
 ## 🚀 Projects
 
-### [Project 001: Modern Data Platform](./project-001-modern-data-platform/)
-**Medallion Architecture | ETL Pipelines | Data Quality**
-
-Building scalable data lakehouse with Bronze/Silver/Gold layers:
-- Hive-partitioned Parquet storage
-- Schema validation with DuckDB
-- Airflow DAG orchestration
-- Great Expectations data quality
-
-**Status:** 🚧 In Development
+**Coming Soon** - Building production-grade data engineering projects to showcase:
+- Medallion data lakehouse architecture
+- ETL pipeline frameworks
+- Dimensional modeling implementations
+- RPA automation systems
+- ML systems for supply chain analytics
 
 ---
 
