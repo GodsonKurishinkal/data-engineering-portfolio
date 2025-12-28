@@ -1,173 +1,290 @@
 <div align="center">
 
-# Godson Kurishinkal
+<!-- Animated Header -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:3776AB,100:FF6B6B&height=200&section=header&text=Godson%20Kurishinkal&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Data%20Engineer%20%7C%20Dubai,%20UAE&descSize=20&descAlignY=55" width="100%"/>
 
-**Senior Data Engineer** · Dubai, UAE
+<br>
 
 *Building enterprise data platforms that power supply chain operations at scale*
 
+<br>
+
+<!-- Social Badges -->
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/godsonkurishinkal)
 [![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:godson.kurishinkal@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/GodsonKurishinkal)
 
 <br>
 
-![Python](https://img.shields.io/badge/Python-Expert-3776AB?style=flat-square&logo=python&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-Advanced-4479A1?style=flat-square&logo=postgresql&logoColor=white)
-![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)
-![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white)
+<!-- Profile Views -->
+![Profile Views](https://komarev.com/ghpvc/?username=GodsonKurishinkal&color=3776AB&style=flat-square&label=Profile+Views)
+
+</div>
+
+<br>
+
+## 🎯 About Me
+
+```python
+class SeniorDataEngineer:
+    def __init__(self):
+        self.name = "Godson Kurishinkal"
+        self.role = "Senior Data Engineer"
+        self.location = "Dubai, UAE"
+        self.company = "Landmark Group"
+        
+    def what_i_build(self):
+        return """
+        Production data infrastructure for retail supply chain operations—
+        not prototypes or dashboards, but systems that 10,000+ SKUs depend on daily.
+        """
+    
+    def daily_stack(self):
+        return ["Python", "SQL", "Polars", "DuckDB", "Azure", "Databricks"]
+```
+
+---
+
+## 📊 Impact at a Glance
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/87%25-Faster-success?style=for-the-badge" alt="87%"/>
+<br><b>Data Extraction</b>
+<br><sub>4 hrs → 30 min</sub>
+</td>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/95%25+-Reliability-blue?style=for-the-badge" alt="95%+"/>
+<br><b>Pipeline Uptime</b>
+<br><sub>50+ ETL jobs</sub>
+</td>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/90%25-Fresher-orange?style=for-the-badge" alt="90%"/>
+<br><b>Data Freshness</b>
+<br><sub>48 hrs → 2-4 hrs</sub>
+</td>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/10K+-SKUs-red?style=for-the-badge" alt="10K+"/>
+<br><b>Daily Processing</b>
+<br><sub>Medallion Architecture</sub>
+</td>
+</tr>
+</table>
 
 </div>
 
 ---
 
-## 🎯 What I Build
+## 🛠️ Tech Arsenal
 
-I design and build **production data infrastructure** for retail supply chain operations—not prototypes or dashboards, but the systems that **10,000+ SKUs depend on daily**.
+<div align="center">
 
-My work sits at the intersection of **data engineering**, **applied ML**, and **supply chain operations**: building pipelines that ingest from legacy ERPs, transforming messy operational data into reliable analytics, and deploying ML models that actually run in production.
+### Languages & Core
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
+![DAX](https://img.shields.io/badge/DAX-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 
----
+### Data Processing
+![Polars](https://img.shields.io/badge/Polars-CD792C?style=for-the-badge&logo=polars&logoColor=white)
+![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black)
+![PySpark](https://img.shields.io/badge/PySpark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
 
-## 📊 Impact
+### Cloud & Infrastructure
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=for-the-badge&logo=databricks&logoColor=white)
+![Delta Lake](https://img.shields.io/badge/Delta_Lake-00ADD8?style=for-the-badge&logo=delta&logoColor=white)
 
-<table>
-<tr>
-<td align="center"><h3>87%</h3><sub>Faster Data Extraction</sub><br><code>4 hrs → 30 min</code></td>
-<td align="center"><h3>95%+</h3><sub>Pipeline Reliability</sub><br><code>50+ ETL jobs</code></td>
-<td align="center"><h3>90%</h3><sub>Data Freshness</sub><br><code>48 hrs → 2-4 hrs</code></td>
-<td align="center"><h3>10K+</h3><sub>SKUs Processed</sub><br><code>Medallion Architecture</code></td>
-</tr>
-</table>
+### Storage & Formats
+![Parquet](https://img.shields.io/badge/Parquet-50ABF1?style=for-the-badge&logo=apache&logoColor=white)
+![ADLS](https://img.shields.io/badge/ADLS_Gen2-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
 
----
+### ML & Analytics
+![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![Prophet](https://img.shields.io/badge/Prophet-3B5998?style=for-the-badge&logo=meta&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-189FDD?style=for-the-badge&logo=xgboost&logoColor=white)
 
-## 🛠️ Technical Focus
+### Visualization & BI
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
-| Domain | Technologies & Patterns |
-|--------|------------------------|
-| **Data Platforms** | Medallion lakehouse (Bronze/Silver/Gold), Star schema, Incremental processing |
-| **Processing** | Python, SQL, Polars, DuckDB, PySpark |
-| **Orchestration** | Production ETL frameworks, Retry logic, YAML-driven config |
-| **ML Systems** | Demand forecasting (15+ ensembles), ABC-XYZ classification, Anomaly detection |
-| **Cloud** | Azure Data Factory, Databricks, Synapse, Delta Lake, ADLS Gen2 |
+### Automation
+![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=white)
+![PyAutoGUI](https://img.shields.io/badge/PyAutoGUI-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
----
-
-## 🏗️ Production Systems
-
-<details>
-<summary><b>Medallion Data Lakehouse</b> — Enterprise data platform</summary>
-<br>
-Processing retail operations data through Bronze (raw ingestion), Silver (cleaned, validated), and Gold (business-ready) layers. Built with Polars + DuckDB for performance, Parquet + Hive partitioning for storage efficiency.
-
-```
-Bronze → Raw ingestion from ERP, CRM, WMS, OBI
-Silver → Validated, deduplicated, type-enforced
-Gold   → Business-ready aggregates & dimensions
-```
-</details>
-
-<details>
-<summary><b>Universal Replenishment Engine</b> — Inventory optimization</summary>
-<br>
-Implementing (s,S) policy with ABC-XYZ classification, statistical safety stock calculations, and scenario-based YAML configuration for different operational patterns (3PL-to-warehouse, storage-to-picking).
-</details>
-
-<details>
-<summary><b>Demand Forecasting System</b> — 15+ algorithm ensemble</summary>
-<br>
-ADI/CV² demand pattern classification with automated model selection. Handles intermittent demand patterns common in retail—lumpy, erratic, smooth, and slow-moving SKUs.
-</details>
-
-<details>
-<summary><b>CBM Anomaly Detection</b> — Three-tier statistical system</summary>
-<br>
-
-| Tier | Method | Purpose |
-|------|--------|---------|
-| 1 | Validation Rules | Business logic checks |
-| 2 | IQR/Z-score | Outlier detection |
-| 3 | Volatility Analysis | Pattern stability |
-
-Identified 500+ data quality issues with priority scoring.
-</details>
-
-<details>
-<summary><b>RPA Bot Framework</b> — Legacy system automation</summary>
-<br>
-Selenium/PyAutoGUI automation for OBI, GCRM, GDMS, WMS integration. Abstract base classes, factory pattern, exponential backoff retry logic.
-</details>
+</div>
 
 ---
 
-## 💻 Tech Stack
+## 🏗️ Production Systems I've Built
 
-```
-┌─────────────────┬────────────────────────────────────────────────┐
-│ Languages       │ Python (expert) · SQL · DAX                    │
-├─────────────────┼────────────────────────────────────────────────┤
-│ Processing      │ Polars · DuckDB · PySpark · Pandas             │
-├─────────────────┼────────────────────────────────────────────────┤
-│ Storage         │ Parquet · Delta Lake · Hive Partitioning       │
-├─────────────────┼────────────────────────────────────────────────┤
-│ Cloud           │ Azure (ADF, Synapse, ADLS Gen2) · Databricks   │
-├─────────────────┼────────────────────────────────────────────────┤
-│ Orchestration   │ Custom Python frameworks · Airflow patterns    │
-├─────────────────┼────────────────────────────────────────────────┤
-│ ML/Stats        │ Scikit-learn · Prophet · XGBoost · statsmodels │
-├─────────────────┼────────────────────────────────────────────────┤
-│ Visualization   │ Power BI · Streamlit                           │
-├─────────────────┼────────────────────────────────────────────────┤
-│ Automation      │ Selenium · PyAutoGUI                           │
-└─────────────────┴────────────────────────────────────────────────┘
-```
+<details>
+<summary>🔷 <b>Medallion Data Lakehouse</b> — Enterprise Data Platform</summary>
+<br>
 
----
+Processing retail operations data through a three-layer architecture:
 
-## ⚙️ Engineering Principles
-
-```python
-class ProductionCode:
-    """The code I write follows patterns that matter in production."""
+```mermaid
+graph LR
+    A[�� Sources] --> B[🥉 Bronze]
+    B --> C[🥈 Silver]
+    C --> D[🥇 Gold]
     
-    patterns = [
-        "Medallion architecture for data quality at each layer",
-        "Idempotent pipelines that can be safely re-run",
-        "Configuration-driven design (YAML, dataclasses) over hardcoding",
-        "Comprehensive error handling with structured logging",
-        "Type hints on all public interfaces",
-        "Design patterns (Strategy, Factory, Template) where they reduce complexity",
-    ]
+    subgraph Sources
+    A1[ERP] --> A
+    A2[CRM] --> A
+    A3[WMS] --> A
+    A4[OBI] --> A
+    end
 ```
+
+| Layer | Purpose | Tech |
+|-------|---------|------|
+| **Bronze** | Raw ingestion, schema-on-read | Polars, Parquet |
+| **Silver** | Validated, deduplicated, typed | DuckDB, Hive Partitioning |
+| **Gold** | Business aggregates, dimensions | Star Schema, Delta Lake |
+
+</details>
+
+<details>
+<summary>📦 <b>Universal Replenishment Engine</b> — Inventory Optimization</summary>
+<br>
+
+Implementing sophisticated inventory policies:
+
+- **(s,S) Policy** — Reorder point with order-up-to level
+- **ABC-XYZ Classification** — Value × Demand variability matrix
+- **Statistical Safety Stock** — Service level driven calculations
+- **Scenario Configuration** — YAML-driven operational patterns
+
+Supports: 3PL-to-warehouse, storage-to-picking, cross-dock operations
+
+</details>
+
+<details>
+<summary>📈 <b>Demand Forecasting System</b> — 15+ Algorithm Ensemble</summary>
+<br>
+
+| Pattern Type | Classification | Algorithms |
+|--------------|----------------|------------|
+| Smooth | Low ADI, Low CV² | Moving Average, Exponential Smoothing |
+| Intermittent | High ADI, Low CV² | Croston, SBA |
+| Erratic | Low ADI, High CV² | ARIMA, Prophet |
+| Lumpy | High ADI, High CV² | Ensemble with outlier handling |
+
+Automated model selection based on ADI/CV² demand pattern classification.
+
+</details>
+
+<details>
+<summary>🔍 <b>CBM Anomaly Detection</b> — Three-Tier Statistical System</summary>
+<br>
+
+```
+Tier 1 ──► Validation Rules (Business Logic)
+    │
+    ▼
+Tier 2 ──► Outlier Detection (IQR/Z-score)
+    │
+    ▼
+Tier 3 ──► Volatility Analysis (Pattern Stability)
+    │
+    ▼
+   📊 Priority Scoring ──► 500+ issues identified
+```
+
+</details>
+
+<details>
+<summary>🤖 <b>RPA Bot Framework</b> — Legacy System Automation</summary>
+<br>
+
+**Systems Integrated:** OBI, GCRM, GDMS, WMS
+
+**Design Patterns:**
+- Abstract Base Classes for bot behaviors
+- Factory Pattern for bot instantiation
+- Exponential Backoff for retry logic
+- Structured logging for debugging
+
+</details>
 
 ---
 
-## 📍 Currently
+## ⚙️ Engineering Philosophy
+
+<div align="center">
+
+| Principle | Why It Matters |
+|-----------|----------------|
+| 🏛️ **Medallion Architecture** | Data quality gates at each layer |
+| 🔄 **Idempotent Pipelines** | Safe re-runs, no duplicates |
+| 📝 **Config-Driven Design** | YAML/dataclasses over hardcoding |
+| 🛡️ **Error Handling** | Structured logging, graceful failures |
+| 📐 **Type Hints** | Self-documenting, IDE-friendly code |
+| 🧩 **Design Patterns** | Strategy, Factory, Template Method |
+
+</div>
+
+---
+
+## 📍 Current Status
+
+<div align="center">
 
 | | |
-|---|---|
-| **Role** | Senior Data Engineer @ Landmark Group |
-| **Education** | BS Data Science & Applications, IIT Madras *(in progress)* |
-| **Focus** | Cloud platform architecture (Azure/Databricks), MLOps |
-| **Open to** | Senior Data Engineer roles in UAE |
+|:---:|:---|
+| 💼 | **Senior Data Engineer** @ Landmark Group |
+| 🎓 | **BS Data Science** @ IIT Madras *(in progress)* |
+| 🎯 | **Focus:** Azure/Databricks, MLOps, Platform Engineering |
+| 🔍 | **Open to:** Senior/Staff Data Engineer roles in UAE |
+
+</div>
 
 ---
 
 ## 📁 Featured Repositories
 
+<div align="center">
+
 | Repository | Description | Status |
-|------------|-------------|--------|
-| `medallion-lakehouse` | Production lakehouse patterns | 🚧 Coming Soon |
-| `etl-framework` | Configuration-driven ETL pipelines | 🚧 Coming Soon |
-| `demand-forecasting` | ML ensemble for retail forecasting | 🚧 Coming Soon |
+|:-----------|:------------|:------:|
+| `medallion-lakehouse` | Production lakehouse patterns with Polars + DuckDB | 🚧 |
+| `etl-framework` | Config-driven ETL with retry logic & logging | �� |
+| `demand-forecasting` | ML ensemble for retail demand patterns | 🚧 |
+| `rpa-automation` | Legacy system integration framework | 🚧 |
+
+*Building public versions of production patterns*
+
+</div>
+
+---
+
+## 📈 GitHub Stats
+
+<div align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=GodsonKurishinkal&show_icons=true&theme=github_dark&hide_border=true&bg_color=0D1117&title_color=3776AB&icon_color=3776AB&text_color=FFFFFF" width="49%"/>
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=GodsonKurishinkal&theme=github-dark-blue&hide_border=true&background=0D1117&stroke=3776AB&ring=3776AB&fire=FF6B6B&currStreakLabel=FFFFFF" width="49%"/>
+
+<br><br>
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GodsonKurishinkal&layout=compact&theme=github_dark&hide_border=true&bg_color=0D1117&title_color=3776AB&text_color=FFFFFF" width="40%"/>
+
+</div>
 
 ---
 
 <div align="center">
 
+<!-- Animated Footer -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:3776AB,100:FF6B6B&height=120&section=footer" width="100%"/>
+
 **Dubai, UAE** · Open to Senior Data Engineer opportunities
 
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=GodsonKurishinkal&show_icons=true&theme=default&hide_border=true&hide=stars&count_private=true)](https://github.com/GodsonKurishinkal)
+<sub>💡 *"Production code is code that someone depends on."*</sub>
 
 </div>
