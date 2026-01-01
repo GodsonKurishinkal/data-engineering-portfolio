@@ -642,6 +642,106 @@
             height: 18px;
         }
         
+        /* 2026 Focus Section */
+        .focus-2026 {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+        
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 800px) {
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .focus-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .focus-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+        }
+        
+        .focus-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+        
+        .focus-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .focus-card-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: var(--radius-sm);
+            font-size: 1.25rem;
+        }
+        
+        .focus-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .focus-card-items {
+            list-style: none;
+        }
+        
+        .focus-card-items li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .focus-card-items li:last-child {
+            border-bottom: none;
+        }
+        
+        .focus-card-items li::before {
+            content: '→';
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        
+        .focus-card-items .target {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        
         /* Coming Soon Section */
         .coming-soon {
             background: var(--bg-secondary);
@@ -1030,11 +1130,54 @@
         </div>
     </section>
     
+    <!-- 2026 Focus Section -->
+    <section class="focus-2026 animate-on-scroll" aria-labelledby="focus-title">
+        <div class="section-header">
+            <p class="section-eyebrow">NEW YEAR, NEW GOALS</p>
+            <h2 class="section-title" id="focus-title">2026 Focus</h2>
+        </div>
+        <div class="focus-grid">
+            <div class="focus-card">
+                <div class="focus-card-header">
+                    <span class="focus-card-icon">🎓</span>
+                    <h3 class="focus-card-title">Certifications</h3>
+                </div>
+                <ul class="focus-card-items">
+                    <li>Azure Data Engineer (DP-203) <span class="target">Q1</span></li>
+                    <li>Microsoft Fabric Data Engineer <span class="target">Q2</span></li>
+                    <li>Databricks Data Engineer <span class="target">Q3</span></li>
+                </ul>
+            </div>
+            <div class="focus-card">
+                <div class="focus-card-header">
+                    <span class="focus-card-icon">💼</span>
+                    <h3 class="focus-card-title">Portfolio</h3>
+                </div>
+                <ul class="focus-card-items">
+                    <li>5+ detailed case studies <span class="target">Ongoing</span></li>
+                    <li>Architecture diagrams <span class="target">Q1</span></li>
+                    <li>Open-source ETL toolkit <span class="target">Q2</span></li>
+                </ul>
+            </div>
+            <div class="focus-card">
+                <div class="focus-card-header">
+                    <span class="focus-card-icon">🚀</span>
+                    <h3 class="focus-card-title">Career</h3>
+                </div>
+                <ul class="focus-card-items">
+                    <li>Senior/Staff Data Engineer role <span class="target">Q2</span></li>
+                    <li>Enterprise-scale cloud projects <span class="target">Ongoing</span></li>
+                    <li>Technical content & writing <span class="target">Weekly</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
     <!-- Coming Soon Section -->
     <section class="coming-soon animate-on-scroll" aria-labelledby="coming-soon-title">
         <div class="coming-soon-content">
-            <h2 id="coming-soon-title">🚀 Big Things Coming in 2026</h2>
-            <p>More case studies, architecture deep-dives, and open-source projects on the way. Let's build something great this year.</p>
+            <h2 id="coming-soon-title">🚀 Let's Connect</h2>
+            <p>Follow along as I build in public. New case studies, learnings, and projects coming regularly.</p>
             <div class="social-links">
                 <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="social-link">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
