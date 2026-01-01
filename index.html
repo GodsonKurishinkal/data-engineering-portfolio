@@ -91,8 +91,15 @@
             pointer-events: none;
             z-index: 0;
             background-image: 
-                radial-gradient(circle at 1px 1px, rgba(8, 145, 178, 0.15) 1px, transparent 0);
-            background-size: 40px 40px;
+                linear-gradient(rgba(8, 145, 178, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 25s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
         
         /* Hero gradient overlay */
