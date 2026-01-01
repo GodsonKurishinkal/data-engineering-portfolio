@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Demand Forecasting System | Godson - Senior Data Engineer</title>
+    <meta name="description" content="Case study: Building an intelligent demand forecasting system with 15+ ensemble algorithms and ADI/CV² pattern classification for supply chain optimization.">
+    <meta name="keywords" content="Demand Forecasting, Time Series, Machine Learning, Ensemble Models, Supply Chain, Python, Scikit-learn">
+    <meta name="author" content="Godson Kurishinkal">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Demand Forecasting System | Case Study">
+    <meta property="og:description" content="How I built an intelligent forecasting engine with 15+ algorithms that automatically selects the best model based on demand patterns.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/demand-forecasting.html">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+    
+    <style>
+        /* CSS Reset & Variables */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #fafbfc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --accent: #0891b2;
+            --accent-hover: #0e7490;
+            --accent-glow: rgba(8, 145, 178, 0.12);
+            --accent-gradient: linear-gradient(135deg, #0891b2 0%, #0ea5e9 50%, #2563eb 100%);
+            --accent-green: #059669;
+            --accent-green-glow: rgba(5, 150, 105, 0.15);
+            --accent-amber: #d97706;
+            --accent-amber-glow: rgba(217, 119, 6, 0.15);
+            --accent-purple: #7c3aed;
+            --accent-purple-glow: rgba(124, 58, 237, 0.15);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border: rgba(15, 23, 42, 0.08);
+            --border-hover: rgba(8, 145, 178, 0.5);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --gradient-accent: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Background Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(8, 145, 178, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 251, 252, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-logo a {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-logo a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+        
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 7rem 2rem 4rem;
+        }
+        
+        /* Case Study Header */
+        .case-header {
+            margin-bottom: 3rem;
+        }
+        
+        .case-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-purple-glow);
+            border: 1px solid var(--accent-purple);
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--accent-purple);
+            margin-bottom: 1.5rem;
+        }
+        
+        .case-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .case-header h1 .gradient {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .case-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .meta-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Impact Stats */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        @media (max-width: 700px) {
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .impact-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .impact-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+        
+        .impact-card.green { border-top: 3px solid var(--accent-green); }
+        .impact-card.blue { border-top: 3px solid var(--accent); }
+        .impact-card.amber { border-top: 3px solid var(--accent-amber); }
+        .impact-card.purple { border-top: 3px solid var(--accent-purple); }
+        
+        .impact-value {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .impact-card.green .impact-value { color: var(--accent-green); }
+        .impact-card.blue .impact-value { color: var(--accent); }
+        .impact-card.amber .impact-value { color: var(--accent-amber); }
+        .impact-card.purple .impact-value { color: var(--accent-purple); }
+        
+        .impact-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+        
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .section ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .section li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Algorithm Cards */
+        .algorithm-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 700px) {
+            .algorithm-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .algorithm-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .algorithm-card {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .algorithm-card:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .algorithm-card h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .algorithm-card p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        .algorithm-card .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: var(--accent-glow);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+        
+        /* Pattern Classification */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 600px) {
+            .pattern-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .pattern-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        
+        .pattern-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pattern-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: var(--radius-sm);
+            font-size: 1.25rem;
+        }
+        
+        .pattern-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .pattern-formula {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .pattern-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .pattern-algorithms {
+            font-size: 0.8125rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        /* Architecture Diagram */
+        .architecture-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .flow-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: var(--radius);
+            font-size: 1.5rem;
+        }
+        
+        .flow-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .flow-arrow {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: #1e293b;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: #0f172a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .code-title {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: #94a3b8;
+        }
+        
+        .code-dots {
+            display: flex;
+            gap: 0.375rem;
+        }
+        
+        .code-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .code-dots span:nth-child(1) { background: #f87171; }
+        .code-dots span:nth-child(2) { background: #fbbf24; }
+        .code-dots span:nth-child(3) { background: #4ade80; }
+        
+        .code-content {
+            padding: 1.25rem;
+            overflow-x: auto;
+        }
+        
+        .code-content pre {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin: 0;
+        }
+        
+        .code-content .comment { color: #64748b; }
+        .code-content .keyword { color: #22d3ee; }
+        .code-content .string { color: #4ade80; }
+        .code-content .number { color: #fbbf24; }
+        .code-content .function { color: #a78bfa; }
+        .code-content .class { color: #f472b6; }
+        
+        /* Tech Stack Pills */
+        .tech-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-pill {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        
+        .tech-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Lessons Learned */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .lesson-card {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            border-left: 3px solid var(--accent);
+        }
+        
+        .lesson-card h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .lesson-card p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .case-cta {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-top: 4rem;
+        }
+        
+        .case-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-text a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-text a:hover {
+            color: var(--accent);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            main {
+                padding: 6rem 1rem 3rem;
+            }
+            
+            .case-meta {
+                gap: 1.5rem;
+            }
+            
+            .impact-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation">
+        <div class="nav-logo">
+            <a href="../index.html">← Back to Portfolio</a>
+        </div>
+        <div class="nav-links">
+            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Header -->
+        <header class="case-header">
+            <span class="case-badge">📈 Machine Learning</span>
+            <h1>Intelligent <span class="gradient">Demand Forecasting</span> System</h1>
+            <p class="case-subtitle">An ensemble forecasting engine with 15+ algorithms that automatically selects the best model based on demand pattern classification using ADI/CV² analysis.</p>
+            
+            <div class="case-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Senior Data Engineer</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Industry</span>
+                    <span class="meta-value">Retail Supply Chain</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Duration</span>
+                    <span class="meta-value">6 months</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">SKUs</span>
+                    <span class="meta-value">10,000+</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Impact Stats -->
+        <div class="impact-grid">
+            <div class="impact-card green">
+                <div class="impact-value">15+</div>
+                <div class="impact-label">Algorithms in Ensemble</div>
+            </div>
+            <div class="impact-card blue">
+                <div class="impact-value">4</div>
+                <div class="impact-label">Pattern Categories</div>
+            </div>
+            <div class="impact-card amber">
+                <div class="impact-value">85%</div>
+                <div class="impact-label">Forecast Accuracy</div>
+            </div>
+            <div class="impact-card purple">
+                <div class="impact-value">30%</div>
+                <div class="impact-label">Stockout Reduction</div>
+            </div>
+        </div>
+        
+        <!-- The Challenge -->
+        <section class="section">
+            <h2 class="section-title">The Challenge</h2>
+            <p>Supply chain forecasting is notoriously difficult because not all products behave the same way. A best-seller with consistent daily sales needs a different forecasting approach than a slow-moving spare part ordered once a month.</p>
+            <p>The existing system used a one-size-fits-all approach—applying the same simple moving average to all 10,000+ SKUs. This led to:</p>
+            <ul>
+                <li>Frequent stockouts on fast-moving items (losing sales)</li>
+                <li>Excess inventory on slow-movers (tying up capital)</li>
+                <li>Manual overrides by planners consuming hours daily</li>
+                <li>No visibility into why forecasts were off</li>
+            </ul>
+        </section>
+        
+        <!-- The Solution -->
+        <section class="section">
+            <h2 class="section-title">The Solution</h2>
+            <p>I built an intelligent forecasting system that classifies each SKU's demand pattern and automatically selects the most appropriate algorithm from an ensemble of 15+ models.</p>
+            
+            <!-- Architecture Flow -->
+            <div class="architecture-flow">
+                <div class="flow-step">
+                    <div class="flow-icon">📊</div>
+                    <span class="flow-label">Historical Data</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">🔍</div>
+                    <span class="flow-label">Pattern Analysis</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">🎯</div>
+                    <span class="flow-label">ADI/CV² Classification</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">🤖</div>
+                    <span class="flow-label">Model Selection</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">📈</div>
+                    <span class="flow-label">Forecast Output</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pattern Classification -->
+        <section class="section">
+            <h2 class="section-title">Pattern Classification (ADI/CV²)</h2>
+            <p>The system uses two key metrics to classify demand patterns:</p>
+            <ul>
+                <li><strong>ADI (Average Demand Interval)</strong> — How often does demand occur?</li>
+                <li><strong>CV² (Coefficient of Variation Squared)</strong> — How variable is demand size?</li>
+            </ul>
+            
+            <div class="pattern-grid">
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <div class="pattern-icon">📈</div>
+                        <div>
+                            <div class="pattern-name">Smooth</div>
+                            <div class="pattern-formula">ADI &lt; 1.32 AND CV² &lt; 0.49</div>
+                        </div>
+                    </div>
+                    <p class="pattern-desc">Regular, predictable demand. Best for time series models.</p>
+                    <div class="pattern-algorithms">→ ARIMA, Prophet, Holt-Winters</div>
+                </div>
+                
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <div class="pattern-icon">📊</div>
+                        <div>
+                            <div class="pattern-name">Erratic</div>
+                            <div class="pattern-formula">ADI &lt; 1.32 AND CV² ≥ 0.49</div>
+                        </div>
+                    </div>
+                    <p class="pattern-desc">Frequent but variable demand. Needs robust methods.</p>
+                    <div class="pattern-algorithms">→ Random Forest, XGBoost, Croston</div>
+                </div>
+                
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <div class="pattern-icon">⚡</div>
+                        <div>
+                            <div class="pattern-name">Intermittent</div>
+                            <div class="pattern-formula">ADI ≥ 1.32 AND CV² &lt; 0.49</div>
+                        </div>
+                    </div>
+                    <p class="pattern-desc">Infrequent but consistent quantities when ordered.</p>
+                    <div class="pattern-algorithms">→ Croston, SBA, TSB</div>
+                </div>
+                
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <div class="pattern-icon">🎲</div>
+                        <div>
+                            <div class="pattern-name">Lumpy</div>
+                            <div class="pattern-formula">ADI ≥ 1.32 AND CV² ≥ 0.49</div>
+                        </div>
+                    </div>
+                    <p class="pattern-desc">Rare and unpredictable. Hardest to forecast.</p>
+                    <div class="pattern-algorithms">→ TSB, Bootstrap, Safety Stock Models</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Algorithm Ensemble -->
+        <section class="section">
+            <h2 class="section-title">Algorithm Ensemble</h2>
+            <p>The system includes 15+ forecasting algorithms, each optimized for different demand characteristics:</p>
+            
+            <div class="algorithm-grid">
+                <div class="algorithm-card">
+                    <h4>ARIMA</h4>
+                    <p>Auto-regressive integrated moving average for stationary series</p>
+                    <span class="tag">Time Series</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>Prophet</h4>
+                    <p>Facebook's model for seasonality and holiday effects</p>
+                    <span class="tag">Seasonality</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>Holt-Winters</h4>
+                    <p>Triple exponential smoothing for trends</p>
+                    <span class="tag">Trending</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>XGBoost</h4>
+                    <p>Gradient boosting with feature engineering</p>
+                    <span class="tag">ML</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>Random Forest</h4>
+                    <p>Ensemble of decision trees for robustness</p>
+                    <span class="tag">ML</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>Croston</h4>
+                    <p>Specialized for intermittent demand</p>
+                    <span class="tag">Intermittent</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>SBA</h4>
+                    <p>Syntetos-Boylan Approximation</p>
+                    <span class="tag">Intermittent</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>TSB</h4>
+                    <p>Teunter-Syntetos-Babai for lumpy demand</p>
+                    <span class="tag">Lumpy</span>
+                </div>
+                <div class="algorithm-card">
+                    <h4>Simple Exponential</h4>
+                    <p>Baseline model for stable demand</p>
+                    <span class="tag">Baseline</span>
+                </div>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--text-muted);">+ Moving Averages, Linear Regression, LSTM, Theta Method, Naive Methods, and more...</p>
+        </section>
+        
+        <!-- Code Sample -->
+        <section class="section">
+            <h2 class="section-title">Implementation</h2>
+            <p>The pattern classifier uses a clean, configurable design:</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="code-title">pattern_classifier.py</span>
+                </div>
+                <div class="code-content">
+<pre><span class="keyword">class</span> <span class="class">DemandPatternClassifier</span>:
+    <span class="string">"""Classify SKU demand patterns using ADI/CV² analysis."""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, adi_threshold=<span class="number">1.32</span>, cv2_threshold=<span class="number">0.49</span>):
+        self.adi_threshold = adi_threshold
+        self.cv2_threshold = cv2_threshold
+        
+    <span class="keyword">def</span> <span class="function">classify</span>(self, demand_series: pd.Series) -> <span class="class">DemandPattern</span>:
+        <span class="comment"># Calculate Average Demand Interval</span>
+        non_zero_periods = (demand_series > <span class="number">0</span>).sum()
+        adi = len(demand_series) / non_zero_periods <span class="keyword">if</span> non_zero_periods > <span class="number">0</span> <span class="keyword">else</span> float(<span class="string">'inf'</span>)
+        
+        <span class="comment"># Calculate CV² (squared coefficient of variation)</span>
+        non_zero_demand = demand_series[demand_series > <span class="number">0</span>]
+        cv2 = (non_zero_demand.std() / non_zero_demand.mean()) ** <span class="number">2</span>
+        
+        <span class="comment"># Classify based on thresholds</span>
+        <span class="keyword">if</span> adi < self.adi_threshold <span class="keyword">and</span> cv2 < self.cv2_threshold:
+            <span class="keyword">return</span> <span class="class">DemandPattern</span>.SMOOTH
+        <span class="keyword">elif</span> adi < self.adi_threshold <span class="keyword">and</span> cv2 >= self.cv2_threshold:
+            <span class="keyword">return</span> <span class="class">DemandPattern</span>.ERRATIC
+        <span class="keyword">elif</span> adi >= self.adi_threshold <span class="keyword">and</span> cv2 < self.cv2_threshold:
+            <span class="keyword">return</span> <span class="class">DemandPattern</span>.INTERMITTENT
+        <span class="keyword">else</span>:
+            <span class="keyword">return</span> <span class="class">DemandPattern</span>.LUMPY</pre>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tech Stack -->
+        <section class="section">
+            <h2 class="section-title">Tech Stack</h2>
+            <div class="tech-pills">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Pandas</span>
+                <span class="tech-pill">Scikit-learn</span>
+                <span class="tech-pill">Statsmodels</span>
+                <span class="tech-pill">Prophet</span>
+                <span class="tech-pill">XGBoost</span>
+                <span class="tech-pill">Polars</span>
+                <span class="tech-pill">DuckDB</span>
+            </div>
+        </section>
+        
+        <!-- Lessons Learned -->
+        <section class="section">
+            <h2 class="section-title">Key Learnings</h2>
+            <div class="lessons-grid">
+                <div class="lesson-card">
+                    <h4>No Silver Bullet</h4>
+                    <p>Different demand patterns need different algorithms. The classifier approach improved accuracy by 25% over one-size-fits-all.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Intermittent is Hard</h4>
+                    <p>40% of SKUs had intermittent/lumpy demand. Croston and TSB significantly outperformed traditional methods here.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Feature Engineering Matters</h4>
+                    <p>Adding promotional calendars, seasonality flags, and lead time features boosted ML model accuracy by 15%.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Explainability Wins Trust</h4>
+                    <p>Showing planners WHY a forecast was generated (pattern type, algorithm used) increased adoption significantly.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA -->
+        <div class="case-cta">
+            <h3>Interested in the Details?</h3>
+            <p>Let's discuss how intelligent forecasting can transform your supply chain operations.</p>
+            <div class="cta-buttons">
+                <a href="medallion-lakehouse.html" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    View Lakehouse Case Study
+                </a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2026 <a href="../index.html">Godson Kurishinkal</a>. Building data pipelines that power decisions.</p>
+    </footer>
+</body>
+</html>
