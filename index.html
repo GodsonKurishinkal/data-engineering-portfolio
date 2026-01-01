@@ -642,6 +642,142 @@
             height: 18px;
         }
         
+        /* Featured Projects Section */
+        .featured-projects {
+            background: var(--bg-secondary);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .project-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .project-card-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: var(--radius-sm);
+            font-size: 1.5rem;
+        }
+        
+        .project-card-arrow {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover .project-card-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+        
+        .project-card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-card-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .project-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+        
+        .project-card-metrics {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .project-metric {
+            text-align: center;
+        }
+        
+        .project-metric-value {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .project-metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        
         /* 2026 Focus Section */
         .focus-2026 {
             background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
@@ -1127,6 +1263,76 @@
                     Git
                 </span>
             </div>
+        </div>
+    </section>
+    
+    <!-- Featured Projects Section -->
+    <section class="featured-projects animate-on-scroll" aria-labelledby="projects-title">
+        <div class="section-header">
+            <p class="section-eyebrow">FEATURED WORK</p>
+            <h2 class="section-title" id="projects-title">Projects</h2>
+        </div>
+        <div class="projects-grid">
+            <a href="projects/medallion-lakehouse.html" class="project-card">
+                <div class="project-card-header">
+                    <span class="project-card-icon">🏗️</span>
+                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+                <h3 class="project-card-title">Medallion Data Lakehouse</h3>
+                <p class="project-card-desc">Bronze/Silver/Gold architecture processing 10,000+ SKUs with 95%+ pipeline reliability.</p>
+                <div class="project-card-tags">
+                    <span class="project-tag">Polars</span>
+                    <span class="project-tag">Parquet</span>
+                    <span class="project-tag">Star Schema</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-metric">
+                        <div class="project-metric-value">87%</div>
+                        <div class="project-metric-label">Faster</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">90%</div>
+                        <div class="project-metric-label">Fresher Data</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">50+</div>
+                        <div class="project-metric-label">Pipelines</div>
+                    </div>
+                </div>
+            </a>
+            <a href="enterprise-data-platform/" class="project-card">
+                <div class="project-card-header">
+                    <span class="project-card-icon">⚙️</span>
+                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+                <h3 class="project-card-title">Enterprise Data Platform</h3>
+                <p class="project-card-desc">Production-grade ETL framework with Abstract Base Classes, data quality validation, and 3-tier anomaly detection.</p>
+                <div class="project-card-tags">
+                    <span class="project-tag">Python</span>
+                    <span class="project-tag">DuckDB</span>
+                    <span class="project-tag">ETL Framework</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-metric">
+                        <div class="project-metric-value">98%</div>
+                        <div class="project-metric-label">Reliability</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">3-Tier</div>
+                        <div class="project-metric-label">Quality</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">7K+</div>
+                        <div class="project-metric-label">Lines</div>
+                    </div>
+                </div>
+            </a>
         </div>
     </section>
     
