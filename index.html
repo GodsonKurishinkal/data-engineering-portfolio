@@ -1962,26 +1962,24 @@
                 </div>
                 <div class="code-body">
                     <pre><span class="class">PIPELINE</span> = {
-    <span class="string">"layer"</span>: <span class="string">"landing"</span>,
-    <span class="string">"run_date"</span>: <span class="string">"2026-01-01"</span>,
+    <span class="string">"load"</span>: {<span class="string">"mode"</span>: <span class="string">"FULL"</span>},
+    <span class="string">"paths"</span>: {<span class="string">"output"</span>: <span class="string">"data/landing/orders"</span>},
     
-    <span class="string">"database"</span>: {
-        <span class="string">"type"</span>: <span class="string">"postgres"</span>,
-        <span class="string">"host"</span>: <span class="string">"db.company.internal"</span>,
-        <span class="string">"port"</span>: <span class="number">5432</span>,
-        <span class="string">"database"</span>: <span class="string">"orders_db"</span>,
-        <span class="string">"tables"</span>: [<span class="string">"orders"</span>, <span class="string">"inventory"</span>]
+    <span class="string">"schema"</span>: {
+        <span class="string">"order_id"</span>: <span class="string">"string"</span>,
+        <span class="string">"amount"</span>: <span class="string">"decimal(10,2)"</span>,
+        <span class="string">"country"</span>: <span class="string">"string"</span>,
+        <span class="string">"created_at"</span>: <span class="string">"timestamp"</span>
     },
     
-    <span class="string">"paths"</span>: {
-        <span class="string">"bronze"</span>: <span class="string">"data/bronze/"</span>,
-        <span class="string">"silver"</span>: <span class="string">"data/silver/"</span>,
-        <span class="string">"gold"</span>: <span class="string">"data/gold/"</span>
+    <span class="string">"quality"</span>: {
+        <span class="string">"required_columns"</span>: [<span class="string">"order_id"</span>, <span class="string">"amount"</span>],
+        <span class="string">"not_null"</span>: [<span class="string">"order_id"</span>]
     }
 }</pre>
                 </div>
                 <div class="code-footer">
-                    <span>📋 Metadata & Connection Info</span>
+                    <span>📋 Schema + Quality Rules</span>
                 </div>
             </div>
             
@@ -1993,34 +1991,36 @@
                         <span class="code-header-dot yellow"></span>
                         <span class="code-header-dot green"></span>
                     </div>
-                    <span class="code-header-title">pipeline.py</span>
+                    <span class="code-header-title">ingestion.py</span>
                     <span class="code-header-lang">Python</span>
                 </div>
                 <div class="code-body">
-                    <pre><span class="keyword">from</span> config <span class="keyword">import</span> <span class="class">PIPELINE</span>
+                    <pre><span class="keyword">from</span> config <span class="keyword">import</span> <span class="class">PIPELINE</span>, <span class="class">DB_CONFIG</span>
 
-<span class="decorator">@pipeline</span>(schedule=<span class="string">"0 6 * * *"</span>)
-<span class="keyword">def</span> <span class="function">run_etl</span>():
-    config = <span class="class">PIPELINE</span>
-    
-    <span class="comment"># Extract from configured sources</span>
-    raw = <span class="function">extract</span>(
-        config[<span class="string">"database"</span>],
-        config[<span class="string">"run_date"</span>]
+<span class="comment"># Database tables ingestion</span>
+<span class="keyword">for</span> table <span class="keyword">in</span> <span class="class">DB_CONFIG</span>[<span class="string">"tables"</span>]:
+    df = (
+        db.read
+        .format(<span class="string">"jdbc"</span>)
+        .option(<span class="string">"url"</span>, <span class="class">DB_CONFIG</span>[<span class="string">"url"</span>])
+        .option(<span class="string">"dbtable"</span>, table)
+        .load()
     )
     
-    <span class="comment"># Transform & load to layers</span>
-    <span class="keyword">for</span> layer <span class="keyword">in</span> [<span class="string">"bronze"</span>, <span class="string">"silver"</span>, <span class="string">"gold"</span>]:
-        <span class="function">process_layer</span>(raw, config, layer)</pre>
+    <span class="comment"># Validate against config schema</span>
+    <span class="function">validate_schema</span>(df, <span class="class">PIPELINE</span>[<span class="string">"schema"</span>])
+    <span class="function">check_quality</span>(df, <span class="class">PIPELINE</span>[<span class="string">"quality"</span>])
+    
+    df.write.parquet(<span class="class">PIPELINE</span>[<span class="string">"paths"</span>][<span class="string">"output"</span>])</pre>
                 </div>
                 <div class="code-footer">
-                    <span>⚡ Reusable Pipeline Logic</span>
+                    <span>⚡ Config-Driven Validation</span>
                 </div>
             </div>
         </div>
         
         <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 1.5rem; font-family: var(--font-mono);">
-            ✓ No hardcoded values &nbsp;•&nbsp; ✓ Environment agnostic &nbsp;•&nbsp; ✓ Easy testing
+            ✓ Schema validation &nbsp;•&nbsp; ✓ Quality checks &nbsp;•&nbsp; ✓ FULL/INCREMENTAL modes
         </p>
     </section>
     
