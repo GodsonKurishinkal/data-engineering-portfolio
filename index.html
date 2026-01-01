@@ -100,10 +100,66 @@
             100% { transform: translate(50px, 50px); }
         }
         
+        /* Terminal Header */
+        .terminal-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            background: #1e293b;
+            padding: 0.4rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 0.375rem;
+        }
+        
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .terminal-dot.red { background: #ef4444; }
+        .terminal-dot.yellow { background: #eab308; }
+        .terminal-dot.green { background: #22c55e; }
+        
+        .terminal-text {
+            color: #94a3b8;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-path {
+            color: #22d3ee;
+        }
+        
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background: #22d3ee;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
         /* Navigation */
         nav {
             position: fixed;
-            top: 0;
+            top: 32px;
             left: 0;
             right: 0;
             z-index: 1000;
@@ -190,9 +246,88 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 6rem 2rem 4rem;
+            padding: 7rem 2rem 4rem;
             position: relative;
             z-index: 2;
+        }
+        
+        /* Data Pipeline Flow Animation */
+        .pipeline-flow {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 1.2s;
+        }
+        
+        .pipeline-node {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        
+        .pipeline-node:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .pipeline-node.active {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+            color: var(--accent);
+        }
+        
+        .pipeline-arrow {
+            color: var(--border);
+            animation: pulse-arrow 2s ease-in-out infinite;
+        }
+        
+        .pipeline-arrow:nth-child(2) { animation-delay: 0.5s; }
+        .pipeline-arrow:nth-child(4) { animation-delay: 1s; }
+        .pipeline-arrow:nth-child(6) { animation-delay: 1.5s; }
+        
+        @keyframes pulse-arrow {
+            0%, 100% { color: var(--border); }
+            50% { color: var(--accent); }
+        }
+        
+        .pipeline-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-left: 0.5rem;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: status-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes status-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        
+        @media (max-width: 768px) {
+            .pipeline-flow {
+                display: none;
+            }
         }
         
         .hero-container {
@@ -505,6 +640,29 @@
             color: var(--text-muted);
             margin-top: 0.375rem;
             font-weight: 500;
+        }
+        
+        /* Stat Progress Bar */
+        .stat-progress {
+            width: 60%;
+            height: 4px;
+            background: var(--border);
+            border-radius: 9999px;
+            margin: 0.75rem auto 0;
+            overflow: hidden;
+        }
+        
+        .stat-progress-bar {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 9999px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.5s ease;
+        }
+        
+        .stat-item.visible .stat-progress-bar {
+            transform: scaleX(1);
         }
         
         /* Section Styles */
@@ -1059,6 +1217,32 @@
             font-family: var(--font-mono);
         }
         
+        /* Footer Status Indicator */
+        .footer-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+        
+        .footer-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: status-pulse 2s ease-in-out infinite;
+        }
+        
+        .footer-status-text {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+        
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -1126,6 +1310,20 @@
     </style>
 </head>
 <body>
+    <!-- Terminal Header -->
+    <div class="terminal-header" aria-hidden="true">
+        <div class="terminal-dots">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+        </div>
+        <div class="terminal-text">
+            <span class="terminal-path">~/portfolio</span>
+            <span>$ python pipeline.py --status running</span>
+            <span class="terminal-cursor"></span>
+        </div>
+    </div>
+    
     <!-- Background Elements -->
     <div class="bg-grid" aria-hidden="true"></div>
     
@@ -1177,6 +1375,21 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Pipeline Flow Animation -->
+        <div class="pipeline-flow" aria-hidden="true">
+            <span class="pipeline-node">📥 Extract</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-node active">⚙️ Transform</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-node">📤 Load</span>
+            <span class="pipeline-arrow">→</span>
+            <span class="pipeline-node">📊 Analytics</span>
+            <span class="pipeline-status">
+                <span class="status-dot"></span>
+                Live
+            </span>
+        </div>
     </header>
     
     <!-- Stats Section -->
@@ -1191,6 +1404,7 @@
                 </div>
                 <div class="stat-value"><span class="counter" data-target="6">0</span>+</div>
                 <div class="stat-label">Years Experience</div>
+                <div class="stat-progress"><div class="stat-progress-bar" style="width: 75%"></div></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
@@ -1200,6 +1414,7 @@
                 </div>
                 <div class="stat-value"><span class="counter" data-target="50">0</span>+</div>
                 <div class="stat-label">ETL Pipelines</div>
+                <div class="stat-progress"><div class="stat-progress-bar" style="width: 90%"></div></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
@@ -1210,6 +1425,7 @@
                 </div>
                 <div class="stat-value"><span class="counter" data-target="95">0</span>%+</div>
                 <div class="stat-label">Reliability</div>
+                <div class="stat-progress"><div class="stat-progress-bar" style="width: 95%"></div></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
@@ -1222,6 +1438,7 @@
                 </div>
                 <div class="stat-value"><span class="counter" data-target="15">0</span>+</div>
                 <div class="stat-label">Fact Tables</div>
+                <div class="stat-progress"><div class="stat-progress-bar" style="width: 85%"></div></div>
             </div>
         </div>
     </section>
@@ -1576,6 +1793,10 @@
             <div class="footer-bottom">
                 <p class="footer-copyright">© 2026 Godson Kurishinkal. All rights reserved.</p>
                 <p class="footer-tagline">Building data pipelines that power decisions ⚡</p>
+                <div class="footer-status">
+                    <span class="footer-status-dot"></span>
+                    <span class="footer-status-text">All pipelines operational</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -1630,6 +1851,10 @@
                     // Trigger counter animation when stats section is visible
                     if (entry.target.closest('.stats') || entry.target.classList.contains('stats')) {
                         animateCounters();
+                        // Add visible class to stat items for progress bar animation
+                        document.querySelectorAll('.stat-item').forEach(item => {
+                            item.classList.add('visible');
+                        });
                     }
                 }
             });
@@ -1654,6 +1879,54 @@
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
+            
+            // Terminal typing effect
+            const terminalCommands = [
+                '$ python pipeline.py --status running',
+                '$ duckdb analytics.db --query "SELECT *"',
+                '$ polars transform --input bronze/',
+                '$ pytest tests/ -v --cov=src',
+                '$ git push origin main'
+            ];
+            let currentCommand = 0;
+            const terminalText = document.querySelector('.terminal-text');
+            
+            if (terminalText) {
+                const updateTerminal = () => {
+                    const pathSpan = terminalText.querySelector('.terminal-path');
+                    const cursorSpan = terminalText.querySelector('.terminal-cursor');
+                    const command = terminalCommands[currentCommand];
+                    
+                    // Clear and retype
+                    terminalText.innerHTML = '';
+                    terminalText.appendChild(pathSpan.cloneNode(true));
+                    
+                    const commandSpan = document.createElement('span');
+                    commandSpan.textContent = ' ' + command;
+                    terminalText.appendChild(commandSpan);
+                    terminalText.appendChild(cursorSpan.cloneNode(true));
+                    
+                    currentCommand = (currentCommand + 1) % terminalCommands.length;
+                };
+                
+                setInterval(updateTerminal, 4000);
+            }
+            
+            // Pipeline node animation
+            const pipelineNodes = document.querySelectorAll('.pipeline-node');
+            let activeNode = 1;
+            
+            if (pipelineNodes.length > 0) {
+                setInterval(() => {
+                    pipelineNodes.forEach((node, index) => {
+                        node.classList.remove('active');
+                        if (index === activeNode) {
+                            node.classList.add('active');
+                        }
+                    });
+                    activeNode = (activeNode + 1) % pipelineNodes.length;
+                }, 2000);
+            }
         });
     </script>
 </body>
