@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Anomaly Detection System | Godson - Senior Data Engineer</title>
+    <meta name="description" content="Case study: Building a 3-tier statistical anomaly detection system for data quality monitoring in supply chain operations.">
+    <meta name="keywords" content="Anomaly Detection, Data Quality, Statistical Analysis, Z-Score, IQR, Python, Supply Chain">
+    <meta name="author" content="Godson Kurishinkal">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="3-Tier Anomaly Detection System | Case Study">
+    <meta property="og:description" content="How I built a multi-layer statistical system that catches data quality issues before they impact downstream analytics.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/anomaly-detection.html">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+    
+    <style>
+        /* CSS Reset & Variables */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #fafbfc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --accent: #0891b2;
+            --accent-hover: #0e7490;
+            --accent-glow: rgba(8, 145, 178, 0.12);
+            --accent-gradient: linear-gradient(135deg, #0891b2 0%, #0ea5e9 50%, #2563eb 100%);
+            --accent-green: #059669;
+            --accent-green-glow: rgba(5, 150, 105, 0.15);
+            --accent-amber: #d97706;
+            --accent-amber-glow: rgba(217, 119, 6, 0.15);
+            --accent-purple: #7c3aed;
+            --accent-purple-glow: rgba(124, 58, 237, 0.15);
+            --accent-red: #dc2626;
+            --accent-red-glow: rgba(220, 38, 38, 0.15);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border: rgba(15, 23, 42, 0.08);
+            --border-hover: rgba(8, 145, 178, 0.5);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --gradient-accent: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Background Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(8, 145, 178, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 251, 252, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-logo a {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-logo a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+        
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 7rem 2rem 4rem;
+        }
+        
+        /* Case Study Header */
+        .case-header {
+            margin-bottom: 3rem;
+        }
+        
+        .case-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-red-glow);
+            border: 1px solid var(--accent-red);
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--accent-red);
+            margin-bottom: 1.5rem;
+        }
+        
+        .case-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .case-header h1 .gradient {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .case-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .meta-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Impact Stats */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        @media (max-width: 700px) {
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .impact-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .impact-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+        
+        .impact-card.green { border-top: 3px solid var(--accent-green); }
+        .impact-card.blue { border-top: 3px solid var(--accent); }
+        .impact-card.amber { border-top: 3px solid var(--accent-amber); }
+        .impact-card.red { border-top: 3px solid var(--accent-red); }
+        
+        .impact-value {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .impact-card.green .impact-value { color: var(--accent-green); }
+        .impact-card.blue .impact-value { color: var(--accent); }
+        .impact-card.amber .impact-value { color: var(--accent-amber); }
+        .impact-card.red .impact-value { color: var(--accent-red); }
+        
+        .impact-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+        
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .section ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .section li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* 3-Tier Architecture */
+        .tier-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .tier-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .tier-card:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .tier-card.tier-1 { border-left: 4px solid var(--accent-green); }
+        .tier-card.tier-2 { border-left: 4px solid var(--accent-amber); }
+        .tier-card.tier-3 { border-left: 4px solid var(--accent-red); }
+        
+        .tier-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tier-number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .tier-1 .tier-number { background: var(--accent-green-glow); color: var(--accent-green); }
+        .tier-2 .tier-number { background: var(--accent-amber-glow); color: var(--accent-amber); }
+        .tier-3 .tier-number { background: var(--accent-red-glow); color: var(--accent-red); }
+        
+        .tier-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .tier-info .tier-subtitle {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+        
+        .tier-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 600px) {
+            .tier-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .tier-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+        
+        .tier-checks {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .tier-check {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .tier-check::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        /* Method Cards */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 700px) {
+            .method-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .method-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .method-card {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .method-card:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .method-card h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .method-card p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        .method-card .formula {
+            display: block;
+            margin-top: 0.75rem;
+            padding: 0.5rem;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-align: center;
+        }
+        
+        /* Architecture Flow */
+        .architecture-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .flow-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: var(--radius);
+            font-size: 1.5rem;
+        }
+        
+        .flow-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .flow-arrow {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: #1e293b;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: #0f172a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .code-title {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: #94a3b8;
+        }
+        
+        .code-dots {
+            display: flex;
+            gap: 0.375rem;
+        }
+        
+        .code-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .code-dots span:nth-child(1) { background: #f87171; }
+        .code-dots span:nth-child(2) { background: #fbbf24; }
+        .code-dots span:nth-child(3) { background: #4ade80; }
+        
+        .code-content {
+            padding: 1.25rem;
+            overflow-x: auto;
+        }
+        
+        .code-content pre {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin: 0;
+        }
+        
+        .code-content .comment { color: #64748b; }
+        .code-content .keyword { color: #22d3ee; }
+        .code-content .string { color: #4ade80; }
+        .code-content .number { color: #fbbf24; }
+        .code-content .function { color: #a78bfa; }
+        .code-content .class { color: #f472b6; }
+        .code-content .decorator { color: #fb923c; }
+        
+        /* Tech Stack Pills */
+        .tech-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-pill {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        
+        .tech-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Lessons Learned */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .lesson-card {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            border-left: 3px solid var(--accent-red);
+        }
+        
+        .lesson-card h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .lesson-card p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .case-cta {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-top: 4rem;
+        }
+        
+        .case-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-text a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-text a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            main {
+                padding: 6rem 1rem 3rem;
+            }
+            
+            .case-meta {
+                gap: 1.5rem;
+            }
+            
+            .impact-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation">
+        <div class="nav-logo">
+            <a href="../index.html">← Back to Portfolio</a>
+        </div>
+        <div class="nav-links">
+            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Header -->
+        <header class="case-header">
+            <span class="case-badge">🔍 Data Quality</span>
+            <h1>3-Tier <span class="gradient">Anomaly Detection</span> System</h1>
+            <p class="case-subtitle">A multi-layer statistical system that catches data quality issues at ingestion, during processing, and monitors long-term volatility—before bad data impacts downstream analytics.</p>
+            
+            <div class="case-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Senior Data Engineer</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Industry</span>
+                    <span class="meta-value">Retail Supply Chain</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Duration</span>
+                    <span class="meta-value">3 months</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Dimensions Monitored</span>
+                    <span class="meta-value">6+</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Impact Stats -->
+        <div class="impact-grid">
+            <div class="impact-card green">
+                <div class="impact-value">500+</div>
+                <div class="impact-label">Anomalies Detected</div>
+            </div>
+            <div class="impact-card blue">
+                <div class="impact-value">70%</div>
+                <div class="impact-label">Fewer Incidents</div>
+            </div>
+            <div class="impact-card amber">
+                <div class="impact-value">3</div>
+                <div class="impact-label">Detection Tiers</div>
+            </div>
+            <div class="impact-card red">
+                <div class="impact-value">&lt;5min</div>
+                <div class="impact-label">Alert Latency</div>
+            </div>
+        </div>
+        
+        <!-- The Challenge -->
+        <section class="section">
+            <h2 class="section-title">The Challenge</h2>
+            <p>In supply chain analytics, data quality issues don't just cause wrong reports—they cause wrong decisions. A single corrupted inventory record can trigger unnecessary purchase orders worth thousands of dollars.</p>
+            <p>We were drowning in data quality fires:</p>
+            <ul>
+                <li>Source systems sending null values where quantities should exist</li>
+                <li>Dimension tables with duplicate or missing keys breaking joins</li>
+                <li>Sudden spikes in sales data from system glitches (not actual demand)</li>
+                <li>Gradual data drift going unnoticed until quarterly reviews</li>
+                <li>No visibility into which specific records were problematic</li>
+            </ul>
+        </section>
+        
+        <!-- The Solution -->
+        <section class="section">
+            <h2 class="section-title">The Solution</h2>
+            <p>I designed a 3-tier anomaly detection system that operates at different stages of the data pipeline, catching issues at the right level with the right technique:</p>
+            
+            <!-- Architecture Flow -->
+            <div class="architecture-flow">
+                <div class="flow-step">
+                    <div class="flow-icon">📥</div>
+                    <span class="flow-label">Raw Data</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon" style="background: var(--accent-green-glow);">1️⃣</div>
+                    <span class="flow-label">Validation</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon" style="background: var(--accent-amber-glow);">2️⃣</div>
+                    <span class="flow-label">Outlier</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon" style="background: var(--accent-red-glow);">3️⃣</div>
+                    <span class="flow-label">Volatility</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">✅</div>
+                    <span class="flow-label">Clean Data</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3-Tier Deep Dive -->
+        <section class="section">
+            <h2 class="section-title">The 3 Tiers</h2>
+            
+            <div class="tier-stack">
+                <!-- Tier 1 -->
+                <div class="tier-card tier-1">
+                    <div class="tier-header">
+                        <div class="tier-number">1</div>
+                        <div class="tier-info">
+                            <h3>Schema Validation</h3>
+                            <span class="tier-subtitle">Gate: Bronze → Silver</span>
+                        </div>
+                    </div>
+                    <div class="tier-content">
+                        <p class="tier-desc">Rule-based checks that ensure data conforms to expected schemas, constraints, and business rules before entering the Silver layer.</p>
+                        <div class="tier-checks">
+                            <div class="tier-check">Null checks on required fields</div>
+                            <div class="tier-check">Data type validation</div>
+                            <div class="tier-check">Referential integrity (FK→PK)</div>
+                            <div class="tier-check">Range constraints (qty &gt; 0)</div>
+                            <div class="tier-check">Uniqueness validation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tier 2 -->
+                <div class="tier-card tier-2">
+                    <div class="tier-header">
+                        <div class="tier-number">2</div>
+                        <div class="tier-info">
+                            <h3>Statistical Outlier Detection</h3>
+                            <span class="tier-subtitle">Gate: Silver → Gold</span>
+                        </div>
+                    </div>
+                    <div class="tier-content">
+                        <p class="tier-desc">Statistical methods that identify individual records that deviate significantly from expected distributions—catching data that's valid but suspicious.</p>
+                        <div class="tier-checks">
+                            <div class="tier-check">Z-Score (|z| &gt; 3)</div>
+                            <div class="tier-check">Modified Z-Score (robust)</div>
+                            <div class="tier-check">IQR fencing</div>
+                            <div class="tier-check">MAD-based detection</div>
+                            <div class="tier-check">Percentile thresholds</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tier 3 -->
+                <div class="tier-card tier-3">
+                    <div class="tier-header">
+                        <div class="tier-number">3</div>
+                        <div class="tier-info">
+                            <h3>Volatility Monitoring</h3>
+                            <span class="tier-subtitle">Continuous: Gold Layer</span>
+                        </div>
+                    </div>
+                    <div class="tier-content">
+                        <p class="tier-desc">Time-series analysis that detects aggregate-level anomalies, trend breaks, and gradual drift that individual outlier detection would miss.</p>
+                        <div class="tier-checks">
+                            <div class="tier-check">Rolling CV monitoring</div>
+                            <div class="tier-check">Trend break detection</div>
+                            <div class="tier-check">Seasonal deviation alerts</div>
+                            <div class="tier-check">Volume spike detection</div>
+                            <div class="tier-check">Week-over-week variance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Detection Methods -->
+        <section class="section">
+            <h2 class="section-title">Detection Methods</h2>
+            
+            <div class="method-grid">
+                <div class="method-card">
+                    <h4>Z-Score</h4>
+                    <p>Measures standard deviations from mean. Best for normally distributed data.</p>
+                    <span class="formula">z = (x - μ) / σ</span>
+                </div>
+                <div class="method-card">
+                    <h4>Modified Z-Score</h4>
+                    <p>Uses median instead of mean. Robust to existing outliers.</p>
+                    <span class="formula">M = 0.6745(x - x̃) / MAD</span>
+                </div>
+                <div class="method-card">
+                    <h4>IQR Fencing</h4>
+                    <p>Quartile-based bounds. No distribution assumptions.</p>
+                    <span class="formula">[Q1 - 1.5×IQR, Q3 + 1.5×IQR]</span>
+                </div>
+                <div class="method-card">
+                    <h4>Rolling CV</h4>
+                    <p>Tracks coefficient of variation over time windows.</p>
+                    <span class="formula">CV = σ / μ (rolling)</span>
+                </div>
+                <div class="method-card">
+                    <h4>Grubbs Test</h4>
+                    <p>Statistical test for single outliers in univariate data.</p>
+                    <span class="formula">G = max|x - x̄| / s</span>
+                </div>
+                <div class="method-card">
+                    <h4>DBSCAN</h4>
+                    <p>Density-based clustering for multivariate anomalies.</p>
+                    <span class="formula">ε-neighborhood density</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Code Sample -->
+        <section class="section">
+            <h2 class="section-title">Implementation</h2>
+            <p>The anomaly detector is configurable per metric with multiple detection strategies:</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="code-title">anomaly_detector.py</span>
+                </div>
+                <div class="code-content">
+<pre><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass
+<span class="keyword">from</span> enum <span class="keyword">import</span> Enum
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+
+<span class="keyword">class</span> <span class="class">DetectionMethod</span>(Enum):
+    ZSCORE = <span class="string">"zscore"</span>
+    MODIFIED_ZSCORE = <span class="string">"modified_zscore"</span>
+    IQR = <span class="string">"iqr"</span>
+
+<span class="decorator">@dataclass</span>
+<span class="keyword">class</span> <span class="class">AnomalyConfig</span>:
+    method: DetectionMethod
+    threshold: float = <span class="number">3.0</span>
+    min_samples: int = <span class="number">30</span>
+
+<span class="keyword">class</span> <span class="class">AnomalyDetector</span>:
+    <span class="string">"""Multi-method statistical anomaly detection."""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, config: AnomalyConfig):
+        self.config = config
+        self._methods = {
+            DetectionMethod.ZSCORE: self._zscore,
+            DetectionMethod.MODIFIED_ZSCORE: self._modified_zscore,
+            DetectionMethod.IQR: self._iqr_fence,
+        }
+    
+    <span class="keyword">def</span> <span class="function">detect</span>(self, data: np.ndarray) -> np.ndarray:
+        <span class="string">"""Return boolean mask of anomalies."""</span>
+        <span class="keyword">if</span> len(data) < self.config.min_samples:
+            <span class="keyword">return</span> np.zeros(len(data), dtype=bool)
+        <span class="keyword">return</span> self._methods[self.config.method](data)
+    
+    <span class="keyword">def</span> <span class="function">_zscore</span>(self, data: np.ndarray) -> np.ndarray:
+        z = (data - np.mean(data)) / np.std(data)
+        <span class="keyword">return</span> np.abs(z) > self.config.threshold
+    
+    <span class="keyword">def</span> <span class="function">_modified_zscore</span>(self, data: np.ndarray) -> np.ndarray:
+        median = np.median(data)
+        mad = np.median(np.abs(data - median))
+        m = <span class="number">0.6745</span> * (data - median) / (mad + <span class="number">1e-10</span>)
+        <span class="keyword">return</span> np.abs(m) > self.config.threshold
+    
+    <span class="keyword">def</span> <span class="function">_iqr_fence</span>(self, data: np.ndarray) -> np.ndarray:
+        q1, q3 = np.percentile(data, [<span class="number">25</span>, <span class="number">75</span>])
+        iqr = q3 - q1
+        <span class="keyword">return</span> (data < q1 - <span class="number">1.5</span>*iqr) | (data > q3 + <span class="number">1.5</span>*iqr)</pre>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tech Stack -->
+        <section class="section">
+            <h2 class="section-title">Tech Stack</h2>
+            <div class="tech-pills">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">NumPy</span>
+                <span class="tech-pill">Pandas</span>
+                <span class="tech-pill">SciPy</span>
+                <span class="tech-pill">DuckDB</span>
+                <span class="tech-pill">Great Expectations</span>
+                <span class="tech-pill">Streamlit</span>
+            </div>
+        </section>
+        
+        <!-- Lessons Learned -->
+        <section class="section">
+            <h2 class="section-title">Key Learnings</h2>
+            <div class="lessons-grid">
+                <div class="lesson-card">
+                    <h4>Layers Beat Single Methods</h4>
+                    <p>No single detection method catches everything. The 3-tier approach improved detection by 3x over Z-score alone.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Context Matters</h4>
+                    <p>A 50% sales spike on Black Friday is expected. Time-aware thresholds reduced false positives by 60%.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Quarantine, Don't Delete</h4>
+                    <p>Anomalies go to a quarantine table for review—sometimes "anomalies" are real events worth investigating.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Alert Fatigue is Real</h4>
+                    <p>Started with 100+ daily alerts. Tuned thresholds and added severity levels to reduce to ~10 actionable alerts.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA -->
+        <div class="case-cta">
+            <h3>Want to Build Better Data Quality?</h3>
+            <p>Let's discuss how layered anomaly detection can save your analytics from bad data.</p>
+            <div class="cta-buttons">
+                <a href="medallion-lakehouse.html" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    View Lakehouse Case Study
+                </a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2026 <a href="../index.html">Godson Kurishinkal</a>. Building data pipelines that power decisions.</p>
+    </footer>
+</body>
+</html>
