@@ -1137,13 +1137,30 @@
             background: var(--bg-secondary);
         }
         
-        .code-container {
-            max-width: 900px;
+        .code-showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 1100px;
             margin: 0 auto;
+        }
+        
+        @media (max-width: 900px) {
+            .code-showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .code-container {
             background: #1e293b;
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow-xl);
+        }
+        
+        .code-container.full-width {
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         .code-header {
@@ -1929,60 +1946,82 @@
     <section class="code-showcase animate-on-scroll" aria-labelledby="code-title">
         <div class="section-header">
             <p class="section-eyebrow">CODE SAMPLE</p>
-            <h2 class="section-title" id="code-title">How I Build Pipelines</h2>
+            <h2 class="section-title" id="code-title">Configuration-Driven Pipelines</h2>
         </div>
-        <div class="code-container">
-            <div class="code-header">
-                <div class="code-header-dots">
-                    <span class="code-header-dot red"></span>
-                    <span class="code-header-dot yellow"></span>
-                    <span class="code-header-dot green"></span>
+        <div class="code-showcase-grid">
+            <!-- Config File -->
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-header-dots">
+                        <span class="code-header-dot red"></span>
+                        <span class="code-header-dot yellow"></span>
+                        <span class="code-header-dot green"></span>
+                    </div>
+                    <span class="code-header-title">config.py</span>
+                    <span class="code-header-lang">Python</span>
                 </div>
-                <span class="code-header-title">medallion_pipeline.py</span>
-                <span class="code-header-lang">Python</span>
+                <div class="code-body">
+                    <pre><span class="class">PIPELINE</span> = {
+    <span class="string">"layer"</span>: <span class="string">"landing"</span>,
+    <span class="string">"run_date"</span>: <span class="string">"2026-01-01"</span>,
+    
+    <span class="string">"database"</span>: {
+        <span class="string">"type"</span>: <span class="string">"postgres"</span>,
+        <span class="string">"host"</span>: <span class="string">"db.company.internal"</span>,
+        <span class="string">"port"</span>: <span class="number">5432</span>,
+        <span class="string">"database"</span>: <span class="string">"orders_db"</span>,
+        <span class="string">"tables"</span>: [<span class="string">"orders"</span>, <span class="string">"inventory"</span>]
+    },
+    
+    <span class="string">"paths"</span>: {
+        <span class="string">"bronze"</span>: <span class="string">"data/bronze/"</span>,
+        <span class="string">"silver"</span>: <span class="string">"data/silver/"</span>,
+        <span class="string">"gold"</span>: <span class="string">"data/gold/"</span>
+    }
+}</pre>
+                </div>
+                <div class="code-footer">
+                    <span>📋 Metadata & Connection Info</span>
+                </div>
             </div>
-            <div class="code-body">
-                <pre><span class="decorator">@pipeline</span>(name=<span class="string">"medallion_etl"</span>, schedule=<span class="string">"0 6 * * *"</span>)
-<span class="keyword">def</span> <span class="function">run_medallion_pipeline</span>(config: <span class="class">PipelineConfig</span>) -> <span class="class">PipelineResult</span>:
-    <span class="comment"># Bronze: Raw ingestion with schema validation</span>
-    bronze_df = (
-        <span class="class">DataLoader</span>(config.sources)
-        .extract()
-        .validate(schema=config.bronze_schema)
-        .write_parquet(path=<span class="string">f"bronze/{config.table}"</span>)
+            
+            <!-- Pipeline File -->
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-header-dots">
+                        <span class="code-header-dot red"></span>
+                        <span class="code-header-dot yellow"></span>
+                        <span class="code-header-dot green"></span>
+                    </div>
+                    <span class="code-header-title">pipeline.py</span>
+                    <span class="code-header-lang">Python</span>
+                </div>
+                <div class="code-body">
+                    <pre><span class="keyword">from</span> config <span class="keyword">import</span> <span class="class">PIPELINE</span>
+
+<span class="decorator">@pipeline</span>(schedule=<span class="string">"0 6 * * *"</span>)
+<span class="keyword">def</span> <span class="function">run_etl</span>():
+    config = <span class="class">PIPELINE</span>
+    
+    <span class="comment"># Extract from configured sources</span>
+    raw = <span class="function">extract</span>(
+        config[<span class="string">"database"</span>],
+        config[<span class="string">"run_date"</span>]
     )
     
-    <span class="comment"># Silver: Clean, dedupe, apply business rules</span>
-    silver_df = (
-        bronze_df
-        .pipe(<span class="function">clean_nulls</span>)
-        .pipe(<span class="function">deduplicate</span>, keys=[<span class="string">"sku"</span>, <span class="string">"date"</span>])
-        .pipe(<span class="function">apply_transformations</span>, rules=config.rules)
-    )
-    
-    <span class="comment"># Gold: Dimensional model for analytics</span>
-    <span class="keyword">return</span> <span class="class">StarSchemaBuilder</span>(silver_df).build_fact_table()</pre>
-            </div>
-            <div class="code-footer">
-                <div class="code-footer-stats">
-                    <span class="code-footer-stat">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
-                        95%+ test coverage
-                    </span>
-                    <span class="code-footer-stat">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        &lt;30min runtime
-                    </span>
+    <span class="comment"># Transform & load to layers</span>
+    <span class="keyword">for</span> layer <span class="keyword">in</span> [<span class="string">"bronze"</span>, <span class="string">"silver"</span>, <span class="string">"gold"</span>]:
+        <span class="function">process_layer</span>(raw, config, layer)</pre>
                 </div>
-                <span>Production Ready</span>
+                <div class="code-footer">
+                    <span>⚡ Reusable Pipeline Logic</span>
+                </div>
             </div>
         </div>
+        
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 1.5rem; font-family: var(--font-mono);">
+            ✓ No hardcoded values &nbsp;•&nbsp; ✓ Environment agnostic &nbsp;•&nbsp; ✓ Easy testing
+        </p>
     </section>
     
     <!-- Skills Section -->
