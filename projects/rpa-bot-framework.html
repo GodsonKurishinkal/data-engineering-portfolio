@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>RPA Bot Framework | Godson - Senior Data Engineer</title>
+    <meta name="description" content="Case study: Building a robust RPA bot framework with Selenium and PyAutoGUI for automating legacy system data extraction without API access.">
+    <meta name="keywords" content="RPA, Robotic Process Automation, Selenium, PyAutoGUI, Web Scraping, Data Extraction, Python">
+    <meta name="author" content="Godson Kurishinkal">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="RPA Bot Framework | Case Study">
+    <meta property="og:description" content="How I built a resilient RPA framework to extract data from legacy systems that lacked APIs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/rpa-bot-framework.html">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    
+    <style>
+        /* CSS Reset & Variables */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #fafbfc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --accent: #0891b2;
+            --accent-hover: #0e7490;
+            --accent-glow: rgba(8, 145, 178, 0.12);
+            --accent-gradient: linear-gradient(135deg, #0891b2 0%, #0ea5e9 50%, #2563eb 100%);
+            --accent-green: #059669;
+            --accent-green-glow: rgba(5, 150, 105, 0.15);
+            --accent-amber: #d97706;
+            --accent-amber-glow: rgba(217, 119, 6, 0.15);
+            --accent-purple: #7c3aed;
+            --accent-purple-glow: rgba(124, 58, 237, 0.15);
+            --accent-orange: #ea580c;
+            --accent-orange-glow: rgba(234, 88, 12, 0.15);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border: rgba(15, 23, 42, 0.08);
+            --border-hover: rgba(8, 145, 178, 0.5);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --gradient-accent: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Background Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(8, 145, 178, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 251, 252, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-logo a {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-logo a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+        
+        .nav-link svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 7rem 2rem 4rem;
+        }
+        
+        /* Case Study Header */
+        .case-header {
+            margin-bottom: 3rem;
+        }
+        
+        .case-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-orange-glow);
+            border: 1px solid var(--accent-orange);
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--accent-orange);
+            margin-bottom: 1.5rem;
+        }
+        
+        .case-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .case-header h1 .gradient {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .case-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .case-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .meta-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .meta-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Impact Stats */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        @media (max-width: 700px) {
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .impact-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .impact-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+        
+        .impact-card.green { border-top: 3px solid var(--accent-green); }
+        .impact-card.blue { border-top: 3px solid var(--accent); }
+        .impact-card.amber { border-top: 3px solid var(--accent-amber); }
+        .impact-card.orange { border-top: 3px solid var(--accent-orange); }
+        
+        .impact-value {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .impact-card.green .impact-value { color: var(--accent-green); }
+        .impact-card.blue .impact-value { color: var(--accent); }
+        .impact-card.amber .impact-value { color: var(--accent-amber); }
+        .impact-card.orange .impact-value { color: var(--accent-orange); }
+        
+        .impact-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+        
+        .section p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .section ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .section li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Bot Cards */
+        .bot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 600px) {
+            .bot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .bot-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .bot-card:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .bot-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .bot-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-orange-glow);
+            border-radius: var(--radius-sm);
+            font-size: 1.25rem;
+        }
+        
+        .bot-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .bot-system {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .bot-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .bot-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8125rem;
+        }
+        
+        .bot-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--accent-green);
+            font-weight: 500;
+        }
+        
+        /* Architecture Flow */
+        .architecture-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .flow-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: var(--radius);
+            font-size: 1.5rem;
+        }
+        
+        .flow-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .flow-arrow {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        @media (max-width: 700px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .feature-card {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .feature-card h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-card p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: #1e293b;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+        
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: #0f172a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .code-title {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: #94a3b8;
+        }
+        
+        .code-dots {
+            display: flex;
+            gap: 0.375rem;
+        }
+        
+        .code-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .code-dots span:nth-child(1) { background: #f87171; }
+        .code-dots span:nth-child(2) { background: #fbbf24; }
+        .code-dots span:nth-child(3) { background: #4ade80; }
+        
+        .code-content {
+            padding: 1.25rem;
+            overflow-x: auto;
+        }
+        
+        .code-content pre {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin: 0;
+        }
+        
+        .code-content .comment { color: #64748b; }
+        .code-content .keyword { color: #22d3ee; }
+        .code-content .string { color: #4ade80; }
+        .code-content .number { color: #fbbf24; }
+        .code-content .function { color: #a78bfa; }
+        .code-content .class { color: #f472b6; }
+        .code-content .decorator { color: #fb923c; }
+        
+        /* Tech Stack Pills */
+        .tech-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-pill {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        
+        .tech-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Lessons Learned */
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .lesson-card {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            border-left: 3px solid var(--accent-orange);
+        }
+        
+        .lesson-card h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .lesson-card p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .case-cta {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-top: 4rem;
+        }
+        
+        .case-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-text a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-text a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            main {
+                padding: 6rem 1rem 3rem;
+            }
+            
+            .case-meta {
+                gap: 1.5rem;
+            }
+            
+            .impact-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation">
+        <div class="nav-logo">
+            <a href="../index.html">← Back to Portfolio</a>
+        </div>
+        <div class="nav-links">
+            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Header -->
+        <header class="case-header">
+            <span class="case-badge">🤖 Automation</span>
+            <h1><span class="gradient">RPA Bot</span> Framework</h1>
+            <p class="case-subtitle">A resilient robotic process automation framework using Selenium and PyAutoGUI to extract data from legacy systems without API access.</p>
+            
+            <div class="case-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Senior Data Engineer</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Industry</span>
+                    <span class="meta-value">Retail Supply Chain</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Duration</span>
+                    <span class="meta-value">4 months</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Bots Deployed</span>
+                    <span class="meta-value">5+</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Impact Stats -->
+        <div class="impact-grid">
+            <div class="impact-card green">
+                <div class="impact-value">5+</div>
+                <div class="impact-label">Bots in Production</div>
+            </div>
+            <div class="impact-card blue">
+                <div class="impact-value">87%</div>
+                <div class="impact-label">Time Saved</div>
+            </div>
+            <div class="impact-card amber">
+                <div class="impact-value">4h→30m</div>
+                <div class="impact-label">Extraction Time</div>
+            </div>
+            <div class="impact-card orange">
+                <div class="impact-value">24/7</div>
+                <div class="impact-label">Scheduled Runs</div>
+            </div>
+        </div>
+        
+        <!-- The Challenge -->
+        <section class="section">
+            <h2 class="section-title">The Challenge</h2>
+            <p>Enterprise supply chains run on legacy systems. ERPs from the 2000s, warehouse management systems with Java applets, and reporting tools that only export to Excel. These systems hold critical data but offer no APIs.</p>
+            <p>Our data team faced a daily grind:</p>
+            <ul>
+                <li>Manually logging into 5+ systems every morning</li>
+                <li>Navigating complex UI workflows to generate reports</li>
+                <li>Downloading Excel files, then manually importing to our lakehouse</li>
+                <li>4+ hours of repetitive work before actual analysis could begin</li>
+                <li>Human errors causing data inconsistencies downstream</li>
+            </ul>
+        </section>
+        
+        <!-- The Solution -->
+        <section class="section">
+            <h2 class="section-title">The Solution</h2>
+            <p>I built a modular RPA framework that treats each legacy system as a data source. Bots handle the UI interactions, extract data, and feed it directly into our Bronze layer—no human intervention required.</p>
+            
+            <!-- Architecture Flow -->
+            <div class="architecture-flow">
+                <div class="flow-step">
+                    <div class="flow-icon">⏰</div>
+                    <span class="flow-label">Scheduler</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">🤖</div>
+                    <span class="flow-label">Bot Engine</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">🖥️</div>
+                    <span class="flow-label">Legacy System</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">📄</div>
+                    <span class="flow-label">Extract Data</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <div class="flow-icon">🏗️</div>
+                    <span class="flow-label">Bronze Layer</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Bots Deployed -->
+        <section class="section">
+            <h2 class="section-title">Bots in Production</h2>
+            
+            <div class="bot-grid">
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div class="bot-icon">📦</div>
+                        <div>
+                            <div class="bot-name">WMS Extractor</div>
+                            <div class="bot-system">Warehouse Management System</div>
+                        </div>
+                    </div>
+                    <p class="bot-desc">Extracts inventory snapshots, receiving logs, and shipment data from Java-based WMS.</p>
+                    <div class="bot-stats">
+                        <span class="bot-stat">✓ 10K+ records/day</span>
+                        <span class="bot-stat">✓ 6 AM daily</span>
+                    </div>
+                </div>
+                
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div class="bot-icon">📊</div>
+                        <div>
+                            <div class="bot-name">OBI Reporter</div>
+                            <div class="bot-system">Oracle BI Publisher</div>
+                        </div>
+                    </div>
+                    <p class="bot-desc">Navigates complex report parameters, schedules exports, and downloads Excel outputs.</p>
+                    <div class="bot-stats">
+                        <span class="bot-stat">✓ 15 reports/run</span>
+                        <span class="bot-stat">✓ 2x daily</span>
+                    </div>
+                </div>
+                
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div class="bot-icon">🛒</div>
+                        <div>
+                            <div class="bot-name">ERP Scraper</div>
+                            <div class="bot-system">Legacy ERP System</div>
+                        </div>
+                    </div>
+                    <p class="bot-desc">Extracts purchase orders, vendor data, and pricing information from green-screen terminals.</p>
+                    <div class="bot-stats">
+                        <span class="bot-stat">✓ 5K+ POs/week</span>
+                        <span class="bot-stat">✓ Hourly sync</span>
+                    </div>
+                </div>
+                
+                <div class="bot-card">
+                    <div class="bot-header">
+                        <div class="bot-icon">📈</div>
+                        <div>
+                            <div class="bot-name">Sales Aggregator</div>
+                            <div class="bot-system">POS Reporting Portal</div>
+                        </div>
+                    </div>
+                    <p class="bot-desc">Collects daily sales from multiple retail store portals into unified format.</p>
+                    <div class="bot-stats">
+                        <span class="bot-stat">✓ 50+ stores</span>
+                        <span class="bot-stat">✓ EOD batch</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Framework Features -->
+        <section class="section">
+            <h2 class="section-title">Framework Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🔄 Retry Logic</h4>
+                    <p>Exponential backoff with configurable max retries for transient failures</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📸 Screenshot Logging</h4>
+                    <p>Captures screenshots on failures for debugging UI changes</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔐 Credential Vault</h4>
+                    <p>Encrypted credential storage with rotation support</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⏱️ Element Waits</h4>
+                    <p>Smart waits for dynamic elements with configurable timeouts</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📧 Alert System</h4>
+                    <p>Email/Teams notifications on failures or anomalies</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📝 Audit Trail</h4>
+                    <p>Complete execution logs with timestamps and actions</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Code Sample -->
+        <section class="section">
+            <h2 class="section-title">Implementation</h2>
+            <p>The framework uses an Abstract Base Class pattern for consistency:</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="code-title">base_bot.py</span>
+                </div>
+                <div class="code-content">
+<pre><span class="keyword">from</span> abc <span class="keyword">import</span> ABC, abstractmethod
+<span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver
+<span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait
+
+<span class="keyword">class</span> <span class="class">BaseBot</span>(ABC):
+    <span class="string">"""Abstract base class for all RPA bots."""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, config: BotConfig):
+        self.config = config
+        self.driver = <span class="keyword">None</span>
+        self.logger = setup_logger(self.__class__.__name__)
+        
+    <span class="keyword">def</span> <span class="function">run</span>(self) -> ExtractResult:
+        <span class="string">"""Main execution flow with error handling."""</span>
+        <span class="keyword">try</span>:
+            self._initialize_driver()
+            self._login()
+            data = self._extract()
+            self._save_to_bronze(data)
+            <span class="keyword">return</span> ExtractResult(success=<span class="keyword">True</span>, records=len(data))
+        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+            self._capture_screenshot()
+            self._send_alert(str(e))
+            <span class="keyword">raise</span>
+        <span class="keyword">finally</span>:
+            self._cleanup()
+    
+    <span class="decorator">@abstractmethod</span>
+    <span class="keyword">def</span> <span class="function">_login</span>(self) -> <span class="keyword">None</span>:
+        <span class="string">"""Implement system-specific login flow."""</span>
+        <span class="keyword">pass</span>
+    
+    <span class="decorator">@abstractmethod</span>
+    <span class="keyword">def</span> <span class="function">_extract</span>(self) -> pd.DataFrame:
+        <span class="string">"""Implement system-specific extraction logic."""</span>
+        <span class="keyword">pass</span>
+    
+    <span class="keyword">def</span> <span class="function">_wait_for_element</span>(self, locator, timeout=<span class="number">30</span>):
+        <span class="string">"""Wait for element with retry logic."""</span>
+        <span class="keyword">return</span> WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_element_located(locator)
+        )</pre>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tech Stack -->
+        <section class="section">
+            <h2 class="section-title">Tech Stack</h2>
+            <div class="tech-pills">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Selenium</span>
+                <span class="tech-pill">PyAutoGUI</span>
+                <span class="tech-pill">ChromeDriver</span>
+                <span class="tech-pill">Windows Task Scheduler</span>
+                <span class="tech-pill">Pandas</span>
+                <span class="tech-pill">Parquet</span>
+            </div>
+        </section>
+        
+        <!-- Lessons Learned -->
+        <section class="section">
+            <h2 class="section-title">Key Learnings</h2>
+            <div class="lessons-grid">
+                <div class="lesson-card">
+                    <h4>UI Changes Break Bots</h4>
+                    <p>System updates change element IDs. Using semantic selectors and fallback strategies reduced maintenance by 60%.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Timing is Everything</h4>
+                    <p>Hard-coded waits fail. Implemented smart waits with element visibility checks and exponential backoff.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Screenshots Save Hours</h4>
+                    <p>Automatic screenshots on failures made debugging 10x faster—seeing exactly where the bot got stuck.</p>
+                </div>
+                <div class="lesson-card">
+                    <h4>Headless Has Limits</h4>
+                    <p>Some legacy Java applets only work with visible browsers. Learned to detect and switch modes dynamically.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA -->
+        <div class="case-cta">
+            <h3>Interested in Automation?</h3>
+            <p>Let's discuss how RPA can unlock data from your legacy systems.</p>
+            <div class="cta-buttons">
+                <a href="medallion-lakehouse.html" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    View Lakehouse Case Study
+                </a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2026 <a href="../index.html">Godson Kurishinkal</a>. Building data pipelines that power decisions.</p>
+    </footer>
+</body>
+</html>
