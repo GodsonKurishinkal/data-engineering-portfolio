@@ -290,201 +290,260 @@
         /* Data Pipeline Flow Animation */
         .pipeline-section {
             padding: 4rem 2rem;
-            background: #FFFFFF;
+            background: #F8F9FA;
         }
         
         .architecture-diagram {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 3rem auto;
-            font-family: var(--font-mono);
-        }
-        
-        .arch-row {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            justify-content: space-between;
+            gap: 3rem;
             position: relative;
         }
         
-        .arch-column {
+        .data-sources {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            align-items: center;
+            gap: 1.2rem;
+            min-width: 180px;
         }
         
-        .arch-layer {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            justify-content: center;
+        .sources-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            text-align: center;
         }
         
-        .arch-component {
-            position: relative;
+        .source-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             background: #FFFFFF;
             border: 2px solid #E5E7EB;
-            border-radius: 12px;
-            min-width: 120px;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            position: relative;
         }
         
-        .arch-component:hover {
-            border-color: #5A89BF;
-            box-shadow: 0 4px 12px rgba(90, 137, 191, 0.15);
-            transform: translateY(-2px);
+        .source-item:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+            transform: scale(1.05);
         }
         
-        .arch-icon {
-            width: 48px;
-            height: 48px;
+        .source-icon {
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .arch-icon svg {
+        .source-icon svg {
             width: 100%;
             height: 100%;
         }
         
-        .arch-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1F2937;
-            text-align: center;
-        }
-        
-        .arch-sublabel {
+        .source-label {
             font-size: 0.7rem;
-            color: #6B7280;
+            font-weight: 600;
+            color: #4B5563;
             text-align: center;
+            line-height: 1.2;
         }
         
-        .layer-container {
+        .connection-curve {
+            position: absolute;
+            width: 200px;
+            height: 100%;
+            left: 180px;
+            top: 0;
+            pointer-events: none;
+        }
+        
+        .connection-curve svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .pipeline-center {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1.5rem 2rem;
-            background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
-            border: 2px solid #E5E7EB;
-            border-radius: 16px;
-            min-width: 200px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            gap: 2rem;
+            position: relative;
         }
         
-        .layer-badge {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #FFFFFF;
-            background: linear-gradient(135deg, #5A89BF 0%, #9890C8 100%);
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            margin-bottom: 0.5rem;
+        .pipeline-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #EF4444;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
         }
         
-        .layer-title {
+        .ingestion-layer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            background: #FFF7ED;
+            border: 3px solid #FB923C;
+            border-radius: 16px;
+            position: relative;
+        }
+        
+        .loader-icon {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .data-lake-container {
+            width: 100%;
+            padding: 2rem;
+            background: #FFFFFF;
+            border: 3px solid #FB923C;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(251, 146, 60, 0.15);
+        }
+        
+        .lake-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lake-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #EA580C;
+            margin-bottom: 0.5rem;
+        }
+        
+        .lake-layers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lake-layer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border: 2px solid #F59E0B;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .lake-layer:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.25);
+        }
+        
+        .lake-icon {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .lake-layer-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #92400E;
+        }
+        
+        .lake-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .lake-feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.75rem;
+            background: #FEF3C7;
+            border: 1px solid #FDE68A;
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .feature-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #78350F;
+            text-align: center;
+        }
+        
+        .data-outputs {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-width: 200px;
+        }
+        
+        .output-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .output-header {
             font-size: 1rem;
             font-weight: 700;
-            color: #1F2937;
-            margin-bottom: 0.25rem;
-        }
-        
-        .layer-desc {
-            font-size: 0.7rem;
-            color: #6B7280;
+            color: #0EA5E9;
             text-align: center;
-            max-width: 180px;
         }
         
-        .layer-tech {
-            margin-top: 0.5rem;
-            font-size: 0.65rem;
-            color: #5A89BF;
-            font-weight: 600;
-        }
-        
-        .arch-arrow {
-            position: relative;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, #D1D5DB 0%, #5A89BF 100%);
-            border-radius: 2px;
-        }
-        
-        .arch-arrow::after {
-            content: '';
-            position: absolute;
-            right: -8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid #5A89BF;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-        }
-        
-        .arch-arrow-vertical {
-            position: relative;
-            width: 3px;
-            height: 60px;
-            background: linear-gradient(180deg, #D1D5DB 0%, #5A89BF 100%);
-            border-radius: 2px;
-            margin: 0 auto;
-        }
-        
-        .arch-arrow-vertical::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-top: 10px solid #5A89BF;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-        }
-        
-        .data-flow-particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #5A89BF;
-            border-radius: 50%;
-            animation: flowHorizontal 2.5s ease-in-out infinite;
-            box-shadow: 0 0 12px rgba(90, 137, 191, 0.8);
-        }
-        
-        @keyframes flowHorizontal {
-            0% { left: 0; opacity: 0; }
-            15% { opacity: 1; }
-            85% { opacity: 1; }
-            100% { left: 100%; opacity: 0; }
-        }
-        
-        .arch-metrics {
+        .output-item {
             display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
-            padding: 1.5rem;
-            background: #F9FAFB;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: #FFFFFF;
+            border: 2px solid #E0F2FE;
             border-radius: 12px;
-            border: 1px solid #E5E7EB;
+            transition: all 0.3s ease;
         }
         
+        .output-item:hover {
+            border-color: #0EA5E9;
+            box-shadow: 0 4px 16px rgba(14, 165, 233, 0.2);
+            transform: translateX(-4px);
+        }
+        
+        .output-icon {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .output-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #0369A1;
+            text-align: center;
+        }
+            
         .arch-metric {
             display: flex;
             flex-direction: column;
@@ -495,7 +554,7 @@
         .metric-value {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #5A89BF;
+            color: #EF4444;
         }
         
         .metric-label {
@@ -504,32 +563,36 @@
             font-weight: 500;
         }
         
-        .process-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #10B981;
-            color: white;
-            font-size: 0.6rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
-        }
-        
-        @media (max-width: 1200px) {
+        @media (max-width: 1400px) {
             .architecture-diagram {
-                overflow-x: auto;
+                flex-direction: column;
+                gap: 3rem;
             }
             
-            .arch-row {
-                min-width: 1000px;
+            .data-sources {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .data-outputs {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
         
         @media (max-width: 768px) {
             .pipeline-section {
                 padding: 2rem 1rem;
+            }
+            
+            .lake-layers {
+                grid-template-columns: 1fr;
+            }
+            
+            .lake-features {
+                grid-template-columns: 1fr;
             }
         }
         
