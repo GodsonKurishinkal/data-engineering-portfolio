@@ -227,11 +227,14 @@
         
         .nav-badge {
             display: inline;
-            margin-left: 0.5rem;
-            padding-left: 0.5rem;
-            border-left: 1px solid var(--border);
             font-size: 1rem;
             font-weight: 400;
+            color: var(--text-muted);
+        }
+        
+        .nav-badge::before {
+            content: '•';
+            margin: 0 0.5rem;
             color: var(--text-muted);
         }
         
