@@ -216,7 +216,7 @@
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0;
         }
         
         .nav-logo span {
@@ -226,16 +226,18 @@
         }
         
         .nav-badge {
-            display: inline;
+            display: inline-block;
             font-size: 1rem;
             font-weight: 400;
             color: var(--text-muted);
+            margin-left: 0.5rem;
+            padding-left: 0.5rem;
         }
         
         .nav-badge::before {
             content: '•';
             color: #FB2C36;
-            margin: 0 0.5rem;
+            margin-right: 0.5rem;
         }
         
         .nav-links {
