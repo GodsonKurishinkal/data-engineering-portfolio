@@ -316,9 +316,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1.5rem 1rem;
+            padding: 1.5rem 0.5rem;
             position: relative;
             z-index: 2;
+            max-width: 200px;
         }
 
         .flow-stage-header {
@@ -421,14 +422,104 @@
 
         /* Animated Flow Arrows */
         .flow-arrows {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            display: none; /* Hide SVG arrows, using CSS connectors instead */
         }
+
+        /* CSS Flow Connectors */
+        .flow-stage {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Connector lines between stages */
+        .flow-stage:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: 50%;
+            width: 4px;
+            height: 60%;
+            transform: translateY(-50%);
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                #0078D4 10%, 
+                #0078D4 90%, 
+                transparent 100%
+            );
+            opacity: 0.3;
+        }
+
+        /* Horizontal connector with arrow */
+        .flow-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .flow-connector-line {
+            position: relative;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--from-color, #0078D4), var(--to-color, #107C10));
+            border-radius: 2px;
+        }
+
+        .flow-connector-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--from-color, #0078D4);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--from-color, #0078D4);
+        }
+
+        .flow-connector-line::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid var(--to-color, #107C10);
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            filter: drop-shadow(0 0 4px var(--to-color, #107C10));
+        }
+
+        /* Animated dot on connector */
+        .flow-connector .flow-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+            animation: flowDot 2s ease-in-out infinite;
+        }
+
+        @keyframes flowDot {
+            0% { left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: calc(100% - 8px); opacity: 0; }
+        }
+
+        .flow-connector:nth-child(2) .flow-dot { animation-delay: 0s; color: #0078D4; }
+        .flow-connector:nth-child(4) .flow-dot { animation-delay: 0.7s; color: #107C10; }
+        .flow-connector:nth-child(6) .flow-dot { animation-delay: 1.4s; color: #E25A1C; }
 
         .flow-arrows svg {
             width: 100%;
@@ -492,17 +583,25 @@
         @media (max-width: 900px) {
             .flow-container {
                 flex-direction: column;
-                gap: 2rem;
+                gap: 0;
                 min-height: auto;
             }
             
             .flow-stage {
-                border-bottom: 2px dashed #e2e8f0;
-                padding-bottom: 2rem;
+                border-bottom: none;
+                padding-bottom: 1rem;
+                max-width: 100%;
             }
             
             .flow-stage:last-child {
                 border-bottom: none;
+            }
+            
+            .flow-connector {
+                width: 100%;
+                height: 50px;
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
             }
             
             .flow-arrows {
@@ -1913,6 +2012,12 @@
                     </div>
                 </div>
                 
+                <!-- Connector 1: Ingest → Store -->
+                <div class="flow-connector">
+                    <div class="flow-connector-line" style="--from-color: #0078D4; --to-color: #107C10;"></div>
+                    <div class="flow-dot" style="color: #0078D4;"></div>
+                </div>
+                
                 <!-- Stage 2: Store -->
                 <div class="flow-stage">
                     <div class="flow-stage-header">
@@ -1933,6 +2038,12 @@
                             <div class="medallion-layer gold">🥇 Gold (Curated)</div>
                         </div>
                     </div>
+                </div>
+                
+                <!-- Connector 2: Store → Process -->
+                <div class="flow-connector">
+                    <div class="flow-connector-line" style="--from-color: #107C10; --to-color: #E25A1C;"></div>
+                    <div class="flow-dot" style="color: #107C10;"></div>
                 </div>
                 
                 <!-- Stage 3: Process -->
@@ -1964,6 +2075,12 @@
                             <div class="flow-node-label">Quality Checks</div>
                         </div>
                     </div>
+                </div>
+                
+                <!-- Connector 3: Process → Serve -->
+                <div class="flow-connector">
+                    <div class="flow-connector-line" style="--from-color: #E25A1C; --to-color: #8661C5;"></div>
+                    <div class="flow-dot" style="color: #E25A1C;"></div>
                 </div>
                 
                 <!-- Stage 4: Serve -->
