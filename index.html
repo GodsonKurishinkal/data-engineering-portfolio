@@ -290,149 +290,227 @@
         /* Data Pipeline Flow Animation */
         .pipeline-section {
             padding: 4rem 2rem;
-            background: #F8F9FA;
+            background: transparent;
+            overflow: hidden;
         }
         
-        /* Architecture Diagram - Azure Style */
-        .architecture-diagram {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; /* 4 columns + 3 separators */
-            gap: 1rem;
-            max-width: 1400px;
+        /* Architecture Flow Diagram */
+        .architecture-flow {
+            max-width: 1200px;
             margin: 3rem auto;
-            padding: 2rem;
-            background: transparent;
-            border-radius: 12px;
             position: relative;
-            align-items: start;
         }
 
-        .arch-column {
+        /* Flow Container */
+        .flow-container {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            position: relative;
+            min-height: 420px;
+        }
+
+        /* Flow Stage */
+        .flow-stage {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
             align-items: center;
-            padding: 1rem 0;
-            min-height: 400px;
+            padding: 1.5rem 1rem;
+            position: relative;
+            z-index: 2;
         }
 
-        .arch-header {
-            font-size: 0.9rem;
+        .flow-stage-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, #0078D4 0%, #106EBE 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
-            color: #64748b;
             letter-spacing: 1px;
-            margin-bottom: 1rem;
-            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3);
         }
 
-        .arch-group {
+        .flow-stage:nth-child(2) .flow-stage-header { background: linear-gradient(135deg, #107C10 0%, #0B6A0B 100%); box-shadow: 0 4px 15px rgba(16, 124, 16, 0.3); }
+        .flow-stage:nth-child(3) .flow-stage-header { background: linear-gradient(135deg, #E25A1C 0%, #C74A10 100%); box-shadow: 0 4px 15px rgba(226, 90, 28, 0.3); }
+        .flow-stage:nth-child(4) .flow-stage-header { background: linear-gradient(135deg, #8661C5 0%, #6B4FA0 100%); box-shadow: 0 4px 15px rgba(134, 97, 197, 0.3); }
+
+        .flow-stage-content {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 0.75rem;
             width: 100%;
             align-items: center;
         }
 
-        .arch-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background: transparent; /* No solid background */
-            transition: transform 0.2s ease;
-            width: 100px;
-            text-align: center;
-        }
-
-        .arch-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .arch-icon {
-            width: 48px;
-            height: 48px;
+        /* Flow Node */
+        .flow-node {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #0078D4; /* Azure Blue */
-        }
-
-        .arch-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .arch-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #334155;
-            line-height: 1.2;
-        }
-
-        /* Separators (Vertical Dashed Lines) */
-        .arch-separator {
-            width: 1px;
-            height: 100%;
-            border-left: 2px dashed #cbd5e1;
-            align-self: stretch;
-            margin-top: 3rem; /* Offset for header */
-        }
-
-        /* Connectors (Dotted Arrows) */
-        .arch-arrow {
-            position: absolute;
-            height: 2px;
-            background: transparent;
-            border-top: 2px dotted #94a3b8;
-            z-index: 0;
-        }
-
-        /* Specific styling for Store column (Stacked layers) */
-        .store-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            background: #f8fafc;
-            padding: 1rem;
-            border: 1px dashed #cbd5e1;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
             width: 100%;
-            align-items: center;
+            max-width: 160px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
-        .store-layer {
+        .flow-node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: #0078D4;
+        }
+
+        .flow-node-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            color: #0078D4;
+        }
+
+        .flow-node-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .flow-node-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.3;
+        }
+
+        /* Medallion Stack */
+        .medallion-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+            max-width: 160px;
+        }
+
+        .medallion-layer {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
+            padding: 0.6rem 0.75rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .medallion-layer.bronze { border-left: 4px solid #CD7F32; color: #8B4513; }
+        .medallion-layer.silver { border-left: 4px solid #C0C0C0; color: #4a5568; }
+        .medallion-layer.gold { border-left: 4px solid #FFD700; color: #B8860B; }
+
+        .medallion-layer:hover {
+            transform: translateX(4px);
+        }
+
+        /* Animated Flow Arrows */
+        .flow-arrows {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #475569;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flow-arrows svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .flow-path {
+            fill: none;
+            stroke: #cbd5e1;
+            stroke-width: 2;
+            stroke-dasharray: 8 4;
+        }
+
+        .flow-path-animated {
+            fill: none;
+            stroke: #0078D4;
+            stroke-width: 2;
+            stroke-dasharray: 8 4;
+            stroke-dashoffset: 0;
+            animation: flowDash 2s linear infinite;
+        }
+
+        @keyframes flowDash {
+            to { stroke-dashoffset: -24; }
+        }
+
+        /* Data Particles Animation */
+        .data-dot {
+            fill: #0078D4;
+            opacity: 0;
+        }
+
+        .data-dot.animate {
+            animation: flowParticle 3s ease-in-out infinite;
+        }
+
+        .data-dot:nth-child(2) { animation-delay: 0.5s; }
+        .data-dot:nth-child(3) { animation-delay: 1s; }
+        .data-dot:nth-child(4) { animation-delay: 1.5s; }
+        .data-dot:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes flowParticle {
+            0% { opacity: 0; offset-distance: 0%; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; offset-distance: 100%; }
+        }
+
+        /* Flow Arrow Heads */
+        .arrow-head {
+            fill: #0078D4;
+            animation: arrowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .architecture-diagram {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .arch-separator {
-                display: none;
-            }
-            .arch-column {
+        @media (max-width: 900px) {
+            .flow-container {
+                flex-direction: column;
+                gap: 2rem;
                 min-height: auto;
-                border-bottom: 2px dashed #cbd5e1;
+            }
+            
+            .flow-stage {
+                border-bottom: 2px dashed #e2e8f0;
                 padding-bottom: 2rem;
             }
-            .arch-column:last-child {
+            
+            .flow-stage:last-child {
                 border-bottom: none;
+            }
+            
+            .flow-arrows {
+                display: none;
+            }
+            
+            .flow-node, .medallion-stack {
+                max-width: 200px;
             }
         }
         
@@ -1757,141 +1835,154 @@
             <h2 class="section-title" id="architecture-title">End-to-End Data Platform</h2>
         </div>
         
-        <div class="architecture-diagram" aria-hidden="true">
-            <!-- Column 1: Ingest -->
-            <div class="arch-column">
-                <div class="arch-header">Ingest</div>
-                <div class="arch-group">
-                    <div class="arch-item">
-                        <div class="arch-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M3 21h18M5 21V7l8-4 8 4v14M8 21v-9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v9" />
-                            </svg>
-                        </div>
-                        <div class="arch-label">ERP System</div>
+        <div class="architecture-flow">
+            <!-- Animated Flow Arrows SVG -->
+            <svg class="flow-arrows" viewBox="0 0 1200 420" preserveAspectRatio="none">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#0078D4" class="arrow-head"/>
+                    </marker>
+                    <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0078D4"/>
+                        <stop offset="33%" stop-color="#107C10"/>
+                        <stop offset="66%" stop-color="#E25A1C"/>
+                        <stop offset="100%" stop-color="#8661C5"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Flow Path 1: Ingest to Store -->
+                <path class="flow-path" d="M 280 210 C 320 210, 340 210, 380 210" />
+                <path class="flow-path-animated" d="M 280 210 C 320 210, 340 210, 380 210" marker-end="url(#arrowhead)" style="animation-delay: 0s;"/>
+                
+                <!-- Flow Path 2: Store to Process -->
+                <path class="flow-path" d="M 580 210 C 620 210, 640 210, 680 210" />
+                <path class="flow-path-animated" d="M 580 210 C 620 210, 640 210, 680 210" marker-end="url(#arrowhead)" style="animation-delay: 0.5s;"/>
+                
+                <!-- Flow Path 3: Process to Serve -->
+                <path class="flow-path" d="M 880 210 C 920 210, 940 210, 980 210" />
+                <path class="flow-path-animated" d="M 880 210 C 920 210, 940 210, 980 210" marker-end="url(#arrowhead)" style="animation-delay: 1s;"/>
+                
+                <!-- Animated Data Dots -->
+                <circle class="data-dot animate" r="5" style="offset-path: path('M 280 210 C 320 210, 340 210, 380 210');">
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <circle class="data-dot animate" r="5" style="offset-path: path('M 580 210 C 620 210, 640 210, 680 210'); animation-delay: 1s;">
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1s"/>
+                </circle>
+                <circle class="data-dot animate" r="5" style="offset-path: path('M 880 210 C 920 210, 940 210, 980 210'); animation-delay: 2s;">
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="2s"/>
+                </circle>
+            </svg>
+            
+            <div class="flow-container">
+                <!-- Stage 1: Ingest -->
+                <div class="flow-stage">
+                    <div class="flow-stage-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                        Ingest
                     </div>
-                    <div class="arch-item">
-                        <div class="arch-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
+                    <div class="flow-stage-content">
+                        <div class="flow-node">
+                            <div class="flow-node-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-8h6v8"/></svg>
+                            </div>
+                            <div class="flow-node-label">ERP Systems</div>
                         </div>
-                        <div class="arch-label">CRM</div>
-                    </div>
-                    <div class="arch-item">
-                        <div class="arch-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
+                        <div class="flow-node">
+                            <div class="flow-node-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div class="flow-node-label">CRM / WMS</div>
                         </div>
-                        <div class="arch-label">IoT / Real-time</div>
-                    </div>
-                    <div class="arch-item">
-                        <div class="arch-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <line x1="10" y1="9" x2="8" y2="9"></line>
-                            </svg>
+                        <div class="flow-node">
+                            <div class="flow-node-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            </div>
+                            <div class="flow-node-label">Files / APIs</div>
                         </div>
-                        <div class="arch-label">Flat Files</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Separator -->
-            <div class="arch-separator"></div>
-
-            <!-- Column 2: Store -->
-            <div class="arch-column">
-                <div class="arch-header">Store</div>
-                <div class="arch-group">
-                    <div class="arch-item">
-                        <div class="arch-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                            </svg>
+                        <div class="flow-node">
+                            <div class="flow-node-icon" style="color: #8B5CF6;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/></svg>
+                            </div>
+                            <div class="flow-node-label">RPA Bots</div>
                         </div>
-                        <div class="arch-label">Data Lake Storage</div>
-                    </div>
-                    <div class="store-stack">
-                        <div class="store-layer" style="border-left: 4px solid #CD7F32;">Bronze (Raw)</div>
-                        <div class="store-layer" style="border-left: 4px solid #C0C0C0;">Silver (Clean)</div>
-                        <div class="store-layer" style="border-left: 4px solid #FFD700;">Gold (Curated)</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Separator -->
-            <div class="arch-separator"></div>
-
-            <!-- Column 3: Process -->
-            <div class="arch-column">
-                <div class="arch-header">Process</div>
-                <div class="arch-group" style="justify-content: center; height: 100%;">
-                    <div class="arch-item">
-                        <div class="arch-icon" style="color: #E25A1C;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                            </svg>
-                        </div>
-                        <div class="arch-label">Apache Spark</div>
-                    </div>
-                    <div class="arch-item">
-                        <div class="arch-icon" style="color: #0078D4;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="4" y="4" width="16" height="16" rx="2" />
-                                <path d="M9 9h6M9 13h6M9 17h4" />
-                            </svg>
-                        </div>
-                        <div class="arch-label">Databricks / Synapse</div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Separator -->
-            <div class="arch-separator"></div>
-
-            <!-- Column 4: Serve -->
-            <div class="arch-column">
-                <div class="arch-header">Serve</div>
-                <div class="arch-group">
-                    <div class="arch-item">
-                        <div class="arch-icon" style="color: #F2C811;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <path d="M7 15h2v4H7zm4-6h2v10h-2zm4 3h2v7h-2z" />
-                            </svg>
-                        </div>
-                        <div class="arch-label">Power BI</div>
+                
+                <!-- Stage 2: Store -->
+                <div class="flow-stage">
+                    <div class="flow-stage-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                        Store
                     </div>
-                    <div class="arch-item">
-                        <div class="arch-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
+                    <div class="flow-stage-content">
+                        <div class="flow-node" style="border-color: #107C10;">
+                            <div class="flow-node-icon" style="color: #107C10;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                            </div>
+                            <div class="flow-node-label">Data Lake</div>
                         </div>
-                        <div class="arch-label">ML Models</div>
+                        <div class="medallion-stack">
+                            <div class="medallion-layer bronze">🥉 Bronze (Raw)</div>
+                            <div class="medallion-layer silver">🥈 Silver (Clean)</div>
+                            <div class="medallion-layer gold">🥇 Gold (Curated)</div>
+                        </div>
                     </div>
-                    <div class="arch-item">
-                        <div class="arch-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                            </svg>
+                </div>
+                
+                <!-- Stage 3: Process -->
+                <div class="flow-stage">
+                    <div class="flow-stage-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                        Process
+                    </div>
+                    <div class="flow-stage-content">
+                        <div class="flow-node" style="border-color: #E25A1C;">
+                            <div class="flow-node-icon" style="color: #E25A1C;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                            </div>
+                            <div class="flow-node-label">Apache Spark</div>
                         </div>
-                        <div class="arch-label">REST API</div>
+                        <div class="flow-node" style="border-color: #FF3621;">
+                            <div class="flow-node-icon" style="color: #FF3621;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>
+                            </div>
+                            <div class="flow-node-label">Databricks</div>
+                        </div>
+                        <div class="flow-node">
+                            <div class="flow-node-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            </div>
+                            <div class="flow-node-label">Quality Checks</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stage 4: Serve -->
+                <div class="flow-stage">
+                    <div class="flow-stage-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                        Serve
+                    </div>
+                    <div class="flow-stage-content">
+                        <div class="flow-node" style="border-color: #F2C811;">
+                            <div class="flow-node-icon" style="color: #F2C811;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15h2v4H7zm4-6h2v10h-2zm4 3h2v7h-2z"/></svg>
+                            </div>
+                            <div class="flow-node-label">Power BI</div>
+                        </div>
+                        <div class="flow-node" style="border-color: #8661C5;">
+                            <div class="flow-node-icon" style="color: #8661C5;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                            </div>
+                            <div class="flow-node-label">ML Models</div>
+                        </div>
+                        <div class="flow-node">
+                            <div class="flow-node-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                            </div>
+                            <div class="flow-node-label">REST APIs</div>
+                        </div>
                     </div>
                 </div>
             </div>
