@@ -29,7 +29,7 @@
 class SeniorDataEngineer:
     def __init__(self):
         self.name = "Godson Kurishinkal"
-        self.role = "Senior Data Engineer"
+        self.role = "Data Engineer"
         self.location = "Dubai, UAE"
         self.company = "Landmark Group"
         
@@ -237,7 +237,7 @@ Tier 3 ──► Volatility Analysis (Pattern Stability)
 
 | | |
 |:---:|:---|
-| 💼 | **Senior Data Engineer** @ Landmark Group |
+| 💼 | **Data Engineer** @ Landmark Group |
 | 🎓 | **BS Data Science** @ IIT Madras *(in progress)* |
 | 🎯 | **Focus:** Azure/Databricks, MLOps, Platform Engineering |
 | 🔍 | **Open to:** Senior/Staff Data Engineer roles in UAE |
@@ -283,7 +283,7 @@ Tier 3 ──► Volatility Analysis (Pattern Stability)
 <!-- Animated Footer -->
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:3776AB,100:FF6B6B&height=120&section=footer" width="100%"/>
 
-**Dubai, UAE** · Open to Senior Data Engineer opportunities
+**Dubai, UAE** · Open to Data Engineer opportunities
 
 <sub>💡 *"Production code is code that someone depends on."*</sub>
 

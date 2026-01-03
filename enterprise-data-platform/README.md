@@ -293,7 +293,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 ## 👤 Author
 
 **Godson Kurishinkal**  
-Senior Data Engineer | Dubai, UAE
+Data Engineer | Dubai, UAE
 
 - GitHub: [@GodsonKurishinkal](https://github.com/GodsonKurishinkal)
 - LinkedIn: [godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)
