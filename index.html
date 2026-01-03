@@ -363,12 +363,47 @@
             max-width: 160px;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        /* Node connector - line going right from each node */
+        .flow-node::after {
+            content: '';
+            position: absolute;
+            right: -24px;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, #cbd5e1, transparent);
+        }
+
+        /* Hide connector on last node of each stage */
+        .flow-stage:last-child .flow-node::after,
+        .flow-node:last-child::after {
+            display: none;
+        }
+
+        /* Vertical connector between nodes in same stage */
+        .flow-node:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            width: 2px;
+            height: 8px;
+            background: #e2e8f0;
+            transform: translateX(-50%);
         }
 
         .flow-node:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
             border-color: #0078D4;
+        }
+
+        .flow-node:hover::after,
+        .flow-node:hover::before {
+            background: #0078D4;
         }
 
         .flow-node-icon {
@@ -422,7 +457,35 @@
 
         /* Animated Flow Arrows */
         .flow-arrows {
-            display: none; /* Hide SVG arrows, using CSS connectors instead */
+            display: none; /* Hide old SVG arrows */
+        }
+
+        /* New SVG Connection Lines */
+        .flow-connections {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 60px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .conn-line {
+            animation: dashFlow 1.5s linear infinite;
+        }
+
+        .conn-line-vert {
+            stroke-dasharray: 4 2;
+        }
+
+        @keyframes dashFlow {
+            to { stroke-dashoffset: -18; }
+        }
+
+        .flow-particle {
+            opacity: 0.9;
+            filter: drop-shadow(0 0 4px currentColor);
         }
 
         /* CSS Flow Connectors */
@@ -431,37 +494,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1.5rem 1rem;
+            padding: 1.5rem 0.5rem;
             position: relative;
             z-index: 2;
+            max-width: 220px;
         }
 
-        /* Connector lines between stages */
-        .flow-stage:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -2px;
-            top: 50%;
-            width: 4px;
-            height: 60%;
-            transform: translateY(-50%);
-            background: linear-gradient(180deg, 
-                transparent 0%, 
-                #0078D4 10%, 
-                #0078D4 90%, 
-                transparent 100%
-            );
-            opacity: 0.3;
-        }
-
-        /* Horizontal connector with arrow */
+        /* Hide old connector elements */
         .flow-connector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            flex-shrink: 0;
-            position: relative;
+            display: none;
         }
 
         .flow-connector-line {
@@ -1935,41 +1976,56 @@
         </div>
         
         <div class="architecture-flow">
-            <!-- Animated Flow Arrows SVG -->
-            <svg class="flow-arrows" viewBox="0 0 1200 420" preserveAspectRatio="none">
+            <!-- SVG Connection Lines - Node to Node -->
+            <svg class="flow-connections" viewBox="0 0 1100 480" preserveAspectRatio="xMidYMid meet">
                 <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                        <polygon points="0 0, 10 3.5, 0 7" fill="#0078D4" class="arrow-head"/>
+                    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#0078D4"/>
                     </marker>
-                    <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#0078D4"/>
-                        <stop offset="33%" stop-color="#107C10"/>
-                        <stop offset="66%" stop-color="#E25A1C"/>
-                        <stop offset="100%" stop-color="#8661C5"/>
-                    </linearGradient>
+                    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#107C10"/>
+                    </marker>
+                    <marker id="arrow-orange" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#E25A1C"/>
+                    </marker>
+                    <marker id="arrow-purple" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#8661C5"/>
+                    </marker>
                 </defs>
                 
-                <!-- Flow Path 1: Ingest to Store -->
-                <path class="flow-path" d="M 280 210 C 320 210, 340 210, 380 210" />
-                <path class="flow-path-animated" d="M 280 210 C 320 210, 340 210, 380 210" marker-end="url(#arrowhead)" style="animation-delay: 0s;"/>
+                <!-- Ingest nodes → Data Lake (convergent flow) -->
+                <path class="conn-line" d="M 175 95 Q 250 95, 330 170" stroke="#0078D4" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-green)"/>
+                <path class="conn-line" d="M 175 165 Q 260 165, 330 185" stroke="#00A4EF" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-green)"/>
+                <path class="conn-line" d="M 175 235 Q 260 235, 330 205" stroke="#34A853" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-green)"/>
+                <path class="conn-line" d="M 175 305 Q 250 305, 330 220" stroke="#9333EA" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-green)"/>
                 
-                <!-- Flow Path 2: Store to Process -->
-                <path class="flow-path" d="M 580 210 C 620 210, 640 210, 680 210" />
-                <path class="flow-path-animated" d="M 580 210 C 620 210, 640 210, 680 210" marker-end="url(#arrowhead)" style="animation-delay: 0.5s;"/>
+                <!-- Data Lake → Medallion layers (vertical) -->
+                <line class="conn-line-vert" x1="390" y1="230" x2="390" y2="270" stroke="#107C10" stroke-width="2"/>
+                <line class="conn-line-vert" x1="390" y1="305" x2="390" y2="335" stroke="#107C10" stroke-width="2"/>
+                <line class="conn-line-vert" x1="390" y1="370" x2="390" y2="400" stroke="#107C10" stroke-width="2"/>
                 
-                <!-- Flow Path 3: Process to Serve -->
-                <path class="flow-path" d="M 880 210 C 920 210, 940 210, 980 210" />
-                <path class="flow-path-animated" d="M 880 210 C 920 210, 940 210, 980 210" marker-end="url(#arrowhead)" style="animation-delay: 1s;"/>
+                <!-- Gold layer → Process nodes (divergent flow) -->
+                <path class="conn-line" d="M 455 290 Q 520 290, 580 130" stroke="#FFD700" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-orange)"/>
+                <path class="conn-line" d="M 455 340 Q 530 340, 580 205" stroke="#C0C0C0" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-orange)"/>
+                <path class="conn-line" d="M 455 410 Q 540 410, 580 280" stroke="#CD7F32" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-orange)"/>
                 
-                <!-- Animated Data Dots -->
-                <circle class="data-dot animate" r="5" style="offset-path: path('M 280 210 C 320 210, 340 210, 380 210');">
-                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+                <!-- Process nodes → Serve nodes -->
+                <path class="conn-line" d="M 710 130 Q 780 130, 840 100" stroke="#E25A1C" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-purple)"/>
+                <path class="conn-line" d="M 710 205 Q 780 205, 840 175" stroke="#FF3621" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-purple)"/>
+                <path class="conn-line" d="M 710 280 Q 780 280, 840 250" stroke="#10B981" stroke-width="2" fill="none" stroke-dasharray="6 3" marker-end="url(#arrow-purple)"/>
+                
+                <!-- Animated data dots along paths -->
+                <circle class="flow-particle" r="4" fill="#0078D4">
+                    <animateMotion dur="2s" repeatCount="indefinite" path="M 175 95 Q 250 95, 330 170"/>
                 </circle>
-                <circle class="data-dot animate" r="5" style="offset-path: path('M 580 210 C 620 210, 640 210, 680 210'); animation-delay: 1s;">
-                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1s"/>
+                <circle class="flow-particle" r="4" fill="#00A4EF">
+                    <animateMotion dur="2s" repeatCount="indefinite" begin="0.5s" path="M 175 165 Q 260 165, 330 185"/>
                 </circle>
-                <circle class="data-dot animate" r="5" style="offset-path: path('M 880 210 C 920 210, 940 210, 980 210'); animation-delay: 2s;">
-                    <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="2s"/>
+                <circle class="flow-particle" r="4" fill="#FFD700">
+                    <animateMotion dur="1.5s" repeatCount="indefinite" begin="1s" path="M 455 290 Q 520 290, 580 130"/>
+                </circle>
+                <circle class="flow-particle" r="4" fill="#E25A1C">
+                    <animateMotion dur="1.5s" repeatCount="indefinite" begin="1.5s" path="M 710 130 Q 780 130, 840 100"/>
                 </circle>
             </svg>
             
@@ -2012,12 +2068,6 @@
                     </div>
                 </div>
                 
-                <!-- Connector 1: Ingest → Store -->
-                <div class="flow-connector">
-                    <div class="flow-connector-line" style="--from-color: #0078D4; --to-color: #107C10;"></div>
-                    <div class="flow-dot" style="color: #0078D4;"></div>
-                </div>
-                
                 <!-- Stage 2: Store -->
                 <div class="flow-stage">
                     <div class="flow-stage-header">
@@ -2038,12 +2088,6 @@
                             <div class="medallion-layer gold">🥇 Gold (Curated)</div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Connector 2: Store → Process -->
-                <div class="flow-connector">
-                    <div class="flow-connector-line" style="--from-color: #107C10; --to-color: #E25A1C;"></div>
-                    <div class="flow-dot" style="color: #107C10;"></div>
                 </div>
                 
                 <!-- Stage 3: Process -->
@@ -2075,12 +2119,6 @@
                             <div class="flow-node-label">Quality Checks</div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Connector 3: Process → Serve -->
-                <div class="flow-connector">
-                    <div class="flow-connector-line" style="--from-color: #E25A1C; --to-color: #8661C5;"></div>
-                    <div class="flow-dot" style="color: #E25A1C;"></div>
                 </div>
                 
                 <!-- Stage 4: Serve -->
