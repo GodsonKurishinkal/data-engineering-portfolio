@@ -1993,44 +1993,127 @@
             transform: translateY(0);
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
+        /* Mobile - Hide decorative elements */
+        @media (max-width: 768px) {
+            .terminal-header {
+                display: none;
+            }
+            
+            .bg-grid {
+                opacity: 0.3;
+            }
+            
+            .data-particles {
+                display: none;
+            }
+            
             nav {
-                padding: 1rem;
+                top: 0;
             }
             
-            .nav-logo span {
-                font-size: 1rem;
+            .profile-image-wrapper::after {
+                display: none;
             }
             
-            .nav-badge {
-                font-size: 0.625rem;
-                padding: 0.25rem 0.5rem;
+            .profile-image-wrapper::before {
+                opacity: 0.3;
             }
             
             .hero {
-                padding: 5rem 1rem 3rem;
+                padding: 6rem 1.5rem 3rem;
+                min-height: auto;
+            }
+            
+            .stat-icon::before {
+                display: none;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.75rem 1rem;
+            }
+            
+            .nav-logo span {
+                font-size: 0.95rem;
+            }
+            
+            .nav-badge {
+                font-size: 0.7rem;
+                padding: 0;
+                margin-left: 0.125rem;
+            }
+            
+            .hero {
+                padding: 5rem 1rem 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
             }
             
             .hero-subtitle {
-                font-size: 1rem;
+                font-size: 0.95rem;
+            }
+            
+            .eyebrow {
+                font-size: 0.75rem;
+                padding: 0.375rem 0.75rem;
+                margin-bottom: 1rem;
+            }
+            
+            .profile-image-wrapper {
+                width: 180px;
+                height: 180px;
             }
             
             .btn {
                 padding: 0.75rem 1.25rem;
-                font-size: 0.9375rem;
+                font-size: 0.875rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
             }
             
             section {
                 padding: 3rem 1rem;
             }
             
+            .stat-item {
+                padding: 1.5rem 1rem;
+            }
+            
             .stat-value {
-                font-size: 1.5rem;
+                font-size: 2rem;
+            }
+            
+            .stat-icon {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .stat-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
             }
             
             .social-links {
                 flex-direction: column;
+                width: 100%;
+            }
+            
+            .social-link {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
