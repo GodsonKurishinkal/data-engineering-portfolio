@@ -895,35 +895,20 @@
             transform: translateX(-50%) scale(1);
         }
         
-        /* Stats Section */
+        /* Stats Section - Minimalistic */
         .stats {
             position: relative;
             z-index: 2;
-            padding: 5rem 2rem;
+            padding: 4rem 2rem;
             background: transparent;
-            overflow: hidden;
-        }
-        
-        /* Decorative background elements */
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 400px;
-            background: radial-gradient(ellipse at center, rgba(90, 137, 191, 0.08) 0%, transparent 70%);
-            pointer-events: none;
         }
         
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            position: relative;
         }
         
         @media (max-width: 900px) {
@@ -935,67 +920,25 @@
         @media (max-width: 500px) {
             .stats-grid {
                 grid-template-columns: 1fr;
-                max-width: 280px;
+                max-width: 260px;
             }
         }
         
         .stat-item {
-            position: relative;
             text-align: center;
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
             padding: 2rem 1.5rem;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--bg-card);
             border-radius: var(--radius-lg);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 
-                0 4px 24px -1px rgba(0, 0, 0, 0.06),
-                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-        
-        /* Gradient accent line on top */
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: var(--accent-gradient);
-            border-radius: 0 0 4px 4px;
-            transition: width 0.4s ease;
-        }
-        
-        /* Hover glow effect */
-        .stat-item::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(90, 137, 191, 0.1) 0%, rgba(216, 164, 201, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
         
         .stat-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(90, 137, 191, 0.3);
-            box-shadow: 
-                0 20px 40px -10px rgba(90, 137, 191, 0.25),
-                0 0 0 1px rgba(90, 137, 191, 0.2) inset;
-        }
-        
-        .stat-item:hover::before {
-            width: 80%;
-        }
-        
-        .stat-item:hover::after {
-            opacity: 1;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
         }
         
         .stat-item:nth-child(1) { animation-delay: 0.1s; }
@@ -1003,125 +946,47 @@
         .stat-item:nth-child(3) { animation-delay: 0.3s; }
         .stat-item:nth-child(4) { animation-delay: 0.4s; }
         
-        /* Different accent colors for each stat */
-        .stat-item:nth-child(1)::before { background: linear-gradient(90deg, #5A89BF, #7BA3D4); }
-        .stat-item:nth-child(2)::before { background: linear-gradient(90deg, #9890C8, #B5AED8); }
-        .stat-item:nth-child(3)::before { background: linear-gradient(90deg, #D8A4C9, #E5BDD9); }
-        .stat-item:nth-child(4)::before { background: linear-gradient(90deg, #5A89BF, #9890C8); }
-        
         .stat-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1.25rem;
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(90, 137, 191, 0.12) 0%, rgba(152, 144, 200, 0.08) 100%);
-            border-radius: 50%;
             color: var(--accent);
-            position: relative;
-            transition: all 0.4s ease;
-        }
-        
-        /* Animated ring around icon */
-        .stat-icon::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            border: 2px dashed rgba(90, 137, 191, 0.2);
-            animation: rotate 20s linear infinite;
+            opacity: 0.7;
         }
         
         .stat-item:hover .stat-icon {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, rgba(90, 137, 191, 0.2) 0%, rgba(152, 144, 200, 0.15) 100%);
+            opacity: 1;
         }
         
         .stat-icon svg {
-            width: 28px;
-            height: 28px;
-            position: relative;
-            z-index: 1;
+            width: 24px;
+            height: 24px;
         }
         
         .stat-value {
             font-family: var(--font-mono);
-            font-size: 2.75rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-primary);
             line-height: 1.2;
             letter-spacing: -0.03em;
-            position: relative;
-            display: inline-block;
         }
         
         .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
+            font-size: 0.75rem;
+            color: var(--text-muted);
             margin-top: 0.5rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
         }
         
-        /* Stat Progress Bar */
+        /* Hidden progress bar - keeping for animation trigger */
         .stat-progress {
-            width: 70%;
-            height: 4px;
-            background: rgba(90, 137, 191, 0.1);
-            border-radius: 9999px;
-            margin: 1rem auto 0;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .stat-progress-bar {
-            height: 100%;
-            border-radius: 9999px;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-        
-        /* Different gradient for each progress bar */
-        .stat-item:nth-child(1) .stat-progress-bar { background: linear-gradient(90deg, #5A89BF, #7BA3D4); }
-        .stat-item:nth-child(2) .stat-progress-bar { background: linear-gradient(90deg, #9890C8, #B5AED8); }
-        .stat-item:nth-child(3) .stat-progress-bar { background: linear-gradient(90deg, #D8A4C9, #E5BDD9); }
-        .stat-item:nth-child(4) .stat-progress-bar { background: linear-gradient(90deg, #5A89BF, #9890C8); }
-        
-        /* Glowing dot at the end of progress bar */
-        .stat-progress-bar::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px currentColor;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .stat-item.visible .stat-progress-bar {
-            transform: scaleX(1);
-        }
-        
-        .stat-item.visible .stat-progress-bar::after {
-            opacity: 1;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
-            50% { transform: translateY(-50%) scale(1.3); opacity: 0.7; }
+            display: none;
         }
         
         /* Section Styles */
@@ -1824,149 +1689,6 @@
             transform: scaleX(1);
         }
         
-        /* GitHub Activity Section */
-        .github-activity {
-            background: var(--bg-secondary);
-            padding: 4rem 2rem;
-        }
-        
-        .github-activity-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .github-activity-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .github-activity-title {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .github-activity-title svg {
-            width: 24px;
-            height: 24px;
-        }
-        
-        .github-activity-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        
-        .github-activity-link:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-glow);
-        }
-        
-        .github-activity-link svg {
-            width: 16px;
-            height: 16px;
-        }
-        
-        .contribution-graph {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            overflow-x: auto;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .contribution-grid {
-            display: grid;
-            grid-template-columns: repeat(52, 1fr);
-            grid-template-rows: repeat(7, 1fr);
-            gap: 3px;
-            min-width: 700px;
-        }
-        
-        .contribution-cell {
-            width: 12px;
-            height: 12px;
-            border-radius: 2px;
-            background: #ebedf0;
-            transition: all 0.2s ease;
-        }
-        
-        .contribution-cell:hover {
-            transform: scale(1.3);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        .contribution-cell.level-1 { background: #9be9a8; }
-        .contribution-cell.level-2 { background: #40c463; }
-        .contribution-cell.level-3 { background: #30a14e; }
-        .contribution-cell.level-4 { background: #216e39; }
-        
-        .contribution-legend {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-        
-        .contribution-legend-cells {
-            display: flex;
-            gap: 3px;
-        }
-        
-        .contribution-legend-cell {
-            width: 12px;
-            height: 12px;
-            border-radius: 2px;
-        }
-        
-        .contribution-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-            flex-wrap: wrap;
-        }
-        
-        .contribution-stat {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        
-        .contribution-stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #216e39;
-            font-family: var(--font-mono);
-        }
-        
-        .contribution-stat-label {
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-        }
-        
         /* Coming Soon Section */
         .coming-soon {
             background: var(--bg-secondary);
@@ -2334,39 +2056,36 @@
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="12" cy="12" r="10"></circle>
                         <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
                 </div>
                 <div class="stat-value"><span class="counter" data-target="6">0</span>+</div>
                 <div class="stat-label">Years Experience</div>
-                <div class="stat-progress"><div class="stat-progress-bar" style="width: 75%"></div></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                     </svg>
                 </div>
                 <div class="stat-value"><span class="counter" data-target="50">0</span>+</div>
                 <div class="stat-label">ETL Pipelines</div>
-                <div class="stat-progress"><div class="stat-progress-bar" style="width: 90%"></div></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                         <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
                 </div>
                 <div class="stat-value"><span class="counter" data-target="95">0</span>%+</div>
                 <div class="stat-label">Reliability</div>
-                <div class="stat-progress"><div class="stat-progress-bar" style="width: 95%"></div></div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <rect x="3" y="3" width="7" height="7"></rect>
                         <rect x="14" y="3" width="7" height="7"></rect>
                         <rect x="14" y="14" width="7" height="7"></rect>
@@ -2375,7 +2094,6 @@
                 </div>
                 <div class="stat-value"><span class="counter" data-target="15">0</span>+</div>
                 <div class="stat-label">Fact Tables</div>
-                <div class="stat-progress"><div class="stat-progress-bar" style="width: 85%"></div></div>
             </div>
         </div>
     </section>
@@ -2923,56 +2641,6 @@
         </div>
     </section>
     
-    <!-- GitHub Activity Section -->
-    <section class="github-activity animate-on-scroll" aria-labelledby="github-activity-title">
-        <div class="github-activity-container">
-            <div class="github-activity-header">
-                <h2 class="github-activity-title" id="github-activity-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub Activity
-                </h2>
-                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="github-activity-link">
-                    @GodsonKurishinkal
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                </a>
-            </div>
-            <div class="contribution-graph">
-                <div class="contribution-grid" id="contributionGrid"></div>
-                <div class="contribution-legend">
-                    <span>Less</span>
-                    <div class="contribution-legend-cells">
-                        <div class="contribution-legend-cell" style="background: #ebedf0;"></div>
-                        <div class="contribution-legend-cell" style="background: #9be9a8;"></div>
-                        <div class="contribution-legend-cell" style="background: #40c463;"></div>
-                        <div class="contribution-legend-cell" style="background: #30a14e;"></div>
-                        <div class="contribution-legend-cell" style="background: #216e39;"></div>
-                    </div>
-                    <span>More</span>
-                </div>
-            </div>
-            <div class="contribution-stats">
-                <div class="contribution-stat">
-                    <span class="contribution-stat-value" id="totalContributions">0</span>
-                    <span class="contribution-stat-label">contributions in the last year</span>
-                </div>
-                <div class="contribution-stat">
-                    <span class="contribution-stat-value" id="currentStreak">0</span>
-                    <span class="contribution-stat-label">day current streak</span>
-                </div>
-                <div class="contribution-stat">
-                    <span class="contribution-stat-value" id="longestStreak">0</span>
-                    <span class="contribution-stat-label">day longest streak</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- Coming Soon Section -->
     <section class="coming-soon animate-on-scroll" aria-labelledby="coming-soon-title">
         <div class="coming-soon-content">
@@ -3193,93 +2861,6 @@
             }
             
             setInterval(animateValidationFlow, 1500);
-            
-            // GitHub Contribution Graph Animation
-            const contributionGrid = document.getElementById('contributionGrid');
-            if (contributionGrid) {
-                const totalCells = 52 * 7; // 52 weeks, 7 days
-                const cells = [];
-                let totalContributions = 0;
-                
-                // Generate contribution data with realistic patterns
-                // More activity on weekdays, varying intensity
-                for (let i = 0; i < totalCells; i++) {
-                    const cell = document.createElement('div');
-                    cell.className = 'contribution-cell';
-                    
-                    const dayOfWeek = i % 7;
-                    const weekIndex = Math.floor(i / 7);
-                    
-                    // Higher probability of contributions on weekdays
-                    let probability = dayOfWeek >= 1 && dayOfWeek <= 5 ? 0.7 : 0.3;
-                    
-                    // Recent weeks have more activity
-                    if (weekIndex > 40) probability += 0.15;
-                    if (weekIndex > 48) probability += 0.1;
-                    
-                    // Generate level
-                    let level = 0;
-                    if (Math.random() < probability) {
-                        const rand = Math.random();
-                        if (rand < 0.35) level = 1;
-                        else if (rand < 0.6) level = 2;
-                        else if (rand < 0.85) level = 3;
-                        else level = 4;
-                    }
-                    
-                    cell.dataset.level = level;
-                    if (level > 0) {
-                        totalContributions += level * 2;
-                    }
-                    
-                    cells.push(cell);
-                    contributionGrid.appendChild(cell);
-                }
-                
-                // Animate cells appearing with the green color
-                const githubObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            cells.forEach((cell, index) => {
-                                setTimeout(() => {
-                                    const level = parseInt(cell.dataset.level);
-                                    if (level > 0) {
-                                        cell.classList.add('level-' + level);
-                                    }
-                                }, index * 3);
-                            });
-                            
-                            // Animate stats
-                            animateValue('totalContributions', 0, totalContributions, 2000);
-                            animateValue('currentStreak', 0, 23, 1500);
-                            animateValue('longestStreak', 0, 47, 1500);
-                            
-                            githubObserver.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.3 });
-                
-                githubObserver.observe(document.querySelector('.github-activity'));
-                
-                function animateValue(id, start, end, duration) {
-                    const element = document.getElementById(id);
-                    const range = end - start;
-                    const startTime = performance.now();
-                    
-                    function update(currentTime) {
-                        const elapsed = currentTime - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        const value = Math.floor(start + range * progress);
-                        element.textContent = value;
-                        
-                        if (progress < 1) {
-                            requestAnimationFrame(update);
-                        }
-                    }
-                    
-                    requestAnimationFrame(update);
-                }
-            }
         });
     </script>
 </body>
