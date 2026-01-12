@@ -2098,55 +2098,249 @@
         </div>
     </section>
     
-    <!-- Expertise Section -->
-    <section class="expertise animate-on-scroll" aria-labelledby="expertise-title">
+    <!-- Featured Projects Section -->
+    <section class="featured-projects animate-on-scroll" aria-labelledby="projects-title">
         <div class="section-header">
-            <p class="section-eyebrow">EXPERTISE</p>
-            <h2 class="section-title" id="expertise-title">Core Competencies</h2>
+            <p class="section-eyebrow">WHAT I'VE BUILT</p>
+            <h2 class="section-title" id="projects-title">Featured Projects</h2>
+            <p class="section-subtitle">Real production systems powering supply chain operations</p>
         </div>
-        <div class="expertise-grid">
-            <article class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        <div class="projects-grid">
+            <a href="projects/medallion-lakehouse.html" class="project-card">
+                <div class="project-card-header">
+                    <span class="project-card-icon">🏗️</span>
+                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                 </div>
-                <h3 class="expertise-title">Data Platform Architecture</h3>
-                <p class="expertise-text">Medallion architecture with Bronze/Silver/Gold layers, star schema dimensional modeling for scalable analytics infrastructure.</p>
-            </article>
-            <article class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="22" y1="12" x2="2" y2="12"></line>
-                        <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
-                        <line x1="6" y1="16" x2="6.01" y2="16"></line>
-                        <line x1="10" y1="16" x2="10.01" y2="16"></line>
+                <h3 class="project-card-title">Medallion Data Lakehouse</h3>
+                <p class="project-card-desc">Bronze/Silver/Gold architecture processing 10,000+ SKUs with 95%+ pipeline reliability.</p>
+                <div class="project-card-tags">
+                    <span class="project-tag">Polars</span>
+                    <span class="project-tag">Parquet</span>
+                    <span class="project-tag">Star Schema</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-metric">
+                        <div class="project-metric-value">87%</div>
+                        <div class="project-metric-label">Faster</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">90%</div>
+                        <div class="project-metric-label">Fresher Data</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">50+</div>
+                        <div class="project-metric-label">Pipelines</div>
+                    </div>
+                </div>
+            </a>
+            <a href="enterprise-data-platform/" class="project-card">
+                <div class="project-card-header">
+                    <span class="project-card-icon">⚙️</span>
+                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                 </div>
-                <h3 class="expertise-title">Pipeline Engineering</h3>
-                <p class="expertise-text">End-to-end ETL orchestration integrating ERP, CRM, WMS, and OBI systems with 95%+ reliability across 50+ production pipelines.</p>
-            </article>
-            <article class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                <h3 class="project-card-title">Enterprise Data Platform</h3>
+                <p class="project-card-desc">Production-grade ETL framework with Abstract Base Classes, data quality validation, and 3-tier anomaly detection.</p>
+                <div class="project-card-tags">
+                    <span class="project-tag">Python</span>
+                    <span class="project-tag">DuckDB</span>
+                    <span class="project-tag">ETL Framework</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-metric">
+                        <div class="project-metric-value">98%</div>
+                        <div class="project-metric-label">Reliability</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">3-Tier</div>
+                        <div class="project-metric-label">Quality</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">7K+</div>
+                        <div class="project-metric-label">Lines</div>
+                    </div>
+                </div>
+            </a>
+            <a href="projects/demand-forecasting.html" class="project-card">
+                <div class="project-card-header">
+                    <span class="project-card-icon">📈</span>
+                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
                 </div>
-                <h3 class="expertise-title">Supply Chain Analytics</h3>
-                <p class="expertise-text">Demand forecasting, inventory optimization, and replenishment automation managing 10,000+ SKUs with ML-driven insights.</p>
-            </article>
+                <h3 class="project-card-title">Demand Forecasting System</h3>
+                <p class="project-card-desc">Intelligent forecasting engine with 15+ ensemble algorithms and ADI/CV² pattern classification.</p>
+                <div class="project-card-tags">
+                    <span class="project-tag">ML Ensemble</span>
+                    <span class="project-tag">Time Series</span>
+                    <span class="project-tag">Scikit-learn</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-metric">
+                        <div class="project-metric-value">15+</div>
+                        <div class="project-metric-label">Algorithms</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">85%</div>
+                        <div class="project-metric-label">Accuracy</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">30%</div>
+                        <div class="project-metric-label">Less Stockouts</div>
+                    </div>
+                </div>
+            </a>
+            <a href="projects/anomaly-detection.html" class="project-card">
+                <div class="project-card-header">
+                    <span class="project-card-icon">🔍</span>
+                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+                <h3 class="project-card-title">Anomaly Detection System</h3>
+                <p class="project-card-desc">3-tier statistical system for data quality monitoring: validation → outlier → volatility.</p>
+                <div class="project-card-tags">
+                    <span class="project-tag">Z-Score</span>
+                    <span class="project-tag">IQR</span>
+                    <span class="project-tag">Data Quality</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-metric">
+                        <div class="project-metric-value">500+</div>
+                        <div class="project-metric-label">Anomalies</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">70%</div>
+                        <div class="project-metric-label">Less Incidents</div>
+                    </div>
+                    <div class="project-metric">
+                        <div class="project-metric-value">3-Tier</div>
+                        <div class="project-metric-label">Detection</div>
+                    </div>
+                </div>
+            </a>
         </div>
+    </section>
+    
+    <!-- Code Showcase Section -->
+    <section class="code-showcase animate-on-scroll" aria-labelledby="code-title">
+        <div class="section-header">
+            <p class="section-eyebrow">HOW I BUILD</p>
+            <h2 class="section-title" id="code-title">Configuration-Driven Pipelines</h2>
+            <p class="section-subtitle">Real code from production systems—declarative configs that enable schema validation, quality checks, and flexible load modes</p>
+        </div>
+        <div class="code-showcase-grid">
+            <!-- Config File -->
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-header-dots">
+                        <span class="code-header-dot red"></span>
+                        <span class="code-header-dot yellow"></span>
+                        <span class="code-header-dot green"></span>
+                    </div>
+                    <span class="code-header-title">config.py</span>
+                    <span class="code-header-lang">Python</span>
+                </div>
+                <div class="code-body">
+                    <pre><span class="class">PIPELINE</span> = {
+    <span class="string">"load"</span>: {<span class="string">"mode"</span>: <span class="string">"FULL"</span>},
+    <span class="string">"paths"</span>: {<span class="string">"output"</span>: <span class="string">"data/landing/orders"</span>},
+    
+    <span class="string">"schema"</span>: {
+        <span class="string">"order_id"</span>: <span class="string">"string"</span>,
+        <span class="string">"amount"</span>: <span class="string">"decimal(10,2)"</span>,
+        <span class="string">"country"</span>: <span class="string">"string"</span>,
+        <span class="string">"created_at"</span>: <span class="string">"timestamp"</span>
+    },
+    
+    <span class="string">"quality"</span>: {
+        <span class="string">"required_columns"</span>: [<span class="string">"order_id"</span>, <span class="string">"amount"</span>],
+        <span class="string">"not_null"</span>: [<span class="string">"order_id"</span>]
+    }
+}</pre>
+                </div>
+                <div class="code-footer">
+                    <span>📋 Schema + Quality Rules</span>
+                </div>
+            </div>
+            
+            <!-- Pipeline File -->
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-header-dots">
+                        <span class="code-header-dot red"></span>
+                        <span class="code-header-dot yellow"></span>
+                        <span class="code-header-dot green"></span>
+                    </div>
+                    <span class="code-header-title">ingestion.py</span>
+                    <span class="code-header-lang">Python</span>
+                </div>
+                <div class="code-body">
+                    <pre><span class="keyword">from</span> config <span class="keyword">import</span> <span class="class">PIPELINE</span>, <span class="class">DB_CONFIG</span>
+
+<span class="comment"># Database tables ingestion</span>
+<span class="keyword">for</span> table <span class="keyword">in</span> <span class="class">DB_CONFIG</span>[<span class="string">"tables"</span>]:
+    df = (
+        db.read
+        .format(<span class="string">"jdbc"</span>)
+        .option(<span class="string">"url"</span>, <span class="class">DB_CONFIG</span>[<span class="string">"url"</span>])
+        .option(<span class="string">"dbtable"</span>, table)
+        .load()
+    )
+    
+    <span class="comment"># Validate against config schema</span>
+    <span class="function">validate_schema</span>(df, <span class="class">PIPELINE</span>[<span class="string">"schema"</span>])
+    <span class="function">check_quality</span>(df, <span class="class">PIPELINE</span>[<span class="string">"quality"</span>])
+    
+    df.write.parquet(<span class="class">PIPELINE</span>[<span class="string">"paths"</span>][<span class="string">"output"</span>])</pre>
+                </div>
+                <div class="code-footer">
+                    <span>⚡ Config-Driven Validation</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Validation Flow Animation -->
+        <div class="validation-flow">
+            <div class="validation-step active" data-step="1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+                Read Config
+            </div>
+            <span class="validation-arrow">→</span>
+            <div class="validation-step" data-step="2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                Validate Schema
+            </div>
+            <span class="validation-arrow">→</span>
+            <div class="validation-step" data-step="3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Quality Check
+            </div>
+            <span class="validation-arrow">→</span>
+            <div class="validation-step" data-step="4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                Load Data
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 1.5rem; font-family: var(--font-mono);">
+            ✓ Schema validation &nbsp;•&nbsp; ✓ Quality checks &nbsp;•&nbsp; ✓ FULL/INCREMENTAL modes
+        </p>
     </section>
     
     <!-- Tech Stack Section -->
     <section class="animate-on-scroll" aria-labelledby="tech-title">
         <div class="section-header">
-            <p class="section-eyebrow">TECHNOLOGY</p>
+            <p class="section-eyebrow">TOOLS I USE</p>
             <h2 class="section-title" id="tech-title">Tech Stack</h2>
+            <p class="section-subtitle">Production-tested technologies for building reliable data systems</p>
         </div>
         <div class="tech-stack">
             <div class="tech-grid">
@@ -2253,356 +2447,12 @@
         </div>
     </section>
     
-    <!-- Featured Projects Section -->
-    <section class="featured-projects animate-on-scroll" aria-labelledby="projects-title">
-        <div class="section-header">
-            <p class="section-eyebrow">FEATURED WORK</p>
-            <h2 class="section-title" id="projects-title">Projects</h2>
-        </div>
-        <div class="projects-grid">
-            <a href="projects/medallion-lakehouse.html" class="project-card">
-                <div class="project-card-header">
-                    <span class="project-card-icon">🏗️</span>
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-                <h3 class="project-card-title">Medallion Data Lakehouse</h3>
-                <p class="project-card-desc">Bronze/Silver/Gold architecture processing 10,000+ SKUs with 95%+ pipeline reliability.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">Polars</span>
-                    <span class="project-tag">Parquet</span>
-                    <span class="project-tag">Star Schema</span>
-                </div>
-                <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">87%</div>
-                        <div class="project-metric-label">Faster</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">90%</div>
-                        <div class="project-metric-label">Fresher Data</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">50+</div>
-                        <div class="project-metric-label">Pipelines</div>
-                    </div>
-                </div>
-            </a>
-            <a href="enterprise-data-platform/" class="project-card">
-                <div class="project-card-header">
-                    <span class="project-card-icon">⚙️</span>
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-                <h3 class="project-card-title">Enterprise Data Platform</h3>
-                <p class="project-card-desc">Production-grade ETL framework with Abstract Base Classes, data quality validation, and 3-tier anomaly detection.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">Python</span>
-                    <span class="project-tag">DuckDB</span>
-                    <span class="project-tag">ETL Framework</span>
-                </div>
-                <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">98%</div>
-                        <div class="project-metric-label">Reliability</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">3-Tier</div>
-                        <div class="project-metric-label">Quality</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">7K+</div>
-                        <div class="project-metric-label">Lines</div>
-                    </div>
-                </div>
-            </a>
-            <a href="projects/demand-forecasting.html" class="project-card">
-                <div class="project-card-header">
-                    <span class="project-card-icon">📈</span>
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-                <h3 class="project-card-title">Demand Forecasting System</h3>
-                <p class="project-card-desc">Intelligent forecasting engine with 15+ ensemble algorithms and ADI/CV² pattern classification.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">ML Ensemble</span>
-                    <span class="project-tag">Time Series</span>
-                    <span class="project-tag">Scikit-learn</span>
-                </div>
-                <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">15+</div>
-                        <div class="project-metric-label">Algorithms</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">85%</div>
-                        <div class="project-metric-label">Accuracy</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">30%</div>
-                        <div class="project-metric-label">Less Stockouts</div>
-                    </div>
-                </div>
-            </a>
-            <a href="projects/rpa-bot-framework.html" class="project-card">
-                <div class="project-card-header">
-                    <span class="project-card-icon">🤖</span>
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-                <h3 class="project-card-title">RPA Bot Framework</h3>
-                <p class="project-card-desc">Selenium/PyAutoGUI bots for extracting data from legacy systems without API access.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">Selenium</span>
-                    <span class="project-tag">PyAutoGUI</span>
-                    <span class="project-tag">Automation</span>
-                </div>
-                <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">5+</div>
-                        <div class="project-metric-label">Bots</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">87%</div>
-                        <div class="project-metric-label">Time Saved</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">24/7</div>
-                        <div class="project-metric-label">Scheduled</div>
-                    </div>
-                </div>
-            </a>
-            <a href="projects/anomaly-detection.html" class="project-card">
-                <div class="project-card-header">
-                    <span class="project-card-icon">🔍</span>
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-                <h3 class="project-card-title">Anomaly Detection System</h3>
-                <p class="project-card-desc">3-tier statistical system for data quality monitoring: validation → outlier → volatility.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">Z-Score</span>
-                    <span class="project-tag">IQR</span>
-                    <span class="project-tag">Data Quality</span>
-                </div>
-                <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">500+</div>
-                        <div class="project-metric-label">Anomalies</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">70%</div>
-                        <div class="project-metric-label">Less Incidents</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">3-Tier</div>
-                        <div class="project-metric-label">Detection</div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-    
-    <!-- Code Showcase Section -->
-    <section class="code-showcase animate-on-scroll" aria-labelledby="code-title">
-        <div class="section-header">
-            <p class="section-eyebrow">CODE SAMPLE</p>
-            <h2 class="section-title" id="code-title">Configuration-Driven Pipelines</h2>
-        </div>
-        <div class="code-showcase-grid">
-            <!-- Config File -->
-            <div class="code-container">
-                <div class="code-header">
-                    <div class="code-header-dots">
-                        <span class="code-header-dot red"></span>
-                        <span class="code-header-dot yellow"></span>
-                        <span class="code-header-dot green"></span>
-                    </div>
-                    <span class="code-header-title">config.py</span>
-                    <span class="code-header-lang">Python</span>
-                </div>
-                <div class="code-body">
-                    <pre><span class="class">PIPELINE</span> = {
-    <span class="string">"load"</span>: {<span class="string">"mode"</span>: <span class="string">"FULL"</span>},
-    <span class="string">"paths"</span>: {<span class="string">"output"</span>: <span class="string">"data/landing/orders"</span>},
-    
-    <span class="string">"schema"</span>: {
-        <span class="string">"order_id"</span>: <span class="string">"string"</span>,
-        <span class="string">"amount"</span>: <span class="string">"decimal(10,2)"</span>,
-        <span class="string">"country"</span>: <span class="string">"string"</span>,
-        <span class="string">"created_at"</span>: <span class="string">"timestamp"</span>
-    },
-    
-    <span class="string">"quality"</span>: {
-        <span class="string">"required_columns"</span>: [<span class="string">"order_id"</span>, <span class="string">"amount"</span>],
-        <span class="string">"not_null"</span>: [<span class="string">"order_id"</span>]
-    }
-}</pre>
-                </div>
-                <div class="code-footer">
-                    <span>📋 Schema + Quality Rules</span>
-                </div>
-            </div>
-            
-            <!-- Pipeline File -->
-            <div class="code-container">
-                <div class="code-header">
-                    <div class="code-header-dots">
-                        <span class="code-header-dot red"></span>
-                        <span class="code-header-dot yellow"></span>
-                        <span class="code-header-dot green"></span>
-                    </div>
-                    <span class="code-header-title">ingestion.py</span>
-                    <span class="code-header-lang">Python</span>
-                </div>
-                <div class="code-body">
-                    <pre><span class="keyword">from</span> config <span class="keyword">import</span> <span class="class">PIPELINE</span>, <span class="class">DB_CONFIG</span>
-
-<span class="comment"># Database tables ingestion</span>
-<span class="keyword">for</span> table <span class="keyword">in</span> <span class="class">DB_CONFIG</span>[<span class="string">"tables"</span>]:
-    df = (
-        db.read
-        .format(<span class="string">"jdbc"</span>)
-        .option(<span class="string">"url"</span>, <span class="class">DB_CONFIG</span>[<span class="string">"url"</span>])
-        .option(<span class="string">"dbtable"</span>, table)
-        .load()
-    )
-    
-    <span class="comment"># Validate against config schema</span>
-    <span class="function">validate_schema</span>(df, <span class="class">PIPELINE</span>[<span class="string">"schema"</span>])
-    <span class="function">check_quality</span>(df, <span class="class">PIPELINE</span>[<span class="string">"quality"</span>])
-    
-    df.write.parquet(<span class="class">PIPELINE</span>[<span class="string">"paths"</span>][<span class="string">"output"</span>])</pre>
-                </div>
-                <div class="code-footer">
-                    <span>⚡ Config-Driven Validation</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Validation Flow Animation -->
-        <div class="validation-flow">
-            <div class="validation-step active" data-step="1">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
-                Read Config
-            </div>
-            <span class="validation-arrow">→</span>
-            <div class="validation-step" data-step="2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                Validate Schema
-            </div>
-            <span class="validation-arrow">→</span>
-            <div class="validation-step" data-step="3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                Quality Check
-            </div>
-            <span class="validation-arrow">→</span>
-            <div class="validation-step" data-step="4">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
-                Load Data
-            </div>
-        </div>
-        
-        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 1.5rem; font-family: var(--font-mono);">
-            ✓ Schema validation &nbsp;•&nbsp; ✓ Quality checks &nbsp;•&nbsp; ✓ FULL/INCREMENTAL modes
-        </p>
-    </section>
-    
-    <!-- Skills Section -->
-    <section class="skills-section animate-on-scroll" aria-labelledby="skills-title">
-        <div class="section-header">
-            <p class="section-eyebrow">PROFICIENCY</p>
-            <h2 class="section-title" id="skills-title">Technical Skills</h2>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/></svg>
-                        Python
-                    </span>
-                    <span class="skill-level">Expert</span>
-                </div>
-                <div class="skill-bar"><div class="skill-bar-fill" style="width: 95%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
-                        SQL / DuckDB
-                    </span>
-                    <span class="skill-level">Expert</span>
-                </div>
-                <div class="skill-bar"><div class="skill-bar-fill" style="width: 92%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                        Polars / Pandas
-                    </span>
-                    <span class="skill-level">Advanced</span>
-                </div>
-                <div class="skill-bar"><div class="skill-bar-fill" style="width: 88%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                        Spark / PySpark
-                    </span>
-                    <span class="skill-level">Intermediate</span>
-                </div>
-                <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                        Data Modeling
-                    </span>
-                    <span class="skill-level">Advanced</span>
-                </div>
-                <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                        Streamlit / Dashboards
-                    </span>
-                    <span class="skill-level">Advanced</span>
-                </div>
-                <div class="skill-bar"><div class="skill-bar-fill" style="width: 82%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-header">
-                    <span class="skill-name">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        Selenium / RPA
-                    </span>
-                    <span class="skill-level">Advanced</span>
-                </div>
-                <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%"></div></div>
-            </div>
-        </div>
-    </section>
-    
     <!-- Goals Section -->
     <section class="focus-2026 animate-on-scroll" aria-labelledby="focus-title">
         <div class="section-header">
-            <p class="section-eyebrow">ROADMAP</p>
-            <h2 class="section-title" id="focus-title">Current Goals</h2>
+            <p class="section-eyebrow">WHERE I'M HEADING</p>
+            <h2 class="section-title" id="focus-title">2026 Roadmap</h2>
+            <p class="section-subtitle">Cloud certifications, leadership growth, and enterprise-scale platforms</p>
         </div>
         <div class="focus-grid">
             <div class="focus-card">
