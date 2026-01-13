@@ -252,8 +252,8 @@ Tier 3 ──► Volatility Analysis (Pattern Stability)
 
 | Repository | Description | Status |
 |:-----------|:------------|:------:|
-| `medallion-lakehouse` | Production lakehouse patterns with Polars + DuckDB | 🚧 |
-| `etl-framework` | Config-driven ETL with retry logic & logging | �� |
+| `medallion-lakehouse` | Production lakehouse patterns with Polars + DuckDB | ✅ |
+| `etl-framework` | Config-driven ETL with retry logic & logging | ✅ |
 | `demand-forecasting` | ML ensemble for retail demand patterns | 🚧 |
 | `rpa-automation` | Legacy system integration framework | 🚧 |
 
