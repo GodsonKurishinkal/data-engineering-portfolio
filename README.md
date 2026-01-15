@@ -1,11 +1,11 @@
 <div align="center">
 
 <!-- Animated Header -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:3776AB,100:FF6B6B&height=200&section=header&text=Godson%20Kurishinkal&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Data%20Engineer%20%7C%20Dubai,%20UAE&descSize=20&descAlignY=55" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:3776AB,100:FF6B6B&height=200&section=header&text=Godson%20Kurishinkal&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Senior%20Data%20Engineer%20%7C%20Analytics%20Engineering%20%26%20BI&descSize=20&descAlignY=55" width="100%"/>
 
 <br>
 
-*Building enterprise data platforms that power supply chain operations at scale*
+*Engineering data architecture to support analytics and business intelligence*
 
 <br>
 
@@ -29,18 +29,19 @@
 class SeniorDataEngineer:
     def __init__(self):
         self.name = "Godson Kurishinkal"
-        self.role = "Data Engineer"
+        self.role = "Senior Data Engineer | Analytics Engineering & BI"
         self.location = "Dubai, UAE"
         self.company = "Landmark Group"
         
     def what_i_build(self):
         return """
-        Production data infrastructure for retail supply chain operations—
-        not prototypes or dashboards, but systems that 10,000+ SKUs depend on daily.
+        Analytics architecture and BI infrastructure—dimensional models,
+        transformation layers, semantic consistency across 50+ reports.
+        Turning operational data into automated business decisions.
         """
     
     def daily_stack(self):
-        return ["Python", "SQL", "Polars", "DuckDB", "Azure", "Databricks"]
+        return ["Python", "SQL", "Polars", "DuckDB", "Azure", "Databricks", "Power BI"]
 ```
 
 ---
@@ -237,10 +238,11 @@ Tier 3 ──► Volatility Analysis (Pattern Stability)
 
 | | |
 |:---:|:---|
-| 💼 | **Data Engineer** @ Landmark Group |
+| 💼 | **Assistant Manager - MIS & Analytics** @ Landmark Group |
 | 🎓 | **BS Data Science** @ IIT Madras *(in progress)* |
-| 🎯 | **Focus:** Azure/Databricks, MLOps, Platform Engineering |
-| 🔍 | **Open to:** Senior/Staff Data Engineer roles in UAE |
+| 🎯 | **Focus:** Azure Databricks, Delta Lake, Microsoft Fabric |
+| 📜 | **Pursuing:** DP-700, Databricks Data Engineer Associate & Professional |
+| 🔍 | **Open to:** Senior/Lead/Staff Data Engineer roles in UAE |
 
 </div>
 

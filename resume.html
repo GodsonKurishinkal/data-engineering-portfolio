@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Senior Data Engineer Resume - Godson Kurishinkal">
+    <title>Godson Kurishinkal - Senior Data Engineer Resume</title>
+    
+    <style>
+        /* ==========================================================================
+           CSS VARIABLES - Edit these to customize colors, fonts, and spacing
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --color-primary: #1a365d;           /* Dark blue - headers, name */
+            --color-secondary: #2c5282;         /* Medium blue - section titles */
+            --color-accent: #3182ce;            /* Light blue - links, highlights */
+            --color-text: #1a202c;              /* Near black - body text */
+            --color-text-muted: #4a5568;        /* Gray - secondary text */
+            --color-border: #e2e8f0;            /* Light gray - dividers */
+            --color-background: #ffffff;        /* White - page background */
+            --color-tag-bg: #edf2f7;            /* Light gray - skill tags */
+            
+            /* Typography */
+            --font-primary: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            --font-size-name: 1.75rem;
+            --font-size-title: 1rem;
+            --font-size-section: 0.875rem;
+            --font-size-body: 0.8125rem;
+            --font-size-small: 0.75rem;
+            --line-height: 1.5;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 0.75rem;
+            --spacing-lg: 1rem;
+            --spacing-xl: 1.5rem;
+            
+            /* Page Layout */
+            --page-max-width: 8.5in;
+            --page-padding: 0.5in;
+        }
+
+        /* ==========================================================================
+           BASE STYLES
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-body);
+            line-height: var(--line-height);
+            color: var(--color-text);
+            background-color: #f7fafc;
+        }
+
+        /* ==========================================================================
+           PAGE CONTAINER
+           ========================================================================== */
+        .resume {
+            max-width: var(--page-max-width);
+            margin: 1rem auto;
+            padding: var(--page-padding);
+            background-color: var(--color-background);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==========================================================================
+           HEADER SECTION - Name, Title, Contact
+           ========================================================================== */
+        header {
+            text-align: center;
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--color-primary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .name {
+            font-size: var(--font-size-name);
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .title {
+            font-size: var(--font-size-title);
+            font-weight: 500;
+            color: var(--color-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Contact Information - Single Line */
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--spacing-sm) var(--spacing-lg);
+            font-size: var(--font-size-small);
+            color: var(--color-text-muted);
+        }
+
+        .contact a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact a:hover {
+            color: var(--color-accent);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        /* ==========================================================================
+           SECTION STYLES
+           ========================================================================== */
+        section {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-title {
+            font-size: var(--font-size-section);
+            font-weight: 700;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* ==========================================================================
+           PROFESSIONAL SUMMARY
+           ========================================================================== */
+        .summary p {
+            color: var(--color-text);
+            text-align: justify;
+        }
+
+        /* ==========================================================================
+           SKILLS SECTION
+           ========================================================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm) var(--spacing-xl);
+        }
+
+        .skill-category {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .skill-label {
+            font-weight: 600;
+            color: var(--color-secondary);
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .skill-items {
+            color: var(--color-text);
+        }
+
+        /* ==========================================================================
+           EXPERIENCE SECTION
+           ========================================================================== */
+        .experience-item {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .experience-company {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .experience-location {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-small);
+        }
+
+        .experience-role {
+            font-weight: 500;
+            color: var(--color-secondary);
+        }
+
+        .experience-dates {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-small);
+        }
+
+        .experience-bullets {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-bullets li {
+            position: relative;
+            padding-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .experience-bullets li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-size: 0.75rem;
+        }
+
+        /* Highlight metrics */
+        .metric {
+            font-weight: 600;
+            color: var(--color-secondary);
+        }
+
+        /* ==========================================================================
+           PROJECTS SECTION
+           ========================================================================== */
+        .project-item {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .project-name {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .project-tech {
+            font-size: var(--font-size-small);
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        .project-description {
+            color: var(--color-text);
+        }
+
+        /* ==========================================================================
+           EDUCATION SECTION
+           ========================================================================== */
+        .education-item {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .education-degree {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .education-dates {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-small);
+        }
+
+        .education-school {
+            color: var(--color-secondary);
+        }
+
+        .education-details {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-small);
+            margin-top: var(--spacing-xs);
+        }
+
+        /* ==========================================================================
+           CERTIFICATIONS SECTION
+           ========================================================================== */
+        .certifications-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm) var(--spacing-xl);
+        }
+
+        .certification-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .certification-name {
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .certification-date {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-small);
+        }
+
+        /* ==========================================================================
+           PRINT STYLES - Optimized for PDF export
+           ========================================================================== */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0.4in;
+            }
+
+            html {
+                font-size: 14px;
+            }
+
+            body {
+                background-color: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .resume {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            /* Ensure colors print */
+            .name, .section-title, .experience-company, .project-name, .education-degree {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Prevent page breaks inside elements */
+            .experience-item, .project-item, .education-item {
+                break-inside: avoid;
+            }
+
+            /* Hide links underlines but keep color */
+            a {
+                text-decoration: none !important;
+            }
+
+            /* Reduce spacing for print */
+            section {
+                margin-bottom: var(--spacing-md);
+            }
+
+            .experience-item {
+                margin-bottom: var(--spacing-md);
+            }
+        }
+
+        /* ==========================================================================
+           RESPONSIVE STYLES
+           ========================================================================== */
+        @media screen and (max-width: 600px) {
+            .resume {
+                margin: 0;
+                padding: var(--spacing-lg);
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-header, .project-header, .education-header {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+
+            .contact {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==========================================================================
+         RESUME CONTAINER
+         ========================================================================== -->
+    <main class="resume" role="main">
+        
+        <!-- ======================================================================
+             HEADER SECTION
+             Contains: Name, Professional Title, Contact Information
+             ATS Note: Keep name as plain text, avoid images/graphics
+             ====================================================================== -->
+        <header>
+            <h1 class="name">Godson Kurishinkal Antony</h1>
+            <p class="title">Senior Data Engineer | Analytics Engineering & BI</p>
+            
+            <!-- Contact Information - All on one line for easy scanning -->
+            <div class="contact">
+                <span class="contact-item">
+                    Dubai, UAE
+                </span>
+                <span class="contact-item">
+                    <a href="mailto:godson.kurishinkal@gmail.com">godson.kurishinkal@gmail.com</a>
+                </span>
+                <span class="contact-item">
+                    <a href="tel:+971505276062">+971 50 527 6062</a>
+                </span>
+                <span class="contact-item">
+                    <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank">linkedin.com/in/godsonkurishinkal</a>
+                </span>
+                <span class="contact-item">
+                    <a href="https://github.com/GodsonKurishinkal" target="_blank">github.com/GodsonKurishinkal</a>
+                </span>
+            </div>
+        </header>
+
+        <!-- ======================================================================
+             PROFESSIONAL SUMMARY
+             Keep to 2-3 lines. Focus on: years experience, key skills, impact
+             ATS Note: Include target job title keywords
+             ====================================================================== -->
+        <section class="summary">
+            <h2 class="section-title">Professional Summary</h2>
+            <p>
+                Senior Data Engineer with <span class="metric">5+ years</span> engineering data architecture to support analytics and business intelligence. 
+                Built dimensional models with <span class="metric">40+ fact tables</span> and <span class="metric">25+ dimension tables</span>, designed medallion lakehouse (Bronze→Silver→Gold) for progressive data refinement. 
+                Created semantic layers ensuring consistent business logic across <span class="metric">50+ reports</span> and dashboards, achieving <span class="metric">87% faster</span> analytics delivery and <span class="metric">95%+ data accuracy</span>.
+            </p>
+        </section>
+
+        <!-- ======================================================================
+             TECHNICAL SKILLS
+             Organized by category for easy scanning
+             ATS Note: Use standard technology names, avoid abbreviations
+             ====================================================================== -->
+        <section class="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <span class="skill-label">Languages:</span>
+                    <span class="skill-items">Python, SQL, DAX, Bash</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Data Processing:</span>
+                    <span class="skill-items">Polars, PySpark, Pandas, DuckDB</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Cloud & Tools:</span>
+                    <span class="skill-items">Azure, Databricks, Azure Data Factory, Docker</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Storage:</span>
+                    <span class="skill-items">Parquet, Delta Lake, SQL Server, ADLS Gen2</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Orchestration:</span>
+                    <span class="skill-items">Apache Airflow, Windows Task Scheduler</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Visualization:</span>
+                    <span class="skill-items">Power BI, Streamlit, DAX Studio</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">ML/Analytics:</span>
+                    <span class="skill-items">Scikit-learn, Prophet, XGBoost, statsmodels</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Domains:</span>
+                    <span class="skill-items">Retail, Supply Chain, Inventory, Demand Forecasting</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             PROFESSIONAL EXPERIENCE
+             Format: Company | Location, Role | Dates, then bullet points
+             Each bullet: Action verb + what you did + quantifiable result
+             ATS Note: Include keywords from job descriptions
+             ====================================================================== -->
+        <section class="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <!-- Current Role -->
+            <article class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Landmark Group</span>
+                    <span class="experience-location">Dubai, UAE</span>
+                </div>
+                <div class="experience-header">
+                    <span class="experience-role">Assistant Manager | MIS & Analytics</span>
+                    <span class="experience-dates">Dec 2024 – Present</span>
+                </div>
+                <ul class="experience-bullets">
+                    <li>Managing data engineering operations for warehouse and supply chain analytics, processing <span class="metric">10,000+ SKUs</span> daily with <span class="metric">95%+ reliability</span></li>
+                    <li>Built production-grade <span class="metric">medallion data lakehouse</span> (Bronze/Silver/Gold) with Polars, Parquet, and star schema modeling</li>
+                    <li>Reduced data extraction time from <span class="metric">4 hours to 30 minutes (87% improvement)</span> through optimized ETL pipelines and parallel processing</li>
+                    <li>Improved data freshness from <span class="metric">48 hours to 2-4 hours (90% improvement)</span>, enabling same-day operational reporting</li>
+                    <li>Developed 3-tier anomaly detection system identifying <span class="metric">500+ data quality issues</span>, reducing production incidents by <span class="metric">70%</span></li>
+                </ul>
+            </article>
+
+            <!-- Previous Role -->
+            <article class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Danube Home</span>
+                    <span class="experience-location">Dubai, UAE</span>
+                </div>
+                <div class="experience-header">
+                    <span class="experience-role">Executive Business Analytics | Supply Chain Planning</span>
+                    <span class="experience-dates">Dec 2022 – Nov 2024</span>
+                </div>
+                <ul class="experience-bullets">
+                    <li>Built end-to-end data infrastructure for planning operations with cloud-based ETL pipelines using BigQuery, Python, and SQL</li>
+                    <li>Designed Universal Replenishment Engine implementing <span class="metric">(s,S) inventory policies</span> with ABC-XYZ classification for <span class="metric">2 distribution centers</span></li>
+                    <li>Developed advanced Power BI analytics with DAX, reducing manual reporting processes and improving decision-making speed</li>
+                    <li>Built demand forecasting system with <span class="metric">15+ ML algorithm ensemble</span> using ADI/CV2 pattern classification</li>
+                    <li>Created real-time operational dashboards providing supply chain visibility to <span class="metric">50+ stakeholders</span></li>
+                </ul>
+            </article>
+
+            <!-- Third Role -->
+            <article class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Al Behar Al Sabaa Aluminium & Glass Contracting</span>
+                    <span class="experience-location">Sharjah, UAE</span>
+                </div>
+                <div class="experience-header">
+                    <span class="experience-role">Business Intelligence Analyst</span>
+                    <span class="experience-dates">Feb 2020 – Dec 2022</span>
+                </div>
+                <ul class="experience-bullets">
+                    <li>Built end-to-end analytics platform managing supply chain data lifecycle from capture to reporting</li>
+                    <li>Reduced manual reporting by <span class="metric">50%</span> and improved operational efficiency by <span class="metric">15%</span> through Python automation</li>
+                    <li>Deployed <span class="metric">5+ RPA bots</span> (Selenium/PyAutoGUI) for legacy system automation, eliminating manual data entry</li>
+                    <li>Developed ETL pipelines and data transformation workflows for multi-source integration</li>
+                </ul>
+            </article>
+
+            <!-- Add more experience items as needed -->
+            <!--
+            <article class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Company Name</span>
+                    <span class="experience-location">City, Country</span>
+                </div>
+                <div class="experience-header">
+                    <span class="experience-role">Job Title</span>
+                    <span class="experience-dates">Month Year – Month Year</span>
+                </div>
+                <ul class="experience-bullets">
+                    <li>Achievement with <span class="metric">quantifiable result</span></li>
+                </ul>
+            </article>
+            -->
+        </section>
+
+        <!-- ======================================================================
+             KEY PROJECTS
+             Highlight 2-3 impactful projects with technologies and outcomes
+             ====================================================================== -->
+        <section class="projects">
+            <h2 class="section-title">Key Projects</h2>
+            
+            <article class="project-item">
+                <div class="project-header">
+                    <span class="project-name">Medallion Data Lakehouse Architecture</span>
+                    <span class="project-tech">Python, Polars, DuckDB, Parquet, Star Schema</span>
+                </div>
+                <p class="project-description">
+                    Production data platform with Bronze/Silver/Gold layers, dimensional modeling (<span class="metric">40+ fact tables</span>, <span class="metric">25+ dimension tables</span>), and automated quality gates processing retail operations data at scale.
+                </p>
+            </article>
+
+            <article class="project-item">
+                <div class="project-header">
+                    <span class="project-name">ML-Powered Demand Forecasting Engine</span>
+                    <span class="project-tech">Python, Scikit-learn, Prophet, XGBoost, Streamlit</span>
+                </div>
+                <p class="project-description">
+                    Ensemble forecasting system with automatic algorithm selection based on demand patterns (ADI/CV2 classification), reducing stockouts by 30% and improving inventory turnover.
+                </p>
+            </article>
+
+            <article class="project-item">
+                <div class="project-header">
+                    <span class="project-name">Modular ETL Framework</span>
+                    <span class="project-tech">Python, Abstract Base Classes, YAML, Logging</span>
+                </div>
+                <p class="project-description">
+                    Configuration-driven ETL framework with strategy pattern for extractors, schema validation, quality checks, and FULL/INCREMENTAL load modes supporting multi-source integration.
+                </p>
+            </article>
+        </section>
+
+        <!-- ======================================================================
+             EDUCATION
+             Include relevant coursework if recent graduate
+             ====================================================================== -->
+        <section class="education">
+            <h2 class="section-title">Education</h2>
+            
+            <article class="education-item">
+                <div class="education-header">
+                    <span class="education-degree">Bachelor of Science (BS) in Data Science and Applications</span>
+                    <span class="education-dates">Jan 2023 – Present</span>
+                </div>
+                <p class="education-school">Indian Institute of Technology, Madras (IIT Madras)</p>
+                <p class="education-details">Foundation Level in Programming and Data Science (Currently pursuing)</p>
+            </article>
+
+            <article class="education-item">
+                <div class="education-header">
+                    <span class="education-degree">Diploma in Mechanical Engineering</span>
+                    <span class="education-dates">2014 – 2017</span>
+                </div>
+                <p class="education-school">Carmel Polytechnic College</p>
+                <p class="education-details">CGPA: 8.46</p>
+            </article>
+        </section>
+
+        <!-- ======================================================================
+             CERTIFICATIONS
+             List relevant certifications with dates
+             ====================================================================== -->
+        <section class="certifications">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-list">
+                <div class="certification-item">
+                    <span class="certification-name">Microsoft Fabric Data Engineer Associate (DP-700)</span>
+                    <span class="certification-date">— In Progress</span>
+                </div>
+                <div class="certification-item">
+                    <span class="certification-name">Databricks Data Engineer Associate</span>
+                    <span class="certification-date">— In Progress</span>
+                </div>
+                <div class="certification-item">
+                    <span class="certification-name">Databricks Data Engineer Professional</span>
+                    <span class="certification-date">— In Progress</span>
+                </div>
+                <div class="certification-item">
+                    <span class="certification-name">Google Business Intelligence Certificate</span>
+                    <span class="certification-date">— May 2024</span>
+                </div>
+                <div class="certification-item">
+                    <span class="certification-name">Google Data Analytics Professional Certificate</span>
+                    <span class="certification-date">— Apr 2024</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
