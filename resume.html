@@ -471,36 +471,36 @@
             <h2 class="section-title">Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <span class="skill-label">Languages:</span>
-                    <span class="skill-items">Python, SQL, DAX, Bash</span>
+                    <span class="skill-label">Cloud & Data:</span>
+                    <span class="skill-items">Azure, Databricks, Microsoft Fabric, Delta Lake</span>
                 </div>
                 <div class="skill-category">
-                    <span class="skill-label">Data Processing:</span>
+                    <span class="skill-label">Languages:</span>
+                    <span class="skill-items">Python, SQL, DAX, M Query</span>
+                </div>
+                <div class="skill-category">
+                    <span class="skill-label">Processing:</span>
                     <span class="skill-items">Polars, PySpark, Pandas, DuckDB</span>
                 </div>
                 <div class="skill-category">
-                    <span class="skill-label">Cloud & Tools:</span>
-                    <span class="skill-items">Azure, Databricks, Azure Data Factory, Docker</span>
+                    <span class="skill-label">Data Modeling:</span>
+                    <span class="skill-items">Star Schema, Dimensional Design, Semantic Layers</span>
                 </div>
                 <div class="skill-category">
                     <span class="skill-label">Storage:</span>
                     <span class="skill-items">Parquet, Delta Lake, SQL Server, ADLS Gen2</span>
                 </div>
                 <div class="skill-category">
-                    <span class="skill-label">Orchestration:</span>
-                    <span class="skill-items">Apache Airflow, Windows Task Scheduler</span>
-                </div>
-                <div class="skill-category">
-                    <span class="skill-label">Visualization:</span>
-                    <span class="skill-items">Power BI, Streamlit, DAX Studio</span>
+                    <span class="skill-label">BI & Reporting:</span>
+                    <span class="skill-items">Power BI, Streamlit, DAX Studio, Data Quality</span>
                 </div>
                 <div class="skill-category">
                     <span class="skill-label">ML/Analytics:</span>
-                    <span class="skill-items">Scikit-learn, Prophet, XGBoost, statsmodels</span>
+                    <span class="skill-items">Scikit-learn, Prophet, XGBoost, Forecasting</span>
                 </div>
                 <div class="skill-category">
                     <span class="skill-label">Domains:</span>
-                    <span class="skill-items">Retail, Supply Chain, Inventory, Demand Forecasting</span>
+                    <span class="skill-items">Retail, Supply Chain, Inventory Optimization</span>
                 </div>
             </div>
         </section>
@@ -525,11 +525,11 @@
                     <span class="experience-dates">Dec 2024 – Present</span>
                 </div>
                 <ul class="experience-bullets">
-                    <li>Managing data engineering operations for warehouse and supply chain analytics, processing <span class="metric">10,000+ SKUs</span> daily with <span class="metric">95%+ reliability</span></li>
-                    <li>Built production-grade <span class="metric">medallion data lakehouse</span> (Bronze/Silver/Gold) with Polars, Parquet, and star schema modeling</li>
-                    <li>Reduced data extraction time from <span class="metric">4 hours to 30 minutes (87% improvement)</span> through optimized ETL pipelines and parallel processing</li>
-                    <li>Improved data freshness from <span class="metric">48 hours to 2-4 hours (90% improvement)</span>, enabling same-day operational reporting</li>
-                    <li>Developed 3-tier anomaly detection system identifying <span class="metric">500+ data quality issues</span>, reducing production incidents by <span class="metric">70%</span></li>
+                    <li>Designed dimensional models with <span class="metric">40+ fact tables</span> and <span class="metric">25+ dimension tables</span> using star schema, enabling consistent analytics across the organization</li>
+                    <li>Built <span class="metric">medallion lakehouse</span> (Bronze/Silver/Gold) for progressive data refinement, processing <span class="metric">10,000+ SKUs</span> daily with <span class="metric">95%+ data accuracy</span></li>
+                    <li>Created semantic layers ensuring consistent business logic across <span class="metric">50+ reports</span> and dashboards, achieving <span class="metric">87% faster</span> analytics delivery</li>
+                    <li>Improved data freshness from <span class="metric">48 hours to 2-4 hours (90%)</span>, enabling same-day business decisions</li>
+                    <li>Developed 3-tier data quality framework identifying <span class="metric">500+ issues</span>, reducing analytics incidents by <span class="metric">70%</span></li>
                 </ul>
             </article>
 
@@ -544,11 +544,11 @@
                     <span class="experience-dates">Dec 2022 – Nov 2024</span>
                 </div>
                 <ul class="experience-bullets">
-                    <li>Built end-to-end data infrastructure for planning operations with cloud-based ETL pipelines using BigQuery, Python, and SQL</li>
-                    <li>Designed Universal Replenishment Engine implementing <span class="metric">(s,S) inventory policies</span> with ABC-XYZ classification for <span class="metric">2 distribution centers</span></li>
-                    <li>Developed advanced Power BI analytics with DAX, reducing manual reporting processes and improving decision-making speed</li>
-                    <li>Built demand forecasting system with <span class="metric">15+ ML algorithm ensemble</span> using ADI/CV2 pattern classification</li>
-                    <li>Created real-time operational dashboards providing supply chain visibility to <span class="metric">50+ stakeholders</span></li>
+                    <li>Built <span class="metric">50+ automated transformation pipelines</span> powering analytics with proper dimensional modeling and fact table design</li>
+                    <li>Designed Universal Replenishment Engine with ensemble forecasting (<span class="metric">15+ algorithms</span>), inventory optimization using (s,S) policy</li>
+                    <li>Developed Power BI semantic models with DAX, ensuring consistent business logic and reducing ad-hoc query time by <span class="metric">60%</span></li>
+                    <li>Created real-time Streamlit dashboards enabling same-day business decisions for <span class="metric">50+ stakeholders</span></li>
+                    <li>Implemented slowly changing dimensions and data quality frameworks with <span class="metric">95%+ uptime</span></li>
                 </ul>
             </article>
 
@@ -597,31 +597,31 @@
             
             <article class="project-item">
                 <div class="project-header">
-                    <span class="project-name">Medallion Data Lakehouse Architecture</span>
-                    <span class="project-tech">Python, Polars, DuckDB, Parquet, Star Schema</span>
+                    <span class="project-name">Analytics Lakehouse Architecture</span>
+                    <span class="project-tech">Python, Polars, DuckDB, Delta Lake, Star Schema</span>
                 </div>
                 <p class="project-description">
-                    Production data platform with Bronze/Silver/Gold layers, dimensional modeling (<span class="metric">40+ fact tables</span>, <span class="metric">25+ dimension tables</span>), and automated quality gates processing retail operations data at scale.
+                    Dimensional data platform with Bronze/Silver/Gold layers, <span class="metric">40+ fact tables</span>, <span class="metric">25+ dimensions</span>, and semantic layers ensuring consistent business logic across all analytics.
                 </p>
             </article>
 
             <article class="project-item">
                 <div class="project-header">
-                    <span class="project-name">ML-Powered Demand Forecasting Engine</span>
+                    <span class="project-name">ML-Powered Analytics Engine</span>
                     <span class="project-tech">Python, Scikit-learn, Prophet, XGBoost, Streamlit</span>
                 </div>
                 <p class="project-description">
-                    Ensemble forecasting system with automatic algorithm selection based on demand patterns (ADI/CV2 classification), reducing stockouts by 30% and improving inventory turnover.
+                    Ensemble forecasting with automatic algorithm selection (ADI/CV2 classification), inventory optimization with safety stock calculations, reducing stockouts by <span class="metric">30%</span>.
                 </p>
             </article>
 
             <article class="project-item">
                 <div class="project-header">
-                    <span class="project-name">Modular ETL Framework</span>
-                    <span class="project-tech">Python, Abstract Base Classes, YAML, Logging</span>
+                    <span class="project-name">Transformation Layer Framework</span>
+                    <span class="project-tech">Python, YAML, Data Quality, Logging</span>
                 </div>
                 <p class="project-description">
-                    Configuration-driven ETL framework with strategy pattern for extractors, schema validation, quality checks, and FULL/INCREMENTAL load modes supporting multi-source integration.
+                    Configuration-driven transformation framework with schema validation, data quality checks, and FULL/INCREMENTAL modes. Production-grade code with type hints and documentation.
                 </p>
             </article>
         </section>
