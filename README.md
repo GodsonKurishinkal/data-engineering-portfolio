@@ -1,221 +1,61 @@
-<div align="center">
+# Godson Kurishinkal | Senior Data Engineer Portfolio
 
-<!-- Header Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=200&section=header&text=Godson%20Kurishinkal&fontSize=50&fontColor=fff&animation=fadeIn&fontAlignY=35&desc=Senior%20Data%20Engineer%20|%20Building%20Production%20Data%20Platforms&descAlignY=55&descSize=18"/>
+> Building production data pipelines that power supply chain decisions.
+> **Not dashboards. Production data infrastructure.**
 
-<!-- Typing SVG -->
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&pause=1000&color=667EEA&center=true&vCenter=true&random=false&width=600&lines=Building+Data+Pipelines+at+Scale+%F0%9F%9A%80;50%2B+ETL+Pipelines+%7C+95%25%2B+Reliability;10%2C000%2B+SKUs+Processed+Daily;Medallion+Architecture+%7C+ML+Systems" alt="Typing SVG" /></a>
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com/in/godsonkurishinkal)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/GodsonKurishinkal)
+[![Email](https://img.shields.io/badge/Email-Contact-red?style=flat&logo=gmail)](mailto:godson.kurishinkal@gmail.com)
 
-<!-- Profile Badges -->
-<p>
-<a href="https://linkedin.com/in/godsonkurishinkal"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
-<a href="https://godsonkurishinkal.github.io/data-engineering-portfolio/"><img src="https://img.shields.io/badge/Portfolio-View_Projects-FF5722?style=for-the-badge&logo=googlechrome&logoColor=white"/></a>
-<a href="mailto:godson.kurishinkal@gmail.com"><img src="https://img.shields.io/badge/Email-Contact_Me-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/></a>
-</p>
+## 👋 About Me
 
-<!-- Profile Views Counter -->
-<img src="https://komarev.com/ghpvc/?username=GodsonKurishinkal&style=for-the-badge&color=667eea&label=Profile+Views"/>
+**Senior Data Engineer** at **Landmark Group**, Dubai, UAE.
 
-</div>
+I build enterprise data pipelines and ML systems for supply chain operations. My work powers inventory decisions for **10,000+ SKUs** daily.
 
----
+## 📊 Verified Impact
 
-## 🎯 About
-
-<img align="right" src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif" width="350"/>
-
-I build **production data infrastructure** that powers supply chain decisions—not dashboards, real systems processing **10,000+ SKUs** daily with **95%+ reliability**.
-
-**6+ years** designing data lakehouses, ETL frameworks, and ML pipelines for enterprise retail operations.
-
-📍 **Dubai, UAE** · Landmark Group
-
-**What I do:**
-- 🏗️ Design & build enterprise data lakehouses
-- ⚙️ Architect 50+ production ETL pipelines
-- 🤖 Deploy ML forecasting systems at scale
-- 📊 Enable real-time analytics for business teams
-
----
-
-## 📊 Impact at Scale
-
-<div align="center">
-
-| 🚀 **87% Faster** | 📈 **90% Fresher** | ✅ **95%+ Reliable** | 🔍 **500+ Caught** |
-|:----------------:|:------------------:|:-------------------:|:-----------------:|
-| Data Delivery | Data Pipelines | Pipeline Uptime | Anomalies Fixed |
-| *4 hrs → 30 min* | *48 hrs → 2-4 hrs* | *50+ ETL jobs* | *Data Quality* |
-
-</div>
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        PRODUCTION IMPACT METRICS                            │
-├──────────────────┬──────────────────┬──────────────────┬───────────────────┤
-│  ⏱️  87% FASTER   │  📊 90% FRESHER   │  ✅ 95%+ UPTIME   │  🎯 500+ FIXED    │
-│  Data Delivery   │  Data Pipelines  │  Pipeline SLA    │  Anomalies        │
-│  4 hrs → 30 min  │  48h → 2-4 hrs   │  50+ ETL Jobs    │  Auto-detected    │
-└──────────────────┴──────────────────┴──────────────────┴───────────────────┘
-```
-
----
+| Metric | Value | Details |
+|--------|-------|---------|
+| **ETL Pipelines** | 50+ | Multi-source extrac| **ETL Pipelines** | 50+ | Multi-source extrac| **ETL Pipelinien| **ETL Pipelines** | 5? 30 minutes |
+| **Freshness** | 90% | 48h → 2-4h latency |
+| **SKUs Managed** | 10K+ | Daily processing |
+| **Fact Tables** | 15+ | Star schema |
+| **RPA Bots** | 5+ | Legacy integration |
+| **ML Algorithms** | 15+ | Ensemble forecasting |
 
 ## 🛠️ Tech Stack
 
-<div align="center">
+**Core:** Python, SQL, DuckDB, Polars, Pandas
+**Architecture:** Medallion Lakehouse, Star Schema, Parquet
+**Automation:** Selenium, PyAutoGUI, Task Scheduler
+**ML:** Scikit-learn, Prophet, Statsmodels
+**Viz:** Streamlit, Power BI
 
-### Languages & Core Tools
-![Python](https://img.shields.io/badge/Python-Expert-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-Expert-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Polars](https://img.shields.io/badge/Polars-CD792C?style=for-the-badge&logo=polars&logoColor=white)
-![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black)
-![PySpark](https://img.shields.io/badge/PySpark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)
+## 🚀 Production Systems
 
-### Cloud & Data Platforms
-![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
-![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=for-the-badge&logo=databricks&logoColor=white)
-![Microsoft Fabric](https://img.shields.io/badge/Microsoft_Fabric-742774?style=for-the-badge&logo=microsoft&logoColor=white)
-![Delta Lake](https://img.shields.io/badge/Delta_Lake-003366?style=for-the-badge&logo=delta&logoColor=white)
+1. **Medallion Lakehouse** - Bronze/Silver/Gold, 87% time reduction
+2. **Demand Forecasting** - 15+ algorithm ensemble
+3. **Replenishment Engine** - (s,S) policy, ABC-XYZ
+4. **Anomaly Detection** - 500+ fixes, 70% incident reduction
+5. **RPA Framework** - 5+ bots for ERP/CRM/WMS
 
-### BI & Analytics
-![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![DAX](https://img.shields.io/badge/DAX-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)
+## 📁 Projects
 
-### ML & Forecasting
-![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
-![Prophet](https://img.shields.io/badge/Prophet-3B5998?style=for-the-badge&logo=meta&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-189FDD?style=for-the-badge&logo=xgboost&logoColor=white)
+| Project | Tech |
+|---------|------|
+| [Reddit ETL](projects/01_reddit_etl_pipeline/) | Airflow, AWS, Terraform |
+| [Kafka Streaming](projects/02_kafka_streaming/) | Kafka, Spark |
+| [AWS Data Lake](projects/03_aws_data_lake/) | S3, Glue, Athena |
+| [Airflow Pipeline](projects/04_airflow_data_pipeline/) | Airflow, PostgreSQL |
+| [dbt Analytics](projects/05_dbt_analytics/) | dbt, SQL |
+| [PostgreSQL DW](projects/06_postgres_dw/) | PostgreSQL, Docker |
 
-### DevOps & Tools
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Airflow](https://img.shields.io/badge/Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white)
+## 📫 Contact
 
-</div>
+- **Email:** godson.kurishinkal@gmail.com
+- **LinkedIn:** [godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)
+- **GitHub:** [GodsonKurishinkal](https://github.com/GodsonKurishinkal)
 
 ---
-
-## 🏗️ What I Build
-
-### 🔥 Production Systems
-
-<table>
-<tr>
-<td width="50%">
-
-**🏠 Enterprise Data Lakehouse**
-> Medallion architecture (Bronze → Silver → Gold) processing 10,000+ SKUs with 15+ fact tables and 6+ dimensions
-
-![Polars](https://img.shields.io/badge/Polars-CD792C?style=flat-square&logo=polars&logoColor=white)
-![Parquet](https://img.shields.io/badge/Parquet-50ABF1?style=flat-square&logoColor=white)
-![Star Schema](https://img.shields.io/badge/Star_Schema-667eea?style=flat-square)
-
-</td>
-<td width="50%">
-
-**🤖 ML-Powered Forecasting Engine**
-> 15+ algorithm ensemble with ADI/CV² demand pattern classification—automatic model selection per SKU
-
-![Scikit-learn](https://img.shields.io/badge/Sklearn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
-![Prophet](https://img.shields.io/badge/Prophet-3B5998?style=flat-square&logo=meta&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-189FDD?style=flat-square)
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-**⚙️ ETL Framework**
-> Config-driven pipelines with ABC patterns, schema validation, and 3-tier data quality checks
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![DuckDB](https://img.shields.io/badge/DuckDB-FFF000?style=flat-square&logo=duckdb&logoColor=black)
-![50+ Pipelines](https://img.shields.io/badge/50+-Pipelines-success?style=flat-square)
-
-</td>
-<td width="50%">
-
-**🔍 Anomaly Detection System**
-> Statistical monitoring: validation → outlier detection → volatility analysis (500+ issues identified)
-
-![Statistics](https://img.shields.io/badge/Statistical_ML-764ba2?style=flat-square)
-![Z-Score](https://img.shields.io/badge/Z--Score-667eea?style=flat-square)
-![IQR](https://img.shields.io/badge/IQR-ff6b6b?style=flat-square)
-
-</td>
-</tr>
-</table>
-
-<details>
-<summary><b>📂 View All Featured Projects</b></summary>
-
-<br>
-
-| Project | Technologies | Impact |
-|:--------|:------------|:-------|
-| 🏠 [**Medallion Lakehouse**](projects/medallion-lakehouse.html) | `Polars` `Parquet` `Star Schema` | 87% faster · 95%+ reliability |
-| 📈 [**Demand Forecasting**](projects/demand-forecasting.html) | `Scikit-learn` `Prophet` `Ensemble` | 15+ algorithms · 85% accuracy |
-| 🔍 [**Anomaly Detection**](projects/anomaly-detection.html) | `Z-Score` `IQR` `Volatility` | 500+ issues caught |
-| ⚙️ [**Enterprise ETL Framework**](enterprise-data-platform/) | `Python` `DuckDB` `Config-driven` | 50+ production pipelines |
-
-</details>
-
----
-
-## 🎯 Currently
-
-<div align="center">
-
-| 🎓 Education | 📜 Certifications | 🔍 Looking For |
-|:------------:|:-----------------:|:--------------:|
-| BS Data Science | DP-700 (Fabric) → | Senior Data Engineer |
-| IIT Madras | Databricks Associate → | Staff Data Engineer |
-| *In Progress* | Databricks Professional | UAE Opportunities |
-
-</div>
-
----
-
-## 📈 GitHub Stats
-
-<div align="center">
-
-<!-- GitHub Stats Card -->
-<img src="https://github-readme-stats.vercel.app/api?username=GodsonKurishinkal&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&bg_color=0d1117&title_color=667eea&icon_color=764ba2&text_color=c9d1d9" height="180"/>
-
-<!-- GitHub Streak Stats -->
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=GodsonKurishinkal&theme=tokyonight&hide_border=true&background=0d1117&stroke=667eea&ring=764ba2&fire=ff6b6b&currStreakLabel=667eea" height="180"/>
-
-</div>
-
-<div align="center">
-
-<!-- Top Languages -->
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=GodsonKurishinkal&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=667eea&text_color=c9d1d9&langs_count=8" height="160"/>
-
-<!-- GitHub Trophies -->
-<img src="https://github-profile-trophy.vercel.app/?username=GodsonKurishinkal&theme=algolia&no-frame=true&no-bg=true&column=7&margin-w=5"/>
-
-</div>
-
-<!-- Activity Graph -->
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=GodsonKurishinkal&bg_color=0d1117&color=667eea&line=764ba2&point=ff6b6b&area=true&hide_border=true" width="100%"/>
-
----
-
-<div align="center">
-
-### 🤝 Let's Build Something Together
-
-<a href="https://linkedin.com/in/godsonkurishinkal"><img src="https://img.shields.io/badge/LinkedIn-Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
-<a href="https://godsonkurishinkal.github.io/data-engineering-portfolio/"><img src="https://img.shields.io/badge/Portfolio-View_My_Work-FF5722?style=for-the-badge&logo=googlechrome&logoColor=white"/></a>
-<a href="mailto:godson.kurishinkal@gmail.com"><img src="https://img.shields.io/badge/Email-Get_In_Touch-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/></a>
-
-**📍 Dubai, UAE**
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:667eea,100:764ba2&height=100&section=footer"/>
-
-</div>
+*© 2026 Godson Kurishinkal*
