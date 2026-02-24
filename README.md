@@ -1,7 +1,9 @@
-# Godson Kurishinkal | Senior Data Engineer
+# Godson Kurishinkal Antony | Senior Data Engineer
 
+> **Retail Supply Chain Analytics · Demand Forecasting · ML**
+> Python · SQL · Databricks · Power BI
+>
 > Building production data infrastructure that powers supply chain decisions for 10,000+ SKUs daily.
-> **Not dashboards. Not reports. Production-grade data systems.**
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-success?style=for-the-badge)](https://godsonkurishinkal.github.io/data-engineering-portfolio/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/godsonkurishinkal)
@@ -33,18 +35,18 @@ I design and build data platforms that solve real business problems. Not proof-o
 
 ## Featured Projects
 
-### 🏗️ [Medallion Data Lakehouse](enterprise-data-platform/)
+### [Medallion Data Lakehouse](enterprise-data-platform/)
 A Bronze/Silver/Gold architecture processing data from 4 source systems (ERP, CRM, WMS, OBI) into analytics-ready star schema models.
 
 **Scale:** 10,000+ SKUs | 50+ pipelines | 15 fact tables | 6 dimensions
 
 **Key Decision:** Chose Polars over Pandas after benchmarks showed 5-10x speedup on our data volumes. Chose DuckDB over PostgreSQL for analytics because zero-copy Parquet reads eliminated query latency.
 
-[📖 Full Case Study →](enterprise-data-platform/)
+[Full Case Study →](enterprise-data-platform/)
 
 ---
 
-### 🔍 [3-Tier Anomaly Detection System](enterprise-data-platform/data-quality/)
+### [3-Tier Anomaly Detection System](enterprise-data-platform/data-quality/)
 Multi-layer validation framework that caught 500+ data quality issues before they reached reports.
 
 **Architecture:**
@@ -58,14 +60,14 @@ Tier 3: Statistical Outliers → Alert + Log
 
 ---
 
-### 🤖 [RPA Bot Framework](enterprise-data-platform/etl-framework/extractors/)
-Selenium/PyAutoGUI bots for legacy systems without API access. Fragile by nature, but better than manual exports.
+### [RPA Bot Framework](enterprise-data-platform/etl-framework/extractors/)
+5+ Selenium/PyAutoGUI bots for legacy systems without API access. Fragile by nature, but better than manual exports.
 
 **Why RPA?** WMS had no API. Options were: (1) manual exports daily forever, (2) convince vendor to add API (6+ months), or (3) automate the clicks. I chose pragmatism over purity.
 
 ---
 
-### 📈 [Demand Forecasting Engine](enterprise-data-platform/)
+### [Demand Forecasting Engine](enterprise-data-platform/)
 15+ algorithm ensemble with automatic pattern classification (ADI/CV² method) to select optimal forecasting approach per SKU.
 
 **Algorithms:** ARIMA, Prophet, Exponential Smoothing, Croston's Method (intermittent demand), and more.
@@ -80,6 +82,7 @@ Selenium/PyAutoGUI bots for legacy systems without API access. Fragile by nature
 | **Processing** | Polars | 5-10x faster than Pandas, lazy evaluation, native Parquet support |
 | **Analytics** | DuckDB | Zero-copy Parquet reads, embedded (no server), vectorized execution |
 | **Storage** | Parquet | Columnar, compressed (80% smaller than CSV), schema evolution |
+| **Visualization** | Power BI | Enterprise dashboards, DAX measures, supply chain KPIs |
 | **Automation** | Selenium | Only option for legacy systems without APIs |
 | **Orchestration** | Task Scheduler | Enterprise constraint; would use Airflow in greenfield |
 
@@ -92,10 +95,11 @@ Selenium/PyAutoGUI bots for legacy systems without API access. Fragile by nature
 ### Languages & Tools
 ```
 Python 3.10+     SQL (T-SQL, PL/SQL)     Git
-Polars           DuckDB                   Docker (learning)
-Pandas           SQL Server               GitHub Actions
-Selenium         Oracle                   Power BI
-PyAutoGUI        Parquet/Hive             Streamlit
+Polars           DuckDB                   Power BI
+Pandas           SQL Server               Streamlit
+Selenium         Oracle                   GitHub Actions
+PyAutoGUI        Parquet/Hive             Docker (learning)
+Scikit-learn     statsmodels              Prophet
 ```
 
 ---
@@ -117,9 +121,9 @@ I document major technical decisions. Here's a sample:
 - First-class Parquet support
 
 **Trade-offs:**
-- ❌ Spark: Overkill for single-machine workloads
-- ❌ Pandas: Memory issues at 500MB+ DataFrames
-- ✅ Polars: Sweet spot for our 2-5GB daily volume
+- Spark: Overkill for single-machine workloads
+- Pandas: Memory issues at 500MB+ DataFrames
+- Polars: Sweet spot for our 2-5GB daily volume
 
 **Migration Path:** If daily volume exceeds 50GB, migrate to Spark/Databricks.
 
@@ -150,18 +154,16 @@ data-engineering-portfolio/
 
 | Technology | Status | Goal |
 |------------|--------|------|
-| **Microsoft Fabric** | 🟡 In Progress | DP-700 Certification Q1 |
-| **Databricks** | 🟡 In Progress | Associate Cert Q2 |
-| **Apache Spark** | 📖 Studying | Distributed processing |
-| **dbt** | 📖 Studying | Transformation layer |
+| **Microsoft Fabric** | In Progress | DP-700 Certification Q1 |
+| **Databricks** | In Progress | Associate → Professional Cert |
+| **Apache Spark** | Studying | Distributed processing at scale |
+| **dbt** | Studying | Transformation layer |
 
 **Why these?** My current stack works for single-machine workloads. Cloud data platforms are the next scale tier.
 
 ---
 
 ## Contact
-
-Building data infrastructure for supply chain operations.
 
 - **Portfolio:** [godsonkurishinkal.github.io/data-engineering-portfolio](https://godsonkurishinkal.github.io/data-engineering-portfolio/)
 - **LinkedIn:** [linkedin.com/in/godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)
