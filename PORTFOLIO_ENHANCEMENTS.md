@@ -21,7 +21,7 @@ Your portfolio has a strong foundation with:
 ## Architecture Decisions
 
 ### Why Polars over Pandas?
-**Context:** Processing 10,000+ SKUs daily with 4-hour batch windows
+**Context:** Processing 30,000+ SKUs daily with 4-hour batch windows
 **Decision:** Polars with lazy evaluation
 **Rationale:**
 - 5-10x faster than Pandas for aggregations on our data volume
@@ -37,7 +37,7 @@ Your portfolio has a strong foundation with:
 **Alternative:** Would migrate to Spark if daily volume exceeds 100GB or we need distributed processing
 
 ### Why DuckDB over PostgreSQL for Analytics?
-**Context:** 15+ fact tables, complex analytical queries
+**Context:** 10+ fact tables, complex analytical queries
 **Decision:** DuckDB as embedded OLAP engine
 **Rationale:**
 - Zero-copy Parquet reads reduce query time by 70%
@@ -172,7 +172,7 @@ Quality Gates:          ✓               ✓✓              ✓✓✓
    - Rejected records logged to `/silver/quarantine/`
 
 3. Gold Layer (Analytics-Ready)
-   - Star schema: 15 fact tables, 6 dimensions
+   - Star schema: 10+ fact tables, 6+ dimensions
    - Pre-aggregated for common queries
    - DuckDB views for complex joins
 
@@ -304,7 +304,7 @@ Quality Gates:          ✓               ✓✓              ✓✓✓
 ### Documentation Culture
 - **ADR (Architecture Decision Records):** Why we chose X over Y
 - **Runbooks:** Step-by-step troubleshooting guides
-- **Data Dictionary:** 15 fact tables, 6 dimensions fully documented
+- **Data Dictionary:** 10+ fact tables, 6+ dimensions fully documented
 - **Impact:** New team member productive in 1 week (previous: 1 month)
 
 ### Standardization

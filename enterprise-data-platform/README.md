@@ -13,7 +13,7 @@
 
 ## Executive Summary
 
-A **Medallion architecture data lakehouse** processing 850,000+ records daily from 4 source systems (ERP, CRM, WMS, OBI). Reduced data latency from 48 hours to 2-4 hours, enabling same-day supply chain decisions for 10,000+ SKUs.
+A **Medallion architecture data lakehouse** processing 850,000+ records daily from 4 source systems (ERP, CRM, WMS, OBI). Reduced data latency from 48 hours to 2-4 hours, enabling same-day supply chain decisions for 30,000+ SKUs.
 
 ### Impact at a Glance
 
@@ -216,7 +216,7 @@ A **Medallion architecture data lakehouse** designed for enterprise retail suppl
 │                         🥇 GOLD LAYER                                        │
 │                                                                              │
 │  • Business-ready star schema                                               │
-│  • 15+ fact tables, 6+ dimension tables                                    │
+│  • 10+ fact tables, 6+ dimension tables                                    │
 │  • Optimized for analytical queries                                         │
 │  • Powers ML models & dashboards                                           │
 │                                                                              │

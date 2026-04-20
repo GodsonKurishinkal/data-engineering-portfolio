@@ -5,7 +5,7 @@
 
 ## Context
 
-Our Gold layer contains 15+ fact tables and 6+ dimension tables in star schema format. Analysts need to run complex analytical queries for:
+Our Gold layer contains 10+ fact tables and 6+ dimension tables in star schema format. Analysts need to run complex analytical queries for:
 
 1. **Ad-hoc analysis**: Exploratory queries during investigations
 2. **Dashboard backends**: Streamlit apps querying aggregated data

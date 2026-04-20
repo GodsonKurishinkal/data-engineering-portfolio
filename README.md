@@ -3,7 +3,7 @@
 > **Retail Supply Chain Analytics · Demand Forecasting · ML**
 > Python · SQL · Databricks · Power BI
 >
-> Building production data infrastructure that powers supply chain decisions for 10,000+ SKUs daily.
+> Building production data infrastructure that powers supply chain decisions for 30,000+ SKUs daily.
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Live-success?style=for-the-badge)](https://godsonkurishinkal.github.io/data-engineering-portfolio/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/godsonkurishinkal)
@@ -13,7 +13,7 @@
 
 ## About
 
-**Senior Data Engineer** at **Landmark Group**, Dubai, UAE.
+**Assistant Manager – MIS & Analytics, DC Operations** at **Landmark Group**, Dubai, UAE.
 
 I design and build data platforms that solve real business problems. Not proof-of-concepts—production systems that 15+ stakeholders depend on daily for inventory, forecasting, and operational decisions.
 
@@ -38,7 +38,7 @@ I design and build data platforms that solve real business problems. Not proof-o
 ### [Medallion Data Lakehouse](enterprise-data-platform/)
 A Bronze/Silver/Gold architecture processing data from 4 source systems (ERP, CRM, WMS, OBI) into analytics-ready star schema models.
 
-**Scale:** 10,000+ SKUs | 50+ pipelines | 15 fact tables | 6 dimensions
+**Scale:** 30,000+ SKUs | 50+ pipelines | 10+ fact tables | 6+ dimensions
 
 **Key Decision:** Chose Polars over Pandas after benchmarks showed 5-10x speedup on our data volumes. Chose DuckDB over PostgreSQL for analytics because zero-copy Parquet reads eliminated query latency.
 
@@ -68,7 +68,7 @@ Tier 3: Statistical Outliers → Alert + Log
 ---
 
 ### [Demand Forecasting Engine](enterprise-data-platform/)
-15+ algorithm ensemble with automatic pattern classification (ADI/CV² method) to select optimal forecasting approach per SKU.
+7+ algorithm ensemble with automatic pattern classification (ADI/CV² method) to select optimal forecasting approach per SKU.
 
 **Algorithms:** ARIMA, Prophet, Exponential Smoothing, Croston's Method (intermittent demand), and more.
 
@@ -110,7 +110,7 @@ I document major technical decisions. Here's a sample:
 
 ### Why Polars Over Pandas?
 
-**Context:** Processing 10,000+ SKUs with 4-hour batch windows
+**Context:** Processing 30,000+ SKUs with 4-hour batch windows
 
 **Decision:** Polars with lazy evaluation
 

@@ -5,7 +5,7 @@
 
 ## Context
 
-Our ETL pipelines process 10,000+ SKUs daily across multiple source systems (ERP, CRM, WMS, OBI). The existing Pandas-based pipelines had several issues:
+Our ETL pipelines process 30,000+ SKUs daily across multiple source systems (ERP, CRM, WMS, OBI). The existing Pandas-based pipelines had several issues:
 
 1. **Memory pressure**: DataFrames exceeding 500MB caused OOM errors on 16GB workstations
 2. **Single-threaded bottleneck**: GIL prevented parallel processing within transformations
