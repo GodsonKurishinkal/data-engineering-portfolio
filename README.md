@@ -14,7 +14,7 @@
 ## About
 
 **Assistant Manager – MIS & Analytics, DC Operations** at **Landmark Group**, Dubai, UAE.
-**6+ years in data & analytics** across UAE retail and logistics (8 years total professional experience).
+**6+ years in UAE data & analytics** across retail and logistics.
 
 I design and build data platforms that solve real business problems. Not proof-of-concepts—production systems that 15+ strategic stakeholders depend on daily for inventory, forecasting, and operational decisions.
 
