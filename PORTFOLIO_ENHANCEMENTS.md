@@ -112,7 +112,7 @@ Quality Gates:          ✓               ✓✓              ✓✓✓
 - **Data Volume:** 2-5GB daily incremental, 200GB historical
 - **Pipeline SLA:** 95% completion within 2-hour window
 - **Latency Requirements:** Max 4-hour data lag for operational reporting
-- **Uptime:** 98.7% over 12 months (6 days total downtime)
+- **Uptime:** 95%+ over 12 months
 - **SKU Coverage:** 10,247 active products across 12 warehouses
 - **Query Performance:** P95 < 3 seconds for dimensional queries
 - **Storage Cost:** $120/month (Parquet compression: 70% reduction vs CSV)
@@ -190,7 +190,7 @@ Quality Gates:          ✓               ✓✓              ✓✓✓
 - ✅ Decision speed: Same-day inventory adjustments now possible
 
 **Technical Metrics:**
-- ✅ Reliability: 98.7% uptime (SLA: 95%)
+- ✅ Reliability: 95%+ uptime
 - ✅ Data quality: 500+ anomalies auto-detected in 12 months
 - ✅ Storage costs: 70% reduction (Parquet vs CSV compression)
 - ✅ Query performance: P95 < 3s (previous: timeouts)

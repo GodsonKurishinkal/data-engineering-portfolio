@@ -14,8 +14,9 @@
 ## About
 
 **Assistant Manager – MIS & Analytics, DC Operations** at **Landmark Group**, Dubai, UAE.
+**6+ years in data & analytics** across UAE retail and logistics (8 years total professional experience).
 
-I design and build data platforms that solve real business problems. Not proof-of-concepts—production systems that 15+ stakeholders depend on daily for inventory, forecasting, and operational decisions.
+I design and build data platforms that solve real business problems. Not proof-of-concepts—production systems that 15+ strategic stakeholders depend on daily for inventory, forecasting, and operational decisions.
 
 **My Philosophy:** Choose the simplest architecture that solves the problem. Complexity should be a last resort, not a flex.
 
@@ -61,7 +62,7 @@ Tier 3: Statistical Outliers → Alert + Log
 ---
 
 ### [RPA Bot Framework](enterprise-data-platform/etl-framework/extractors/)
-5+ Selenium/PyAutoGUI bots for legacy systems without API access. Fragile by nature, but better than manual exports.
+4 Selenium/PyAutoGUI bots for legacy systems without API access (WMS, OBI, ERP, Sales Aggregator). Fragile by nature, but better than manual exports.
 
 **Why RPA?** WMS had no API. Options were: (1) manual exports daily forever, (2) convince vendor to add API (6+ months), or (3) automate the clicks. I chose pragmatism over purity.
 
@@ -160,6 +161,17 @@ data-engineering-portfolio/
 | **dbt** | Studying | Transformation layer |
 
 **Why these?** My current stack works for single-machine workloads. Cloud data platforms are the next scale tier.
+
+---
+
+## Education & Certifications
+
+**BS in Data Science & Applications** — Indian Institute of Technology, Madras *(Jan 2023 – Present)*
+**Diploma in Mechanical Engineering** — Carmel Polytechnic College *(2014 – 2017, CGPA 8.46)*
+
+**Completed certifications:**
+- Google Business Intelligence Certificate *(May 2024)*
+- Google Data Analytics Professional Certificate *(Apr 2024)*
 
 ---
 

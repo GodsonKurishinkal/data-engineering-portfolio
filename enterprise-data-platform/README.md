@@ -129,9 +129,9 @@ Tier 3: Statistical Anomalies → Alerts team, logs for review
 
 | Metric | Value |
 |--------|-------|
-| Pipeline uptime | 98.7% (12-month average) |
+| Pipeline uptime | 95%+ (12-month average) |
 | P95 query latency | < 3 seconds |
-| Storage efficiency | 70% savings (Parquet vs CSV) |
+| Storage efficiency | 80% savings (Parquet vs CSV) |
 | Test coverage | 87% |
 
 ---
@@ -439,8 +439,8 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## 👤 Author
 
-**Godson Kurishinkal**  
-Data Engineer | Dubai, UAE
+**Godson Kurishinkal Antony**  
+Senior Data Engineer | Dubai, UAE
 
 - GitHub: [@GodsonKurishinkal](https://github.com/GodsonKurishinkal)
 - LinkedIn: [godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)

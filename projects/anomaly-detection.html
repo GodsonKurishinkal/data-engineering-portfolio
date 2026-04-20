@@ -860,17 +860,17 @@
                 <span class="flow-arrow">→</span>
                 <div class="flow-step">
                     <div class="flow-icon" style="background: var(--accent-green-glow);">1️⃣</div>
-                    <span class="flow-label">Validation</span>
+                    <span class="flow-label">Schema</span>
                 </div>
                 <span class="flow-arrow">→</span>
                 <div class="flow-step">
                     <div class="flow-icon" style="background: var(--accent-amber-glow);">2️⃣</div>
-                    <span class="flow-label">Outlier</span>
+                    <span class="flow-label">Business Rules</span>
                 </div>
                 <span class="flow-arrow">→</span>
                 <div class="flow-step">
                     <div class="flow-icon" style="background: var(--accent-red-glow);">3️⃣</div>
-                    <span class="flow-label">Volatility</span>
+                    <span class="flow-label">Statistical</span>
                 </div>
                 <span class="flow-arrow">→</span>
                 <div class="flow-step">
@@ -911,39 +911,39 @@
                     <div class="tier-header">
                         <div class="tier-number">2</div>
                         <div class="tier-info">
-                            <h3>Statistical Outlier Detection</h3>
-                            <span class="tier-subtitle">Gate: Silver → Gold</span>
+                            <h3>Business Rules</h3>
+                            <span class="tier-subtitle">Gate: Silver → Gold · Flag + Continue</span>
                         </div>
                     </div>
                     <div class="tier-content">
-                        <p class="tier-desc">Statistical methods that identify individual records that deviate significantly from expected distributions—catching data that's valid but suspicious.</p>
+                        <p class="tier-desc">Domain-specific validations and cross-field consistency checks that enforce supply-chain logic beyond schema constraints—flag issues but let the pipeline continue.</p>
                         <div class="tier-checks">
-                            <div class="tier-check">Z-Score (|z| &gt; 3)</div>
-                            <div class="tier-check">Modified Z-Score (robust)</div>
-                            <div class="tier-check">IQR fencing</div>
-                            <div class="tier-check">MAD-based detection</div>
-                            <div class="tier-check">Percentile thresholds</div>
+                            <div class="tier-check">Cross-field consistency (e.g., ship_date ≥ order_date)</div>
+                            <div class="tier-check">Domain logic (negative on-hand is impossible)</div>
+                            <div class="tier-check">Reorder-point sanity (safety stock ≥ 0)</div>
+                            <div class="tier-check">Conformed dimension matches across facts</div>
+                            <div class="tier-check">Temporal logic (no future-dated transactions)</div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tier 3 -->
                 <div class="tier-card tier-3">
                     <div class="tier-header">
                         <div class="tier-number">3</div>
                         <div class="tier-info">
-                            <h3>Volatility Monitoring</h3>
-                            <span class="tier-subtitle">Continuous: Gold Layer</span>
+                            <h3>Statistical Outliers</h3>
+                            <span class="tier-subtitle">Continuous: Gold Layer · Alert + Log</span>
                         </div>
                     </div>
                     <div class="tier-content">
-                        <p class="tier-desc">Time-series analysis that detects aggregate-level anomalies, trend breaks, and gradual drift that individual outlier detection would miss.</p>
+                        <p class="tier-desc">Statistical methods that catch suspicious records and aggregate-level anomalies—individual outliers, trend breaks, and gradual drift that business rules would miss.</p>
                         <div class="tier-checks">
-                            <div class="tier-check">Rolling CV monitoring</div>
-                            <div class="tier-check">Trend break detection</div>
-                            <div class="tier-check">Seasonal deviation alerts</div>
-                            <div class="tier-check">Volume spike detection</div>
-                            <div class="tier-check">Week-over-week variance</div>
+                            <div class="tier-check">Z-Score (|z| &gt; 3) and Modified Z-Score (robust)</div>
+                            <div class="tier-check">IQR fencing and MAD-based detection</div>
+                            <div class="tier-check">Rolling CV and volatility monitoring</div>
+                            <div class="tier-check">Trend break and seasonal-deviation alerts</div>
+                            <div class="tier-check">Volume-spike and week-over-week variance</div>
                         </div>
                     </div>
                 </div>
