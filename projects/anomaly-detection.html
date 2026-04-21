@@ -3,1115 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- SEO Meta Tags -->
-    <title>Anomaly Detection System | Godson - Data Engineer</title>
-    <meta name="description" content="Case study: Building a 3-tier statistical anomaly detection system for data quality monitoring in supply chain operations.">
-    <meta name="keywords" content="Anomaly Detection, Data Quality, Statistical Analysis, Z-Score, IQR, Python, Supply Chain">
-    <meta name="author" content="Godson Kurishinkal">
-    
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="3-Tier Anomaly Detection System | Case Study">
-    <meta property="og:description" content="How I built a multi-layer statistical system that catches data quality issues before they impact downstream analytics.">
+    <meta name="theme-color" content="#0f172a">
+
+    <title>3-Tier Anomaly Detection — Godson Kurishinkal Antony</title>
+    <meta name="description" content="Case study: a three-layer data quality system — schema, business rules, statistical outliers — catching 500+ issues and cutting analytics incidents by 70%.">
+    <meta name="author" content="Godson Kurishinkal Antony">
+
+    <meta property="og:title" content="3-Tier Anomaly Detection — Case Study">
+    <meta property="og:description" content="Schema → business rules → statistical outliers. 500+ anomalies caught. 70% fewer analytics incidents.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/anomaly-detection.html">
-    
-    <!-- Google Fonts -->
+    <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
-    
-    <style>
-        /* CSS Reset & Variables */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --bg-primary: #fafbfc;
-            --bg-secondary: #f1f5f9;
-            --bg-card: #ffffff;
-            --accent: #0891b2;
-            --accent-hover: #0e7490;
-            --accent-glow: rgba(8, 145, 178, 0.12);
-            --accent-gradient: linear-gradient(135deg, #0891b2 0%, #0ea5e9 50%, #2563eb 100%);
-            --accent-green: #059669;
-            --accent-green-glow: rgba(5, 150, 105, 0.15);
-            --accent-amber: #d97706;
-            --accent-amber-glow: rgba(217, 119, 6, 0.15);
-            --accent-purple: #7c3aed;
-            --accent-purple-glow: rgba(124, 58, 237, 0.15);
-            --accent-red: #dc2626;
-            --accent-red-glow: rgba(220, 38, 38, 0.15);
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --border: rgba(15, 23, 42, 0.08);
-            --border-hover: rgba(8, 145, 178, 0.5);
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-            --gradient-accent: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-            --transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-            --radius: 16px;
-            --radius-sm: 10px;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-        
-        /* Background Grid */
-        .bg-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background-image: 
-                linear-gradient(rgba(8, 145, 178, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-        
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(250, 251, 252, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .nav-logo a {
-            font-weight: 600;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .nav-logo a:hover {
-            color: var(--accent);
-        }
-        
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-sm);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            transition: var(--transition);
-        }
-        
-        .nav-link:hover {
-            color: var(--accent);
-            background: var(--accent-glow);
-        }
-        
-        .nav-link svg {
-            width: 20px;
-            height: 20px;
-        }
-        
-        /* Main Content */
-        main {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 7rem 2rem 4rem;
-        }
-        
-        /* Case Study Header */
-        .case-header {
-            margin-bottom: 3rem;
-        }
-        
-        .case-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--accent-red-glow);
-            border: 1px solid var(--accent-red);
-            border-radius: 9999px;
-            font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            color: var(--accent-red);
-            margin-bottom: 1.5rem;
-        }
-        
-        .case-header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-        
-        .case-header h1 .gradient {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .case-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-        
-        .case-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-        }
-        
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        
-        .meta-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .meta-value {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        /* Impact Stats */
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin: 3rem 0;
-        }
-        
-        @media (max-width: 700px) {
-            .impact-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        .impact-card {
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            text-align: center;
-            transition: var(--transition);
-        }
-        
-        .impact-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-2px);
-        }
-        
-        .impact-card.green { border-top: 3px solid var(--accent-green); }
-        .impact-card.blue { border-top: 3px solid var(--accent); }
-        .impact-card.amber { border-top: 3px solid var(--accent-amber); }
-        .impact-card.red { border-top: 3px solid var(--accent-red); }
-        
-        .impact-value {
-            font-family: var(--font-mono);
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-        
-        .impact-card.green .impact-value { color: var(--accent-green); }
-        .impact-card.blue .impact-value { color: var(--accent); }
-        .impact-card.amber .impact-value { color: var(--accent-amber); }
-        .impact-card.red .impact-value { color: var(--accent-red); }
-        
-        .impact-label {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-        
-        /* Sections */
-        .section {
-            margin-bottom: 4rem;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 1.5rem;
-            background: var(--accent-gradient);
-            border-radius: 2px;
-        }
-        
-        .section p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-        
-        .section ul {
-            list-style: none;
-            margin: 1rem 0;
-        }
-        
-        .section li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-secondary);
-        }
-        
-        .section li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: 600;
-        }
-        
-        /* 3-Tier Architecture */
-        .tier-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .tier-card {
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            transition: var(--transition);
-        }
-        
-        .tier-card:hover {
-            border-color: var(--border-hover);
-        }
-        
-        .tier-card.tier-1 { border-left: 4px solid var(--accent-green); }
-        .tier-card.tier-2 { border-left: 4px solid var(--accent-amber); }
-        .tier-card.tier-3 { border-left: 4px solid var(--accent-red); }
-        
-        .tier-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .tier-number {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-        
-        .tier-1 .tier-number { background: var(--accent-green-glow); color: var(--accent-green); }
-        .tier-2 .tier-number { background: var(--accent-amber-glow); color: var(--accent-amber); }
-        .tier-3 .tier-number { background: var(--accent-red-glow); color: var(--accent-red); }
-        
-        .tier-info h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .tier-info .tier-subtitle {
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-        }
-        
-        .tier-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        
-        @media (max-width: 600px) {
-            .tier-content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .tier-desc {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
-        }
-        
-        .tier-checks {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .tier-check {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-        
-        .tier-check::before {
-            content: '✓';
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-        
-        /* Method Cards */
-        .method-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        @media (max-width: 700px) {
-            .method-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .method-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .method-card {
-            padding: 1.25rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            transition: var(--transition);
-        }
-        
-        .method-card:hover {
-            border-color: var(--border-hover);
-        }
-        
-        .method-card h4 {
-            font-size: 0.9375rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        
-        .method-card p {
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-        
-        .method-card .formula {
-            display: block;
-            margin-top: 0.75rem;
-            padding: 0.5rem;
-            background: var(--bg-secondary);
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--accent);
-            text-align: center;
-        }
-        
-        /* Architecture Flow */
-        .architecture-flow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow-x: auto;
-            margin: 1.5rem 0;
-        }
-        
-        .flow-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            min-width: 100px;
-            text-align: center;
-        }
-        
-        .flow-icon {
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-glow);
-            border-radius: var(--radius);
-            font-size: 1.5rem;
-        }
-        
-        .flow-label {
-            font-size: 0.8125rem;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-        
-        .flow-arrow {
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        /* Code Block */
-        .code-block {
-            background: #1e293b;
-            border-radius: var(--radius);
-            overflow: hidden;
-            margin: 1.5rem 0;
-        }
-        
-        .code-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1rem;
-            background: #0f172a;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .code-title {
-            font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            color: #94a3b8;
-        }
-        
-        .code-dots {
-            display: flex;
-            gap: 0.375rem;
-        }
-        
-        .code-dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-        
-        .code-dots span:nth-child(1) { background: #f87171; }
-        .code-dots span:nth-child(2) { background: #fbbf24; }
-        .code-dots span:nth-child(3) { background: #4ade80; }
-        
-        .code-content {
-            padding: 1.25rem;
-            overflow-x: auto;
-        }
-        
-        .code-content pre {
-            font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            line-height: 1.6;
-            color: #e2e8f0;
-            margin: 0;
-        }
-        
-        .code-content .comment { color: #64748b; }
-        .code-content .keyword { color: #22d3ee; }
-        .code-content .string { color: #4ade80; }
-        .code-content .number { color: #fbbf24; }
-        .code-content .function { color: #a78bfa; }
-        .code-content .class { color: #f472b6; }
-        .code-content .decorator { color: #fb923c; }
-        
-        /* Tech Stack Pills */
-        .tech-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-        
-        .tech-pill {
-            padding: 0.5rem 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 9999px;
-            font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            color: var(--text-secondary);
-            transition: var(--transition);
-        }
-        
-        .tech-pill:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-        
-        /* Lessons Learned */
-        .lessons-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        
-        @media (max-width: 600px) {
-            .lessons-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .lesson-card {
-            padding: 1.25rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            border-left: 3px solid var(--accent-red);
-        }
-        
-        .lesson-card h4 {
-            font-size: 0.9375rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        
-        .lesson-card p {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin: 0;
-        }
-        
-        /* CTA Section */
-        .case-cta {
-            text-align: center;
-            padding: 3rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-top: 4rem;
-        }
-        
-        .case-cta h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .case-cta p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: var(--radius);
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: var(--gradient-accent);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px var(--accent-glow);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-        
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-        
-        .btn svg {
-            width: 18px;
-            height: 18px;
-        }
-        
-        /* Footer */
-        footer {
-            position: relative;
-            z-index: 2;
-            padding: 2rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            margin-top: 4rem;
-        }
-        
-        .footer-text {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-        
-        .footer-text a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-text a:hover {
-            color: var(--accent);
-        }
-        
-        /* Responsive */
-        @media (max-width: 480px) {
-            nav {
-                padding: 1rem;
-            }
-            
-            main {
-                padding: 6rem 1rem 3rem;
-            }
-            
-            .case-meta {
-                gap: 1.5rem;
-            }
-            
-            .impact-value {
-                font-size: 2rem;
-            }
-        }
-    </style>
+
+    <link rel="stylesheet" href="../assets/css/case-study.css">
 </head>
 <body>
-    <!-- Background -->
-    <div class="bg-grid" aria-hidden="true"></div>
-    
-    <!-- Navigation -->
-    <nav role="navigation" aria-label="Main navigation">
-        <div class="nav-logo">
-            <a href="../index.html">← Back to Portfolio</a>
-        </div>
-        <div class="nav-links">
-            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
+    <nav>
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <span class="nav-brand-mark">GK</span>
+                Godson Kurishinkal <span class="nav-brand-meta">· Data Engineer</span>
             </a>
-            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-            </a>
+            <div class="nav-links">
+                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="../resume.html" class="nav-cta" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                    Résumé
+                </a>
+            </div>
         </div>
     </nav>
-    
-    <!-- Main Content -->
+
     <main>
-        <!-- Header -->
-        <header class="case-header">
-            <span class="case-badge">🔍 Data Quality</span>
-            <h1>3-Tier <span class="gradient">Anomaly Detection</span> System</h1>
-            <p class="case-subtitle">A multi-layer statistical system that catches data quality issues at ingestion, during processing, and monitors long-term volatility—before bad data impacts downstream analytics.</p>
-            
+        <a href="../index.html#projects" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            All case studies
+        </a>
+
+        <header>
+            <span class="case-category">Data Quality · 2024</span>
+            <h1 class="case-title">Catch bad data before it becomes a wrong decision.</h1>
+            <p class="case-pitch">A three-tier detection system — schema, business rules, statistical outliers — living between Bronze and Gold. 500+ issues caught at the gate. 70% fewer analytics incidents downstream.</p>
+
             <div class="case-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Role</span>
-                    <span class="meta-value">Data Engineer</span>
+                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Data Engineer</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Industry</span><span class="case-meta-value">Retail · Supply Chain</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Duration</span><span class="case-meta-value">3 months</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Dimensions monitored</span><span class="case-meta-value">6+</span></div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi">
+                    <div class="kpi-value">500+</div>
+                    <div class="kpi-label">Anomalies caught</div>
+                    <div class="kpi-detail">Before reaching Gold</div>
                 </div>
-                <div class="meta-item">
-                    <span class="meta-label">Industry</span>
-                    <span class="meta-value">Retail Supply Chain</span>
+                <div class="kpi">
+                    <div class="kpi-value">−70%</div>
+                    <div class="kpi-label">Analytics incidents</div>
+                    <div class="kpi-detail">After 3-tier rollout</div>
                 </div>
-                <div class="meta-item">
-                    <span class="meta-label">Duration</span>
-                    <span class="meta-value">3 months</span>
+                <div class="kpi">
+                    <div class="kpi-value">3</div>
+                    <div class="kpi-label">Detection tiers</div>
+                    <div class="kpi-detail">Schema · Rules · Stats</div>
                 </div>
-                <div class="meta-item">
-                    <span class="meta-label">Dimensions Monitored</span>
-                    <span class="meta-value">6+</span>
+                <div class="kpi">
+                    <div class="kpi-value">&lt;5m</div>
+                    <div class="kpi-label">Alert latency</div>
+                    <div class="kpi-detail">Detection → Teams</div>
                 </div>
             </div>
         </header>
-        
-        <!-- Impact Stats -->
-        <div class="impact-grid">
-            <div class="impact-card green">
-                <div class="impact-value">500+</div>
-                <div class="impact-label">Anomalies Detected</div>
-            </div>
-            <div class="impact-card blue">
-                <div class="impact-value">70%</div>
-                <div class="impact-label">Fewer Incidents</div>
-            </div>
-            <div class="impact-card amber">
-                <div class="impact-value">3</div>
-                <div class="impact-label">Detection Tiers</div>
-            </div>
-            <div class="impact-card red">
-                <div class="impact-value">&lt;5min</div>
-                <div class="impact-label">Alert Latency</div>
-            </div>
-        </div>
-        
-        <!-- The Challenge -->
-        <section class="section">
-            <h2 class="section-title">The Challenge</h2>
-            <p>In supply chain analytics, data quality issues don't just cause wrong reports—they cause wrong decisions. A single corrupted inventory record can trigger unnecessary purchase orders worth thousands of dollars.</p>
-            <p>We were drowning in data quality fires:</p>
-            <ul>
-                <li>Source systems sending null values where quantities should exist</li>
-                <li>Dimension tables with duplicate or missing keys breaking joins</li>
-                <li>Sudden spikes in sales data from system glitches (not actual demand)</li>
-                <li>Gradual data drift going unnoticed until quarterly reviews</li>
-                <li>No visibility into which specific records were problematic</li>
-            </ul>
-        </section>
-        
-        <!-- The Solution -->
-        <section class="section">
-            <h2 class="section-title">The Solution</h2>
-            <p>I designed a 3-tier anomaly detection system that operates at different stages of the data pipeline, catching issues at the right level with the right technique:</p>
-            
-            <!-- Architecture Flow -->
-            <div class="architecture-flow">
-                <div class="flow-step">
-                    <div class="flow-icon">📥</div>
-                    <span class="flow-label">Raw Data</span>
-                </div>
-                <span class="flow-arrow">→</span>
-                <div class="flow-step">
-                    <div class="flow-icon" style="background: var(--accent-green-glow);">1️⃣</div>
-                    <span class="flow-label">Schema</span>
-                </div>
-                <span class="flow-arrow">→</span>
-                <div class="flow-step">
-                    <div class="flow-icon" style="background: var(--accent-amber-glow);">2️⃣</div>
-                    <span class="flow-label">Business Rules</span>
-                </div>
-                <span class="flow-arrow">→</span>
-                <div class="flow-step">
-                    <div class="flow-icon" style="background: var(--accent-red-glow);">3️⃣</div>
-                    <span class="flow-label">Statistical</span>
-                </div>
-                <span class="flow-arrow">→</span>
-                <div class="flow-step">
-                    <div class="flow-icon">✅</div>
-                    <span class="flow-label">Clean Data</span>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 3-Tier Deep Dive -->
-        <section class="section">
-            <h2 class="section-title">The 3 Tiers</h2>
-            
-            <div class="tier-stack">
-                <!-- Tier 1 -->
-                <div class="tier-card tier-1">
-                    <div class="tier-header">
-                        <div class="tier-number">1</div>
-                        <div class="tier-info">
-                            <h3>Schema Validation</h3>
-                            <span class="tier-subtitle">Gate: Bronze → Silver</span>
-                        </div>
-                    </div>
-                    <div class="tier-content">
-                        <p class="tier-desc">Rule-based checks that ensure data conforms to expected schemas, constraints, and business rules before entering the Silver layer.</p>
-                        <div class="tier-checks">
-                            <div class="tier-check">Null checks on required fields</div>
-                            <div class="tier-check">Data type validation</div>
-                            <div class="tier-check">Referential integrity (FK→PK)</div>
-                            <div class="tier-check">Range constraints (qty &gt; 0)</div>
-                            <div class="tier-check">Uniqueness validation</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tier 2 -->
-                <div class="tier-card tier-2">
-                    <div class="tier-header">
-                        <div class="tier-number">2</div>
-                        <div class="tier-info">
-                            <h3>Business Rules</h3>
-                            <span class="tier-subtitle">Gate: Silver → Gold · Flag + Continue</span>
-                        </div>
-                    </div>
-                    <div class="tier-content">
-                        <p class="tier-desc">Domain-specific validations and cross-field consistency checks that enforce supply-chain logic beyond schema constraints—flag issues but let the pipeline continue.</p>
-                        <div class="tier-checks">
-                            <div class="tier-check">Cross-field consistency (e.g., ship_date ≥ order_date)</div>
-                            <div class="tier-check">Domain logic (negative on-hand is impossible)</div>
-                            <div class="tier-check">Reorder-point sanity (safety stock ≥ 0)</div>
-                            <div class="tier-check">Conformed dimension matches across facts</div>
-                            <div class="tier-check">Temporal logic (no future-dated transactions)</div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Tier 3 -->
-                <div class="tier-card tier-3">
-                    <div class="tier-header">
-                        <div class="tier-number">3</div>
-                        <div class="tier-info">
-                            <h3>Statistical Outliers</h3>
-                            <span class="tier-subtitle">Continuous: Gold Layer · Alert + Log</span>
-                        </div>
+        <section class="reveal">
+            <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">The problem</h2></div>
+            <div class="prose">
+                <p>In supply chain analytics, a bad row is not a reporting nuisance. A single corrupted inventory record can trigger an unnecessary purchase order. A missing dimension key can silently break a semantic model downstream. Data quality is an operations problem, not a BI problem.</p>
+                <ul>
+                    <li>Source systems routinely sent <strong>nulls where quantities should exist</strong>.</li>
+                    <li>Dimension tables arrived with <strong>duplicate or missing keys</strong>, breaking joins.</li>
+                    <li><strong>Sales spikes from system glitches</strong> looked identical to real demand.</li>
+                    <li>Gradual <strong>data drift</strong> went unnoticed until quarterly review.</li>
+                    <li>When something broke, <strong>no one could say which records</strong> were at fault.</li>
+                </ul>
+                <p>One detection method wasn't going to fix all of that. Schema checks miss behavioural issues. Business rules miss statistical drift. Z-scores miss referential integrity. We needed layers.</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">The system</h2></div>
+            <div class="prose">
+                <p>Three tiers sit between the Bronze and Gold layers of the lakehouse. Each tier fires at a different gate, catches a different failure mode, and has a different response — block, flag, or alert.</p>
+            </div>
+
+            <div class="arch">
+                <div class="arch-row">
+                    <div class="arch-node">
+                        <div class="arch-node-num">00</div>
+                        <div class="arch-node-label">Bronze</div>
+                        <div class="arch-node-sub">Raw data</div>
                     </div>
-                    <div class="tier-content">
-                        <p class="tier-desc">Statistical methods that catch suspicious records and aggregate-level anomalies—individual outliers, trend breaks, and gradual drift that business rules would miss.</p>
-                        <div class="tier-checks">
-                            <div class="tier-check">Z-Score (|z| &gt; 3) and Modified Z-Score (robust)</div>
-                            <div class="tier-check">IQR fencing and MAD-based detection</div>
-                            <div class="tier-check">Rolling CV and volatility monitoring</div>
-                            <div class="tier-check">Trend break and seasonal-deviation alerts</div>
-                            <div class="tier-check">Volume-spike and week-over-week variance</div>
-                        </div>
+                    <span class="arch-arrow">→</span>
+                    <div class="arch-node highlight">
+                        <div class="arch-node-num">T1</div>
+                        <div class="arch-node-label">Schema</div>
+                        <div class="arch-node-sub">Block on fail</div>
                     </div>
+                    <span class="arch-arrow">→</span>
+                    <div class="arch-node highlight">
+                        <div class="arch-node-num">T2</div>
+                        <div class="arch-node-label">Business rules</div>
+                        <div class="arch-node-sub">Flag + continue</div>
+                    </div>
+                    <span class="arch-arrow">→</span>
+                    <div class="arch-node highlight">
+                        <div class="arch-node-num">T3</div>
+                        <div class="arch-node-label">Statistical</div>
+                        <div class="arch-node-sub">Alert + log</div>
+                    </div>
+                    <span class="arch-arrow">→</span>
+                    <div class="arch-node">
+                        <div class="arch-node-num">99</div>
+                        <div class="arch-node-label">Gold</div>
+                        <div class="arch-node-sub">Clean data</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-list">
+                <div class="tier">
+                    <div class="tier-num">01</div>
+                    <div class="tier-name">Schema validation</div>
+                    <div class="tier-gate">Gate: Bronze → Silver · Hard fail</div>
+                    <p class="tier-desc">Rule-based checks that enforce the data contract before a row enters Silver. If schema breaks, the pipeline refuses the batch — bad data never crosses the boundary.</p>
+                    <ul class="tier-checks">
+                        <li>Null checks on required fields</li>
+                        <li>Type validation against declared schema</li>
+                        <li>Referential integrity (FK → PK)</li>
+                        <li>Range constraints (e.g. <code>qty &gt;= 0</code>)</li>
+                        <li>Primary-key uniqueness</li>
+                    </ul>
+                </div>
+                <div class="tier">
+                    <div class="tier-num">02</div>
+                    <div class="tier-name">Business rules</div>
+                    <div class="tier-gate">Gate: Silver → Gold · Flag + continue</div>
+                    <p class="tier-desc">Domain-specific validations that schema can't express. Rows failing a rule are flagged and routed to a quarantine partition; the batch still loads so operations aren't blocked by a handful of edge cases.</p>
+                    <ul class="tier-checks">
+                        <li>Cross-field consistency (<code>ship_date ≥ order_date</code>)</li>
+                        <li>Domain logic (on-hand quantity can't be negative)</li>
+                        <li>Reorder-point sanity (safety stock ≥ 0)</li>
+                        <li>Conformed dimension matches across facts</li>
+                        <li>Temporal logic (no future-dated transactions)</li>
+                    </ul>
+                </div>
+                <div class="tier">
+                    <div class="tier-num">03</div>
+                    <div class="tier-name">Statistical outliers</div>
+                    <div class="tier-gate">Continuous: Gold layer · Alert + log</div>
+                    <p class="tier-desc">Runs over Gold facts on a schedule. Catches individual outliers, trend breaks, and slow drift — the kind of issues that pass schema and rules but still tell you something is wrong.</p>
+                    <ul class="tier-checks">
+                        <li>Z-Score and Modified Z-Score (robust to outliers)</li>
+                        <li>IQR fencing and MAD-based detection</li>
+                        <li>Rolling coefficient of variation</li>
+                        <li>Trend breaks and seasonal-deviation alerts</li>
+                        <li>Volume spikes and week-over-week variance</li>
+                    </ul>
                 </div>
             </div>
         </section>
-        
-        <!-- Detection Methods -->
-        <section class="section">
-            <h2 class="section-title">Detection Methods</h2>
-            
-            <div class="method-grid">
-                <div class="method-card">
-                    <h4>Z-Score</h4>
-                    <p>Measures standard deviations from mean. Best for normally distributed data.</p>
-                    <span class="formula">z = (x - μ) / σ</span>
+
+        <section class="reveal">
+            <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Detection methods</h2></div>
+            <div class="prose">
+                <p>Tier 3 runs multiple methods in parallel. Each method has a domain where it shines and a domain where it fails; picking one method per metric is a ticket to false positives.</p>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">Z-Score</div>
+                    <div class="card-sub">Parametric · normal</div>
+                    <div class="card-desc">Standard deviations from the mean. Fast, simple, works when data is roughly normal.</div>
+                    <div class="card-formula">z = (x − μ) / σ</div>
                 </div>
-                <div class="method-card">
-                    <h4>Modified Z-Score</h4>
-                    <p>Uses median instead of mean. Robust to existing outliers.</p>
-                    <span class="formula">M = 0.6745(x - x̃) / MAD</span>
+                <div class="card">
+                    <div class="card-title">Modified Z-Score</div>
+                    <div class="card-sub">Robust · outlier-resistant</div>
+                    <div class="card-desc">Uses median and MAD. Doesn't get fooled by the outliers it's trying to find.</div>
+                    <div class="card-formula">M = 0.6745(x − x̃) / MAD</div>
                 </div>
-                <div class="method-card">
-                    <h4>IQR Fencing</h4>
-                    <p>Quartile-based bounds. No distribution assumptions.</p>
-                    <span class="formula">[Q1 - 1.5×IQR, Q3 + 1.5×IQR]</span>
+                <div class="card">
+                    <div class="card-title">IQR fencing</div>
+                    <div class="card-sub">Non-parametric · quartile-based</div>
+                    <div class="card-desc">Quartile bounds, no distribution assumption. Good default for skewed data.</div>
+                    <div class="card-formula">[Q1 − 1.5·IQR, Q3 + 1.5·IQR]</div>
                 </div>
-                <div class="method-card">
-                    <h4>Rolling CV</h4>
-                    <p>Tracks coefficient of variation over time windows.</p>
-                    <span class="formula">CV = σ / μ (rolling)</span>
+                <div class="card">
+                    <div class="card-title">Rolling CV</div>
+                    <div class="card-sub">Time-aware · volatility</div>
+                    <div class="card-desc">Coefficient of variation over a moving window. Flags regime changes.</div>
+                    <div class="card-formula">CV = σ / μ (rolling)</div>
                 </div>
-                <div class="method-card">
-                    <h4>Grubbs Test</h4>
-                    <p>Statistical test for single outliers in univariate data.</p>
-                    <span class="formula">G = max|x - x̄| / s</span>
+                <div class="card">
+                    <div class="card-title">Grubbs test</div>
+                    <div class="card-sub">Statistical · single outlier</div>
+                    <div class="card-desc">Formal hypothesis test for a single outlier in univariate data.</div>
+                    <div class="card-formula">G = max|x − x̄| / s</div>
                 </div>
-                <div class="method-card">
-                    <h4>DBSCAN</h4>
-                    <p>Density-based clustering for multivariate anomalies.</p>
-                    <span class="formula">ε-neighborhood density</span>
+                <div class="card">
+                    <div class="card-title">DBSCAN</div>
+                    <div class="card-sub">Density · multivariate</div>
+                    <div class="card-desc">Density-based clustering for multivariate anomalies. Finds the "nothing nearby" points.</div>
+                    <div class="card-formula">ε-neighbourhood density</div>
                 </div>
             </div>
         </section>
-        
-        <!-- Code Sample -->
-        <section class="section">
-            <h2 class="section-title">Implementation</h2>
-            <p>The anomaly detector is configurable per metric with multiple detection strategies:</p>
-            
-            <div class="code-block">
-                <div class="code-header">
-                    <div class="code-dots">
-                        <span></span><span></span><span></span>
+
+        <section class="reveal">
+            <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Key decisions</h2></div>
+            <div class="decisions">
+                <div class="decision">
+                    <div class="decision-head"><span class="decision-title">Three tiers, not one smart model</span><span class="decision-tag">ADR-001</span></div>
+                    <div class="decision-body">
+                        <p>An ML-based anomaly detector would have been impressive and wrong. Schema errors don't need a neural net; they need a fast, boolean gate. Three focused layers are cheaper to reason about, debug, and tune.</p>
+                        <em>Trade-off: each tier tuned separately. Easier than retuning one monolith.</em>
                     </div>
-                    <span class="code-title">anomaly_detector.py</span>
                 </div>
-                <div class="code-content">
-<pre><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass
-<span class="keyword">from</span> enum <span class="keyword">import</span> Enum
-<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+                <div class="decision">
+                    <div class="decision-head"><span class="decision-title">Quarantine, don't delete</span><span class="decision-tag">ADR-002</span></div>
+                    <div class="decision-body">
+                        <p>Flagged rows go to a <code>quarantine/</code> partition, not <code>/dev/null</code>. Sometimes the "anomaly" is a real event worth investigating — a demand spike, a new promotion, a store opening.</p>
+                        <em>Trade-off: extra storage. Near-zero cost on Parquet.</em>
+                    </div>
+                </div>
+                <div class="decision">
+                    <div class="decision-head"><span class="decision-title">Severity-aware alerting</span><span class="decision-tag">ADR-003</span></div>
+                    <div class="decision-body">
+                        <p>Day one of Tier 3 produced 100+ Teams alerts. We tuned thresholds per-metric and tagged severity (<code>INFO</code>, <code>WARN</code>, <code>PAGE</code>), collapsing noise by 90%. If everyone's getting paged, no one is.</p>
+                        <em>Trade-off: severity mapping is manual and per-metric. Worth the discipline.</em>
+                    </div>
+                </div>
+                <div class="decision">
+                    <div class="decision-head"><span class="decision-title">Context over constants</span><span class="decision-tag">ADR-004</span></div>
+                    <div class="decision-body">
+                        <p>A 50% sales spike on Black Friday is the point. Time-aware thresholds — per weekday, per holiday, per season — dropped false positives by 60%.</p>
+                        <em>Trade-off: needs a calendar of events. Maintained as a CSV checked into the repo.</em>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<span class="keyword">class</span> <span class="class">DetectionMethod</span>(Enum):
-    ZSCORE = <span class="string">"zscore"</span>
-    MODIFIED_ZSCORE = <span class="string">"modified_zscore"</span>
-    IQR = <span class="string">"iqr"</span>
+        <section class="reveal">
+            <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Implementation</h2></div>
+            <div class="prose">
+                <p>The Tier 3 detector is a small, configurable core. Each metric gets a config; the detector picks the right method and returns a boolean mask. No surprises.</p>
+            </div>
 
-<span class="decorator">@dataclass</span>
-<span class="keyword">class</span> <span class="class">AnomalyConfig</span>:
-    method: DetectionMethod
-    threshold: float = <span class="number">3.0</span>
-    min_samples: int = <span class="number">30</span>
+            <div class="code">
+                <div class="code-head">
+                    <span class="code-file">quality/anomaly_detector.py</span>
+                    <span class="code-lang">Python</span>
+                </div>
+<pre><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+<span class="kw">from</span> enum <span class="kw">import</span> Enum
+<span class="kw">import</span> numpy <span class="kw">as</span> np
 
-<span class="keyword">class</span> <span class="class">AnomalyDetector</span>:
-    <span class="string">"""Multi-method statistical anomaly detection."""</span>
-    
-    <span class="keyword">def</span> <span class="function">__init__</span>(self, config: AnomalyConfig):
+<span class="kw">class</span> <span class="cls">Method</span>(Enum):
+    ZSCORE = <span class="str">"zscore"</span>
+    MODIFIED_ZSCORE = <span class="str">"modified_zscore"</span>
+    IQR = <span class="str">"iqr"</span>
+
+<span class="dec">@dataclass</span>
+<span class="kw">class</span> <span class="cls">Config</span>:
+    method: <span class="cls">Method</span>
+    threshold: float = <span class="num">3.0</span>
+    min_samples: int = <span class="num">30</span>
+
+<span class="kw">class</span> <span class="cls">AnomalyDetector</span>:
+    <span class="str">"""Multi-method statistical anomaly detection."""</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, config: <span class="cls">Config</span>):
         self.config = config
         self._methods = {
-            DetectionMethod.ZSCORE: self._zscore,
-            DetectionMethod.MODIFIED_ZSCORE: self._modified_zscore,
-            DetectionMethod.IQR: self._iqr_fence,
+            <span class="cls">Method</span>.ZSCORE: self._zscore,
+            <span class="cls">Method</span>.MODIFIED_ZSCORE: self._modified_zscore,
+            <span class="cls">Method</span>.IQR: self._iqr_fence,
         }
-    
-    <span class="keyword">def</span> <span class="function">detect</span>(self, data: np.ndarray) -> np.ndarray:
-        <span class="string">"""Return boolean mask of anomalies."""</span>
-        <span class="keyword">if</span> len(data) < self.config.min_samples:
-            <span class="keyword">return</span> np.zeros(len(data), dtype=bool)
-        <span class="keyword">return</span> self._methods[self.config.method](data)
-    
-    <span class="keyword">def</span> <span class="function">_zscore</span>(self, data: np.ndarray) -> np.ndarray:
-        z = (data - np.mean(data)) / np.std(data)
-        <span class="keyword">return</span> np.abs(z) > self.config.threshold
-    
-    <span class="keyword">def</span> <span class="function">_modified_zscore</span>(self, data: np.ndarray) -> np.ndarray:
+
+    <span class="kw">def</span> <span class="fn">detect</span>(self, data: np.ndarray) -&gt; np.ndarray:
+        <span class="str">"""Return boolean mask of anomalies."""</span>
+        <span class="kw">if</span> len(data) &lt; self.config.min_samples:
+            <span class="kw">return</span> np.zeros(len(data), dtype=bool)
+        <span class="kw">return</span> self._methods[self.config.method](data)
+
+    <span class="kw">def</span> <span class="fn">_modified_zscore</span>(self, data: np.ndarray) -&gt; np.ndarray:
         median = np.median(data)
         mad = np.median(np.abs(data - median))
-        m = <span class="number">0.6745</span> * (data - median) / (mad + <span class="number">1e-10</span>)
-        <span class="keyword">return</span> np.abs(m) > self.config.threshold
-    
-    <span class="keyword">def</span> <span class="function">_iqr_fence</span>(self, data: np.ndarray) -> np.ndarray:
-        q1, q3 = np.percentile(data, [<span class="number">25</span>, <span class="number">75</span>])
+        m = <span class="num">0.6745</span> * (data - median) / (mad + <span class="num">1e-10</span>)
+        <span class="kw">return</span> np.abs(m) &gt; self.config.threshold
+
+    <span class="kw">def</span> <span class="fn">_iqr_fence</span>(self, data: np.ndarray) -&gt; np.ndarray:
+        q1, q3 = np.percentile(data, [<span class="num">25</span>, <span class="num">75</span>])
         iqr = q3 - q1
-        <span class="keyword">return</span> (data < q1 - <span class="number">1.5</span>*iqr) | (data > q3 + <span class="number">1.5</span>*iqr)</pre>
+        <span class="kw">return</span> (data &lt; q1 - <span class="num">1.5</span>*iqr) | (data &gt; q3 + <span class="num">1.5</span>*iqr)</pre>
+            </div>
+
+            <div class="pills">
+                <span class="pill">Python</span>
+                <span class="pill">NumPy</span>
+                <span class="pill">Pandas</span>
+                <span class="pill">SciPy</span>
+                <span class="pill">DuckDB</span>
+                <span class="pill">Great Expectations</span>
+                <span class="pill">Streamlit</span>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">What changed</h2></div>
+            <div class="results">
+                <div class="result">
+                    <div class="result-value">500+</div>
+                    <div class="result-text">Dimension anomalies caught at the Silver gate — <strong>before</strong> they corrupted downstream facts or Power BI models.</div>
+                </div>
+                <div class="result">
+                    <div class="result-value">−70%</div>
+                    <div class="result-text">Analytics incidents dropped sharply after the 3-tier system was live across all 50+ pipelines.</div>
+                </div>
+                <div class="result">
+                    <div class="result-value">−60%</div>
+                    <div class="result-text">False positives removed by context-aware thresholds (per weekday, per season, per event).</div>
+                </div>
+                <div class="result">
+                    <div class="result-value">3×</div>
+                    <div class="result-text">Detection coverage versus Z-score alone. Layers catch different classes of problems.</div>
+                </div>
+                <div class="result">
+                    <div class="result-value">~10</div>
+                    <div class="result-text">Daily actionable alerts, down from 100+ at day one. Severity tagging killed the fatigue.</div>
                 </div>
             </div>
         </section>
-        
-        <!-- Tech Stack -->
-        <section class="section">
-            <h2 class="section-title">Tech Stack</h2>
-            <div class="tech-pills">
-                <span class="tech-pill">Python</span>
-                <span class="tech-pill">NumPy</span>
-                <span class="tech-pill">Pandas</span>
-                <span class="tech-pill">SciPy</span>
-                <span class="tech-pill">DuckDB</span>
-                <span class="tech-pill">Great Expectations</span>
-                <span class="tech-pill">Streamlit</span>
-            </div>
-        </section>
-        
-        <!-- Lessons Learned -->
-        <section class="section">
-            <h2 class="section-title">Key Learnings</h2>
-            <div class="lessons-grid">
-                <div class="lesson-card">
-                    <h4>Layers Beat Single Methods</h4>
-                    <p>No single detection method catches everything. The 3-tier approach improved detection by 3x over Z-score alone.</p>
+
+        <section class="reveal">
+            <div class="sh"><span class="sh-num">07</span><h2 class="sh-title">What I'd do differently</h2></div>
+            <div class="reflection">
+                <div class="reflect-card">
+                    <h4>Declare rules as data</h4>
+                    <p>Tier-2 rules started as Python callables. Moving them to YAML earlier would have let analysts contribute without going through engineering.</p>
                 </div>
-                <div class="lesson-card">
-                    <h4>Context Matters</h4>
-                    <p>A 50% sales spike on Black Friday is expected. Time-aware thresholds reduced false positives by 60%.</p>
+                <div class="reflect-card">
+                    <h4>Baselines from day one</h4>
+                    <p>We tuned thresholds reactively. A two-week baseline run with alerts muted would have given us better starting thresholds and fewer day-one pages.</p>
                 </div>
-                <div class="lesson-card">
-                    <h4>Quarantine, Don't Delete</h4>
-                    <p>Anomalies go to a quarantine table for review—sometimes "anomalies" are real events worth investigating.</p>
+                <div class="reflect-card">
+                    <h4>SLOs, not thresholds</h4>
+                    <p>Framing detection as service level objectives ("99% of inventory rows pass schema") gave stakeholders clearer language than "z &gt; 3."</p>
                 </div>
-                <div class="lesson-card">
-                    <h4>Alert Fatigue is Real</h4>
-                    <p>Started with 100+ daily alerts. Tuned thresholds and added severity levels to reduce to ~10 actionable alerts.</p>
+                <div class="reflect-card">
+                    <h4>Quarantine review loop</h4>
+                    <p>Quarantined rows accumulated. A weekly triage queue with labels ("real event" / "bad data" / "fix upstream") would have closed the feedback loop.</p>
                 </div>
             </div>
         </section>
-        
-        <!-- CTA -->
-        <div class="case-cta">
-            <h3>Want to Build Better Data Quality?</h3>
-            <p>Let's discuss how layered anomaly detection can save your analytics from bad data.</p>
-            <div class="cta-buttons">
-                <a href="medallion-lakehouse.html" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                    </svg>
-                    View Lakehouse Case Study
+
+        <div class="related">
+            <div class="related-heading">Related case studies</div>
+            <div class="related-grid">
+                <a href="medallion-lakehouse.html" class="related-card">
+                    <span class="related-card-tag">Data Platform</span>
+                    <span class="related-card-title">Medallion lakehouse</span>
+                    <span class="related-card-arrow">Read →</span>
                 </a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                    Connect on LinkedIn
+                <a href="demand-forecasting.html" class="related-card">
+                    <span class="related-card-tag">Machine Learning</span>
+                    <span class="related-card-title">Demand forecasting ensemble</span>
+                    <span class="related-card-arrow">Read →</span>
+                </a>
+                <a href="rpa-bot-framework.html" class="related-card">
+                    <span class="related-card-tag">Automation</span>
+                    <span class="related-card-title">RPA bot framework</span>
+                    <span class="related-card-arrow">Read →</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="cta">
+            <h3>Running into data quality fires?</h3>
+            <p>I'm happy to compare notes on detection tiers, alerting discipline, and where SLOs beat ad-hoc thresholds.</p>
+            <div class="cta-row">
+                <a href="mailto:godson.kurishinkal@gmail.com?subject=Anomaly%20detection%20conversation" class="cta-btn cta-btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Get in touch
+                </a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-ghost">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn
                 </a>
             </div>
         </div>
     </main>
-    
-    <!-- Footer -->
+
     <footer>
-        <p class="footer-text">© 2026 <a href="../index.html">Godson Kurishinkal</a>. Building data pipelines that power decisions.</p>
+        <div class="footer-inner">
+            <div>© 2026 Godson Kurishinkal Antony · Dubai</div>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../resume.html">Résumé</a>
+                <a href="mailto:godson.kurishinkal@gmail.com">Email</a>
+                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+            <div class="footer-status">All pipelines operational</div>
+        </div>
     </footer>
+
+    <script>
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
 </body>
 </html>
