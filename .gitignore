@@ -64,3 +64,6 @@ htmlcov/
 
 # mypy
 .mypy_cache/
+
+# Claude Code local config
+.claude/
