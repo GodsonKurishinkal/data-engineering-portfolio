@@ -32,7 +32,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Favicon: GK monogram on dark ink -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
@@ -50,3073 +50,421 @@
       "image": "https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/profile.png",
       "email": "mailto:godson.kurishinkal@gmail.com",
       "telephone": "+971505276062",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Dubai",
-        "addressCountry": "AE"
-      },
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Landmark Group"
-      },
+      "address": {"@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE"},
+      "worksFor": {"@type": "Organization", "name": "Landmark Group"},
       "alumniOf": [
-        {
-          "@type": "EducationalOrganization",
-          "name": "Indian Institute of Technology, Madras"
-        },
-        {
-          "@type": "EducationalOrganization",
-          "name": "Carmel Polytechnic College"
-        }
+        {"@type": "EducationalOrganization", "name": "Indian Institute of Technology, Madras"},
+        {"@type": "EducationalOrganization", "name": "Carmel Polytechnic College"}
       ],
-      "knowsAbout": [
-        "Data Engineering",
-        "Medallion Architecture",
-        "Polars",
-        "DuckDB",
-        "Power BI",
-        "Python",
-        "SQL",
-        "Dimensional Modeling",
-        "Supply Chain Analytics",
-        "ETL Pipelines"
-      ],
-      "sameAs": [
-        "https://linkedin.com/in/godsonkurishinkal",
-        "https://github.com/GodsonKurishinkal"
-      ]
+      "knowsAbout": ["Data Engineering", "Medallion Architecture", "Polars", "DuckDB", "Power BI", "Python", "SQL", "Dimensional Modeling", "Supply Chain Analytics", "ETL Pipelines"],
+      "sameAs": ["https://linkedin.com/in/godsonkurishinkal", "https://github.com/GodsonKurishinkal"]
     }
     </script>
-    
-    <style>
-        /* CSS Reset & Variables */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            /* Simplified palette — one restrained accent, clean neutrals */
-            --bg: #fafafa;
-            --bg-card: #ffffff;
-            --ink: #0f172a;           /* primary text */
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --border: #e5e7eb;
-            --border-hover: #0f172a;
-            --accent: #0f172a;        /* monochrome-authority accent for buttons/links */
-            --accent-hover: #000000;
-            --accent-soft: #1e293b;
-            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-            --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.06);
-            --shadow-lg: 0 12px 32px -8px rgba(15, 23, 42, 0.08);
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-            --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
-            --radius: 12px;
-            --radius-sm: 8px;
-            --radius-lg: 16px;
 
-            /* Legacy aliases (kept for backward compatibility with existing class selectors) */
-            --bg-primary: transparent;
-            --bg-secondary: transparent;
-            --text-primary: var(--ink);
-            --accent-glow: rgba(15, 23, 42, 0.06);
-            --accent-gradient: var(--accent);
-            --gradient-accent: var(--accent);
-            --shadow-xl: var(--shadow-lg);
-            --shadow-accent: 0 10px 40px -10px rgba(15, 23, 42, 0.25);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg);
-            color: var(--ink);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-            background: transparent;
-        }
-        
-        nav.scrolled {
-            background: rgba(250, 251, 252, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 0;
-        }
-        
-        .nav-logo span {
-            font-weight: 600;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-        }
-        
-        .nav-badge {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            margin-left: 0.25rem;
-            padding-left: 0.25rem;
-        }
-        
-        .nav-badge::before {
-            content: '•';
-            color: #FB2C36;
-            margin-right: 0.5rem;
-        }
-        
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-sm);
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
-            background: transparent;
-        }
-        
-        .nav-link:hover {
-            color: var(--accent);
-            background: var(--accent-glow);
-            transform: translateY(-2px);
-        }
-        
-        .nav-link:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-        
-        .nav-link svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .nav-resume-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.5rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            transition: var(--transition);
-            background: transparent;
-            white-space: nowrap;
-        }
-
-        .nav-resume-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-glow);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .nav-resume-btn svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 7rem 2rem 4rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Data Pipeline Flow Animation */
-        .pipeline-section {
-            padding: 4rem 2rem;
-            background: transparent;
-            overflow: hidden;
-        }
-        
-        /* Architecture Flow Diagram */
-        .architecture-flow {
-            max-width: 1200px;
-            margin: 3rem auto;
-            position: relative;
-        }
-
-        /* Flow Container */
-        .flow-container {
-            display: flex;
-            align-items: stretch;
-            justify-content: space-between;
-            position: relative;
-            min-height: 420px;
-        }
-
-        /* Flow Stage */
-        .flow-stage {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem 0.5rem;
-            position: relative;
-            z-index: 2;
-            max-width: 200px;
-        }
-
-        .flow-stage-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1.25rem;
-            background: linear-gradient(135deg, #0078D4 0%, #106EBE 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 120, 212, 0.3);
-        }
-
-        .flow-stage:nth-child(2) .flow-stage-header { background: linear-gradient(135deg, #107C10 0%, #0B6A0B 100%); box-shadow: 0 4px 15px rgba(16, 124, 16, 0.3); }
-        .flow-stage:nth-child(3) .flow-stage-header { background: linear-gradient(135deg, #E25A1C 0%, #C74A10 100%); box-shadow: 0 4px 15px rgba(226, 90, 28, 0.3); }
-        .flow-stage:nth-child(4) .flow-stage-header { background: linear-gradient(135deg, #8661C5 0%, #6B4FA0 100%); box-shadow: 0 4px 15px rgba(134, 97, 197, 0.3); }
-
-        .flow-stage-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            width: 100%;
-            align-items: center;
-        }
-
-        /* Flow Node */
-        .flow-node {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 160px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            position: relative;
-        }
-
-        /* Node connector - line going right from each node */
-        .flow-node::after {
-            content: '';
-            position: absolute;
-            right: -24px;
-            top: 50%;
-            width: 20px;
-            height: 2px;
-            background: linear-gradient(90deg, #cbd5e1, transparent);
-        }
-
-        /* Hide connector on last node of each stage */
-        .flow-stage:last-child .flow-node::after,
-        .flow-node:last-child::after {
-            display: none;
-        }
-
-        /* Vertical connector between nodes in same stage */
-        .flow-node:not(:last-child)::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -10px;
-            width: 2px;
-            height: 8px;
-            background: #e2e8f0;
-            transform: translateX(-50%);
-        }
-
-        .flow-node:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-            border-color: #0078D4;
-        }
-
-        .flow-node:hover::after,
-        .flow-node:hover::before {
-            background: #0078D4;
-        }
-
-        .flow-node-icon {
-            width: 32px;
-            height: 32px;
-            flex-shrink: 0;
-            color: #0078D4;
-        }
-
-        .flow-node-icon svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .flow-node-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #1e293b;
-            line-height: 1.3;
-        }
-
-        /* Medallion Stack */
-        .medallion-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            width: 100%;
-            max-width: 160px;
-        }
-
-        .medallion-layer {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 0.75rem;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        .medallion-layer.bronze { border-left: 4px solid #CD7F32; color: #8B4513; }
-        .medallion-layer.silver { border-left: 4px solid #C0C0C0; color: #4a5568; }
-        .medallion-layer.gold { border-left: 4px solid #FFD700; color: #B8860B; }
-
-        .medallion-layer:hover {
-            transform: translateX(4px);
-        }
-
-        /* Animated Flow Arrows */
-        .flow-arrows {
-            display: none; /* Hide old SVG arrows */
-        }
-
-        /* New SVG Connection Lines */
-        .flow-connections {
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 60px);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .conn-line {
-            animation: dashFlow 1.5s linear infinite;
-        }
-
-        .conn-line-vert {
-            stroke-dasharray: 4 2;
-        }
-
-        @keyframes dashFlow {
-            to { stroke-dashoffset: -18; }
-        }
-
-        .flow-particle {
-            opacity: 0.9;
-            filter: drop-shadow(0 0 4px currentColor);
-        }
-
-        /* CSS Flow Connectors */
-        .flow-stage {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1.5rem 0.5rem;
-            position: relative;
-            z-index: 2;
-            max-width: 220px;
-        }
-
-        /* Hide old connector elements */
-        .flow-connector {
-            display: none;
-        }
-
-        .flow-connector-line {
-            position: relative;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--from-color, #0078D4), var(--to-color, #107C10));
-            border-radius: 2px;
-        }
-
-        .flow-connector-line::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
-            background: var(--from-color, #0078D4);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--from-color, #0078D4);
-        }
-
-        .flow-connector-line::after {
-            content: '';
-            position: absolute;
-            right: -6px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 12px solid var(--to-color, #107C10);
-            border-top: 7px solid transparent;
-            border-bottom: 7px solid transparent;
-            filter: drop-shadow(0 0 4px var(--to-color, #107C10));
-        }
-
-        /* Animated dot on connector */
-        .flow-connector .flow-dot {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-            animation: flowDot 2s ease-in-out infinite;
-        }
-
-        @keyframes flowDot {
-            0% { left: 0; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { left: calc(100% - 8px); opacity: 0; }
-        }
-
-        .flow-connector:nth-child(2) .flow-dot { animation-delay: 0s; color: #0078D4; }
-        .flow-connector:nth-child(4) .flow-dot { animation-delay: 0.7s; color: #107C10; }
-        .flow-connector:nth-child(6) .flow-dot { animation-delay: 1.4s; color: #E25A1C; }
-
-        .flow-arrows svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .flow-path {
-            fill: none;
-            stroke: #cbd5e1;
-            stroke-width: 2;
-            stroke-dasharray: 8 4;
-        }
-
-        .flow-path-animated {
-            fill: none;
-            stroke: #0078D4;
-            stroke-width: 2;
-            stroke-dasharray: 8 4;
-            stroke-dashoffset: 0;
-            animation: flowDash 2s linear infinite;
-        }
-
-        @keyframes flowDash {
-            to { stroke-dashoffset: -24; }
-        }
-
-        /* Data Particles Animation */
-        .data-dot {
-            fill: #0078D4;
-            opacity: 0;
-        }
-
-        .data-dot.animate {
-            animation: flowParticle 3s ease-in-out infinite;
-        }
-
-        .data-dot:nth-child(2) { animation-delay: 0.5s; }
-        .data-dot:nth-child(3) { animation-delay: 1s; }
-        .data-dot:nth-child(4) { animation-delay: 1.5s; }
-        .data-dot:nth-child(5) { animation-delay: 2s; }
-
-        @keyframes flowParticle {
-            0% { opacity: 0; offset-distance: 0%; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { opacity: 0; offset-distance: 100%; }
-        }
-
-        /* Flow Arrow Heads */
-        .arrow-head {
-            fill: #0078D4;
-            animation: arrowPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes arrowPulse {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .flow-container {
-                flex-direction: column;
-                gap: 0;
-                min-height: auto;
-            }
-            
-            .flow-stage {
-                border-bottom: none;
-                padding-bottom: 1rem;
-                max-width: 100%;
-            }
-            
-            .flow-stage:last-child {
-                border-bottom: none;
-            }
-            
-            .flow-connector {
-                width: 100%;
-                height: 50px;
-                transform: rotate(90deg);
-                margin: 0.5rem 0;
-            }
-            
-            .flow-arrows {
-                display: none;
-            }
-            
-            .flow-node, .medallion-stack {
-                max-width: 200px;
-            }
-        }
-        
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4rem;
-            max-width: 1100px;
-            width: 100%;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-            text-align: left;
-        }
-        
-        .hero-image {
-            flex-shrink: 0;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 0.3s;
-        }
-        
-        .profile-image-wrapper {
-            position: relative;
-            width: 320px;
-            height: 320px;
-        }
-        
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--bg-card);
-            box-shadow: var(--shadow-xl);
-            transition: var(--transition);
-        }
-        
-        .profile-image-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: var(--accent-gradient);
-            z-index: -1;
-            opacity: 0.6;
-        }
-        
-        .profile-image-wrapper::after {
-            content: '';
-            position: absolute;
-            inset: -12px;
-            border-radius: 50%;
-            border: 2px dashed #FEF2F2;
-            animation: rotate 30s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .profile-image-wrapper:hover .profile-image {
-            transform: scale(1.02);
-        }
-        
-        @media (max-width: 900px) {
-            .hero-container {
-                flex-direction: column-reverse;
-                gap: 2.5rem;
-                text-align: center;
-            }
-            
-            .hero-content {
-                text-align: center;
-            }
-            
-            .profile-image-wrapper {
-                width: 220px;
-                height: 220px;
-            }
-            
-            .hero-cta {
-                justify-content: center;
-            }
-        }
-        
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            margin-bottom: 1.75rem;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 0.2s;
-            padding: 0.5rem 1rem;
-            background: var(--accent-glow);
-            border-radius: 9999px;
-        }
-        
-        .eyebrow::before,
-        .eyebrow::after {
-            display: none;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.75rem, 7vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.75rem;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 0.4s;
-            letter-spacing: -0.03em;
-        }
-        
-        .hero h1 .gradient {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 580px;
-            margin: 0 0 2.5rem 0;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 0.6s;
-            line-height: 1.7;
-        }
-        
-        .hero-cta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 0.8s;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 1rem 2rem;
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: var(--radius);
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-        
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: white;
-            position: relative;
-            box-shadow: var(--shadow-md), var(--shadow-accent);
-        }
-        
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg), 0 15px 50px -10px rgba(8, 145, 178, 0.5);
-        }
-        
-        .btn-primary:active {
-            transform: translateY(-1px);
-        }
-        
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-glow);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-2px);
-        }
-        
-        /* Tooltip */
-        .tooltip-wrapper {
-            position: relative;
-        }
-        
-        .tooltip {
-            position: absolute;
-            bottom: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%) scale(0.9);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            padding: 0.5rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: var(--bg-secondary);
-        }
-        
-        .tooltip-wrapper:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) scale(1);
-        }
-        
-        /* Stats Section - Minimalistic */
-        .stats {
-            position: relative;
-            z-index: 2;
-            padding: 4rem 2rem;
-            background: transparent;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 900px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 500px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-                max-width: 260px;
-            }
-        }
-        
-        .stat-item {
-            text-align: center;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            padding: 2rem 1.5rem;
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--accent);
-        }
-        
-        .stat-item:nth-child(1) { animation-delay: 0.1s; }
-        .stat-item:nth-child(2) { animation-delay: 0.2s; }
-        .stat-item:nth-child(3) { animation-delay: 0.3s; }
-        .stat-item:nth-child(4) { animation-delay: 0.4s; }
-        
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            opacity: 0.7;
-        }
-        
-        .stat-item:hover .stat-icon {
-            opacity: 1;
-        }
-        
-        .stat-icon svg {
-            width: 24px;
-            height: 24px;
-        }
-        
-        .stat-value {
-            font-family: var(--font-mono);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.2;
-            letter-spacing: -0.03em;
-        }
-        
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        
-        /* Hidden progress bar - keeping for animation trigger */
-        .stat-progress {
-            display: none;
-        }
-        
-        /* About Section */
-        .about-section {
-            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-            padding: 6rem 2rem;
-        }
-        
-        .about-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .about-content {
-            text-align: center;
-        }
-        
-        .about-text {
-            margin: 2.5rem 0;
-            text-align: left;
-        }
-        
-        .about-lead {
-            font-size: 1.375rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .about-text p {
-            font-size: 1.0625rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-        }
-        
-        .about-text strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        
-        .about-highlights {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-        
-        .highlight-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            transition: var(--transition);
-        }
-        
-        .highlight-item:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .highlight-icon {
-            font-size: 2rem;
-        }
-        
-        .highlight-text {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-        
-        .highlight-text strong {
-            display: block;
-            color: var(--text-primary);
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-        
-        @media (max-width: 768px) {
-            .about-highlights {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-lead {
-                font-size: 1.25rem;
-            }
-        }
-        
-        /* Impact Stories Section */
-        .impact-section {
-            background: var(--bg-primary);
-            padding: 6rem 2rem;
-        }
-        
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 900px) {
-            .impact-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-        }
-        
-        .impact-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .impact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
-        }
-        
-        .impact-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .impact-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .impact-icon {
-            font-size: 1.75rem;
-        }
-        
-        .impact-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .impact-comparison {
-            display: flex;
-            align-items: stretch;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .impact-before, .impact-after {
-            flex: 1;
-            text-align: center;
-            padding: 1rem 0.75rem;
-            border-radius: var(--radius-sm);
-        }
-        
-        .impact-before {
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-        
-        .impact-after {
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-        }
-        
-        .impact-label {
-            display: block;
-            font-size: 0.6875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-        
-        .impact-value-old {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #ef4444;
-            margin-bottom: 0.375rem;
-        }
-        
-        .impact-value-new {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #22c55e;
-            margin-bottom: 0.375rem;
-        }
-        
-        .impact-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-        
-        .impact-arrow {
-            display: flex;
-            align-items: center;
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-        
-        .impact-result {
-            text-align: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        
-        .impact-metric {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 2rem;
-            font-weight: 700;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .impact-metric-label {
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        
-        /* Section Styles */
-        section {
-            position: relative;
-            z-index: 2;
-            padding: 5rem 2rem;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-eyebrow {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            margin-bottom: 1rem;
-            display: inline-block;
-            padding: 0.375rem 1rem;
-            background: var(--accent-glow);
-            border-radius: 9999px;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        /* Expertise Section */
-        .expertise {
-            background: var(--bg-secondary);
-            padding: 6rem 2rem;
-        }
-        
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 900px) {
-            .expertise-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .expertise-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .expertise-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2.25rem;
-            transition: var(--transition);
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .expertise-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-        
-        .expertise-card:nth-child(1) { animation-delay: 0.2s; }
-        .expertise-card:nth-child(2) { animation-delay: 0.3s; }
-        .expertise-card:nth-child(3) { animation-delay: 0.4s; }
-        
-        .expertise-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .expertise-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .expertise-icon {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-glow);
-            border-radius: var(--radius);
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-            transition: var(--transition);
-        }
-        
-        .expertise-card:hover .expertise-icon {
-            background: var(--accent-gradient);
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        .expertise-icon svg {
-            width: 28px;
-            height: 28px;
-        }
-        
-        .expertise-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        
-        .expertise-text {
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.7;
-        }
-        
-        /* Tech Stack Section */
-        .tech-stack {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .tech-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        .tech-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.875rem 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 9999px;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .tech-pill:nth-child(1) { animation-delay: 0.1s; }
-        .tech-pill:nth-child(2) { animation-delay: 0.15s; }
-        .tech-pill:nth-child(3) { animation-delay: 0.2s; }
-        .tech-pill:nth-child(4) { animation-delay: 0.25s; }
-        .tech-pill:nth-child(5) { animation-delay: 0.3s; }
-        .tech-pill:nth-child(6) { animation-delay: 0.35s; }
-        .tech-pill:nth-child(7) { animation-delay: 0.4s; }
-        .tech-pill:nth-child(8) { animation-delay: 0.45s; }
-        
-        .tech-pill:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md), 0 8px 25px -5px rgba(8, 145, 178, 0.25);
-            background: var(--accent-glow);
-        }
-        
-        .tech-pill svg {
-            width: 18px;
-            height: 18px;
-        }
-        
-        /* Featured Projects Section */
-        .featured-projects {
-            background: var(--bg-secondary);
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-            text-decoration: none;
-            display: block;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-        
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .project-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .project-card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        
-        .project-card-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-glow);
-            border-radius: var(--radius-sm);
-            font-size: 1.5rem;
-        }
-        
-        .project-card-arrow {
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-        
-        .project-card:hover .project-card-arrow {
-            color: var(--accent);
-            transform: translateX(4px);
-        }
-        
-        .project-card-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-card-desc {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        
-        .project-card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .project-tag {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid rgba(6, 182, 212, 0.2);
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--accent);
-        }
-        
-        .project-card-metrics {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        
-        .project-metric {
-            text-align: center;
-        }
-        
-        .project-metric-value {
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-        
-        .project-metric-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-        
-        /* 2026 Focus Section */
-        .focus-2026 {
-            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            border-top: 1px solid var(--border);
-        }
-        
-        .focus-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 800px) {
-            .focus-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .focus-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .focus-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
-        }
-        
-        .focus-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .focus-card-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-        }
-        
-        .focus-card-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--accent-glow);
-            border-radius: var(--radius-sm);
-            font-size: 1.5rem;
-            transition: var(--transition);
-        }
-        
-        .focus-card:hover .focus-card-icon {
-            transform: scale(1.1);
-        }
-        
-        .focus-card-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        
-        .focus-card-items {
-            list-style: none;
-        }
-        
-        .focus-card-items li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.625rem;
-            padding: 0.625rem 0;
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .focus-card-items li:last-child {
-            border-bottom: none;
-        }
-        
-        .focus-card-items li::before {
-            content: '→';
-            color: var(--accent);
-            flex-shrink: 0;
-            font-weight: 600;
-        }
-        
-        .focus-card-items .target {
-            font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            color: var(--text-muted);
-            margin-left: auto;
-            flex-shrink: 0;
-            background: var(--bg-secondary);
-            padding: 0.125rem 0.5rem;
-            border-radius: var(--radius-sm);
-        }
-        
-        /* Code Showcase Section */
-        .code-showcase {
-            background: var(--bg-secondary);
-        }
-        
-        .code-showcase-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        /* Data Flow Arrow between code blocks */
-        .code-showcase-grid::after {
-            content: '→';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            color: var(--accent);
-            animation: pulseArrow 2s ease-in-out infinite;
-            z-index: 10;
-        }
-        
-        @keyframes pulseArrow {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
-        }
-        
-        @media (max-width: 900px) {
-            .code-showcase-grid {
-                grid-template-columns: 1fr;
-            }
-            .code-showcase-grid::after {
-                content: '↓';
-                top: 50%;
-            }
-        }
-        
-        /* Validation Flow Component */
-        .validation-flow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(34, 211, 238, 0.05), rgba(168, 85, 247, 0.05));
-            border-radius: var(--radius);
-            margin: 2rem auto 0;
-            max-width: 900px;
-            flex-wrap: wrap;
-        }
-        
-        .validation-step {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 9999px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
-        }
-        
-        .validation-step.active {
-            background: rgba(34, 211, 238, 0.15);
-            color: var(--accent);
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
-        }
-        
-        .validation-step svg {
-            width: 14px;
-            height: 14px;
-        }
-        
-        .validation-arrow {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-        }
-        
-        @media (max-width: 600px) {
-            .validation-flow {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            .validation-arrow {
-                transform: rotate(90deg);
-            }
-        }
-        
-        .code-container {
-            background: #1e293b;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .code-container.full-width {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .code-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1rem;
-            background: #0f172a;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .code-header-dots {
-            display: flex;
-            gap: 0.375rem;
-        }
-        
-        .code-header-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-        
-        .code-header-dot.red { background: #ef4444; }
-        .code-header-dot.yellow { background: #eab308; }
-        .code-header-dot.green { background: #22c55e; }
-        
-        .code-header-title {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: #94a3b8;
-        }
-        
-        .code-header-lang {
-            font-family: var(--font-mono);
-            font-size: 0.625rem;
-            color: #22d3ee;
-            padding: 0.25rem 0.5rem;
-            background: rgba(34, 211, 238, 0.1);
-            border-radius: 9999px;
-        }
-        
-        .code-body {
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
-        
-        .code-body pre {
-            margin: 0;
-            font-family: var(--font-mono);
-            font-size: 0.8125rem;
-            line-height: 1.7;
-            color: #e2e8f0;
-        }
-        
-        .code-body .keyword { color: #c084fc; }
-        .code-body .function { color: #22d3ee; }
-        .code-body .string { color: #a3e635; }
-        .code-body .comment { color: #64748b; font-style: italic; }
-        .code-body .decorator { color: #f472b6; }
-        .code-body .number { color: #fb923c; }
-        .code-body .class { color: #fbbf24; }
-        
-        .code-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1rem;
-            background: #0f172a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            color: #64748b;
-        }
-        
-        .code-footer-stats {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .code-footer-stat {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-        }
-        
-        .code-footer-stat svg {
-            width: 12px;
-            height: 12px;
-        }
-        
-        /* Skill Bars Section */
-        .skills-section {
-            background: var(--bg-card);
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        @media (max-width: 768px) {
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .skill-item {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards;
-        }
-        
-        .skill-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .skill-name {
-            font-weight: 600;
-            font-size: 0.9375rem;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .skill-name svg {
-            width: 16px;
-            height: 16px;
-            color: var(--accent);
-        }
-        
-        .skill-level {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-        
-        .skill-bar {
-            height: 8px;
-            background: var(--bg-secondary);
-            border-radius: 9999px;
-            overflow: hidden;
-        }
-        
-        .skill-bar-fill {
-            height: 100%;
-            background: var(--accent-gradient);
-            border-radius: 9999px;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 1.5s ease;
-        }
-        
-        .skill-item.visible .skill-bar-fill {
-            transform: scaleX(1);
-        }
-        
-        /* Coming Soon Section */
-        .coming-soon {
-            background: var(--bg-secondary);
-        }
-        
-        .coming-soon-content {
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .coming-soon h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
-        .coming-soon p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            padding: 0.875rem 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .social-link:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-glow);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .social-link:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-        
-        .social-link svg {
-            width: 20px;
-            height: 20px;
-        }
-        
-        /* Footer */
-        footer {
-            position: relative;
-            z-index: 2;
-            padding: 4rem 2rem;
-            border-top: 1px solid var(--border);
-            background: var(--bg-card);
-        }
-        
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        .footer-info {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            font-size: 0.9375rem;
-            color: var(--text-muted);
-        }
-        
-        .footer-info a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-        
-        .footer-info a:hover {
-            color: var(--accent);
-        }
-        
-        .footer-bottom {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            text-align: center;
-        }
-        
-        .footer-copyright {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-        
-        .footer-tagline {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-        }
-        
-        /* Footer Status Indicator */
-        .footer-status {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-        
-        .footer-status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #22c55e;
-            animation: status-pulse 2s ease-in-out infinite;
-        }
-        
-        .footer-status-text {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Scroll animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            nav {
-                top: 0;
-            }
-
-            .profile-image-wrapper::after {
-                display: none;
-            }
-
-            .profile-image-wrapper::before {
-                opacity: 0.3;
-            }
-            
-            .hero {
-                padding: 6rem 1.5rem 3rem;
-                min-height: auto;
-            }
-            
-            .stat-icon::before {
-                display: none;
-            }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            nav {
-                padding: 0.75rem 1rem;
-            }
-            
-            .nav-logo span {
-                font-size: 0.95rem;
-            }
-            
-            .nav-badge {
-                font-size: 0.7rem;
-                padding: 0;
-                margin-left: 0.125rem;
-            }
-
-            .nav-resume-btn span {
-                display: none;
-            }
-            
-            .hero {
-                padding: 5rem 1rem 2rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 0.95rem;
-            }
-            
-            .eyebrow {
-                font-size: 0.75rem;
-                padding: 0.375rem 0.75rem;
-                margin-bottom: 1rem;
-            }
-            
-            .profile-image-wrapper {
-                width: 180px;
-                height: 180px;
-            }
-            
-            .btn {
-                padding: 0.75rem 1.25rem;
-                font-size: 0.875rem;
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .hero-cta {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            section {
-                padding: 3rem 1rem;
-            }
-            
-            .stat-item {
-                padding: 1.5rem 1rem;
-            }
-            
-            .stat-value {
-                font-size: 2rem;
-            }
-            
-            .stat-icon {
-                width: 48px;
-                height: 48px;
-            }
-            
-            .stat-icon svg {
-                width: 22px;
-                height: 22px;
-            }
-            
-            .section-title {
-                font-size: 1.75rem;
-            }
-            
-            .social-links {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .social-link {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-        
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all var(--transition);
-            z-index: 9999;
-            box-shadow: var(--shadow-lg);
-            backdrop-filter: blur(20px);
-        }
-        
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--accent);
-            background: var(--accent);
-        }
-        
-        .back-to-top:hover svg {
-            stroke: white;
-        }
-        
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .back-to-top svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--text-secondary);
-            transition: stroke var(--transition);
-        }
-        
-        /* Resume Download Button */
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all var(--transition);
-            text-decoration: none;
-        }
-        
-        .btn-download:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn-download svg {
-            width: 18px;
-            height: 18px;
-        }
-        
-        /* Pulse Animation for Status */
-        @keyframes statusPulse {
-            0%, 100% { 
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
-            }
-            50% { 
-                box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
-            }
-        }
-        
-        .footer-status-dot {
-            animation: statusPulse 2s ease-in-out infinite;
-        }
-        
-        /* Enhanced Card Hover Effects */
-        .project-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--accent-gradient);
-            opacity: 0;
-            transition: opacity var(--transition);
-            border-radius: inherit;
-            z-index: -1;
-        }
-        
-        .project-card:hover::before {
-            opacity: 0.03;
-        }
-        
-        /* Floating Animation for Icons */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .expertise-icon {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .expertise-card:nth-child(2) .expertise-icon { animation-delay: 0.5s; }
-        .expertise-card:nth-child(3) .expertise-icon { animation-delay: 1s; }
-        .expertise-card:nth-child(4) .expertise-icon { animation-delay: 1.5s; }
-        .expertise-card:nth-child(5) .expertise-icon { animation-delay: 2s; }
-        .expertise-card:nth-child(6) .expertise-icon { animation-delay: 2.5s; }
-        
-        @media (max-width: 768px) {
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 44px;
-                height: 44px;
-            }
-            
-            .hero-actions {
-                justify-content: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/app.css">
 </head>
 <body>
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-    </button>
-
-    <!-- Navigation -->
-    <nav id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-logo">
-            <span>Godson Kurishinkal</span><span class="nav-badge">Senior Data Engineer</span>
-        </div>
-        <div class="nav-links">
-            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub Profile">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
+    <nav class="landing-nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#top" class="nav-brand">
+                <span class="nav-brand-mark">GK</span>
+                Godson Kurishinkal <span class="nav-brand-meta">· Data Engineer</span>
             </a>
-            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn Profile">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-            </a>
-            <a href="resume.html" target="_blank" rel="noopener noreferrer" class="nav-resume-btn" aria-label="View Resume">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Resume
-            </a>
+            <div class="nav-links">
+                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="resume.html" class="nav-cta" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                    Résumé
+                </a>
+            </div>
         </div>
     </nav>
-    
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <p class="eyebrow">SENIOR DATA ENGINEER · DUBAI</p>
-                <h1>Building <span class="gradient">Production Data</span> Platforms at Scale</h1>
-                <p class="hero-subtitle">6+ years architecting data lakehouses, ETL frameworks, and ML systems that power UAE retail supply chain decisions. 50+ pipelines. 95%+ reliability. 30,000+ SKUs.</p>
-                <div class="hero-cta">
-                    <a href="mailto:godson.kurishinkal@gmail.com?subject=Interested%20in%20working%20with%20you" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        Get in touch
-                    </a>
-                    <a href="resume.html" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                        </svg>
-                        View resume
-                    </a>
-                </div>
+
+    <header class="hero" id="top">
+        <div>
+            <p class="hero-eyebrow">Senior Data Engineer · Dubai</p>
+            <h1 class="hero-title">Data platforms that earn trust — and the decisions that follow.</h1>
+            <p class="hero-pitch">6+ years building medallion lakehouses, ETL frameworks, and ML systems for UAE retail supply chain. 50+ pipelines. 95%+ reliability. 30,000+ SKUs moving through code I own.</p>
+            <div class="hero-cta-row">
+                <a href="mailto:godson.kurishinkal@gmail.com?subject=Interested%20in%20working%20with%20you" class="btn btn-ink">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Get in touch
+                </a>
+                <a href="#projects" class="btn btn-ghost">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    See case studies
+                </a>
             </div>
-            <div class="hero-image">
-                <div class="profile-image-wrapper">
-                    <img src="assets/images/profile.png" alt="Godson Kurishinkal - Data Engineer" class="profile-image" loading="eager">
-                </div>
-            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="assets/images/profile.png" alt="Godson Kurishinkal Antony" class="hero-image" loading="eager">
         </div>
     </header>
-    
-    <!-- About Me Section -->
-    <section class="about-section animate-on-scroll" aria-labelledby="about-title">
-        <div class="about-container">
-            <div class="about-content">
-                <p class="section-eyebrow">WHO I AM</p>
-                <h2 class="section-title" id="about-title">Building Data Infrastructure That Matters</h2>
-                <div class="about-text">
-                    <p class="about-lead">I'm not just a data engineer—I'm the person teams call when they need data they can trust, delivered fast.</p>
-                    <p>With <strong>6+ years in UAE data &amp; analytics</strong>, I've built my career on turning messy data into reliable infrastructure. Currently <strong>Assistant Manager – MIS &amp; Analytics, DC Operations</strong> at <strong>Landmark Group</strong> in Dubai, I build pipelines that power warehouse and delivery operations—the data infrastructure behind analytical and business intelligence reports that drive real decisions.</p>
-                    <p>My work sits between raw chaos and actionable intelligence: <strong>30,000+ SKUs</strong> flowing through pipelines I designed, <strong>50+ ETL jobs</strong> that run while everyone sleeps, and a <strong>3-tier anomaly detection system</strong> that catches problems before they become crises.</p>
-                    <p>The thing I'm proudest of? Reducing data delivery from <strong>4 hours to 30 minutes</strong>. That's not a vanity metric—it's the difference between same-day decisions and playing catch-up.</p>
-                </div>
-                <div class="about-highlights">
-                    <div class="highlight-item">
-                        <span class="highlight-text"><strong>Landmark Group</strong><br>Dubai, UAE</span>
-                    </div>
-                    <div class="highlight-item">
-                        <span class="highlight-text"><strong>IIT Madras</strong><br>BS Data Science</span>
-                    </div>
-                    <div class="highlight-item">
-                        <span class="highlight-text"><strong>Next Goal</strong><br>Cloud Platform Engineering</span>
-                    </div>
-                </div>
+
+    <section class="section-wide reveal" aria-labelledby="about-title">
+        <p class="section-eyebrow">About</p>
+        <h2 class="section-title-lg" id="about-title">The person teams call when the data has to work.</h2>
+        <div class="about-grid">
+            <div class="about-prose">
+                <p class="lead">I build the infrastructure that turns messy sources into reliable, same-day decisions — and I sweat the details that keep it that way.</p>
+                <p>Currently <strong>Assistant Manager — MIS &amp; Analytics, DC Operations</strong> at <strong>Landmark Group</strong> in Dubai, designing the data pipelines that power warehouse and delivery operations across <strong>30,000+ SKUs</strong> and <strong>50+ ETL jobs</strong>.</p>
+                <p>Before that, six years across UAE retail and logistics — Al Behar and Danube Home — building dashboards, forecasts, and the plumbing underneath them. The thread throughout: make data that the business can act on today, not tomorrow.</p>
+                <p>The result I'm proudest of: collapsing data delivery from <strong>4 hours to 30 minutes</strong>. Not a vanity metric — the difference between same-day decisions and playing catch-up.</p>
             </div>
+            <aside class="about-side">
+                <div class="about-chip">
+                    <span class="about-chip-label">Currently at</span>
+                    <span class="about-chip-value">Landmark Group</span>
+                    <span class="about-chip-sub">Dubai · Dec 2024 – Present</span>
+                </div>
+                <div class="about-chip">
+                    <span class="about-chip-label">Studying</span>
+                    <span class="about-chip-value">BS Data Science · IIT Madras</span>
+                    <span class="about-chip-sub">Foundation Level · ongoing</span>
+                </div>
+                <div class="about-chip">
+                    <span class="about-chip-label">Next</span>
+                    <span class="about-chip-value">Cloud data platforms</span>
+                    <span class="about-chip-sub">Fabric · Databricks · dbt (2026)</span>
+                </div>
+            </aside>
         </div>
     </section>
-    
-    <!-- Impact Stories Section -->
-    <section class="impact-section animate-on-scroll" aria-labelledby="impact-title">
-        <div class="section-header">
-            <p class="section-eyebrow">REAL IMPACT</p>
-            <h2 class="section-title" id="impact-title">Before & After Transformations</h2>
-            <p class="section-subtitle">Numbers that moved the needle for supply chain operations</p>
-        </div>
+
+    <section class="section-wide reveal" aria-labelledby="impact-title">
+        <p class="section-eyebrow">Real impact</p>
+        <h2 class="section-title-lg" id="impact-title">Before / after, in numbers.</h2>
+        <p class="section-sub">What the system looked like before I arrived, and what it looks like now.</p>
         <div class="impact-grid">
-            <div class="impact-card">
-                <div class="impact-header">
-                    <h3 class="impact-title">Data Delivery Speed</h3>
-                </div>
-                <div class="impact-comparison">
-                    <div class="impact-before">
-                        <span class="impact-label">Before</span>
-                        <span class="impact-value-old">4 Hours</span>
-                        <span class="impact-desc">Manual extraction & Excel processing</span>
+            <div class="impact">
+                <span class="impact-label-row">Data delivery speed</span>
+                <h3 class="impact-title">From morning grind to same-day reporting</h3>
+                <div class="impact-compare">
+                    <div class="impact-old">
+                        <span class="impact-old-val">4 hours</span>
+                        <span class="impact-sub">Manual extracts + Excel</span>
                     </div>
-                    <div class="impact-arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </div>
-                    <div class="impact-after">
-                        <span class="impact-label">After</span>
-                        <span class="impact-value-new">30 Min</span>
-                        <span class="impact-desc">Automated pipelines with Polars</span>
+                    <span class="impact-arrow">→</span>
+                    <div class="impact-new">
+                        <span class="impact-new-val">30 min</span>
+                        <span class="impact-sub">Polars + partitioned Parquet</span>
                     </div>
                 </div>
                 <div class="impact-result">
-                    <span class="impact-metric">87%</span>
-                    <span class="impact-metric-label">Faster Delivery</span>
+                    <span class="impact-result-val">−87%</span>
+                    <span class="impact-result-label">ETL window</span>
                 </div>
             </div>
-            
-            <div class="impact-card">
-                <div class="impact-header">
-                    <h3 class="impact-title">Data Freshness</h3>
-                </div>
-                <div class="impact-comparison">
-                    <div class="impact-before">
-                        <span class="impact-label">Before</span>
-                        <span class="impact-value-old">48 Hours</span>
-                        <span class="impact-desc">Next-day reporting only</span>
+            <div class="impact">
+                <span class="impact-label-row">Data freshness</span>
+                <h3 class="impact-title">Overnight lag → same-day decisions</h3>
+                <div class="impact-compare">
+                    <div class="impact-old">
+                        <span class="impact-old-val">48 hrs</span>
+                        <span class="impact-sub">Next-day reporting</span>
                     </div>
-                    <div class="impact-arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </div>
-                    <div class="impact-after">
-                        <span class="impact-label">After</span>
-                        <span class="impact-value-new">2-4 Hrs</span>
-                        <span class="impact-desc">Same-day operational decisions</span>
+                    <span class="impact-arrow">→</span>
+                    <div class="impact-new">
+                        <span class="impact-new-val">2–4 hrs</span>
+                        <span class="impact-sub">Incremental loads</span>
                     </div>
                 </div>
                 <div class="impact-result">
-                    <span class="impact-metric">90%</span>
-                    <span class="impact-metric-label">Fresher Data</span>
+                    <span class="impact-result-val">+90%</span>
+                    <span class="impact-result-label">Freshness</span>
                 </div>
             </div>
-            
-            <div class="impact-card">
-                <div class="impact-header">
-                    <h3 class="impact-title">Data Quality Incidents</h3>
-                </div>
-                <div class="impact-comparison">
-                    <div class="impact-before">
-                        <span class="impact-label">Before</span>
-                        <span class="impact-value-old">Weekly</span>
-                        <span class="impact-desc">Reactive firefighting mode</span>
+            <div class="impact">
+                <span class="impact-label-row">Quality incidents</span>
+                <h3 class="impact-title">Firefights → proactive detection</h3>
+                <div class="impact-compare">
+                    <div class="impact-old">
+                        <span class="impact-old-val">Weekly</span>
+                        <span class="impact-sub">Reactive debugging</span>
                     </div>
-                    <div class="impact-arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </div>
-                    <div class="impact-after">
-                        <span class="impact-label">After</span>
-                        <span class="impact-value-new">Monthly</span>
-                        <span class="impact-desc">Proactive anomaly detection</span>
+                    <span class="impact-arrow">→</span>
+                    <div class="impact-new">
+                        <span class="impact-new-val">Monthly</span>
+                        <span class="impact-sub">3-tier validation</span>
                     </div>
                 </div>
                 <div class="impact-result">
-                    <span class="impact-metric">500+</span>
-                    <span class="impact-metric-label">Anomalies Caught</span>
+                    <span class="impact-result-val">500+</span>
+                    <span class="impact-result-label">Caught at gate</span>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Stats Section -->
-    <section class="stats" aria-label="Key Statistics">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                </div>
+
+    <section class="section-wide" aria-label="Key numbers">
+        <div class="stats-row">
+            <div class="stat">
                 <div class="stat-value">6+</div>
-                <div class="stat-label">Years Experience</div>
+                <div class="stat-label">Years · UAE data</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg>
-                </div>
+            <div class="stat">
                 <div class="stat-value">50+</div>
-                <div class="stat-label">ETL Pipelines</div>
+                <div class="stat-label">ETL pipelines</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                </div>
+            <div class="stat">
                 <div class="stat-value">95%+</div>
                 <div class="stat-label">Reliability</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="3" width="7" height="7"></rect>
-                        <rect x="14" y="14" width="7" height="7"></rect>
-                        <rect x="3" y="14" width="7" height="7"></rect>
-                    </svg>
-                </div>
+            <div class="stat">
                 <div class="stat-value">10+</div>
-                <div class="stat-label">Fact Tables</div>
+                <div class="stat-label">Fact tables</div>
             </div>
         </div>
     </section>
-    
-    <!-- Expertise Section -->
-    <section class="expertise animate-on-scroll" aria-labelledby="expertise-title">
-        <div class="section-header">
-            <p class="section-eyebrow">WHAT I DO</p>
-            <h2 class="section-title" id="expertise-title">Core Specializations</h2>
-            <p class="section-subtitle">End-to-end data engineering for enterprise supply chain operations</p>
-        </div>
+
+    <section class="section-wide reveal" aria-labelledby="expertise-title">
+        <p class="section-eyebrow">What I do</p>
+        <h2 class="section-title-lg" id="expertise-title">Core specialisations.</h2>
+        <p class="section-sub">End-to-end data engineering for enterprise supply chain operations.</p>
         <div class="expertise-grid">
-            <div class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                        <path d="M2 17l10 5 10-5"></path>
-                        <path d="M2 12l10 5 10-5"></path>
-                    </svg>
-                </div>
-                <h3 class="expertise-title">Medallion Data Lakehouse</h3>
-                <p class="expertise-text">Bronze → Silver → Gold architecture with Hive-partitioned Parquet files. Designed for scalability, data lineage tracking, and incremental processing patterns that handle 30,000+ SKUs daily.</p>
+            <div class="expertise">
+                <div class="expertise-num">01</div>
+                <h3 class="expertise-title">Medallion lakehouse</h3>
+                <p class="expertise-text">Bronze → Silver → Gold on Hive-partitioned Parquet. Designed for lineage, incremental loads, and 30,000+ SKUs flowing daily.</p>
             </div>
-            <div class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg>
-                </div>
-                <h3 class="expertise-title">ETL Pipeline Architecture</h3>
-                <p class="expertise-text">Configuration-driven pipelines with Abstract Base Classes for extractors, transformers, and loaders. 50+ production pipelines with 95%+ reliability, supporting FULL and INCREMENTAL load patterns.</p>
+            <div class="expertise">
+                <div class="expertise-num">02</div>
+                <h3 class="expertise-title">ETL frameworks</h3>
+                <p class="expertise-text">Configuration-driven pipelines built on Abstract Base Classes. 50+ production pipelines, 95%+ reliability, FULL / INCREMENTAL modes.</p>
             </div>
-            <div class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="3" y1="9" x2="21" y2="9"></line>
-                        <line x1="9" y1="21" x2="9" y2="9"></line>
-                    </svg>
-                </div>
-                <h3 class="expertise-title">Dimensional Modeling</h3>
-                <p class="expertise-text">Star schema design with 10+ fact tables and 6+ dimension tables. Slowly Changing Dimensions (SCD Type 2), conformed dimensions, and optimized for both analytical queries and reporting.</p>
+            <div class="expertise">
+                <div class="expertise-num">03</div>
+                <h3 class="expertise-title">Dimensional modelling</h3>
+                <p class="expertise-text">Kimball star schema with 10+ fact tables, 6+ conformed dimensions, SCD Type 2. Optimised for analytical queries and semantic layers.</p>
             </div>
-            <div class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                </div>
-                <h3 class="expertise-title">Data Quality Engineering</h3>
-                <p class="expertise-text">3-tier validation framework: schema validation → business rule checks → statistical anomaly detection. Z-score and IQR-based outlier detection that's caught 500+ issues before they reached stakeholders.</p>
+            <div class="expertise">
+                <div class="expertise-num">04</div>
+                <h3 class="expertise-title">Data quality</h3>
+                <p class="expertise-text">3-tier validation: schema → business rules → statistical outliers. 500+ issues caught before reaching Gold; incidents down 70%.</p>
             </div>
-            <div class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                </div>
-                <h3 class="expertise-title">ML-Powered Forecasting</h3>
-                <p class="expertise-text">7+ algorithm ensemble using ADI/CV² demand pattern classification. Prophet, XGBoost, and statistical methods automatically selected based on demand characteristics for optimal accuracy.</p>
+            <div class="expertise">
+                <div class="expertise-num">05</div>
+                <h3 class="expertise-title">ML forecasting</h3>
+                <p class="expertise-text">7+ algorithm ensemble with ADI/CV² pattern classification. Prophet, XGBoost, Croston — chosen per SKU, not per portfolio.</p>
             </div>
-            <div class="expertise-card">
-                <div class="expertise-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                    </svg>
-                </div>
-                <h3 class="expertise-title">RPA & Legacy Integration</h3>
-                <p class="expertise-text">4 Selenium/PyAutoGUI bots that extract data from systems without APIs (WMS, OBI, ERP, Sales Aggregator). When there's no clean way in, I build one—automating what others think can't be automated.</p>
+            <div class="expertise">
+                <div class="expertise-num">06</div>
+                <h3 class="expertise-title">RPA &amp; legacy integration</h3>
+                <p class="expertise-text">Selenium + PyAutoGUI bots for systems with no APIs (WMS, OBI, ERP, POS). When there's no way in, I build one.</p>
             </div>
         </div>
     </section>
-    
-    <!-- Featured Projects Section -->
-    <section class="featured-projects animate-on-scroll" aria-labelledby="projects-title">
-        <div class="section-header">
-            <p class="section-eyebrow">WHAT I'VE BUILT</p>
-            <h2 class="section-title" id="projects-title">Featured Projects</h2>
-            <p class="section-subtitle">Real production systems powering supply chain operations</p>
-        </div>
+
+    <section class="section-wide reveal" id="projects" aria-labelledby="projects-title">
+        <p class="section-eyebrow">Case studies</p>
+        <h2 class="section-title-lg" id="projects-title">Projects in production.</h2>
+        <p class="section-sub">Real systems powering supply chain decisions — not a demo folder.</p>
         <div class="projects-grid">
             <a href="projects/medallion-lakehouse.html" class="project-card">
-                <div class="project-card-header">
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                <div class="project-card-head">
+                    <span class="project-card-tag">Data Platform</span>
+                    <span class="project-card-arrow">→</span>
                 </div>
-                <h3 class="project-card-title">Medallion Data Lakehouse</h3>
-                <p class="project-card-desc">Bronze/Silver/Gold architecture processing 30,000+ SKUs with 95%+ pipeline reliability.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">Polars</span>
-                    <span class="project-tag">Parquet</span>
-                    <span class="project-tag">Star Schema</span>
-                </div>
-                <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">87%</div>
-                        <div class="project-metric-label">Faster</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">90%</div>
-                        <div class="project-metric-label">Fresher Data</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">50+</div>
-                        <div class="project-metric-label">Pipelines</div>
-                    </div>
-                </div>
-            </a>
-            <a href="enterprise-data-platform/" class="project-card">
-                <div class="project-card-header">
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-                <h3 class="project-card-title">Enterprise Data Platform</h3>
-                <p class="project-card-desc">Production-grade ETL framework with Abstract Base Classes, data quality validation, and 3-tier anomaly detection.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">Python</span>
-                    <span class="project-tag">DuckDB</span>
-                    <span class="project-tag">ETL Framework</span>
+                <h3 class="project-card-title">Medallion data lakehouse</h3>
+                <p class="project-card-desc">Bronze / Silver / Gold architecture for UAE retail supply chain. 30,000+ SKUs, 50+ pipelines, same-day reporting.</p>
+                <div class="project-card-pills">
+                    <span class="project-card-pill">Polars</span>
+                    <span class="project-card-pill">DuckDB</span>
+                    <span class="project-card-pill">Parquet</span>
+                    <span class="project-card-pill">Star schema</span>
                 </div>
                 <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">98%</div>
-                        <div class="project-metric-label">Reliability</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">3-Tier</div>
-                        <div class="project-metric-label">Quality</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">7K+</div>
-                        <div class="project-metric-label">Lines</div>
-                    </div>
-                </div>
-            </a>
-            <a href="projects/demand-forecasting.html" class="project-card">
-                <div class="project-card-header">
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
-                <h3 class="project-card-title">Demand Forecasting System</h3>
-                <p class="project-card-desc">Intelligent forecasting engine with 7+ ensemble algorithms and ADI/CV² pattern classification.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">ML Ensemble</span>
-                    <span class="project-tag">Time Series</span>
-                    <span class="project-tag">Scikit-learn</span>
-                </div>
-                <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">7+</div>
-                        <div class="project-metric-label">Algorithms</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">85%</div>
-                        <div class="project-metric-label">Accuracy</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">30%</div>
-                        <div class="project-metric-label">Less Stockouts</div>
-                    </div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">87%</span><span class="project-card-metric-label">Faster</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">90%</span><span class="project-card-metric-label">Fresher</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">50+</span><span class="project-card-metric-label">Pipelines</span></div>
                 </div>
             </a>
             <a href="projects/anomaly-detection.html" class="project-card">
-                <div class="project-card-header">
-                    <svg class="project-card-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                <div class="project-card-head">
+                    <span class="project-card-tag">Data Quality</span>
+                    <span class="project-card-arrow">→</span>
                 </div>
-                <h3 class="project-card-title">Anomaly Detection System</h3>
-                <p class="project-card-desc">3-tier statistical system for data quality monitoring: validation → outlier → volatility.</p>
-                <div class="project-card-tags">
-                    <span class="project-tag">Z-Score</span>
-                    <span class="project-tag">IQR</span>
-                    <span class="project-tag">Data Quality</span>
+                <h3 class="project-card-title">3-Tier anomaly detection</h3>
+                <p class="project-card-desc">Schema → business rules → statistical outliers between Bronze and Gold. 500+ issues caught at the gate.</p>
+                <div class="project-card-pills">
+                    <span class="project-card-pill">Z-Score</span>
+                    <span class="project-card-pill">Modified Z</span>
+                    <span class="project-card-pill">IQR</span>
+                    <span class="project-card-pill">DBSCAN</span>
                 </div>
                 <div class="project-card-metrics">
-                    <div class="project-metric">
-                        <div class="project-metric-value">500+</div>
-                        <div class="project-metric-label">Anomalies</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">70%</div>
-                        <div class="project-metric-label">Less Incidents</div>
-                    </div>
-                    <div class="project-metric">
-                        <div class="project-metric-value">3-Tier</div>
-                        <div class="project-metric-label">Detection</div>
-                    </div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">500+</span><span class="project-card-metric-label">Caught</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">−70%</span><span class="project-card-metric-label">Incidents</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">3</span><span class="project-card-metric-label">Tiers</span></div>
+                </div>
+            </a>
+            <a href="projects/demand-forecasting.html" class="project-card">
+                <div class="project-card-head">
+                    <span class="project-card-tag">Machine Learning</span>
+                    <span class="project-card-arrow">→</span>
+                </div>
+                <h3 class="project-card-title">Demand forecasting ensemble</h3>
+                <p class="project-card-desc">ADI/CV² pattern classification picks the right algorithm per SKU across 30,000+ items — smooth, erratic, intermittent, lumpy.</p>
+                <div class="project-card-pills">
+                    <span class="project-card-pill">Prophet</span>
+                    <span class="project-card-pill">XGBoost</span>
+                    <span class="project-card-pill">Croston</span>
+                    <span class="project-card-pill">Scikit-learn</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-card-metric"><span class="project-card-metric-val">7+</span><span class="project-card-metric-label">Algorithms</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">+25%</span><span class="project-card-metric-label">Accuracy</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">−30%</span><span class="project-card-metric-label">Stockouts</span></div>
+                </div>
+            </a>
+            <a href="projects/rpa-bot-framework.html" class="project-card">
+                <div class="project-card-head">
+                    <span class="project-card-tag">Automation</span>
+                    <span class="project-card-arrow">→</span>
+                </div>
+                <h3 class="project-card-title">RPA bot framework</h3>
+                <p class="project-card-desc">Shared ABC framework for 4 production bots extracting from WMS, OBI, ERP, and POS portals — legacy systems without APIs.</p>
+                <div class="project-card-pills">
+                    <span class="project-card-pill">Selenium</span>
+                    <span class="project-card-pill">PyAutoGUI</span>
+                    <span class="project-card-pill">ABC pattern</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-card-metric"><span class="project-card-metric-val">4</span><span class="project-card-metric-label">Bots</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">−87%</span><span class="project-card-metric-label">Manual</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">95%+</span><span class="project-card-metric-label">Reliable</span></div>
+                </div>
+            </a>
+            <a href="enterprise-data-platform/" class="project-card">
+                <div class="project-card-head">
+                    <span class="project-card-tag">Open source</span>
+                    <span class="project-card-arrow">→</span>
+                </div>
+                <h3 class="project-card-title">Enterprise data platform</h3>
+                <p class="project-card-desc">Production-grade ETL framework with Abstract Base Classes, configuration-driven behaviour, schema validation, and 3-tier quality checks.</p>
+                <div class="project-card-pills">
+                    <span class="project-card-pill">Python</span>
+                    <span class="project-card-pill">DuckDB</span>
+                    <span class="project-card-pill">YAML</span>
+                </div>
+                <div class="project-card-metrics">
+                    <div class="project-card-metric"><span class="project-card-metric-val">7k+</span><span class="project-card-metric-label">Lines</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">3-Tier</span><span class="project-card-metric-label">Quality</span></div>
+                    <div class="project-card-metric"><span class="project-card-metric-val">GitHub</span><span class="project-card-metric-label">Repo</span></div>
                 </div>
             </a>
         </div>
     </section>
-    
-    <!-- Code Showcase Section -->
-    <section class="code-showcase animate-on-scroll" aria-labelledby="code-title">
-        <div class="section-header">
-            <p class="section-eyebrow">HOW I BUILD</p>
-            <h2 class="section-title" id="code-title">Configuration-Driven Pipelines</h2>
-            <p class="section-subtitle">Real code from production systems—declarative configs that enable schema validation, quality checks, and flexible load modes</p>
-        </div>
-        <div class="code-showcase-grid">
-            <!-- Config File -->
-            <div class="code-container">
-                <div class="code-header">
-                    <div class="code-header-dots">
-                        <span class="code-header-dot red"></span>
-                        <span class="code-header-dot yellow"></span>
-                        <span class="code-header-dot green"></span>
-                    </div>
-                    <span class="code-header-title">config.py</span>
-                    <span class="code-header-lang">Python</span>
-                </div>
-                <div class="code-body">
-                    <pre><span class="class">PIPELINE</span> = {
-    <span class="string">"load"</span>: {<span class="string">"mode"</span>: <span class="string">"FULL"</span>},
-    <span class="string">"paths"</span>: {<span class="string">"output"</span>: <span class="string">"data/landing/orders"</span>},
-    
-    <span class="string">"schema"</span>: {
-        <span class="string">"order_id"</span>: <span class="string">"string"</span>,
-        <span class="string">"amount"</span>: <span class="string">"decimal(10,2)"</span>,
-        <span class="string">"country"</span>: <span class="string">"string"</span>,
-        <span class="string">"created_at"</span>: <span class="string">"timestamp"</span>
-    },
-    
-    <span class="string">"quality"</span>: {
-        <span class="string">"required_columns"</span>: [<span class="string">"order_id"</span>, <span class="string">"amount"</span>],
-        <span class="string">"not_null"</span>: [<span class="string">"order_id"</span>]
-    }
-}</pre>
-                </div>
-                <div class="code-footer">
-                    <span>📋 Schema + Quality Rules</span>
-                </div>
-            </div>
-            
-            <!-- Pipeline File -->
-            <div class="code-container">
-                <div class="code-header">
-                    <div class="code-header-dots">
-                        <span class="code-header-dot red"></span>
-                        <span class="code-header-dot yellow"></span>
-                        <span class="code-header-dot green"></span>
-                    </div>
-                    <span class="code-header-title">ingestion.py</span>
-                    <span class="code-header-lang">Python</span>
-                </div>
-                <div class="code-body">
-                    <pre><span class="keyword">from</span> config <span class="keyword">import</span> <span class="class">PIPELINE</span>, <span class="class">DB_CONFIG</span>
 
-<span class="comment"># Database tables ingestion</span>
-<span class="keyword">for</span> table <span class="keyword">in</span> <span class="class">DB_CONFIG</span>[<span class="string">"tables"</span>]:
-    df = (
-        db.read
-        .format(<span class="string">"jdbc"</span>)
-        .option(<span class="string">"url"</span>, <span class="class">DB_CONFIG</span>[<span class="string">"url"</span>])
-        .option(<span class="string">"dbtable"</span>, table)
-        .load()
-    )
-    
-    <span class="comment"># Validate against config schema</span>
-    <span class="function">validate_schema</span>(df, <span class="class">PIPELINE</span>[<span class="string">"schema"</span>])
-    <span class="function">check_quality</span>(df, <span class="class">PIPELINE</span>[<span class="string">"quality"</span>])
-    
-    df.write.parquet(<span class="class">PIPELINE</span>[<span class="string">"paths"</span>][<span class="string">"output"</span>])</pre>
-                </div>
-                <div class="code-footer">
-                    <span>Config-Driven Validation</span>
-                </div>
-            </div>
+    <section class="section-wide reveal" aria-labelledby="tech-title">
+        <p class="section-eyebrow">Tools I use</p>
+        <h2 class="section-title-lg" id="tech-title">Tech stack.</h2>
+        <p class="section-sub">Production-tested technologies for building reliable data systems.</p>
+        <div class="tech-grid">
+            <span class="tech"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.83l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.23l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05L0 11.97l.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.24l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05 1.07.13zM7.95 2.16l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09-.33.22zM21.1 6.11l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01.21.03zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08-.33.23z"/></svg>Python</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>SQL · T-SQL · PL/SQL</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>Polars</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>DuckDB</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 15V9M12 15V9M17 15V9"/></svg>Power BI + DAX</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Parquet · Hive</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>SQL Server · Oracle</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Streamlit</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Selenium · PyAutoGUI</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Scikit-learn · Prophet</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.546 10.93L13.067.452a1.55 1.55 0 00-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 012.327 2.341l2.658 2.66a1.838 1.838 0 011.9 3.039 1.837 1.837 0 01-2.6 0 1.846 1.846 0 01-.404-1.996L12.86 8.955v6.525a1.844 1.844 0 01.5.343 1.838 1.838 0 010 2.598 1.838 1.838 0 01-2.598 0 1.838 1.838 0 010-2.598c.196-.196.433-.343.687-.432V8.825a1.838 1.838 0 01-.687-.432 1.846 1.846 0 01-.404-1.996L7.636 3.665.452 10.849a1.55 1.55 0 000 2.188l10.48 10.477a1.55 1.55 0 002.186 0l10.428-10.428a1.55 1.55 0 000-2.156z"/></svg>Git</span>
+            <span class="tech"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>GitHub</span>
         </div>
-        
-        <!-- Validation Flow Animation -->
-        <div class="validation-flow">
-            <div class="validation-step active" data-step="1">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
-                Read Config
-            </div>
-            <span class="validation-arrow">→</span>
-            <div class="validation-step" data-step="2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                Validate Schema
-            </div>
-            <span class="validation-arrow">→</span>
-            <div class="validation-step" data-step="3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                Quality Check
-            </div>
-            <span class="validation-arrow">→</span>
-            <div class="validation-step" data-step="4">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
-                Load Data
-            </div>
-        </div>
-        
-        <p style="text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 1.5rem; font-family: var(--font-mono);">
-            ✓ Schema validation &nbsp;•&nbsp; ✓ Quality checks &nbsp;•&nbsp; ✓ FULL/INCREMENTAL modes
-        </p>
-    </section>
-    
-    <!-- Tech Stack Section -->
-    <section class="animate-on-scroll" aria-labelledby="tech-title">
-        <div class="section-header">
-            <p class="section-eyebrow">TOOLS I USE</p>
-            <h2 class="section-title" id="tech-title">Tech Stack</h2>
-            <p class="section-subtitle">Production-tested technologies for building reliable data systems</p>
-        </div>
-        <div class="tech-stack">
-            <div class="tech-grid">
-                <!-- Core: Production-tested -->
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.83l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.23l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05L0 11.97l.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.24l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05 1.07.13zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09-.33.22zM21.1 6.11l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01.21.03zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08-.33.23z"/>
-                    </svg>
-                    Python
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                    </svg>
-                    SQL
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="4 17 10 11 4 5"></polyline>
-                        <line x1="12" y1="19" x2="20" y2="19"></line>
-                    </svg>
-                    Polars
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                    </svg>
-                    DuckDB
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                        <path d="M7 15V9M12 15V9M17 15V9"></path>
-                    </svg>
-                    Power BI + DAX
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                        <path d="M2 17l10 5 10-5"></path>
-                        <path d="M2 12l10 5 10-5"></path>
-                    </svg>
-                    Parquet
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                        <path d="M2 17l10 5 10-5"></path>
-                        <path d="M2 12l10 5 10-5"></path>
-                    </svg>
-                    SQL Server
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M12 6v6l4 2"></path>
-                    </svg>
-                    Streamlit
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                    </svg>
-                    Selenium
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                    Scikit-learn
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23.546 10.93L13.067.452a1.55 1.55 0 00-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 012.327 2.341l2.658 2.66a1.838 1.838 0 011.9 3.039 1.837 1.837 0 01-2.6 0 1.846 1.846 0 01-.404-1.996L12.86 8.955v6.525a1.844 1.844 0 01.5.343 1.838 1.838 0 010 2.598 1.838 1.838 0 01-2.598 0 1.838 1.838 0 010-2.598c.196-.196.433-.343.687-.432V8.825a1.838 1.838 0 01-.687-.432 1.846 1.846 0 01-.404-1.996L7.636 3.665.452 10.849a1.55 1.55 0 000 2.188l10.48 10.477a1.55 1.55 0 002.186 0l10.428-10.428a1.55 1.55 0 000-2.156z"/>
-                    </svg>
-                    Git
-                </span>
-                <span class="tech-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                </span>
-            </div>
-            <p class="section-subtitle" style="margin-top: 2rem; font-size: 0.875rem; opacity: 0.75;">
-                <strong>2026 Roadmap:</strong> Microsoft Fabric (DP-700), Databricks, Apache Spark, dbt
-            </p>
+        <div class="tech-note">
+            <strong>2026 Roadmap</strong>
+            Microsoft Fabric (DP-700), Databricks, Apache Spark, dbt — certifications in progress alongside cloud-native portfolio projects.
         </div>
     </section>
-    
-    <!-- Goals Section -->
-    <section class="focus-2026 animate-on-scroll" aria-labelledby="focus-title">
-        <div class="section-header">
-            <p class="section-eyebrow">WHERE I'M HEADING</p>
-            <h2 class="section-title" id="focus-title">2026 Roadmap</h2>
-            <p class="section-subtitle">Cloud certifications, leadership growth, and enterprise-scale platforms</p>
-        </div>
+
+    <section class="section-wide reveal" aria-labelledby="focus-title">
+        <p class="section-eyebrow">Where I'm heading</p>
+        <h2 class="section-title-lg" id="focus-title">2026 roadmap.</h2>
+        <p class="section-sub">Cloud certifications, portfolio depth, and technical leadership.</p>
         <div class="focus-grid">
-            <div class="focus-card">
-                <div class="focus-card-header">
-                    <h3 class="focus-card-title">Certifications</h3>
-                </div>
-                <ul class="focus-card-items">
-                    <li>Fabric Data Engineer (DP-700) <span class="target">Q1</span></li>
-                    <li>Databricks DE Associate <span class="target">Q2</span></li>
-                    <li>Databricks DE Professional <span class="target">Q3</span></li>
+            <div class="focus">
+                <div class="focus-title">Certifications</div>
+                <ul class="focus-list">
+                    <li class="focus-item"><span class="focus-item-name">Fabric Data Engineer (DP-700)</span><span class="focus-item-target">Q1</span></li>
+                    <li class="focus-item"><span class="focus-item-name">Databricks DE Associate</span><span class="focus-item-target">Q2</span></li>
+                    <li class="focus-item"><span class="focus-item-name">Databricks DE Professional</span><span class="focus-item-target">Q3</span></li>
                 </ul>
             </div>
-            <div class="focus-card">
-                <div class="focus-card-header">
-                    <h3 class="focus-card-title">Portfolio</h3>
-                </div>
-                <ul class="focus-card-items">
-                    <li>5+ detailed case studies <span class="target">Ongoing</span></li>
-                    <li>Architecture diagrams <span class="target">Q1</span></li>
-                    <li>Open-source ETL toolkit <span class="target">Q2</span></li>
+            <div class="focus">
+                <div class="focus-title">Portfolio</div>
+                <ul class="focus-list">
+                    <li class="focus-item"><span class="focus-item-name">5+ detailed case studies</span><span class="focus-item-target">Ongoing</span></li>
+                    <li class="focus-item"><span class="focus-item-name">Architecture diagrams</span><span class="focus-item-target">Q1</span></li>
+                    <li class="focus-item"><span class="focus-item-name">Open-source ETL toolkit</span><span class="focus-item-target">Q2</span></li>
                 </ul>
             </div>
-            <div class="focus-card">
-                <div class="focus-card-header">
-                    <h3 class="focus-card-title">Career</h3>
-                </div>
-                <ul class="focus-card-items">
-                    <li>Senior/Staff Data Engineer <span class="target">Q1-Q2</span></li>
-                    <li>Cloud-native data platforms <span class="target">Ongoing</span></li>
-                    <li>Technical leadership & mentoring <span class="target">Ongoing</span></li>
+            <div class="focus">
+                <div class="focus-title">Career</div>
+                <ul class="focus-list">
+                    <li class="focus-item"><span class="focus-item-name">Senior / Staff Data Engineer</span><span class="focus-item-target">Q1–Q2</span></li>
+                    <li class="focus-item"><span class="focus-item-name">Cloud-native platforms</span><span class="focus-item-target">Ongoing</span></li>
+                    <li class="focus-item"><span class="focus-item-name">Technical leadership &amp; mentoring</span><span class="focus-item-target">Ongoing</span></li>
                 </ul>
             </div>
         </div>
     </section>
-    
-    <!-- Coming Soon Section -->
-    <section class="coming-soon animate-on-scroll" aria-labelledby="coming-soon-title">
-        <div class="coming-soon-content">
-            <h2 id="coming-soon-title">Let's Connect</h2>
-            <p>Follow along as I build in public. New case studies, learnings, and projects coming regularly.</p>
-            <div class="social-links">
-                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    Follow on GitHub
-                </a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                    Connect on LinkedIn
-                </a>
-            </div>
+
+    <section class="contact-strip reveal" aria-labelledby="contact-title">
+        <h2 id="contact-title">Let's talk data.</h2>
+        <p>Hiring, collaborating, comparing notes on medallion lakehouses or lumpy-demand forecasts — I'm happy to hear from you.</p>
+        <div class="contact-row">
+            <a href="mailto:godson.kurishinkal@gmail.com?subject=Hello%20Godson" class="btn btn-ink">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email
+            </a>
+            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+            </a>
+            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
         </div>
     </section>
-    
-    <!-- Footer -->
+
     <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <span>Dubai, UAE</span>
-                <a href="mailto:godson.kurishinkal@gmail.com">godson.kurishinkal@gmail.com</a>
+        <div class="footer-inner">
+            <div>© 2026 Godson Kurishinkal Antony · Dubai</div>
+            <div class="footer-links">
+                <a href="#top">Home</a>
+                <a href="resume.html">Résumé</a>
+                <a href="mailto:godson.kurishinkal@gmail.com">Email</a>
                 <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
-            <div class="footer-bottom">
-                <p class="footer-copyright">© 2026 Godson Kurishinkal. All rights reserved.</p>
-                <p class="footer-tagline">Senior Data Engineer · Building production data platforms that power decisions.</p>
-                <div class="footer-status">
-                    <span class="footer-status-dot"></span>
-                    <span class="footer-status-text">All pipelines operational</span>
-                </div>
-            </div>
+            <div class="footer-status">All pipelines operational</div>
         </div>
     </footer>
-    
+
     <script>
-        // Navigation scroll effect
+        // Nav scroll background
         const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-            
-            lastScroll = currentScroll;
-        });
-        
-        // Intersection Observer — subtle scroll reveal only
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        const onScroll = () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-        // Back-to-top button visibility + action
-        document.addEventListener('DOMContentLoaded', () => {
-            const backToTopBtn = document.getElementById('backToTop');
-            if (!backToTopBtn) return;
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 600) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            }, { passive: true });
-
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
+        // Scroll reveal
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
 </body>
 </html>
