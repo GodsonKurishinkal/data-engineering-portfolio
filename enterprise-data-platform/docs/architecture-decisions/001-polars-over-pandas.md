@@ -5,7 +5,7 @@
 
 ## Context
 
-Our ETL pipelines process 30,000+ SKUs daily across multiple source systems (ERP, CRM, WMS, OBI). The existing Pandas-based pipelines had several issues:
+Our ETL pipelines process 30,000+ SKUs daily across multiple source systems (ERP, WMS, OBI, POS). The existing Pandas-based pipelines had several issues:
 
 1. **Memory pressure**: DataFrames exceeding 500MB caused OOM errors on 16GB workstations
 2. **Single-threaded bottleneck**: GIL prevented parallel processing within transformations
@@ -121,7 +121,7 @@ result = (
 
 - [Polars Documentation](https://pola.rs/)
 - [Polars vs Pandas Benchmark (H2O)](https://h2oai.github.io/db-benchmark/)
-- [Internal benchmark notebook](/notebooks/polars-pandas-benchmark.ipynb)
+- [Measured Polars vs Pandas comparison](../performance-benchmarks.md#polars-vs-pandas-comparison)
 
 ## Revision History
 

@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#fafafa">
 
     <title>Demand Forecasting Ensemble — Godson Kurishinkal Antony</title>
     <meta name="description" content="Case study: a pattern-aware forecasting engine. 7+ algorithms, ADI/CV² classification, one auto-selected model per SKU across 30,000+ items.">
     <meta name="author" content="Godson Kurishinkal Antony">
+    <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/demand-forecasting.html">
 
     <meta property="og:title" content="Demand Forecasting Ensemble — Case Study">
     <meta property="og:description" content="Pattern classification + 7+ algorithm ensemble for 30,000+ SKUs. One model per SKU, picked by ADI/CV² signature.">
@@ -21,14 +22,17 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
+    <link rel="stylesheet" href="../assets/css/tokens.css">
     <link rel="stylesheet" href="../assets/css/app.css">
+    <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="../index.html" class="nav-brand">
                 <span class="nav-brand-mark">GK</span>
-                Godson Kurishinkal <span class="nav-brand-meta">· Data Engineer</span>
+                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span> <span class="nav-brand-meta">· Data Engineer</span>
             </a>
             <div class="nav-links">
                 <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
@@ -45,14 +49,14 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main">
         <a href="../index.html#projects" class="back-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
             All case studies
         </a>
 
         <header>
-            <span class="case-category">Machine Learning · 2024 – 2025</span>
+            <span class="case-category">Machine Learning · 2025 – 2026</span>
             <h1 class="case-title">One model per SKU, chosen by its demand signature.</h1>
             <p class="case-pitch">Pattern-aware forecasting for 30,000+ SKUs. ADI/CV² classifies each item as smooth, erratic, intermittent, or lumpy — and an ensemble of 7+ algorithms picks the right tool for each shape.</p>
 
@@ -154,25 +158,25 @@
             </div>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-title">Smooth</div>
+                    <h3 class="card-title">Smooth</h3>
                     <div class="card-sub">ADI &lt; 1.32 · CV² &lt; 0.49</div>
                     <div class="card-desc">Regular, predictable demand. Classic time-series territory.</div>
                     <span class="card-tag">ARIMA · Prophet · Holt-Winters</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Erratic</div>
+                    <h3 class="card-title">Erratic</h3>
                     <div class="card-sub">ADI &lt; 1.32 · CV² ≥ 0.49</div>
                     <div class="card-desc">Frequent but highly variable. Needs robust, non-parametric methods.</div>
                     <span class="card-tag">Random Forest · XGBoost</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Intermittent</div>
+                    <h3 class="card-title">Intermittent</h3>
                     <div class="card-sub">ADI ≥ 1.32 · CV² &lt; 0.49</div>
                     <div class="card-desc">Infrequent but consistent size. Croston and friends.</div>
                     <span class="card-tag">Croston · SBA · TSB</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Lumpy</div>
+                    <h3 class="card-title">Lumpy</h3>
                     <div class="card-sub">ADI ≥ 1.32 · CV² ≥ 0.49</div>
                     <div class="card-desc">Rare and unpredictable. Plan safety stock; forecast humbly.</div>
                     <span class="card-tag">TSB · Bootstrap · Safety stock</span>
@@ -187,47 +191,47 @@
             </div>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-title">ARIMA</div>
+                    <h3 class="card-title">ARIMA</h3>
                     <div class="card-desc">Auto-regressive integrated moving average for stationary series.</div>
                     <span class="card-tag">Time series</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Prophet</div>
+                    <h3 class="card-title">Prophet</h3>
                     <div class="card-desc">Additive model with seasonality and holiday effects.</div>
                     <span class="card-tag">Seasonality</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Holt-Winters</div>
+                    <h3 class="card-title">Holt-Winters</h3>
                     <div class="card-desc">Triple exponential smoothing for trend and seasonality.</div>
                     <span class="card-tag">Trending</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">XGBoost</div>
+                    <h3 class="card-title">XGBoost</h3>
                     <div class="card-desc">Gradient boosting with engineered calendar and lag features.</div>
                     <span class="card-tag">ML</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Random Forest</div>
+                    <h3 class="card-title">Random Forest</h3>
                     <div class="card-desc">Tree ensemble — robust to noisy, erratic demand.</div>
                     <span class="card-tag">ML</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Croston</div>
+                    <h3 class="card-title">Croston</h3>
                     <div class="card-desc">Purpose-built for intermittent demand series.</div>
                     <span class="card-tag">Intermittent</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">SBA</div>
+                    <h3 class="card-title">SBA</h3>
                     <div class="card-desc">Syntetos-Boylan Approximation — bias-corrected Croston.</div>
                     <span class="card-tag">Intermittent</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">TSB</div>
+                    <h3 class="card-title">TSB</h3>
                     <div class="card-desc">Teunter-Syntetos-Babai — adapts to demand probability changes.</div>
                     <span class="card-tag">Lumpy</span>
                 </div>
                 <div class="card">
-                    <div class="card-title">Simple Exponential</div>
+                    <h3 class="card-title">Simple Exponential</h3>
                     <div class="card-desc">Baseline smoothing — the honest comparison.</div>
                     <span class="card-tag">Baseline</span>
                 </div>
@@ -238,28 +242,28 @@
             <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Pattern first, model second</span><span class="decision-tag">ADR-001</span></div>
+                    <div class="decision-head"><span class="decision-title">Pattern first, model second</span><span class="decision-tag">Decision 01</span></div>
                     <div class="decision-body">
                         <p>Stacking everything into one deep model would have been a PR headline and an operational nightmare. Classifying first makes selection auditable — planners can see <em>why</em> Croston, not ARIMA, was chosen.</p>
                         <em>Trade-off: loses some accuracy from pattern misclassification. Caught by the fallback ensemble.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Explainability over accuracy</span><span class="decision-tag">ADR-002</span></div>
+                    <div class="decision-head"><span class="decision-title">Explainability over accuracy</span><span class="decision-tag">Decision 02</span></div>
                     <div class="decision-body">
                         <p>A 0.5% accuracy gain from a black-box model wouldn't have been worth the adoption penalty. Planners trust forecasts they can understand; surfacing pattern + model + drivers moved adoption far more than tuning ever could.</p>
-                        <em>Trade-off: we leave a little accuracy on the table. Stockout reductions say it's fine.</em>
+                        <em>Trade-off: I leave a little accuracy on the table. Stockout reductions say it's fine.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Safety stock as a first-class output</span><span class="decision-tag">ADR-003</span></div>
+                    <div class="decision-head"><span class="decision-title">Safety stock as a first-class output</span><span class="decision-tag">Decision 03</span></div>
                     <div class="decision-body">
                         <p>Every forecast ships with a prediction interval and a recommended safety stock. Point forecasts alone don't survive contact with real supply chain uncertainty.</p>
                         <em>Trade-off: more columns in the consumer table. Worth every byte.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Backtesting, always</span><span class="decision-tag">ADR-004</span></div>
+                    <div class="decision-head"><span class="decision-title">Backtesting, always</span><span class="decision-tag">Decision 04</span></div>
                     <div class="decision-body">
                         <p>Rolling-origin backtests run on every release. A model can't win selection on training metrics alone — it has to beat the bench on the last N holdout windows.</p>
                         <em>Trade-off: slower release cadence. Caught a regression before it reached planners.</em>

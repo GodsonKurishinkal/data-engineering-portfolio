@@ -46,23 +46,25 @@ source .venv/bin/activate
 
 ### 3. Install Dependencies
 
+Dependencies are declared in `pyproject.toml`; there is no `requirements.txt`.
+
 ```bash
 pip install --upgrade pip
-pip install -r requirements.txt
+
+# Runtime only
+pip install -e .
+
+# Runtime + the RPA extras (Selenium, PyAutoGUI) for legacy sources
+pip install -e ".[rpa]"
+
+# Everything, including dev tooling
+pip install -e ".[all]"
 ```
 
-**requirements.txt:**
-```text
-polars>=0.20.0
-duckdb>=0.9.0
-pyodbc>=5.0.0
-httpx>=0.25.0
-selenium>=4.15.0
-python-dotenv>=1.0.0
-pydantic>=2.5.0
-loguru>=0.7.0
-tenacity>=8.2.0
-pyarrow>=14.0.0
+Pin the resolved set for a reproducible deploy:
+
+```bash
+pip freeze > constraints-$(date +%Y%m%d).txt
 ```
 
 ### 4. Install ODBC Drivers
@@ -115,8 +117,8 @@ WMS_USERNAME=etl_user
 WMS_PASSWORD=secure_password
 
 # API Credentials
-CRM_API_BASE_URL=https://crm.company.com/api
-CRM_API_KEY=your_api_key_here
+POS_API_BASE_URL=https://pos.company.com/api
+POS_API_KEY=your_api_key_here
 
 # RPA Settings
 WMS_WEB_URL=https://wms-legacy.company.local
@@ -195,7 +197,7 @@ extractors:
     
   crm_customers:
     type: api
-    base_url: ${CRM_API_BASE_URL}
+    base_url: ${POS_API_BASE_URL}
     endpoint: /customers
     auth_type: api_key
     pagination: offset
@@ -287,7 +289,7 @@ crontab -e
 # Daily extraction at 6 AM
 0 6 * * * cd /opt/data-platform && .venv/bin/python run_daily_pipeline.py >> /var/log/etl.log 2>&1
 
-# Hourly CRM sync
+# Hourly POS sync
 0 * * * * cd /opt/data-platform && .venv/bin/python run_crm_sync.py >> /var/log/etl.log 2>&1
 ```
 

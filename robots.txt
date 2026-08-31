@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://godsonkurishinkal.github.io/data-engineering-portfolio/sitemap.xml

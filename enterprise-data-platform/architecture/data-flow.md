@@ -10,7 +10,7 @@
 ┌──────────────────────────────────────────────────────────────────┐
 │                       SOURCE SYSTEMS                              │
 ├───────────────┬───────────────┬───────────────┬─────────────────┤
-│     ERP       │     WMS       │     CRM       │     OBI         │
+│     ERP       │     WMS       │     POS       │     OBI         │
 │   (Oracle)    │  (Legacy WMS) │  (REST API)   │  (BI Reports)   │
 ├───────────────┼───────────────┼───────────────┼─────────────────┤
 │ • Inventory   │ • Stock Moves │ • Customers   │ • Daily Reports │
@@ -26,7 +26,7 @@
 |--------|------|-------------------|-----------|-----|
 | ERP | Oracle DB | JDBC (pyodbc) | Daily 6:00 AM | 30 min |
 | WMS | Legacy System | RPA (Selenium) | Daily 5:00 AM | 60 min |
-| CRM | REST API | HTTP Client | Hourly | 5 min |
+| POS | REST API | HTTP Client | Hourly | 5 min |
 | OBI | BI Platform | SFTP Export | Daily 7:00 AM | 15 min |
 
 ---
@@ -59,7 +59,7 @@ SOURCE → EXTRACT → BRONZE → VALIDATE → SILVER → MODEL → GOLD → CON
    │         │
    │         └─→ Extractors (DB, API, RPA)
    │
-   └─→ ERP, WMS, CRM, OBI
+   └─→ ERP, WMS, POS, OBI
 ```
 
 ---

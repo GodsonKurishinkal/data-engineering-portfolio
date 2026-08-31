@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#fafafa">
 
     <title>3-Tier Anomaly Detection — Godson Kurishinkal Antony</title>
     <meta name="description" content="Case study: a three-layer data quality system — schema, business rules, statistical outliers — catching 500+ issues and cutting analytics incidents by 70%.">
     <meta name="author" content="Godson Kurishinkal Antony">
+    <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/anomaly-detection.html">
 
     <meta property="og:title" content="3-Tier Anomaly Detection — Case Study">
     <meta property="og:description" content="Schema → business rules → statistical outliers. 500+ anomalies caught. 70% fewer analytics incidents.">
@@ -21,14 +22,17 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
+    <link rel="stylesheet" href="../assets/css/tokens.css">
     <link rel="stylesheet" href="../assets/css/app.css">
+    <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="../index.html" class="nav-brand">
                 <span class="nav-brand-mark">GK</span>
-                Godson Kurishinkal <span class="nav-brand-meta">· Data Engineer</span>
+                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span> <span class="nav-brand-meta">· Data Engineer</span>
             </a>
             <div class="nav-links">
                 <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
@@ -45,14 +49,14 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main">
         <a href="../index.html#projects" class="back-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
             All case studies
         </a>
 
         <header>
-            <span class="case-category">Data Quality · 2024</span>
+            <span class="case-category">Data Quality · 2025</span>
             <h1 class="case-title">Catch bad data before it becomes a wrong decision.</h1>
             <p class="case-pitch">A three-tier detection system — schema, business rules, statistical outliers — living between Bronze and Gold. 500+ issues caught at the gate. 70% fewer analytics incidents downstream.</p>
 
@@ -98,7 +102,7 @@
                     <li>Gradual <strong>data drift</strong> went unnoticed until quarterly review.</li>
                     <li>When something broke, <strong>no one could say which records</strong> were at fault.</li>
                 </ul>
-                <p>One detection method wasn't going to fix all of that. Schema checks miss behavioural issues. Business rules miss statistical drift. Z-scores miss referential integrity. We needed layers.</p>
+                <p>One detection method wasn't going to fix all of that. Schema checks miss behavioural issues. Business rules miss statistical drift. Z-scores miss referential integrity. It needed layers.</p>
             </div>
         </section>
 
@@ -192,37 +196,37 @@
             </div>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-title">Z-Score</div>
+                    <h3 class="card-title">Z-Score</h3>
                     <div class="card-sub">Parametric · normal</div>
                     <div class="card-desc">Standard deviations from the mean. Fast, simple, works when data is roughly normal.</div>
                     <div class="card-formula">z = (x − μ) / σ</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">Modified Z-Score</div>
+                    <h3 class="card-title">Modified Z-Score</h3>
                     <div class="card-sub">Robust · outlier-resistant</div>
                     <div class="card-desc">Uses median and MAD. Doesn't get fooled by the outliers it's trying to find.</div>
                     <div class="card-formula">M = 0.6745(x − x̃) / MAD</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">IQR fencing</div>
+                    <h3 class="card-title">IQR fencing</h3>
                     <div class="card-sub">Non-parametric · quartile-based</div>
                     <div class="card-desc">Quartile bounds, no distribution assumption. Good default for skewed data.</div>
                     <div class="card-formula">[Q1 − 1.5·IQR, Q3 + 1.5·IQR]</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">Rolling CV</div>
+                    <h3 class="card-title">Rolling CV</h3>
                     <div class="card-sub">Time-aware · volatility</div>
                     <div class="card-desc">Coefficient of variation over a moving window. Flags regime changes.</div>
                     <div class="card-formula">CV = σ / μ (rolling)</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">Grubbs test</div>
+                    <h3 class="card-title">Grubbs test</h3>
                     <div class="card-sub">Statistical · single outlier</div>
                     <div class="card-desc">Formal hypothesis test for a single outlier in univariate data.</div>
                     <div class="card-formula">G = max|x − x̄| / s</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">DBSCAN</div>
+                    <h3 class="card-title">DBSCAN</h3>
                     <div class="card-sub">Density · multivariate</div>
                     <div class="card-desc">Density-based clustering for multivariate anomalies. Finds the "nothing nearby" points.</div>
                     <div class="card-formula">ε-neighbourhood density</div>
@@ -234,28 +238,28 @@
             <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Three tiers, not one smart model</span><span class="decision-tag">ADR-001</span></div>
+                    <div class="decision-head"><span class="decision-title">Three tiers, not one smart model</span><span class="decision-tag">Decision 01</span></div>
                     <div class="decision-body">
                         <p>An ML-based anomaly detector would have been impressive and wrong. Schema errors don't need a neural net; they need a fast, boolean gate. Three focused layers are cheaper to reason about, debug, and tune.</p>
                         <em>Trade-off: each tier tuned separately. Easier than retuning one monolith.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Quarantine, don't delete</span><span class="decision-tag">ADR-002</span></div>
+                    <div class="decision-head"><span class="decision-title">Quarantine, don't delete</span><span class="decision-tag">Decision 02</span></div>
                     <div class="decision-body">
                         <p>Flagged rows go to a <code>quarantine/</code> partition, not <code>/dev/null</code>. Sometimes the "anomaly" is a real event worth investigating — a demand spike, a new promotion, a store opening.</p>
                         <em>Trade-off: extra storage. Near-zero cost on Parquet.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Severity-aware alerting</span><span class="decision-tag">ADR-003</span></div>
+                    <div class="decision-head"><span class="decision-title">Severity-aware alerting</span><span class="decision-tag">Decision 03</span></div>
                     <div class="decision-body">
-                        <p>Day one of Tier 3 produced 100+ Teams alerts. We tuned thresholds per-metric and tagged severity (<code>INFO</code>, <code>WARN</code>, <code>PAGE</code>), collapsing noise by 90%. If everyone's getting paged, no one is.</p>
+                        <p>Day one of Tier 3 produced 100+ Teams alerts. I tuned thresholds per-metric and tagged severity (<code>INFO</code>, <code>WARN</code>, <code>PAGE</code>), collapsing noise by 90%. If everyone's getting paged, no one is.</p>
                         <em>Trade-off: severity mapping is manual and per-metric. Worth the discipline.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Context over constants</span><span class="decision-tag">ADR-004</span></div>
+                    <div class="decision-head"><span class="decision-title">Context over constants</span><span class="decision-tag">Decision 04</span></div>
                     <div class="decision-body">
                         <p>A 50% sales spike on Black Friday is the point. Time-aware thresholds — per weekday, per holiday, per season — dropped false positives by 60%.</p>
                         <em>Trade-off: needs a calendar of events. Maintained as a CSV checked into the repo.</em>
@@ -365,7 +369,7 @@
                 </div>
                 <div class="reflect-card">
                     <h4>Baselines from day one</h4>
-                    <p>We tuned thresholds reactively. A two-week baseline run with alerts muted would have given us better starting thresholds and fewer day-one pages.</p>
+                    <p>I tuned thresholds reactively. A two-week baseline run with alerts muted would have given me better starting thresholds and fewer day-one pages.</p>
                 </div>
                 <div class="reflect-card">
                     <h4>SLOs, not thresholds</h4>

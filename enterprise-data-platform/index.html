@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#fafafa">
 
     <title>Enterprise Data Platform — Godson Kurishinkal Antony</title>
     <meta name="description" content="Production-grade medallion lakehouse codebase: configuration-driven ETL framework, 3-tier data quality, Polars + DuckDB. Source on GitHub.">
     <meta name="author" content="Godson Kurishinkal Antony">
+    <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/enterprise-data-platform/">
 
     <meta property="og:title" content="Enterprise Data Platform — Source Code">
     <meta property="og:description" content="Production-grade medallion lakehouse codebase: configuration-driven ETL, 3-tier quality, Polars + DuckDB.">
@@ -21,14 +22,17 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
+    <link rel="stylesheet" href="../assets/css/tokens.css">
     <link rel="stylesheet" href="../assets/css/app.css">
+    <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="../index.html" class="nav-brand">
                 <span class="nav-brand-mark">GK</span>
-                Godson Kurishinkal <span class="nav-brand-meta">· Data Engineer</span>
+                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span> <span class="nav-brand-meta">· Data Engineer</span>
             </a>
             <div class="nav-links">
                 <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
@@ -45,7 +49,7 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main">
         <a href="../index.html#projects" class="back-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
             All case studies
@@ -59,13 +63,13 @@
             <div class="case-meta">
                 <div class="case-meta-item"><span class="case-meta-label">Status</span><span class="case-meta-value">Production · v1.0</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Stack</span><span class="case-meta-value">Python · Polars · DuckDB</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Tests</span><span class="case-meta-value">87% coverage</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Modules</span><span class="case-meta-value">14 · fully typed</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">License</span><span class="case-meta-value">MIT</span></div>
             </div>
 
             <div class="kpi-grid">
                 <div class="kpi">
-                    <div class="kpi-value">7k+</div>
+                    <div class="kpi-value">5k+</div>
                     <div class="kpi-label">Lines of code</div>
                     <div class="kpi-detail">Type-hinted, documented</div>
                 </div>
@@ -94,22 +98,22 @@
             </div>
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-title">etl-framework/</div>
+                    <h3 class="card-title">etl_framework/</h3>
                     <div class="card-sub">Core pipelines</div>
                     <div class="card-desc">Abstract Base Class extractors, transformers, loaders. Configuration-driven behaviour. FULL and INCREMENTAL modes.</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">data-quality/</div>
+                    <h3 class="card-title">data_quality/</h3>
                     <div class="card-sub">3-tier validation</div>
                     <div class="card-desc">Schema enforcement, business-rule checks, statistical outlier detection (Z-Score, Modified Z, IQR, DBSCAN).</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">architecture/</div>
+                    <h3 class="card-title">architecture/</h3>
                     <div class="card-sub">Diagrams &amp; ADRs</div>
                     <div class="card-desc">Architecture decision records covering Polars vs. Pandas, DuckDB for analytics, medallion structure, partitioning.</div>
                 </div>
                 <div class="card">
-                    <div class="card-title">docs/</div>
+                    <h3 class="card-title">docs/</h3>
                     <div class="card-sub">Runbooks &amp; benchmarks</div>
                     <div class="card-desc">Deployment guide, reliability metrics, performance benchmarks — the operational reality of running this in production.</div>
                 </div>
