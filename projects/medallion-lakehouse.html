@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#fafafa">
 
     <title>Medallion Data Lakehouse — Godson Kurishinkal Antony</title>
     <meta name="description" content="Case study: Bronze/Silver/Gold data lakehouse that cut ETL from 4 hours to 30 minutes and enabled same-day reporting across 30,000+ SKUs.">
     <meta name="author" content="Godson Kurishinkal Antony">
+    <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/medallion-lakehouse.html">
 
     <meta property="og:title" content="Medallion Data Lakehouse — Case Study">
     <meta property="og:description" content="Bronze/Silver/Gold architecture for UAE retail supply chain: 30,000+ SKUs, 87% faster ETL, 95%+ pipeline reliability.">
@@ -21,14 +22,17 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
+    <link rel="stylesheet" href="../assets/css/tokens.css">
     <link rel="stylesheet" href="../assets/css/app.css">
+    <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <nav>
         <div class="nav-inner">
             <a href="../index.html" class="nav-brand">
                 <span class="nav-brand-mark">GK</span>
-                Godson Kurishinkal <span class="nav-brand-meta">· Data Engineer</span>
+                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span> <span class="nav-brand-meta">· Data Engineer</span>
             </a>
             <div class="nav-links">
                 <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
@@ -45,14 +49,14 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main">
         <a href="../index.html#projects" class="back-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
             All case studies
         </a>
 
         <header>
-            <span class="case-category">Data Platform · 2024 – 2025</span>
+            <span class="case-category">Data Platform · 2025</span>
             <h1 class="case-title">A medallion lakehouse for UAE retail supply chain.</h1>
             <p class="case-pitch">Three-tier architecture — Bronze, Silver, Gold — that turned overnight reporting into same-day decisions across 30,000+ SKUs and 50+ pipelines.</p>
 
@@ -90,7 +94,7 @@
         <section class="reveal">
             <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">The problem</h2></div>
             <div class="prose">
-                <p>Supply chain operations ran on a patchwork of ERP, WMS, OBI, and a small army of Excel exports. Each source had its own shape, its own cadence, and its own definition of truth. The cost was obvious to anyone sitting at a desk.</p>
+                <p>Supply chain operations ran on a patchwork of ERP, WMS, OBI, POS, and a small army of Excel exports. Each source had its own shape, its own cadence, and its own definition of truth. The cost was obvious to anyone sitting at a desk.</p>
                 <ul>
                     <li>Daily data extraction consumed <strong>4+ hours</strong> before analysis could even start.</li>
                     <li>Reports were routinely <strong>24–48 hours stale</strong>, blocking same-day decisions.</li>
@@ -112,7 +116,7 @@
                     <div class="arch-node">
                         <div class="arch-node-num">01</div>
                         <div class="arch-node-label">Sources</div>
-                        <div class="arch-node-sub">ERP · WMS · OBI · APIs</div>
+                        <div class="arch-node-sub">ERP · WMS · OBI · POS</div>
                     </div>
                     <span class="arch-arrow">→</span>
                     <div class="arch-node bronze">
@@ -142,7 +146,7 @@
             </div>
 
             <div class="prose">
-                <p><strong>Bronze</strong> — raw landing zone. Every source dumps in its native shape; nothing is transformed. This is the immutable historical record that lets us reprocess anything, anytime.</p>
+                <p><strong>Bronze</strong> — raw landing zone. Every source dumps in its native shape; nothing is transformed. This is the immutable historical record that lets me reprocess anything, anytime.</p>
                 <p><strong>Silver</strong> — schema-enforced, deduplicated, typed. The <a href="anomaly-detection.html">3-tier anomaly detection</a> system lives here, catching 500+ dimension issues before they corrupt Gold.</p>
                 <p><strong>Gold</strong> — Kimball star schema with 10+ fact tables and 6+ conformed dimensions. Optimised for analytical queries and semantic layers. One place for business logic; everything downstream inherits it.</p>
             </div>
@@ -152,30 +156,30 @@
             <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Polars over Pandas</span><span class="decision-tag">ADR-001</span></div>
+                    <div class="decision-head"><span class="decision-title">Polars over Pandas</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/001-polars-over-pandas.md" target="_blank" rel="noopener noreferrer">ADR-001</a></div>
                     <div class="decision-body">
                         <p>Silver transforms on millions of rows per night needed to finish in a window, not a shift. Polars' Arrow-backed expression engine ran 5–10× faster than Pandas on the same workloads, with a lazier memory profile.</p>
                         <em>Trade-off: smaller community, fewer Stack Overflow answers. Worth it — the API is narrower and more predictable.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Hive-partitioned Parquet, not Delta</span><span class="decision-tag">ADR-002</span></div>
+                    <div class="decision-head"><span class="decision-title">Hive-partitioned Parquet, not Delta</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/004-parquet-hive-partitioning.md" target="_blank" rel="noopener noreferrer">ADR-004</a></div>
                     <div class="decision-body">
-                        <p>We weren't running on Spark or Databricks. A plain Parquet lakehouse partitioned by <code>extract_date</code> gave us the query speed we needed via DuckDB + Polars with zero platform lock-in.</p>
+                        <p>I wasn't running on Spark or Databricks. A plain Parquet lakehouse partitioned by <code>extract_date</code> gave me the query speed I needed via DuckDB + Polars with zero platform lock-in.</p>
                         <em>Trade-off: no time-travel or ACID guarantees on Bronze. Backfills run via explicit partition overwrite.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Configuration-driven ETL</span><span class="decision-tag">ADR-003</span></div>
+                    <div class="decision-head"><span class="decision-title">Configuration-driven ETL</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/005-config-driven-pipelines.md" target="_blank" rel="noopener noreferrer">ADR-005</a></div>
                     <div class="decision-body">
                         <p>Every pipeline is a YAML config + an Abstract Base Class. New sources go live in hours, not days. Schema, quality rules, and load mode (FULL / INCREMENTAL) are declarative.</p>
                         <em>Trade-off: steeper ramp for contributors. Mitigated with templates and reviewed PRs.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Windows Task Scheduler for orchestration</span><span class="decision-tag">ADR-004</span></div>
+                    <div class="decision-head"><span class="decision-title">Windows Task Scheduler for orchestration</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/007-task-scheduler-orchestration.md" target="_blank" rel="noopener noreferrer">ADR-007</a></div>
                     <div class="decision-body">
-                        <p>Airflow would have been heavier than the platform itself. We used the OS scheduler already paid for, with structured logs and Teams alerts on failure.</p>
+                        <p>Airflow would have been heavier than the platform itself. I used the OS scheduler already paid for, with structured logs and Teams alerts on failure.</p>
                         <em>Trade-off: no DAG visualization. Solved with a small Streamlit status board reading from the pipeline log table.</em>
                     </div>
                 </div>
@@ -185,7 +189,7 @@
         <section class="reveal">
             <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Implementation</h2></div>
             <div class="prose">
-                <p>Each pipeline inherits from a base extractor/transformer/loader trio. Behavior is declared in a YAML file; the engine reads it and runs the pipeline. That keeps the 50+ pipelines consistent and makes behavioral changes reviewable as text diffs, not code reviews.</p>
+                <p>Each pipeline inherits from a base extractor/transformer/loader trio. Behaviour is declared in a YAML file; the engine reads it and runs the pipeline. That keeps the 50+ pipelines consistent and makes behavioural changes reviewable as text diffs, not code reviews.</p>
             </div>
 
             <div class="code">
@@ -284,15 +288,15 @@
             <div class="reflection">
                 <div class="reflect-card">
                     <h4>Start with the data contract</h4>
-                    <p>We shipped Bronze first and wrote contracts later. Codifying source schemas up front would have saved two weeks of downstream fixes.</p>
+                    <p>I shipped Bronze first and wrote contracts later. Codifying source schemas up front would have saved two weeks of downstream fixes.</p>
                 </div>
                 <div class="reflect-card">
                     <h4>Invest earlier in lineage</h4>
-                    <p>Our lineage was initially pipeline-local. An OpenLineage-compatible emitter from day one would have made cross-pipeline debugging much cheaper.</p>
+                    <p>The lineage was initially pipeline-local. An OpenLineage-compatible emitter from day one would have made cross-pipeline debugging much cheaper.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>Delta, if we had the runtime</h4>
-                    <p>Plain Parquet was the right call for our runtime, but time-travel and ACID on Bronze would have removed a whole class of reprocessing risk.</p>
+                    <h4>Delta, if I'd had the runtime</h4>
+                    <p>Plain Parquet was the right call for this runtime, but time-travel and ACID on Bronze would have removed a whole class of reprocessing risk.</p>
                 </div>
                 <div class="reflect-card">
                     <h4>Semantic layer as code</h4>

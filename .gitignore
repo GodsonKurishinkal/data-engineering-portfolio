@@ -67,3 +67,7 @@ htmlcov/
 
 # Claude Code local config
 .claude/
+
+# Local working notes (not published)
+PORTFOLIO_ENHANCEMENTS.md
+NOTES.md

@@ -6,14 +6,12 @@
 [![Polars](https://img.shields.io/badge/Polars-Latest-orange.svg)](https://pola.rs)
 [![DuckDB](https://img.shields.io/badge/DuckDB-Latest-yellow.svg)](https://duckdb.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-Passing-success.svg)](#)
-[![Coverage](https://img.shields.io/badge/Coverage-87%25-green.svg)](#)
 
 ---
 
 ## Executive Summary
 
-A **Medallion architecture data lakehouse** processing 850,000+ records daily from 4 source systems (ERP, CRM, WMS, OBI). Reduced data latency from 48 hours to 2-4 hours, enabling same-day supply chain decisions for 30,000+ SKUs.
+A **Medallion architecture data lakehouse** processing 30,000+ SKUs daily from 4 source systems (ERP, WMS, OBI, POS). Reduced data latency from 48 hours to 2–4 hours, enabling same-day supply chain decisions.
 
 ### Impact at a Glance
 
@@ -31,17 +29,11 @@ A **Medallion architecture data lakehouse** processing 850,000+ records daily fr
 
 ### Business Context
 
-The supply chain operations team at a major retail company made decisions on **stale data**:
-
-> *"I don't know what inventory I have until it's already a problem."*  
-> *— Warehouse Manager*
-
-> *"I spend 60% of my time cleaning data, not analyzing it."*  
-> *— Business Analyst*
+The supply chain operations team at a major retail company made decisions on **stale data**. Inventory positions were only knowable after they had already become a problem, and analysts spent most of their week cleaning rather than analysing.
 
 ### Technical Pain Points
 
-1. **Fragmented data**: 4 source systems (ERP, CRM, WMS, OBI) with no integration
+1. **Fragmented data**: 4 source systems (ERP, WMS, OBI, POS) with no integration
 2. **Manual exports**: Daily 4-hour Excel extraction ritual (fragile, error-prone)
 3. **No historical tracking**: Only point-in-time snapshots, no trend analysis
 4. **Quality discovered late**: Issues found in reports, not at data ingestion
@@ -117,22 +109,13 @@ Tier 3: Statistical Anomalies → Alerts team, logs for review
 | **Quality automation** | 500+ anomalies auto-detected in 12 months |
 | **Reusable framework** | 5 additional pipelines built from template |
 
-### Stakeholder Feedback
-
-> *"I can finally trust the numbers in my reports."*  
-> *— Finance Analyst*
-
-> *"Same-day visibility changed how we manage replenishment."*  
-> *— Supply Chain Manager*
-
 ### Technical Metrics
 
 | Metric | Value |
 |--------|-------|
-| Pipeline uptime | 95%+ (12-month average) |
+| Pipeline success rate | 98.2% (30-day, see reliability-metrics.md) |
 | P95 query latency | < 3 seconds |
 | Storage efficiency | 80% savings (Parquet vs CSV) |
-| Test coverage | 87% |
 
 ---
 
@@ -154,28 +137,13 @@ Tier 3: Statistical Anomalies → Alerts team, logs for review
 
 ---
 
-## 🎯 Overview
-
-A **Medallion architecture data lakehouse** designed for enterprise retail supply chain operations. This platform processes data from multiple source systems (ERP, CRM, WMS, OBI) and delivers analytics-ready datasets for demand forecasting, inventory optimization, and operational reporting.
-
-### Key Metrics
-
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| ETL Processing Time | 4 hours | 30 minutes | **87%** ⬇️ |
-| Data Freshness | 48 hours | 2-4 hours | **90%** ⬇️ |
-| Pipeline Reliability | ~70% | 95%+ | **25%** ⬆️ |
-| Data Quality Issues | Unknown | 500+ caught | **Automated** |
-
----
-
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           DATA SOURCES                                       │
 ├─────────────┬─────────────┬─────────────┬─────────────┬─────────────────────┤
-│     ERP     │     CRM     │     WMS     │     OBI     │   External APIs     │
+│     ERP     │     POS     │     WMS     │     OBI     │   External APIs     │
 └──────┬──────┴──────┬──────┴──────┬──────┴──────┬──────┴──────────┬──────────┘
        │             │             │             │                 │
        ▼             ▼             ▼             ▼                 ▼
@@ -189,38 +157,38 @@ A **Medallion architecture data lakehouse** designed for enterprise retail suppl
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         🥉 BRONZE LAYER                                      │
+│                         BRONZE LAYER                                      │
 │                                                                              │
 │  • Raw data landing zone                                                    │
 │  • Immutable historical record                                              │
 │  • Hive-partitioned Parquet (by extract_date)                              │
 │  • Full audit trails                                                        │
 │                                                                              │
-│  📁 /lakehouse/bronze/{source}/{table}/extract_date={YYYY-MM-DD}/          │
+│  /lakehouse/bronze/{source}/{table}/extract_date={YYYY-MM-DD}/          │
 └────────────────────────────────────┬────────────────────────────────────────┘
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         🥈 SILVER LAYER                                      │
+│                         SILVER LAYER                                      │
 │                                                                              │
 │  • Cleaned & validated data                                                 │
 │  • Schema enforcement                                                       │
 │  • Deduplication & null handling                                           │
 │  • 3-tier anomaly detection                                                │
 │                                                                              │
-│  📁 /lakehouse/silver/{domain}/{entity}/                                    │
+│  /lakehouse/silver/{domain}/{entity}/                                    │
 └────────────────────────────────────┬────────────────────────────────────────┘
                                      │
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         🥇 GOLD LAYER                                        │
+│                         GOLD LAYER                                        │
 │                                                                              │
 │  • Business-ready star schema                                               │
 │  • 10+ fact tables, 6+ dimension tables                                    │
 │  • Optimized for analytical queries                                         │
 │  • Powers ML models & dashboards                                           │
 │                                                                              │
-│  📁 /lakehouse/gold/facts/ & /lakehouse/gold/dimensions/                   │
+│  /lakehouse/gold/facts/ & /lakehouse/gold/dimensions/                   │
 └────────────────────────────────────┬────────────────────────────────────────┘
                                      │
                                      ▼
@@ -234,48 +202,45 @@ A **Medallion architecture data lakehouse** designed for enterprise retail suppl
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 enterprise-data-platform/
-├── README.md                    # This file
+├── README.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── Makefile                            # lint / format / clean
+├── pyproject.toml
 ├── architecture/
-│   ├── medallion-architecture.md    # Detailed layer specifications
-│   ├── data-flow.md                 # End-to-end data flow documentation
-│   └── system-integration-diagram.png
-├── etl-framework/
+│   ├── medallion-architecture.md       # Layer specifications
+│   └── data-flow.md                    # End-to-end data flow
+├── etl_framework/
 │   ├── __init__.py
-│   ├── config/
-│   │   ├── pipeline_config.yaml     # Pipeline definitions
-│   │   └── source_config.yaml       # Source system configs
 │   ├── extractors/
-│   │   ├── base_extractor.py        # Abstract base class
-│   │   ├── database_extractor.py    # SQL Server, Oracle
-│   │   ├── api_extractor.py         # REST APIs
-│   │   └── rpa_extractor.py         # Selenium/PyAutoGUI bots
+│   │   ├── base_extractor.py           # Abstract base class
+│   │   ├── database_extractor.py       # SQL Server, Oracle
+│   │   ├── api_extractor.py            # REST APIs, auth, pagination
+│   │   └── rpa_extractor.py            # Selenium / PyAutoGUI bots
 │   ├── transformers/
-│   │   ├── base_transformer.py      # Abstract base class
-│   │   ├── cleaner.py               # Data cleaning operations
-│   │   ├── validator.py             # Schema validation
-│   │   └── enricher.py              # Data enrichment
+│   │   ├── base_transformer.py         # Abstract base class
+│   │   ├── schema_enforcer.py          # Schema specs and registry
+│   │   └── data_cleaner.py             # Nulls, dedupe, type coercion
 │   └── loaders/
-│       ├── base_loader.py           # Abstract base class
-│       └── parquet_loader.py        # Hive-partitioned Parquet
-├── orchestration/
-│   ├── task-scheduler-configs/      # Windows Task Scheduler XMLs
-│   └── batch-scripts/               # Orchestration batch files
-├── data-quality/
-│   ├── validation-rules/            # Business rule definitions
-│   └── anomaly-detection/           # 3-tier detection system
+│       ├── parquet_writer.py           # Hive-partitioned Parquet
+│       └── duckdb_loader.py            # Analytical query access
+├── data_quality/
+│   ├── validation_rules/
+│   │   └── validation_engine.py        # Tiers 1–2: schema + business rules
+│   └── anomaly_detection/
+│       └── anomaly_detector.py         # Tier 3: statistical outliers
 └── docs/
-    ├── performance-benchmarks.md    # Speed comparisons
-    ├── reliability-metrics.md       # SLA tracking
-    └── deployment-guide.md          # Production setup
+    ├── architecture-decisions/         # ADR-001 … ADR-007
+    ├── performance-benchmarks.md
+    ├── reliability-metrics.md
+    └── deployment-guide.md
 ```
 
----
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -292,29 +257,38 @@ source .venv/bin/activate  # Linux/Mac
 ### Installation
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
+# Install the package and its runtime dependencies
+pip install -e .
 
-# Verify installation
-python -c "import polars; import duckdb; print('Ready!')"
+# Or with the dev tooling (ruff, mypy, black)
+pip install -e ".[dev]"
+
+# Verify
+python -c "import etl_framework; print(etl_framework.__version__)"
 ```
 
 ### Run a Pipeline
 
-```bash
-# Execute a single pipeline
-python -m etl_framework.run --pipeline inventory_daily
+The framework in this repository is the reusable component layer — extractors,
+transformers, loaders and the quality engine. The orchestration entry point and
+the pipeline YAML configs live in the private production repository; what follows
+is how the pieces compose.
 
-# Execute all pipelines for a source
-python -m etl_framework.run --source erp
+```python
+from etl_framework.extractors import create_oracle_extractor
+from etl_framework.transformers import SchemaEnforcer, INVENTORY_SCHEMA
+from etl_framework.loaders import write_to_bronze
 
-# Dry run (no writes)
-python -m etl_framework.run --pipeline inventory_daily --dry-run
+extractor = create_oracle_extractor(query="SELECT * FROM vw_inventory_snapshot")
+df = extractor.extract()
+
+df = SchemaEnforcer(INVENTORY_SCHEMA).apply(df)
+write_to_bronze(df, source="obi", table="inventory", partition_by=["extract_date"])
 ```
 
 ---
 
-## 💡 Key Design Decisions
+## Key Design Decisions
 
 ### Why Polars over Pandas?
 
@@ -350,7 +324,7 @@ pipelines:
 
 ---
 
-## 📊 Data Model
+## Data Model
 
 ### Fact Tables (Gold Layer)
 
@@ -375,7 +349,7 @@ pipelines:
 
 ---
 
-## 🔒 Data Quality
+## Data Quality
 
 ### 3-Tier Anomaly Detection
 
@@ -405,7 +379,7 @@ Tier 3: BUSINESS RULES
 
 ---
 
-## 📈 Performance Benchmarks
+## Performance Benchmarks
 
 | Pipeline | Records/Day | Avg Runtime | P95 Runtime |
 |----------|-------------|-------------|-------------|
@@ -416,7 +390,7 @@ Tier 3: BUSINESS RULES
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Technology |
 |----------|------------|
@@ -431,16 +405,16 @@ Tier 3: BUSINESS RULES
 
 ---
 
-## 📄 License
+## License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-## 👤 Author
+## Author
 
 **Godson Kurishinkal Antony**  
-Senior Data Engineer | Dubai, UAE
+Data Engineer | Dubai, UAE
 
 - GitHub: [@GodsonKurishinkal](https://github.com/GodsonKurishinkal)
 - LinkedIn: [godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)

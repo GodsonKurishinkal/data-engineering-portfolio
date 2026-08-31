@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f172a">
-    <title>Godson Kurishinkal Antony — Senior Data Engineer · Résumé</title>
-    <meta name="description" content="Résumé of Godson Kurishinkal Antony — Senior Data Engineer in Dubai. 6+ years in UAE data &amp; analytics. Medallion lakehouses, ETL frameworks, ML forecasting.">
+    <meta name="theme-color" content="#fafafa">
+    <title>Godson Kurishinkal Antony — Data Engineer · Résumé</title>
+    <meta name="description" content="Résumé of Godson Kurishinkal Antony — data engineer in Dubai. 6+ years in UAE data &amp; analytics. Medallion lakehouses, ETL frameworks, ML forecasting.">
     <meta name="author" content="Godson Kurishinkal Antony">
+    <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/resume.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,22 +15,16 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
+    <link rel="stylesheet" href="assets/css/tokens.css">
+
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+        /* Tokens come from assets/css/tokens.css.
+           Only the two values specific to a printed page are set here. */
         :root {
-            --bg: #f1f5f9;
+            --bg: #f1f5f9;   /* cooler desk behind the sheet, not the site background */
             --paper: #ffffff;
-            --ink: #0f172a;
-            --ink-2: #1e293b;
-            --text-2: #334155;
-            --text-3: #64748b;
-            --text-4: #94a3b8;
-            --border: #e5e7eb;
-            --border-2: #cbd5e1;
-            --live: #10b981;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
         }
 
         html { scroll-behavior: smooth; }
@@ -98,6 +93,19 @@
         }
         .toolbar-print:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
         .toolbar-print svg { width: 14px; height: 14px; }
+        .toolbar-actions { display: flex; gap: 0.5rem; }
+        a.toolbar-print { text-decoration: none; }
+
+        :where(a, button):focus-visible {
+            outline: 2px solid var(--ink);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { transition-duration: 0.01ms !important; }
+        }
 
         /* ---- Page ---- */
         .resume {
@@ -359,6 +367,7 @@
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
     <div class="toolbar no-print">
         <a href="index.html" class="toolbar-brand">
             <span class="toolbar-brand-mark">GK</span>
@@ -369,16 +378,22 @@
             <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
+        <div class="toolbar-actions">
+        <a class="toolbar-print" href="Godson_Kurishinkal_Antony_Resume.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+        </a>
         <button class="toolbar-print" onclick="window.print()" aria-label="Print or save as PDF">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            Print / Save PDF
+            Print
         </button>
+        </div>
     </div>
 
-    <main class="resume" role="main">
+    <main class="resume" id="main" role="main">
         <header class="r-head">
             <h1 class="r-name">Godson Kurishinkal Antony</h1>
-            <p class="r-title">Senior Data Engineer · Analytics Engineering &amp; BI</p>
+            <p class="r-title">Data Engineer · Analytics Engineering &amp; BI</p>
             <div class="r-contact">
                 <span class="r-contact-item">Dubai, UAE</span>
                 <span class="r-contact-item"><a href="mailto:godson.kurishinkal@gmail.com">godson.kurishinkal@gmail.com</a></span>
@@ -391,9 +406,9 @@
         <section>
             <h2 class="r-section-title">Summary</h2>
             <p class="r-summary">
-                Senior Data Engineer with <span class="metric">6+ years</span> in UAE data &amp; analytics, engineering supply chain data platforms across retail and logistics.
+                Data engineer with <span class="metric">6+ years</span> in UAE data &amp; analytics, engineering supply chain data platforms across retail and logistics.
                 Built dimensional models with <span class="metric">10+ fact tables</span> and <span class="metric">6+ dimensions</span>, designed medallion lakehouses (Bronze→Silver→Gold) processing <span class="metric">30,000+ SKUs</span> daily.
-                Delivered semantic layers and reporting across <span class="metric">50+ dashboards</span> for <span class="metric">15+ strategic stakeholders</span>, achieving <span class="metric">87% faster</span> analytics delivery and <span class="metric">95%+ data accuracy</span>.
+                Delivered semantic layers and reporting across <span class="metric">50+ reports</span> for <span class="metric">15+ strategic stakeholders</span>, achieving <span class="metric">87% faster</span> analytics delivery at <span class="metric">98%+ pipeline success rate</span>.
             </p>
         </section>
 
@@ -416,7 +431,7 @@
                 <dd>Selenium, PyAutoGUI, config-driven ETL, Git</dd>
                 <dt>Domains</dt>
                 <dd>Retail, supply chain, inventory optimisation</dd>
-                <dt>2026 roadmap</dt>
+                <dt>In progress</dt>
                 <dd>Microsoft Fabric (DP-700), Databricks, Apache Spark, dbt</dd>
             </dl>
         </section>
@@ -434,7 +449,7 @@
                     <span class="r-dates">Dec 2024 – Present</span>
                 </div>
                 <ul class="r-bullets">
-                    <li>Designed dimensional models with <span class="metric">10+ fact tables</span> and <span class="metric">6+ dimensions</span> using Kimball star schema; built a <span class="metric">medallion lakehouse</span> (Bronze/Silver/Gold) processing <span class="metric">30,000+ SKUs</span> daily at <span class="metric">95%+ data accuracy</span>.</li>
+                    <li>Designed dimensional models with <span class="metric">10+ fact tables</span> and <span class="metric">6+ dimensions</span> using Kimball star schema; built a <span class="metric">medallion lakehouse</span> (Bronze/Silver/Gold) processing <span class="metric">30,000+ SKUs</span> daily at a <span class="metric">99%+ data quality score</span>.</li>
                     <li>Engineered <span class="metric">50+ automated transformation pipelines</span> on a configuration-driven ETL framework using Polars and DuckDB — cut ETL from <span class="metric">4 hours to 30 minutes (87%)</span>.</li>
                     <li>Built a demand forecasting engine with a <span class="metric">7+ algorithm</span> ensemble (Prophet, XGBoost, Croston, ARIMA) and ADI/CV² pattern classification for inventory optimisation.</li>
                     <li>Delivered Power BI semantic models and Streamlit dashboards across <span class="metric">50+ reports</span> for <span class="metric">15+ strategic stakeholders</span>, reducing ad-hoc query time by <span class="metric">60%</span>.</li>

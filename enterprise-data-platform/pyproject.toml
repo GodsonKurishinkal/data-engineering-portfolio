@@ -82,14 +82,14 @@ all = [
     "enterprise-data-platform[dev,rpa,viz,ml]",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["etl_framework", "data_quality"]
+
 [project.urls]
 Homepage = "https://godsonkurishinkal.github.io/data-engineering-portfolio/"
 Documentation = "https://github.com/GodsonKurishinkal/data-engineering-portfolio/tree/main/enterprise-data-platform/docs"
 Repository = "https://github.com/GodsonKurishinkal/data-engineering-portfolio"
 Issues = "https://github.com/GodsonKurishinkal/data-engineering-portfolio/issues"
-
-[project.scripts]
-etl = "etl_framework.cli:main"
 
 # ============================================================================
 # Tool Configuration
@@ -116,10 +116,7 @@ ignore = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["etl_framework"]
-
-[tool.ruff.per-file-ignores]
-"tests/**/*" = ["ARG", "S101"]  # Allow unused args and assert in tests
+known-first-party = ["etl_framework", "data_quality"]
 
 [tool.mypy]
 python_version = "3.10"
@@ -142,41 +139,6 @@ module = [
     "pyautogui.*",
 ]
 ignore_missing_imports = true
-
-[tool.pytest.ini_options]
-minversion = "7.0"
-addopts = [
-    "-ra",
-    "-q",
-    "--strict-markers",
-    "--cov=etl_framework",
-    "--cov-report=term-missing",
-    "--cov-report=html:coverage_html",
-]
-testpaths = ["tests"]
-pythonpath = [".", "etl-framework"]
-markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
-    "integration: marks tests requiring external services",
-]
-
-[tool.coverage.run]
-source = ["etl_framework"]
-branch = true
-omit = [
-    "tests/*",
-    "*/__init__.py",
-]
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "raise NotImplementedError",
-    "if TYPE_CHECKING:",
-    "if __name__ == .__main__.:",
-]
-fail_under = 80
 
 [tool.black]
 line-length = 88

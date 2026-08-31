@@ -2,6 +2,14 @@
 
 > SLA tracking and reliability monitoring for the Enterprise Data Platform
 
+**Snapshot as of 2026-01-05.** Figures below cover the preceding 30 days
+(2025-12-06 → 2026-01-05). This is a point-in-time record, not a live dashboard.
+
+> **Note on the public figures.** The portfolio site quotes *95%+ pipeline
+> reliability* — that is the SLA target the platform is designed and alerted
+> against. The 98.2% below is what it measured in this window. Target and
+> measurement are deliberately different numbers.
+
 ## System Reliability Overview
 
 | Metric | Target | Actual (30-day avg) | Status |
@@ -22,7 +30,7 @@
 | ERP Inventory | 30 | 30 | 0 | 100% |
 | ERP Sales | 30 | 29 | 1 | 96.7% |
 | WMS Stock Movements | 30 | 28 | 2 | 93.3% |
-| CRM Sync | 720 (hourly) | 715 | 5 | 99.3% |
+| POS Sales Portal | 720 (hourly) | 715 | 5 | 99.3% |
 | Gold Layer Build | 30 | 30 | 0 | 100% |
 
 ### Failure Analysis

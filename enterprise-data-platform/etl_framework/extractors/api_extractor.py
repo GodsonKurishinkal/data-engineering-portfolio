@@ -103,7 +103,7 @@ class APIExtractor(BaseExtractor):
             base_url="https://api.crm.company.com/v2",
             endpoint="/customers",
             auth_type=AuthType.BEARER,
-            bearer_token=os.getenv("CRM_TOKEN"),
+            bearer_token=os.getenv("POS_TOKEN"),
             pagination_type=PaginationType.OFFSET,
             page_size=500,
             data_path="results.customers",

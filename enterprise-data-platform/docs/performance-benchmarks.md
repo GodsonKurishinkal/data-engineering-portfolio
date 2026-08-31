@@ -1,6 +1,7 @@
 # Performance Benchmarks
 
 > Measured performance metrics for the Enterprise Data Platform
+> **Measured 2026-01. Point-in-time, on the hardware below.**
 
 ## Hardware Specifications
 
@@ -22,7 +23,7 @@
 | ERP Inventory | 500,000 | 2 min 15 sec | 3,700 rec/sec |
 | ERP Sales | 1,200,000 | 5 min 30 sec | 3,636 rec/sec |
 | WMS Stock Movements | 250,000 | 4 min (incl. RPA) | 1,041 rec/sec |
-| CRM API | 50,000 | 45 sec | 1,111 rec/sec |
+| POS Sales Portal | 50,000 | 45 sec | 1,111 rec/sec |
 
 ### Transformation Benchmarks
 

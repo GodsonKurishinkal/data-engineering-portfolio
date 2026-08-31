@@ -1,496 +1,111 @@
-# Contributing to Enterprise Data Platform
+# Working on this codebase
 
-Thank you for your interest in contributing! This document provides guidelines and workflows for contributing to the Enterprise Data Platform.
+This is a reference implementation, not a staffed open-source project. There is
+no review queue and no roadmap to contribute to. What follows is how to run it
+locally and the conventions the code holds itself to — useful if you are reading
+the source, forking it, or evaluating it.
 
-## Table of Contents
-
-- [Code of Conduct](#code-of-conduct)
-- [Getting Started](#getting-started)
-- [Development Workflow](#development-workflow)
-- [Coding Standards](#coding-standards)
-- [Testing Guidelines](#testing-guidelines)
-- [Pipeline Development](#pipeline-development)
-- [Documentation](#documentation)
-- [Pull Request Process](#pull-request-process)
+Questions and corrections are welcome by
+[email](mailto:godson.kurishinkal@gmail.com) or as a GitHub issue.
 
 ---
 
-## Code of Conduct
+## Local setup
 
-Be respectful, professional, and constructive. We're all here to build better data infrastructure.
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.10+
-- Git
-- (Optional) Database drivers: ODBC Driver 17 for SQL Server, Oracle Client
-
-### Setup
+**Prerequisites:** Python 3.10+, Git. Optionally the ODBC Driver 17 for SQL
+Server and an Oracle client if you intend to exercise `DatabaseExtractor`
+against a real source.
 
 ```bash
-# Clone the repository
 git clone https://github.com/GodsonKurishinkal/data-engineering-portfolio.git
 cd data-engineering-portfolio/enterprise-data-platform
 
-# Create virtual environment
 python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-# .venv\Scripts\activate   # Windows
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 
-# Install development dependencies
-make install-dev
-
-# Verify setup
-make test-fast
+pip install -e ".[dev]"        # runtime + ruff, mypy, black
 ```
 
-### Project Structure
+Optional extras, installed the same way: `.[rpa]` for the Selenium/PyAutoGUI
+bots, `.[viz]` for Streamlit, `.[ml]` for the forecasting stack, `.[all]` for
+everything.
 
-```
-enterprise-data-platform/
-├── etl-framework/           # Core ETL library
-│   ├── extractors/          # Data extraction modules
-│   ├── transformers/        # Data transformation modules
-│   └── loaders/             # Data loading modules
-├── architecture/            # Architecture documentation
-├── data-quality/            # Data quality rules and checks
-├── docs/                    # Technical documentation
-├── tests/                   # Test suites
-└── notebooks/               # Jupyter notebooks for exploration
-```
-
----
-
-## Development Workflow
-
-### Branch Naming
-
-```
-feature/TICKET-description    # New features
-bugfix/TICKET-description     # Bug fixes
-docs/description              # Documentation updates
-refactor/description          # Code refactoring
-test/description              # Test additions
-```
-
-### Commit Messages
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-<type>(<scope>): <description>
-
-[optional body]
-
-[optional footer]
-```
-
-**Types:**
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation
-- `style`: Formatting (no code change)
-- `refactor`: Code restructuring
-- `test`: Adding tests
-- `chore`: Maintenance tasks
-
-**Examples:**
-```
-feat(extractors): add Oracle database extractor
-fix(validators): handle null values in schema check
-docs(adr): add ADR-003 for medallion architecture decision
-test(transformers): add unit tests for data cleaner
-```
-
----
-
-## Coding Standards
-
-### Python Style
-
-We use [Ruff](https://github.com/astral-sh/ruff) for linting and [Black](https://github.com/psf/black) for formatting.
+Verify:
 
 ```bash
-# Format code
-make format
-
-# Check linting
-make lint
-
-# Run all quality checks
-make check
-```
-
-### Type Hints
-
-All public functions must have type hints:
-
-```python
-# Good
-def extract_data(
-    source: str,
-    query: str,
-    batch_size: int = 10_000,
-) -> pl.DataFrame:
-    """Extract data from source system."""
-    ...
-
-# Bad
-def extract_data(source, query, batch_size=10_000):
-    ...
-```
-
-### Docstrings
-
-Use Google-style docstrings:
-
-```python
-def calculate_metrics(
-    df: pl.DataFrame,
-    group_cols: list[str],
-    value_col: str,
-) -> pl.DataFrame:
-    """
-    Calculate aggregated metrics grouped by specified columns.
-    
-    Args:
-        df: Input DataFrame with raw data.
-        group_cols: Columns to group by.
-        value_col: Column to aggregate.
-    
-    Returns:
-        DataFrame with aggregated metrics including sum, mean, and count.
-    
-    Raises:
-        ValueError: If group_cols contains columns not in df.
-    
-    Example:
-        >>> result = calculate_metrics(df, ["region"], "sales")
-        >>> print(result.columns)
-        ['region', 'sum', 'mean', 'count']
-    """
-    ...
-```
-
-### Logging
-
-Use structured logging with appropriate levels:
-
-```python
-import logging
-
-logger = logging.getLogger(__name__)
-
-# Levels:
-logger.debug("Detailed debugging info")
-logger.info("General operational messages")
-logger.warning("Something unexpected but not critical")
-logger.error("Error that prevented operation")
-logger.critical("System is unusable")
-
-# Include context:
-logger.info(
-    "Extraction complete",
-    extra={
-        "source": source_name,
-        "records": record_count,
-        "duration_seconds": duration,
-    }
-)
+python -c "import etl_framework; print(etl_framework.__version__)"
 ```
 
 ---
 
-## Testing Guidelines
-
-### Test Structure
+## Layout
 
 ```
-tests/
-├── unit/                    # Unit tests (fast, isolated)
-│   ├── extractors/
-│   ├── transformers/
-│   └── loaders/
-├── integration/             # Integration tests (slower, need resources)
-├── fixtures/                # Shared test fixtures
-└── conftest.py              # pytest configuration
+etl_framework/
+  extractors/    BaseExtractor + database, API and RPA implementations
+  transformers/  BaseTransformer + schema enforcement and cleaning
+  loaders/       Hive-partitioned Parquet writes, DuckDB query access
+data_quality/
+  validation_rules/    Tiers 1–2: schema checks and business rules
+  anomaly_detection/   Tier 3: statistical outlier detection
+docs/architecture-decisions/   ADR-001 … ADR-007
 ```
 
-### Writing Tests
+Each subpackage's `__init__.py` is the public surface — if a name is not in
+`__all__`, treat it as internal.
 
-```python
-import pytest
-import polars as pl
-from etl_framework.transformers import DataCleaner
+---
 
+## Conventions
 
-class TestDataCleaner:
-    """Tests for DataCleaner transformer."""
-    
-    @pytest.fixture
-    def sample_data(self) -> pl.DataFrame:
-        """Sample DataFrame for testing."""
-        return pl.DataFrame({
-            "id": [1, 2, 2, 3],
-            "value": [10.0, None, 20.0, 30.0],
-            "name": ["  Alice ", "Bob", "Bob", "Charlie"],
-        })
-    
-    def test_removes_duplicates(self, sample_data: pl.DataFrame):
-        """Test that duplicate rows are removed."""
-        cleaner = DataCleaner(dedupe_columns=["id"])
-        result = cleaner.clean(sample_data)
-        
-        assert len(result) == 3
-        assert result["id"].to_list() == [1, 2, 3]
-    
-    def test_handles_null_values(self, sample_data: pl.DataFrame):
-        """Test null value handling with fill strategy."""
-        cleaner = DataCleaner(null_strategy="fill_zero")
-        result = cleaner.clean(sample_data)
-        
-        assert result["value"].null_count() == 0
-    
-    @pytest.mark.slow
-    def test_large_dataset_performance(self):
-        """Test performance on large dataset."""
-        large_df = pl.DataFrame({
-            "id": range(1_000_000),
-            "value": [float(i) for i in range(1_000_000)],
-        })
-        
-        cleaner = DataCleaner()
-        result = cleaner.clean(large_df)
-        
-        assert len(result) == 1_000_000
-```
+**Everything inherits from a base class.** A new extractor subclasses
+`BaseExtractor` and implements `extract()`. Retry, structured logging,
+extraction metadata and failure alerting are inherited, never reimplemented.
+The same holds for transformers and loaders. See
+[ADR-005](docs/architecture-decisions/005-config-driven-pipelines.md).
 
-### Running Tests
+**Behaviour is declared, not coded.** Schema, quality rules and load mode belong
+in a pipeline's YAML config. If a config starts growing conditionals, that logic
+belongs in Python instead.
+
+**Types are not optional.** `mypy` runs in strict mode. Every public function is
+annotated, including the return type.
+
+**Polars, not Pandas,** for anything in the transform path — see
+[ADR-001](docs/architecture-decisions/001-polars-over-pandas.md). Pandas remains
+acceptable at the edges where a library forces it.
+
+**Errors are typed.** Raise `ExtractionError`, `TransformationError`,
+`SchemaViolationError` or `WriteError` rather than bare exceptions, so callers
+can distinguish a bad source from a bad row.
+
+**Quality checks never silently pass.** Tier 1 blocks the batch, Tier 2 flags and
+quarantines, Tier 3 alerts and logs. A check that cannot decide should raise.
+
+---
+
+## Before you commit
 
 ```bash
-# All tests
-make test
-
-# With coverage
-make test-cov
-
-# Fast tests only (skip slow/integration)
-make test-fast
-
-# Specific test file
-pytest tests/unit/extractors/test_database_extractor.py -v
-
-# Specific test
-pytest tests/unit/extractors/test_database_extractor.py::TestDatabaseExtractor::test_connection -v
+make format     # black + ruff --fix
+make check      # ruff, mypy, and a black --check pass
 ```
 
-### Test Coverage
+Both run against `etl_framework/` and `data_quality/`.
 
-Maintain minimum 80% coverage. Check coverage report:
-
-```bash
-make test-cov
-open coverage_html/index.html
-```
+**There is no test suite yet.** That is a known gap, and the honest reason the
+repository carries no coverage badge. If you are adding code here, a focused
+`pytest` suite over the pure functions — `SchemaEnforcer`, `DataCleaner`, and the
+statistical detectors — is the most useful thing you could contribute.
 
 ---
 
-## Pipeline Development
+## Recording a decision
 
-### Creating a New Pipeline
+Anything that changes the shape of the system gets an ADR in
+`docs/architecture-decisions/`, following the Context · Decision · Consequences ·
+Alternatives structure the existing seven use.
 
-1. **Define configuration** in `config/pipelines/`:
-
-```yaml
-# config/pipelines/new_source.yaml
-pipeline:
-  name: new_source_daily
-  description: Extract data from new source system
-  owner: your.email@company.com
-  
-source:
-  type: database
-  connection: ${NEW_SOURCE_CONN}
-  query: |
-    SELECT * FROM source_table
-    WHERE modified_date > :last_run
-
-destination:
-  layer: bronze
-  table: new_source_data
-  partition_by: [extract_date]
-  format: parquet
-
-schedule:
-  cron: "0 6 * * *"
-  timezone: Asia/Dubai
-
-alerts:
-  on_failure: [slack, email]
-  on_success: [log]
-```
-
-2. **Implement extractor** (if new source type):
-
-```python
-# etl-framework/extractors/new_source_extractor.py
-from .base_extractor import BaseExtractor, ExtractorConfig
-
-class NewSourceExtractor(BaseExtractor):
-    def _connect(self) -> None:
-        # Implementation
-        pass
-    
-    def _extract(self) -> pl.DataFrame:
-        # Implementation
-        pass
-    
-    def _disconnect(self) -> None:
-        # Implementation
-        pass
-```
-
-3. **Add tests**:
-
-```python
-# tests/unit/extractors/test_new_source_extractor.py
-class TestNewSourceExtractor:
-    def test_extraction(self):
-        # Test implementation
-        pass
-```
-
-4. **Document** in ADR if significant design decision.
-
-### Pipeline Checklist
-
-Before merging a new pipeline:
-
-- [ ] Configuration file created and validated
-- [ ] Extractor implemented (or using existing)
-- [ ] Transformers defined for Silver layer
-- [ ] Gold layer models identified
-- [ ] Data quality rules defined
-- [ ] Unit tests added (>80% coverage)
-- [ ] Integration test added
-- [ ] Documentation updated
-- [ ] ADR written (if new pattern)
-- [ ] Alerts configured
-- [ ] Runbook created
-
----
-
-## Documentation
-
-### When to Document
-
-- New features or significant changes
-- Architecture decisions (write an ADR)
-- API changes
-- Configuration options
-- Troubleshooting guides
-
-### Documentation Locations
-
-| Type | Location |
-|------|----------|
-| API docs | Docstrings in code |
-| Architecture | `docs/architecture/` |
-| ADRs | `docs/architecture-decisions/` |
-| Guides | `docs/guides/` |
-| Runbooks | `docs/runbooks/` |
-
-### Writing ADRs
-
-Create ADR in `docs/architecture-decisions/`:
-
-```markdown
-# ADR-XXX: Title
-
-## Status
-Proposed / Accepted / Deprecated / Superseded by ADR-XXX
-
-## Context
-What is the issue motivating this decision?
-
-## Decision
-What is the change being proposed?
-
-## Consequences
-What becomes easier or harder?
-
-## Alternatives Considered
-What other options were evaluated?
-```
-
----
-
-## Pull Request Process
-
-### Before Submitting
-
-1. **Ensure all checks pass:**
-   ```bash
-   make check
-   make test
-   ```
-
-2. **Update documentation** if needed
-
-3. **Write meaningful commit messages**
-
-4. **Rebase on main** if behind:
-   ```bash
-   git fetch origin
-   git rebase origin/main
-   ```
-
-### PR Template
-
-```markdown
-## Summary
-Brief description of changes
-
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-
-## Testing
-- [ ] Unit tests added/updated
-- [ ] Integration tests added/updated
-- [ ] Manual testing performed
-
-## Documentation
-- [ ] README updated
-- [ ] ADR written (if applicable)
-- [ ] Docstrings added/updated
-
-## Checklist
-- [ ] Code follows project style guidelines
-- [ ] Self-review completed
-- [ ] Changes generate no new warnings
-- [ ] Tests pass locally
-```
-
-### Review Process
-
-1. At least 1 approval required
-2. All CI checks must pass
-3. No unresolved conversations
-4. Branch must be up to date with main
-
----
-
-## Questions?
-
-Open an issue or reach out:
-- Email: godson.kurishinkal@gmail.com
-- LinkedIn: [linkedin.com/in/godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)
-
-Thank you for contributing!
+ADR numbers are **global to this repository and never reused**. Take the next
+free number, add a row to the index in that directory's `README.md`, and link the
+file from anywhere that references the decision.

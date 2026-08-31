@@ -1,7 +1,7 @@
-# Godson Kurishinkal Antony | Senior Data Engineer
+# Godson Kurishinkal Antony | Data Engineer
 
 > **Retail Supply Chain Analytics · Demand Forecasting · ML**
-> Python · SQL · Databricks · Power BI
+> Python · SQL · Polars · DuckDB · Power BI
 >
 > Building production data infrastructure that powers supply chain decisions for 30,000+ SKUs daily.
 
@@ -28,7 +28,7 @@ I design and build data platforms that solve real business problems. Not proof-o
 |--------|--------|-------|--------|
 | **ETL Processing Time** | 4 hours | 30 minutes | **87% faster** |
 | **Data Freshness** | 48 hours | 2-4 hours | **90% improvement** |
-| **Pipeline Reliability** | ~70% | 95%+ | **25% more reliable** |
+| **Pipeline Reliability** | ~70% | 95%+ | **+25 points** |
 | **Analyst Time on Wrangling** | 60% | 15% | **45% time reclaimed** |
 | **Data Quality Issues** | Unknown | 500+ caught | **Automated detection** |
 
@@ -37,7 +37,7 @@ I design and build data platforms that solve real business problems. Not proof-o
 ## Featured Projects
 
 ### [Medallion Data Lakehouse](enterprise-data-platform/)
-A Bronze/Silver/Gold architecture processing data from 4 source systems (ERP, CRM, WMS, OBI) into analytics-ready star schema models.
+A Bronze/Silver/Gold architecture processing data from 4 source systems (ERP, WMS, OBI, POS) into analytics-ready star schema models.
 
 **Scale:** 30,000+ SKUs | 50+ pipelines | 10+ fact tables | 6+ dimensions
 
@@ -47,7 +47,7 @@ A Bronze/Silver/Gold architecture processing data from 4 source systems (ERP, CR
 
 ---
 
-### [3-Tier Anomaly Detection System](enterprise-data-platform/data-quality/)
+### [3-Tier Anomaly Detection System](enterprise-data-platform/data_quality/)
 Multi-layer validation framework that caught 500+ data quality issues before they reached reports.
 
 **Architecture:**
@@ -61,7 +61,7 @@ Tier 3: Statistical Outliers → Alert + Log
 
 ---
 
-### [RPA Bot Framework](enterprise-data-platform/etl-framework/extractors/)
+### [RPA Bot Framework](enterprise-data-platform/etl_framework/extractors/)
 4 Selenium/PyAutoGUI bots for legacy systems without API access (WMS, OBI, ERP, Sales Aggregator). Fragile by nature, but better than manual exports.
 
 **Why RPA?** WMS had no API. Options were: (1) manual exports daily forever, (2) convince vendor to add API (6+ months), or (3) automate the clicks. I chose pragmatism over purity.
@@ -136,27 +136,35 @@ I document major technical decisions. Here's a sample:
 
 ```
 data-engineering-portfolio/
-├── README.md                    # You are here
-├── enterprise-data-platform/    # Main showcase project
-│   ├── architecture/            # System design docs
-│   ├── etl-framework/           # Production ETL code
-│   │   ├── extractors/          # DB, API, RPA extractors
-│   │   ├── transformers/        # Cleaners, validators
-│   │   └── loaders/             # Parquet, DuckDB writers
-│   ├── data-quality/            # Anomaly detection system
-│   └── docs/                    # Technical documentation
-├── projects/                    # Case study HTML pages
-└── index.html                   # Portfolio website
+├── index.html                   # Landing page
+├── resume.html                  # Print-ready résumé
+├── 404.html
+├── sitemap.xml  ·  robots.txt
+├── LICENSE
+├── assets/
+│   ├── css/tokens.css           # Design tokens (single source of truth)
+│   ├── css/app.css              # Shared component styles
+│   └── images/
+├── projects/                    # Case studies
+│   ├── medallion-lakehouse.html
+│   ├── anomaly-detection.html
+│   ├── demand-forecasting.html
+│   └── rpa-bot-framework.html
+└── enterprise-data-platform/    # The codebase behind the case studies
+    ├── etl_framework/           # Extractors, transformers, loaders
+    ├── data_quality/            # 3-tier validation and anomaly detection
+    ├── architecture/            # Layer specs and data flow
+    └── docs/                    # ADRs, benchmarks, reliability, deployment
 ```
 
 ---
 
-## What I'm Learning (2026)
+## What I'm Learning
 
 | Technology | Status | Goal |
 |------------|--------|------|
-| **Microsoft Fabric** | In Progress | DP-700 Certification Q1 |
-| **Databricks** | In Progress | Associate → Professional Cert |
+| **Microsoft Fabric** | In progress | DP-700 certification |
+| **Databricks** | Next | Associate → Professional certification |
 | **Apache Spark** | Studying | Distributed processing at scale |
 | **dbt** | Studying | Transformation layer |
 
