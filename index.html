@@ -7,13 +7,13 @@
 
     <!-- SEO -->
     <title>Godson Kurishinkal Antony — Data Engineer</title>
-    <meta name="description" content="Data engineer in Dubai. 6+ years building medallion lakehouses, ETL frameworks, and ML systems that power UAE retail supply chain decisions. Python · Polars · DuckDB · Power BI.">
+    <meta name="description" content="Data engineer in Dubai. Six years building data platforms where bad data is structurally impossible, not merely detected — schema gates, install-time validation, three-tier quality. Python · Polars · DuckDB · Power BI.">
     <meta name="author" content="Godson Kurishinkal Antony">
     <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Godson Kurishinkal Antony — Data Engineer">
-    <meta property="og:description" content="6+ years building production data platforms for UAE retail supply chain. Medallion lakehouses. 50+ pipelines. 95%+ reliability. 30,000+ SKUs.">
+    <meta property="og:description" content="Data platforms where the wrong answer can't get through. Schema gates, install-time validation, three-tier quality. UAE retail supply chain.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/">
     <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
@@ -91,8 +91,8 @@
     <header class="hero" id="top">
         <div>
             <p class="hero-eyebrow">Data Engineer · Dubai</p>
-            <h1 class="hero-title">Data platforms that earn trust — and the decisions that follow.</h1>
-            <p class="hero-pitch">6+ years building medallion lakehouses, ETL frameworks, and ML systems for UAE retail supply chain. 50+ pipelines. 95%+ reliability. 30,000+ SKUs moving through code I own.</p>
+            <h1 class="hero-title">Make bad data impossible, not just detectable.</h1>
+            <p class="hero-pitch">Six years building data platforms for UAE retail supply chain — a schema gate that blocks the batch, a scheduler that refuses to install a broken graph, three tiers of validation between raw and reported. 30,000+ SKUs move through those guarantees every day.</p>
             <div class="hero-cta-row">
                 <a href="mailto:godson.kurishinkal@gmail.com?subject=Interested%20in%20working%20with%20you" class="btn btn-ink">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -136,6 +136,54 @@
                     <span class="about-chip-sub">Fabric · Databricks · dbt (2026)</span>
                 </div>
             </aside>
+        </div>
+    </section>
+
+    <section class="section-wide reveal" aria-labelledby="principles-title">
+        <p class="section-eyebrow">How I build</p>
+        <h2 class="section-title-lg" id="principles-title">Five rules I don't break.</h2>
+        <p class="section-sub">Each one is visible in the code, not just the copy. Follow the link and you'll find where it's enforced.</p>
+        <div class="principles">
+            <div class="principle">
+                <div class="principle-num">01</div>
+                <div>
+                    <div class="principle-title">Make the wrong thing impossible</div>
+                    <p class="principle-text">A check that can be skipped will eventually be skipped. Schema violations don't get logged and reviewed — they stop the batch at the boundary and it never reaches Silver.</p>
+                </div>
+                <div class="principle-proof"><a href="projects/anomaly-detection.html">Tier 1 blocks the pipeline</a>; Tier 2 quarantines; only Tier 3 merely alerts.</div>
+            </div>
+            <div class="principle">
+                <div class="principle-num">02</div>
+                <div>
+                    <div class="principle-title">Fail at build time, not at 2am</div>
+                    <p class="principle-text">A dependency cycle is a static property of a config file. There is no good reason to discover it at runtime, in the dark, through a report that quietly came out wrong.</p>
+                </div>
+                <div class="principle-proof"><a href="projects/pipeline-orchestration.html">Nine invariants</a> refuse to install a broken schedule graph.</div>
+            </div>
+            <div class="principle">
+                <div class="principle-num">03</div>
+                <div>
+                    <div class="principle-title">Name the cost of every choice</div>
+                    <p class="principle-text">Every decision buys something and charges for it. A trade-off I can't state in one sentence is a trade-off I haven't understood well enough to defend.</p>
+                </div>
+                <div class="principle-proof"><a href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/tree/main/enterprise-data-platform/docs/architecture-decisions" target="_blank" rel="noopener noreferrer">Seven ADRs</a>, each ending in what it cost.</div>
+            </div>
+            <div class="principle">
+                <div class="principle-num">04</div>
+                <div>
+                    <div class="principle-title">Choose the boring tool</div>
+                    <p class="principle-text">Task Scheduler over Airflow. Plain Parquet over Delta. Three simple validation tiers over one clever model. Complexity is a last resort, not a flex — and every one of those choices is written down with its migration trigger.</p>
+                </div>
+                <div class="principle-proof"><a href="projects/medallion-lakehouse.html">Spark stays a migration path</a>, not a résumé line.</div>
+            </div>
+            <div class="principle">
+                <div class="principle-num">05</div>
+                <div>
+                    <div class="principle-title">The most fragile component does the least thinking</div>
+                    <p class="principle-text">A screen-scraping bot is the least reliable thing in any pipeline. Its only job is to land the bytes. Parsing, cleaning and business logic happen downstream, where failures are cheap and re-runnable.</p>
+                </div>
+                <div class="principle-proof"><a href="projects/rpa-bot-framework.html">Land raw, transform later</a> — bots write to Bronze and stop.</div>
+            </div>
         </div>
     </section>
 
@@ -405,34 +453,51 @@
 
     <section class="section-wide reveal" aria-labelledby="focus-title">
         <p class="section-eyebrow">Where I'm heading</p>
-        <h2 class="section-title-lg" id="focus-title">What's next.</h2>
-        <p class="section-sub">Cloud data platforms, deeper case studies, and the certifications that go with them.</p>
-        <div class="focus-grid">
-            <div class="focus">
-                <div class="focus-title">Certifications</div>
-                <ul class="focus-list">
-                    <li class="focus-item"><span class="focus-item-name">Fabric Data Engineer (DP-700)</span><span class="focus-item-target">In progress</span></li>
-                    <li class="focus-item"><span class="focus-item-name">Databricks DE Associate</span><span class="focus-item-target">Next</span></li>
-                    <li class="focus-item"><span class="focus-item-name">Databricks DE Professional</span><span class="focus-item-target">Later</span></li>
-                </ul>
+        <h2 class="section-title-lg" id="focus-title">Committed, not done.</h2>
+        <p class="section-sub">The gaps I know about, with dates against them. Everything above this line is built and running; nothing below it is. Check back and hold me to it.</p>
+        <div class="commits">
+            <div class="commit">
+                <div>
+                    <div class="commit-name">A test suite over the open-source ETL framework</div>
+                    <div class="commit-why">The scheduler I run in production has 43 tests. The repo you can actually read has none — that gap is mine to close, not to explain away.</div>
+                </div>
+                <div class="commit-by">Q4 2026</div>
+                <div class="commit-state state-active">In progress</div>
             </div>
-            <div class="focus">
-                <div class="focus-title">Portfolio</div>
-                <ul class="focus-list">
-                    <li class="focus-item"><span class="focus-item-name">Case studies</span><span class="focus-item-target">5 live</span></li>
-                    <li class="focus-item"><span class="focus-item-name">Architecture decision records</span><span class="focus-item-target">7 published</span></li>
-                    <li class="focus-item"><span class="focus-item-name">Open-source ETL toolkit</span><span class="focus-item-target">Next</span></li>
-                </ul>
+            <div class="commit">
+                <div>
+                    <div class="commit-name">Fabric Data Engineer · DP-700</div>
+                    <div class="commit-why">Everything I've built is single-machine by constraint. Cloud platforms are the next scale tier and I'd rather be certified than assert it.</div>
+                </div>
+                <div class="commit-by">Q4 2026</div>
+                <div class="commit-state state-active">In progress</div>
             </div>
-            <div class="focus">
-                <div class="focus-title">Craft</div>
-                <ul class="focus-list">
-                    <li class="focus-item"><span class="focus-item-name">Cloud-native lakehouse patterns</span><span class="focus-item-target">Ongoing</span></li>
-                    <li class="focus-item"><span class="focus-item-name">Semantic layer as code (dbt)</span><span class="focus-item-target">In progress</span></li>
-                    <li class="focus-item"><span class="focus-item-name">Mentoring &amp; internal standards</span><span class="focus-item-target">Ongoing</span></li>
-                </ul>
+            <div class="commit">
+                <div>
+                    <div class="commit-name">An operations case study — a year of incidents</div>
+                    <div class="commit-why">I keep a dated incident log with root cause and prevention per entry. Running a platform is a different skill from building one, and I've never written about it.</div>
+                </div>
+                <div class="commit-by">Q1 2027</div>
+                <div class="commit-state state-queued">Queued</div>
+            </div>
+            <div class="commit">
+                <div>
+                    <div class="commit-name">OpenLineage emitter across Bronze → Gold</div>
+                    <div class="commit-why">Lineage is still pipeline-local, which I've called out as a mistake in two case studies without fixing it.</div>
+                </div>
+                <div class="commit-by">Q1 2027</div>
+                <div class="commit-state state-queued">Queued</div>
+            </div>
+            <div class="commit">
+                <div>
+                    <div class="commit-name">Semantic layer as code, above Gold</div>
+                    <div class="commit-why">Business definitions still live in Power BI DAX, which means they can't be reused, tested or diffed outside BI.</div>
+                </div>
+                <div class="commit-by">Q2 2027</div>
+                <div class="commit-state state-queued">Queued</div>
             </div>
         </div>
+        <p class="commit-note">Dates are targets, not guesses dressed as promises. If one slips, it moves here with a new date rather than quietly disappearing.</p>
     </section>
 
     <section class="contact-strip reveal" aria-labelledby="contact-title">
