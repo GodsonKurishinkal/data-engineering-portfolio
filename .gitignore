@@ -71,3 +71,7 @@ htmlcov/
 # Local working notes (not published)
 PORTFOLIO_ENHANCEMENTS.md
 NOTES.md
+
+# Test artefacts
+.coverage
+coverage_html/

@@ -62,7 +62,7 @@ Tier 3: Statistical Outliers → Alert + Log
 ---
 
 ### [RPA Bot Framework](enterprise-data-platform/etl_framework/extractors/)
-4 Selenium/PyAutoGUI bots for legacy systems without API access (WMS, OBI, ERP, Sales Aggregator). Fragile by nature, but better than manual exports.
+4 browser-and-desktop automation bots for legacy systems without API access (WMS, OBI, ERP, POS). Built on Selenium, since migrated to Playwright for the DOM-driven targets. Fragile by nature, but better than manual exports.
 
 **Why RPA?** WMS had no API. Options were: (1) manual exports daily forever, (2) convince vendor to add API (6+ months), or (3) automate the clicks. I chose pragmatism over purity.
 
@@ -84,7 +84,7 @@ Tier 3: Statistical Outliers → Alert + Log
 | **Analytics** | DuckDB | Zero-copy Parquet reads, embedded (no server), vectorized execution |
 | **Storage** | Parquet | Columnar, compressed (80% smaller than CSV), schema evolution |
 | **Visualization** | Power BI | Enterprise dashboards, DAX measures, supply chain KPIs |
-| **Automation** | Selenium | Only option for legacy systems without APIs |
+| **Automation** | Playwright / PyAutoGUI | Only route into legacy systems with no API |
 | **Orchestration** | Task Scheduler | Enterprise constraint; would use Airflow in greenfield |
 
 ### Architecture Patterns
@@ -98,7 +98,7 @@ Tier 3: Statistical Outliers → Alert + Log
 Python 3.10+     SQL (T-SQL, PL/SQL)     Git
 Polars           DuckDB                   Power BI
 Pandas           SQL Server               Streamlit
-Selenium         Oracle                   GitHub Actions
+Playwright       Oracle                   GitHub Actions
 PyAutoGUI        Parquet/Hive             Docker (learning)
 Scikit-learn     statsmodels              Prophet
 ```

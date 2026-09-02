@@ -286,9 +286,10 @@
         <section class="reveal">
             <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">What I'd do differently</h2></div>
             <div class="reflection">
-                <div class="reflect-card">
-                    <h4>Start with the data contract</h4>
-                    <p>I shipped Bronze first and wrote contracts later. Codifying source schemas up front would have saved two weeks of downstream fixes.</p>
+                <div class="reflect-card shipped">
+                    <div class="reflect-card-head"><h4>Start with the data contract</h4><span class="shipped-chip">Shipped</span></div>
+                    <span class="reflect-then">I shipped Bronze first and wrote contracts later. Roughly two weeks went into downstream fixes that a declared schema would have caught at the boundary.</span>
+                    <p class="reflect-now">Schemas are declared up front now — typed column specs in a registry, enforced at the Bronze&#8202;→&#8202;Silver gate, so a source that changes shape fails at the boundary instead of three tables downstream. Trade-off: onboarding a source costs an extra declaration, and the registry is one more thing that can drift from reality.</p>
                 </div>
                 <div class="reflect-card">
                     <h4>Invest earlier in lineage</h4>
@@ -318,9 +319,9 @@
                     <span class="related-card-title">Demand forecasting ensemble</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
-                <a href="rpa-bot-framework.html" class="related-card">
-                    <span class="related-card-tag">Automation</span>
-                    <span class="related-card-title">RPA bot framework</span>
+                <a href="pipeline-orchestration.html" class="related-card">
+                    <span class="related-card-tag">Platform Engineering</span>
+                    <span class="related-card-title">Pipeline orchestration layer</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
             </div>

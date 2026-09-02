@@ -93,10 +93,17 @@ make check      # ruff, mypy, and a black --check pass
 
 Both run against `etl_framework/` and `data_quality/`.
 
-**There is no test suite yet.** That is a known gap, and the honest reason the
-repository carries no coverage badge. If you are adding code here, a focused
-`pytest` suite over the pure functions — `SchemaEnforcer`, `DataCleaner`, and the
-statistical detectors — is the most useful thing you could contribute.
+```bash
+pytest tests/ -q
+```
+
+**Scope of the suite.** 31 tests over the deterministic parts — schema
+enforcement and the tier-1/tier-2 detectors — at 67% coverage on those two
+modules. They run on every push and pull request via GitHub Actions.
+
+Anything needing a live source system (database, portal, browser) is
+deliberately not covered, and is not faked into looking covered. Extraction
+and loading remain the thin spot; that is the most useful place to contribute.
 
 ---
 
