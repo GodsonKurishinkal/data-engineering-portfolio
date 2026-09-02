@@ -1,7 +1,7 @@
 # ADR-006: Use RPA for Legacy System Extraction
 
 ## Status
-**Accepted** (May 2024)
+**Accepted** (May 2024) · **Amended** (2026-02) — see *Amendment: Playwright* below.
 
 ## Context
 
@@ -64,6 +64,22 @@ debug a transform.
 | **Direct database access** | Requested and declined by the WMS vendor; would have voided support. |
 | **Keep manual exports** | Four hours a day, indefinitely, with an error mode nobody could detect. |
 | **Screen-scraping the rendered HTML only** | Insufficient — the WMS is a Java applet with no DOM to scrape. |
+
+## Amendment: Playwright for DOM-driven targets (2026-02)
+
+The decision to use RPA stands. The choice of driver did not.
+
+Selenium's implicit waits meant every slow-rendering report was wrapped in
+sleep-and-retry scaffolding, and a server-issued error page could be saved to
+disk before anything noticed it wasn't the expected payload. The DOM-driven
+bots have moved to **Playwright**: auto-waiting removed most of the scaffolding,
+and network interception lets a bot inspect the response before it writes.
+
+The applet-based extraction stays on **PyAutoGUI** — there is no DOM to drive,
+so nothing about that constraint changed.
+
+**Cost of the amendment:** two automation libraries to keep current instead of
+one, and a migration that had to be done per-bot with no shared shim.
 
 ## Revisit If
 

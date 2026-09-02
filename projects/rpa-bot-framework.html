@@ -58,7 +58,7 @@
         <header>
             <span class="case-category">Automation · 2025</span>
             <h1 class="case-title">When there's no API, build one.</h1>
-            <p class="case-pitch">A resilient RPA framework that treats legacy systems as data sources. Selenium + PyAutoGUI, one shared base class, four bots feeding the Bronze layer every morning before anyone is at their desk.</p>
+            <p class="case-pitch">A resilient RPA framework that treats legacy systems as data sources. One shared base class, four bots, and every extract landed in Bronze before anyone is at their desk.</p>
 
             <div class="case-meta">
                 <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Data Engineer</span></div>
@@ -332,9 +332,10 @@
         <section class="reveal">
             <div class="sh"><span class="sh-num">08</span><h2 class="sh-title">What I'd do differently</h2></div>
             <div class="reflection">
-                <div class="reflect-card">
-                    <h4>Playwright over Selenium</h4>
-                    <p>Playwright's auto-waiting and network interception would have simplified several Selenium workarounds. Selenium was the right choice <em>then</em>; not for a greenfield today.</p>
+                <div class="reflect-card shipped">
+                    <div class="reflect-card-head"><h4>Playwright over Selenium</h4><span class="shipped-chip">Shipped</span></div>
+                    <span class="reflect-then">Selenium's implicit waits meant a shelf of sleep-and-retry workarounds around every slow-rendering report.</span>
+                    <p class="reflect-now">The browser-driven bots run on Playwright now — auto-waiting removed most of those workarounds, and network interception made it possible to catch a server error page before it was ever written to disk as a CSV. The applet bot stays on PyAutoGUI; there is no DOM there to drive. Trade-off: two automation libraries to keep current instead of one.</p>
                 </div>
                 <div class="reflect-card">
                     <h4>Containerised runners</h4>

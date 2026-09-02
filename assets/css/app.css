@@ -542,6 +542,54 @@ h3.card-title, .card-title {
 .code .cm { color: #64748b; font-style: italic; }
 .code .dec { color: #fb923c; }
 
+/* ---- Reflection: a regret that has since been closed ---- */
+.reflect-card.shipped { border-color: var(--live); }
+.reflect-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.shipped-chip {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--live);
+    background: var(--live-bg);
+    border-radius: 4px;
+    padding: 0.15rem 0.45rem;
+    white-space: nowrap;
+}
+.reflect-then {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--text-3);
+    margin-bottom: 0.5rem;
+}
+.reflect-then::before {
+    content: 'Then';
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-4);
+    display: block;
+    margin-bottom: 0.15rem;
+}
+.reflect-now::before {
+    content: 'Since';
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--live);
+    display: block;
+    margin-bottom: 0.15rem;
+}
+
 /* ---- Tech pills ---- */
 .pills {
     display: flex;
