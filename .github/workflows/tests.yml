@@ -1,0 +1,40 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+    paths: ['enterprise-data-platform/**', '.github/workflows/tests.yml']
+  pull_request:
+    paths: ['enterprise-data-platform/**', '.github/workflows/tests.yml']
+  workflow_dispatch:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: enterprise-data-platform
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.12']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install polars duckdb pyarrow numpy pytest pytest-cov
+
+      - name: Run tests
+        run: |
+          pytest tests/ -q \
+            --cov=etl_framework.transformers.schema_enforcer \
+            --cov=data_quality.anomaly_detection.anomaly_detector \
+            --cov-report=term-missing

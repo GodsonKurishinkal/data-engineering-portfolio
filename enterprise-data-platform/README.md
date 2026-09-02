@@ -6,6 +6,7 @@
 [![Polars](https://img.shields.io/badge/Polars-Latest-orange.svg)](https://pola.rs)
 [![DuckDB](https://img.shields.io/badge/DuckDB-Latest-yellow.svg)](https://duckdb.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![tests](https://github.com/GodsonKurishinkal/data-engineering-portfolio/actions/workflows/tests.yml/badge.svg)](https://github.com/GodsonKurishinkal/data-engineering-portfolio/actions/workflows/tests.yml)
 
 ---
 
@@ -114,6 +115,7 @@ Tier 3: Statistical Anomalies → Alerts team, logs for review
 | Metric | Value |
 |--------|-------|
 | Pipeline success rate | 98.2% (30-day, see reliability-metrics.md) |
+| Test suite | 31 tests, 67% coverage on the modules under test |
 | P95 query latency | < 3 seconds |
 | Storage efficiency | 80% savings (Parquet vs CSV) |
 
