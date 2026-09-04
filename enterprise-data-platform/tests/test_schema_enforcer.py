@@ -41,6 +41,27 @@ class TestRequiredColumns:
         with pytest.raises(SchemaViolationError, match="on_hand_qty"):
             enforcer.enforce(df)
 
+    def test_the_gate_blocks_by_default(self, spec):
+        """The default must block, not warn.
+
+        The platform's first claim is that a bad batch cannot pass the
+        boundary. If the default were permissive, every call site that
+        forgot an argument would quietly let one through — which is the
+        failure this whole layer exists to prevent. Skipping the gate has
+        to be explicit.
+        """
+        enforcer = SchemaEnforcer(spec)  # no strict= argument
+
+        assert enforcer.strict is True
+        with pytest.raises(SchemaViolationError, match="on_hand_qty"):
+            enforcer.enforce(pl.DataFrame({"sku_id": ["A"]}))
+
+    def test_registry_enforcers_also_block_by_default(self, spec):
+        registry = SchemaRegistry()
+        registry.register(spec)
+
+        assert registry.get_enforcer("inventory").strict is True
+
     def test_permissive_mode_records_violation_instead_of_raising(self, spec):
         enforcer = SchemaEnforcer(spec, strict=False)
         df = pl.DataFrame({"sku_id": ["A"]})

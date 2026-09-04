@@ -88,13 +88,18 @@ pipeline:
     partition_by: [extract_date]
 ```
 
-**3-tier data quality** — Catch issues early, not in reports:
+**Data quality, by response** — Catch issues early, not in reports. Each layer
+is defined by what it *does* when it finds something, because that is the part
+that matters at 6am:
 
 ```
-Tier 1: Schema Validation    → Pipeline BLOCKS on failure
-Tier 2: Business Rules       → Flags issues, continues pipeline
-Tier 3: Statistical Anomalies → Alerts team, logs for review
+Schema gate      → BLOCKS. Batch refused, nothing lands.      (SchemaEnforcer)
+Business rules   → FLAGS. Rows quarantined, batch continues.  (detector tier 1)
+Statistical      → ALERTS. Logged and paged, nothing halted.  (detector tiers 2–3)
 ```
+
+The detector's own tier numbering is different from this ladder and is set out
+under [Data Quality](#data-quality) below.
 
 ---
 
@@ -115,7 +120,7 @@ Tier 3: Statistical Anomalies → Alerts team, logs for review
 | Metric | Value |
 |--------|-------|
 | Pipeline success rate | 98.2% (30-day, see reliability-metrics.md) |
-| Test suite | 31 tests, 67% coverage on the modules under test |
+| Test suite | 33 tests, 67% coverage on the modules under test |
 | P95 query latency | < 3 seconds |
 | Storage efficiency | 80% savings (Parquet vs CSV) |
 
@@ -355,23 +360,47 @@ pipelines:
 
 ### 3-Tier Anomaly Detection
 
-```
-Tier 1: VALIDATION
-├── Schema conformance
-├── Required fields
-├── Data type enforcement
-└── Referential integrity
+Two things sit under this heading, and they are not the same three tiers.
 
-Tier 2: OUTLIER DETECTION
-├── Statistical bounds (IQR, Z-score)
-├── Historical range checks
-└── Velocity checks (rate of change)
+**The gate** runs first, at the Bronze→Silver boundary, and is implemented by
+`SchemaEnforcer` — not by the detector below. It blocks: a schema violation
+raises and the batch does not land.
 
-Tier 3: BUSINESS RULES
-├── Domain-specific validations
-├── Cross-field consistency
-└── Temporal logic checks
 ```
+SchemaEnforcer (strict=True by default)
+├── Required columns present
+├── Declared types, with coercion
+├── Constraint checks
+└── Violation → SchemaViolationError, batch refused
+```
+
+**The detector** runs after the gate, over data that already conforms. Its three
+tiers are named for the *method* each one uses, and they flag or alert rather
+than block — see `data_quality/anomaly_detection/anomaly_detector.py`:
+
+```
+Tier 1: VALIDATION          → AnomalyDetector.tier1  (TierOneValidator)
+├── Required-field nulls
+├── Non-negative checks
+├── Non-future dates
+└── Custom business rules
+
+Tier 2: OUTLIER DETECTION   → AnomalyDetector.tier2  (TierTwoOutlierDetector)
+├── IQR fencing
+├── Z-score
+├── Modified Z-score (MAD)
+└── Percentile bounds
+
+Tier 3: VOLATILITY          → AnomalyDetector.tier3  (TierThreeVolatilityAnalyzer)
+├── Spike and drop detection
+├── Volume anomalies
+└── Rolling-average deviation
+```
+
+The response ladder quoted earlier — block, flag, alert — describes the quality
+system end to end: the gate blocks, detector tier 1 flags, detector tiers 2–3
+alert. The tier numbers above are the detector's own and do not line up with
+that ladder one-for-one.
 
 ### Results
 

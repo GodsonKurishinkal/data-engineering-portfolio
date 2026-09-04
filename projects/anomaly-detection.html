@@ -187,6 +187,9 @@
                     </ul>
                 </div>
             </div>
+            <div class="prose">
+                <p>One caveat on the numbering, because the code doesn't read the way this section does. The layers above are numbered by <em>response</em> — block, flag, alert. Only the first one blocks, and it lives in <code>SchemaEnforcer</code>, outside the detector module entirely. The detector numbers its own three tiers by <em>method</em> — validation, outliers, volatility — so its tier 1 is the business-rule layer described here as 02, and its tiers 2 and 3 are both inside 03. Nothing in the detector halts a pipeline; it reports and something upstream decides.</p>
+            </div>
         </section>
 
         <section class="reveal">
@@ -220,16 +223,16 @@
                     <div class="card-formula">CV = σ / μ (rolling)</div>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">Grubbs test</h3>
-                    <div class="card-sub">Statistical · single outlier</div>
-                    <div class="card-desc">Formal hypothesis test for a single outlier in univariate data.</div>
-                    <div class="card-formula">G = max|x − x̄| / s</div>
+                    <h3 class="card-title">Percentile bounds</h3>
+                    <div class="card-sub">Empirical · distribution-free</div>
+                    <div class="card-desc">Flags values outside a configured quantile pair. Crude, but the thresholds mean something to a planner, which matters when they have to act on the alert.</div>
+                    <div class="card-formula">x &lt; P₁ or x &gt; P₉₉</div>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">DBSCAN</h3>
-                    <div class="card-sub">Density · multivariate</div>
-                    <div class="card-desc">Density-based clustering for multivariate anomalies. Finds the "nothing nearby" points.</div>
-                    <div class="card-formula">ε-neighbourhood density</div>
+                    <h3 class="card-title">Spike / drop</h3>
+                    <div class="card-sub">Time-aware · period-over-period</div>
+                    <div class="card-desc">Compares the current period's total against the prior one and flags moves past a percentage threshold. Catches step changes that sit inside every static bound.</div>
+                    <div class="card-formula">Δ% = (curr − prev) / prev</div>
                 </div>
             </div>
         </section>

@@ -68,17 +68,25 @@ class SchemaEnforcer:
             primary_key=["sku_code"],
         )
         
+        # Blocks by default: a violation raises rather than being logged.
         enforcer = SchemaEnforcer(schema)
         df = enforcer.enforce(raw_df)
+
+        # Opt out deliberately, for backfills and exploratory reads only.
+        enforcer = SchemaEnforcer(schema, strict=False)
     """
-    
-    def __init__(self, schema: SchemaSpec, strict: bool = False):
+
+    def __init__(self, schema: SchemaSpec, strict: bool = True):
         """
         Initialize schema enforcer.
-        
+
         Args:
             schema: Schema specification to enforce
-            strict: If True, raise errors on schema violations
+            strict: Raise on schema violations. Defaults to True — the
+                Bronze→Silver gate blocks the batch rather than logging
+                a warning and letting it through. A check that can be
+                skipped will eventually be skipped, so skipping it has
+                to be a decision someone writes down at the call site.
         """
         self.schema = schema
         self.strict = strict
@@ -310,8 +318,8 @@ class SchemaRegistry:
         """Get schema by table name."""
         return self.schemas.get(table_name)
     
-    def get_enforcer(self, table_name: str, strict: bool = False) -> SchemaEnforcer:
-        """Get a schema enforcer for a table."""
+    def get_enforcer(self, table_name: str, strict: bool = True) -> SchemaEnforcer:
+        """Get a schema enforcer for a table. Blocks on violation by default."""
         schema = self.get(table_name)
         if not schema:
             raise ValueError(f"No schema registered for table: {table_name}")
