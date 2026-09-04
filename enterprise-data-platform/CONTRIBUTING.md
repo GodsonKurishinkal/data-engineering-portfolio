@@ -97,8 +97,8 @@ Both run against `etl_framework/` and `data_quality/`.
 pytest tests/ -q
 ```
 
-**Scope of the suite.** 31 tests over the deterministic parts — schema
-enforcement and the tier-1/tier-2 detectors — at 67% coverage on those two
+**Scope of the suite.** 33 tests over the deterministic parts — the schema gate
+and the detector's validation and outlier tiers — at 67% coverage on those two
 modules. They run on every push and pull request via GitHub Actions.
 
 Anything needing a live source system (database, portal, browser) is

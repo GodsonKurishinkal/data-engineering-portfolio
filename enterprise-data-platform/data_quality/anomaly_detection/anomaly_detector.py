@@ -1,10 +1,27 @@
 """
 3-Tier Anomaly Detection System
 
-Statistical anomaly detection with three tiers:
-1. Validation: Schema and business rule violations
-2. Outlier Detection: Statistical outliers (IQR, Z-score, etc.)
-3. Volatility Analysis: Sudden changes and trend deviations
+Three tiers, numbered by the *method* each one uses:
+
+1. Validation:        Business-rule violations — required fields, non-negative
+                      quantities, non-future dates, custom predicates.
+2. Outlier Detection: Statistical outliers — IQR, Z-score, modified Z-score
+                      (MAD), percentile bounds.
+3. Volatility:        Change over time — spikes, drops, volume anomalies,
+                      rolling-average deviation.
+
+Note on the numbering. The platform docs also describe a three-layer quality
+system numbered by *response* — block, flag, alert. The two do not line up
+one-for-one, so don't read across:
+
+    block  -> SchemaEnforcer, in etl_framework.transformers.schema_enforcer.
+              It is the Bronze->Silver gate and is NOT part of this module.
+              A violation there raises and the batch never lands.
+    flag   -> tier 1 here. Rows are recorded and quarantined; the batch
+              continues.
+    alert  -> tiers 2 and 3 here. Logged and paged; nothing is halted.
+
+Nothing in this module blocks a pipeline. Everything here reports.
 
 Author: Godson Kurishinkal
 """

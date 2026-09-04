@@ -52,10 +52,14 @@ Multi-layer validation framework that caught 500+ data quality issues before the
 
 **Architecture:**
 ```
-Tier 1: Schema Validation    → Block pipeline on failure
-Tier 2: Business Rules       → Flag + Continue
-Tier 3: Statistical Outliers → Alert + Log
+Schema gate    → Block the batch    (SchemaEnforcer, strict by default)
+Business rules → Flag + continue    (detector tier 1)
+Statistical    → Alert + log        (detector tiers 2–3)
 ```
+
+Layers are named for what they do on failure. The detector module numbers its
+own tiers by method (validation / outliers / volatility), which is a different
+axis — see the [platform README](enterprise-data-platform/README.md#data-quality).
 
 **Result:** 70% reduction in data-related incidents after deployment.
 
@@ -84,7 +88,7 @@ Tier 3: Statistical Outliers → Alert + Log
 | **Analytics** | DuckDB | Zero-copy Parquet reads, embedded (no server), vectorized execution |
 | **Storage** | Parquet | Columnar, compressed (80% smaller than CSV), schema evolution |
 | **Visualization** | Power BI | Enterprise dashboards, DAX measures, supply chain KPIs |
-| **Automation** | Playwright / PyAutoGUI | Only route into legacy systems with no API |
+| **Automation** | Selenium / Playwright / PyAutoGUI | Only route into legacy systems with no API |
 | **Orchestration** | Task Scheduler | Enterprise constraint; would use Airflow in greenfield |
 
 ### Architecture Patterns
@@ -98,7 +102,7 @@ Tier 3: Statistical Outliers → Alert + Log
 Python 3.10+     SQL (T-SQL, PL/SQL)     Git
 Polars           DuckDB                   Power BI
 Pandas           SQL Server               Streamlit
-Playwright       Oracle                   GitHub Actions
+Selenium         Oracle                   GitHub Actions
 PyAutoGUI        Parquet/Hive             Docker (learning)
 Scikit-learn     statsmodels              Prophet
 ```
