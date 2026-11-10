@@ -75,3 +75,6 @@ NOTES.md
 # Test artefacts
 .coverage
 coverage_html/
+
+# CI staging directory
+_site/
