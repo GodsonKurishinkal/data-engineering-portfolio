@@ -64,12 +64,12 @@
                 <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Data Engineer / Owner</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Industry</span><span class="case-meta-value">Retail · Supply Chain</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Runtime</span><span class="case-meta-value">Single Windows host</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Scale</span><span class="case-meta-value">166 scheduled jobs</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Scale</span><span class="case-meta-value">150+ scheduled jobs</span></div>
             </div>
 
             <div class="kpi-grid">
                 <div class="kpi">
-                    <div class="kpi-value">166</div>
+                    <div class="kpi-value">150+</div>
                     <div class="kpi-label">Scheduled jobs</div>
                     <div class="kpi-detail">One runtime contract</div>
                 </div>
@@ -97,10 +97,10 @@
                 <p>The platform runs on a single Windows host. No cluster, no container runtime, no budget for either — which rules out Airflow, Prefect and Dagster before the conversation starts. What was left was the OS scheduler, and the OS scheduler has no concept of a dependency.</p>
                 <p>So dependencies were expressed as arithmetic. If the upstream extract usually finishes by 00:05, schedule the downstream transform at 00:10 and hope. That works until it doesn't, and the ways it stopped working were instructive:</p>
                 <ul>
-                    <li>Ten reporting jobs were scheduled between <strong>00:01 and 00:11</strong> against one BI server. The server buckled. Some jobs got an HTTP 407; others were served an <strong>HTML error page that was saved with a <code>.csv</code> extension</strong> and counted as records.</li>
-                    <li>A report pulling from two URLs continued past a failed second URL, wrote an incomplete partition, and then <strong>refused to re-pull</strong> — because the partition existing was treated as the partition being complete.</li>
-                    <li>A filtered read returned <strong>zero rows, silently</strong>, for weeks: the reader filtered on <code>YEAR/MONTH/DAY</code> while the writer partitioned on <code>year/month/day</code>.</li>
-                    <li>A bot reported a 30-second UI timeout. The real cause was a <code>std::bad_alloc</code> on the reporting server — the timeout was a symptom being read as the diagnosis.</li>
+                    <li>A cluster of reporting jobs was scheduled into the same few minutes against one reporting server. The server buckled. Some jobs failed outright; others were served an <strong>error page that was saved as if it were data</strong> and counted as records.</li>
+                    <li>A multi-part extract continued past a failed part, wrote an incomplete partition, and then <strong>refused to re-pull</strong> — because the partition existing was treated as the partition being complete.</li>
+                    <li>A filtered read returned <strong>zero rows, silently</strong>: the reader and the writer disagreed on the letter case of the partition keys.</li>
+                    <li>A bot reported a UI timeout. The real cause was the server behind it running out of memory — the timeout was a symptom being read as the diagnosis.</li>
                 </ul>
                 <p>The common thread isn't that jobs failed. It's that <strong>the failures were invisible or misattributed</strong>. A wall-clock schedule can't tell you it's wrong. It just produces a plausible-looking file.</p>
             </div>
@@ -109,7 +109,7 @@
         <section class="reveal">
             <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">The system</h2></div>
             <div class="prose">
-                <p>One YAML file is the source of truth for every job. A validator refuses to install a graph that violates any of nine invariants. Task Scheduler is demoted to a dumb trigger — every one of the 166 tasks has the <em>same</em> action — and all the intelligence lives in version-controlled, testable Python.</p>
+                <p>One YAML file is the source of truth for every job. A validator refuses to install a graph that violates any of nine invariants. Task Scheduler is demoted to a dumb trigger — every one of the tasks has the <em>same</em> action — and all the intelligence lives in version-controlled, testable Python.</p>
             </div>
 
             <div class="arch">
@@ -117,7 +117,7 @@
                     <div class="arch-node">
                         <div class="arch-node-num">01</div>
                         <div class="arch-node-label">Config</div>
-                        <div class="arch-node-sub">One YAML · 166 jobs</div>
+                        <div class="arch-node-sub">One YAML · every job</div>
                     </div>
                     <span class="arch-arrow">→</span>
                     <div class="arch-node bronze">
@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">One uniform action for all 166 tasks</span><span class="decision-tag">Decision 04</span></div>
+                    <div class="decision-head"><span class="decision-title">One uniform action for every task</span><span class="decision-tag">Decision 04</span></div>
                     <div class="decision-body">
                         <p>Every registered task runs <code>python -m orchestration run &lt;id&gt;</code>. Nothing job-specific lives on the machine. The scheduler estate is reproducible from the repo, and a corrupted Task Scheduler can be rebuilt from one command.</p>
                         <em>Trade-off: the orchestration layer is Windows-bound. Portable in principle, untested in practice — the trigger mechanism would need replacing on any other host.</em>
@@ -272,7 +272,7 @@ CHECKS = [
                     <div class="result-text">Classes of broken schedule that can reach production. Cycles, collisions and bad ordering are now <strong>install-time errors</strong>, not overnight incidents.</div>
                 </div>
                 <div class="result">
-                    <div class="result-value">166</div>
+                    <div class="result-value">150+</div>
                     <div class="result-text">Jobs running one identical contract — gate, retry, log. There is no second code path, so a fix to retry behaviour is a fix everywhere at once.</div>
                 </div>
                 <div class="result">
@@ -280,8 +280,8 @@ CHECKS = [
                     <div class="result-text">Tests covering the scheduler itself, because hand-rolling cycle detection means owning its correctness.</div>
                 </div>
                 <div class="result">
-                    <div class="result-value">00:01–00:11</div>
-                    <div class="result-text">The overlapping window that overloaded the BI server is gone — staggering is now a validated property of the config rather than something a human remembers.</div>
+                    <div class="result-value">Staggered</div>
+                    <div class="result-text">The overlapping window that overloaded the reporting server is gone — staggering is now a validated property of the config rather than something a human remembers.</div>
                 </div>
                 <div class="result">
                     <div class="result-value">Typed</div>
@@ -298,7 +298,7 @@ CHECKS = [
             <div class="reflection">
                 <div class="reflect-card">
                     <h4>Lint the dangerous idiom, don't fix it twice</h4>
-                    <p>The same email-safety bug — a live send with the draft call commented out beneath a comment claiming "draft only" — was found and fixed independently in two unrelated projects. One shared check asserting no unguarded send would have caught it the first time and prevented the second.</p>
+                    <p>The same unsafe pattern — a side effect that a comment claimed was disabled, but the code still performed — turned up more than once. One shared check asserting the guard is present would have caught it the first time and prevented the second.</p>
                 </div>
                 <div class="reflect-card">
                     <h4>Test what's scheduled, not just the scheduler</h4>
@@ -310,7 +310,7 @@ CHECKS = [
                 </div>
                 <div class="reflect-card">
                     <h4>Finish the path migration</h4>
-                    <p>Two modules still carry TODOs pointing at hardcoded lakehouse paths that should route through the dataset registry. Small, known, and exactly the debt the registry exists to eliminate.</p>
+                    <p>Some modules still build lakehouse paths directly instead of routing through the dataset registry. Small, known, and exactly the debt the registry exists to eliminate.</p>
                 </div>
             </div>
         </section>

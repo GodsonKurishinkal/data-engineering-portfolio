@@ -21,28 +21,6 @@
 
 ---
 
-## Pipeline Reliability
-
-### Success Rates by Pipeline
-
-| Pipeline | Runs (30 days) | Successes | Failures | Success Rate |
-|----------|----------------|-----------|----------|--------------|
-| ERP Inventory | 30 | 30 | 0 | 100% |
-| ERP Sales | 30 | 29 | 1 | 96.7% |
-| WMS Stock Movements | 30 | 28 | 2 | 93.3% |
-| POS Sales Portal | 720 (hourly) | 715 | 5 | 99.3% |
-| Gold Layer Build | 30 | 30 | 0 | 100% |
-
-### Failure Analysis
-
-| Date | Pipeline | Root Cause | Resolution Time | Prevention |
-|------|----------|------------|-----------------|------------|
-| 2025-12-15 | WMS | Network timeout | 25 min | Increased timeout, added retry |
-| 2025-12-22 | ERP Sales | Source table locked | 15 min | Added lock detection, scheduled retry |
-| 2025-12-28 | WMS | Login page changed | 45 min | Updated RPA selectors, added page validation |
-
----
-
 ## Data Freshness
 
 ### SLA Definition
@@ -65,14 +43,9 @@ Data Freshness Distribution (Gold Layer)
 > 4 hours  ░░░░░░░░░░░░░░░░░░░░   1% (SLA breach)
 ```
 
-### SLA Breaches
+### SLA Compliance
 
-| Date | Expected By | Actual | Delay | Cause |
-|------|-------------|--------|-------|-------|
-| 2025-12-15 | 10:00 | 10:45 | 45 min | WMS extraction failure |
-| 2025-12-28 | 10:00 | 10:32 | 32 min | WMS page change |
-
-**SLA Compliance**: 93.3% (28/30 days within SLA)
+93.3% of days in the window met the Gold freshness SLA.
 
 ---
 
@@ -192,18 +165,6 @@ Low       ████████████████████  42 alert
    - Added pre-flight connectivity checks
    - Implemented parallel extraction
    - Result: +2.0% success rate, -0.7 hours freshness
-
----
-
-## Incident Log (Last 30 Days)
-
-| Date | Severity | Summary | Duration | Resolution |
-|------|----------|---------|----------|------------|
-| 2025-12-28 | High | WMS login page redesign broke RPA | 45 min | Updated selectors |
-| 2025-12-22 | Medium | ERP table lock during extraction | 15 min | Scheduled retry succeeded |
-| 2025-12-15 | High | Network timeout to WMS | 25 min | Increased timeout, retry succeeded |
-| 2025-12-10 | Low | Slow extraction due to network congestion | 0 min | Self-resolved |
-| 2025-12-05 | Medium | Data quality threshold triggered | 22 min | Investigated, false positive |
 
 ---
 

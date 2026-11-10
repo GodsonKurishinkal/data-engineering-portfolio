@@ -10,6 +10,7 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 - This changelog.
 
 ### Changed
+- Case studies and platform docs describe operational detail in general terms; per-run records removed from the reliability document; `create_oracle_extractor` takes the ODBC driver name as an argument.
 - `tests` workflow now runs on every pull request, so it can be a required check.
 - `scripts/bump-css-version.sh` works with GNU sed as well as BSD sed.
 

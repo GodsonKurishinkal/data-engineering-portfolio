@@ -152,12 +152,12 @@ result_polars = conn.execute("...").pl()
 
 | Item | SQL Server (Alternative) | DuckDB (Chosen) |
 |------|-------------------------|-----------------|
-| Server license | $800/month | $0 |
-| Storage | $50/month | $0 (uses existing Parquet) |
+| Server license | Recurring licence fee | None |
+| Storage | Separate database storage | None (uses existing Parquet) |
 | Maintenance | 4 hrs/month | 0 hrs/month |
 | Query performance | Baseline | 20x faster |
 
-**Annual savings:** ~$10,200 + analyst productivity gains
+**Net effect:** no licence or separate storage cost, plus analyst productivity gains
 
 ## References
 
