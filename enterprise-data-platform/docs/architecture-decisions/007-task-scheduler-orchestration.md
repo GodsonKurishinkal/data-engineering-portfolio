@@ -5,7 +5,7 @@
 
 ## Context
 
-50+ pipelines need to run on a schedule, in a defined order, with failures
+The pipelines need to run on a schedule, in a defined order, with failures
 visible to a human before the business notices.
 
 **Constraints:**
@@ -19,6 +19,8 @@ weeks: the orchestration stack required more operational attention than the
 pipelines it was orchestrating.
 
 ## Decision
+
+> The log table, alerts and status board described here are not in this repository.
 
 Use **Windows Task Scheduler** — already present, already paid for, already
 monitored by IT — with structured logging to a pipeline log table and Teams

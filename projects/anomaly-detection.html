@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fafafa">
 
-    <title>3-Tier Anomaly Detection — Godson Kurishinkal Antony</title>
-    <meta name="description" content="Case study: a three-layer data quality system — schema, business rules, statistical outliers — catching 500+ issues and cutting analytics incidents by 70%.">
+    <title>Three-tier data-quality checks — Godson Kurishinkal Antony</title>
+    <meta name="description" content="Case study: data-quality checks in three tiers (schema, business rules, statistical outliers) between the Bronze and Gold layers of a retail supply chain lakehouse.">
     <meta name="author" content="Godson Kurishinkal Antony">
     <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/anomaly-detection.html">
 
-    <meta property="og:title" content="3-Tier Anomaly Detection — Case Study">
-    <meta property="og:description" content="Schema → business rules → statistical outliers. 500+ anomalies caught. 70% fewer analytics incidents.">
+    <meta property="og:title" content="Three-tier data-quality checks — Case Study">
+    <meta property="og:description" content="Schema, business rules and statistical outlier checks between Bronze and Gold: what each tier checks and what it does on failure.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/anomaly-detection.html">
     <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
@@ -23,7 +23,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
     <link rel="stylesheet" href="../assets/css/tokens.css?v=2bb3148a">
-    <link rel="stylesheet" href="../assets/css/app.css?v=02437586">
+    <link rel="stylesheet" href="../assets/css/app.css?v=afe324a9">
     <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -63,49 +63,40 @@
 
         <header>
             <span class="case-category">Data Quality · 2025</span>
-            <h1 class="case-title">Catch bad data before it becomes a wrong decision.</h1>
-            <p class="case-pitch">A three-tier detection system — schema, business rules, statistical outliers — living between Bronze and Gold. 500+ issues caught at the gate. 70% fewer analytics incidents downstream.</p>
+            <h1 class="case-title">Three-tier data-quality checks</h1>
+            <p class="case-pitch">Schema, business-rule and statistical checks between the Bronze and Gold layers of the lakehouse. Each tier checks a different kind of failure and responds differently: block the batch, flag the rows, or raise an alert.</p>
 
             <div class="case-meta">
-                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Data Engineer</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Design, build, operations</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Industry</span><span class="case-meta-value">Retail · Supply Chain</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Duration</span><span class="case-meta-value">3 months</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Dimensions monitored</span><span class="case-meta-value">6+</span></div>
             </div>
 
             <div class="kpi-grid">
                 <div class="kpi">
-                    <div class="kpi-value">500+</div>
-                    <div class="kpi-label">Anomalies caught</div>
-                    <div class="kpi-detail">Before reaching Gold</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">−70%</div>
-                    <div class="kpi-label">Analytics incidents</div>
-                    <div class="kpi-detail">After 3-tier rollout</div>
-                </div>
-                <div class="kpi">
                     <div class="kpi-value">3</div>
-                    <div class="kpi-label">Detection tiers</div>
-                    <div class="kpi-detail">Schema · Rules · Stats</div>
+                    <div class="kpi-label">Tiers</div>
+                    <div class="kpi-detail">Schema · Rules · Statistics</div>
                 </div>
                 <div class="kpi">
-                    <div class="kpi-value">&lt;5m</div>
-                    <div class="kpi-label">Alert latency</div>
-                    <div class="kpi-detail">Detection → Teams</div>
+                    <div class="kpi-value">100+ → ~10</div>
+                    <div class="kpi-label">Alerts per day</div>
+                    <div class="kpi-detail">Day one vs. after threshold tuning</div>
                 </div>
             </div>
         </header>
+
+        <p class="case-note">This describes a system I built at work. The snippets below are simplified illustrations. A public version of the detector is in the <a href="../enterprise-data-platform/">ETL framework components</a>. Figures are my own measurements and the underlying data is not public.</p>
 
         <nav class="toc" aria-label="On this page">
             <span class="toc-label">On this page</span>
             <ol>
                 <li><a href="#the-problem">The problem</a></li>
-                <li><a href="#the-system">The system</a></li>
+                <li><a href="#the-system">What I built</a></li>
                 <li><a href="#detection-methods">Detection methods</a></li>
                 <li><a href="#key-decisions">Key decisions</a></li>
                 <li><a href="#implementation">Implementation</a></li>
-                <li><a href="#what-changed">What changed</a></li>
+                <li><a href="#what-changed">Results</a></li>
                 <li><a href="#what-id-do-differently">What I'd do differently</a></li>
             </ol>
         </nav>
@@ -113,22 +104,22 @@
         <section class="reveal" id="the-problem">
             <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">The problem</h2></div>
             <div class="prose">
-                <p>In supply chain analytics, a bad row is not a reporting nuisance. A single corrupted inventory record can trigger an unnecessary purchase order. A missing dimension key can silently break a semantic model downstream. Data quality is an operations problem, not a BI problem.</p>
+                <p>Bad rows in supply chain data lead to wrong operational decisions: a corrupted inventory record can trigger a purchase order nobody needed, and a missing dimension key breaks the reports built on top.</p>
                 <ul>
-                    <li>Source systems routinely sent <strong>nulls where quantities should exist</strong>.</li>
-                    <li>Dimension tables arrived with <strong>duplicate or missing keys</strong>, breaking joins.</li>
-                    <li><strong>Sales spikes from system glitches</strong> looked identical to real demand.</li>
-                    <li>Gradual <strong>data drift</strong> went unnoticed until quarterly review.</li>
-                    <li>When something broke, <strong>no one could say which records</strong> were at fault.</li>
+                    <li>Source systems sent <strong>nulls where quantities should exist</strong>.</li>
+                    <li>Dimension tables arrived with <strong>duplicate or missing keys</strong>, which broke joins.</li>
+                    <li><strong>Sales spikes caused by system glitches</strong> looked the same as real demand.</li>
+                    <li>Gradual <strong>drift</strong> went unnoticed for months.</li>
+                    <li>When something broke, <strong>nobody could say which records</strong> were at fault.</li>
                 </ul>
-                <p>One detection method wasn't going to fix all of that. Schema checks miss behavioural issues. Business rules miss statistical drift. Z-scores miss referential integrity. It needed layers.</p>
+                <p>No single method covers all of these. Schema checks miss behavioural problems, business rules miss statistical drift, and outlier statistics miss referential integrity.</p>
             </div>
         </section>
 
         <section class="reveal" id="the-system">
-            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">The system</h2></div>
+            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">What I built</h2></div>
             <div class="prose">
-                <p>Three tiers sit between the Bronze and Gold layers of the lakehouse. Each tier fires at a different gate, catches a different failure mode, and has a different response — block, flag, or alert.</p>
+                <p>Three tiers between Bronze and Gold. Each one runs at a different point and has its own response on failure.</p>
             </div>
 
             <div class="arch">
@@ -169,11 +160,11 @@
                 <div class="tier">
                     <div class="tier-num">01</div>
                     <div class="tier-name">Schema validation</div>
-                    <div class="tier-gate">Gate: Bronze → Silver · Hard fail</div>
-                    <p class="tier-desc">Rule-based checks that enforce the data contract before a row enters Silver. If schema breaks, the pipeline refuses the batch — bad data never crosses the boundary.</p>
+                    <div class="tier-gate">Bronze → Silver · Blocks the batch</div>
+                    <p class="tier-desc">Enforces the data contract before a row enters Silver. If the schema check fails, the batch is refused.</p>
                     <ul class="tier-checks">
-                        <li>Null checks on required fields</li>
-                        <li>Type validation against declared schema</li>
+                        <li>Nulls in required fields</li>
+                        <li>Types against the declared schema</li>
                         <li>Referential integrity (FK → PK)</li>
                         <li>Range constraints (e.g. <code>qty &gt;= 0</code>)</li>
                         <li>Primary-key uniqueness</li>
@@ -182,75 +173,73 @@
                 <div class="tier">
                     <div class="tier-num">02</div>
                     <div class="tier-name">Business rules</div>
-                    <div class="tier-gate">Gate: Silver → Gold · Flag + continue</div>
-                    <p class="tier-desc">Domain-specific validations that schema can't express. Rows failing a rule are flagged and routed to a quarantine partition; the batch still loads so operations aren't blocked by a handful of edge cases.</p>
+                    <div class="tier-gate">Silver → Gold · Flags rows, load continues</div>
+                    <p class="tier-desc">Domain checks that a schema cannot express. Failing rows are flagged and written to a quarantine partition; the rest of the batch loads, so a few bad rows do not stop operations.</p>
                     <ul class="tier-checks">
                         <li>Cross-field consistency (<code>ship_date ≥ order_date</code>)</li>
-                        <li>Domain logic (on-hand quantity can't be negative)</li>
-                        <li>Reorder-point sanity (safety stock ≥ 0)</li>
-                        <li>Conformed dimension matches across facts</li>
-                        <li>Temporal logic (no future-dated transactions)</li>
+                        <li>On-hand quantity and safety stock not negative</li>
+                        <li>Dimension keys match across facts</li>
+                        <li>No future-dated transactions</li>
                     </ul>
                 </div>
                 <div class="tier">
                     <div class="tier-num">03</div>
                     <div class="tier-name">Statistical outliers</div>
-                    <div class="tier-gate">Continuous: Gold layer · Alert + log</div>
-                    <p class="tier-desc">Runs over Gold facts on a schedule. Catches individual outliers, trend breaks, and slow drift — the kind of issues that pass schema and rules but still tell you something is wrong.</p>
+                    <div class="tier-gate">Gold, on a schedule · Alerts and logs</div>
+                    <p class="tier-desc">Runs over Gold facts. Finds values that pass the schema and the rules but are still unusual: single outliers, step changes and slow drift.</p>
                     <ul class="tier-checks">
-                        <li>Z-Score and Modified Z-Score (robust to outliers)</li>
-                        <li>IQR fencing and MAD-based detection</li>
+                        <li>Z-score and modified Z-score (MAD)</li>
+                        <li>IQR fences and percentile bounds</li>
                         <li>Rolling coefficient of variation</li>
-                        <li>Trend breaks and seasonal-deviation alerts</li>
-                        <li>Volume spikes and week-over-week variance</li>
+                        <li>Period-over-period spikes and drops</li>
                     </ul>
                 </div>
             </div>
             <div class="prose">
-                <p>One caveat on the numbering, because the code doesn't read the way this section does. The layers above are numbered by <em>response</em> — block, flag, alert. Only the first one blocks, and it lives in <code>SchemaEnforcer</code>, outside the detector module entirely. The detector numbers its own three tiers by <em>method</em> — validation, outliers, volatility — so its tier 1 is the business-rule layer described here as 02, and its tiers 2 and 3 are both inside 03. Nothing in the detector halts a pipeline; it reports and something upstream decides.</p>
+                <p>The public code numbers things differently. Above, tiers are numbered by response. In the code, the blocking check lives in <code>SchemaEnforcer</code>, outside the detector module. The detector numbers its own tiers by method (validation, outliers, volatility), so its tier 1 is the business-rule layer here, and its tiers 2 and 3 are both inside tier 03 here. The detector never halts a pipeline; it reports, and the caller decides.</p>
             </div>
         </section>
 
         <section class="reveal" id="detection-methods">
             <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Detection methods</h2></div>
             <div class="prose">
-                <p>Tier 3 runs multiple methods in parallel. Each method has a domain where it shines and a domain where it fails; picking one method per metric is a ticket to false positives.</p>
+                <p>Tier 3 uses several methods because each one fails on some kinds of data.</p>
             </div>
             <div class="card-grid">
                 <div class="card">
-                    <h3 class="card-title">Z-Score</h3>
-                    <div class="card-sub">Parametric · normal</div>
-                    <div class="card-desc">Standard deviations from the mean. Fast, simple, works when data is roughly normal.</div>
+                    <h3 class="card-title">Z-score</h3>
+                    <div class="card-sub">Parametric</div>
+                    <div class="card-desc">Standard deviations from the mean. Fast; works when data is roughly normal.</div>
                     <div class="card-formula">z = (x − μ) / σ</div>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">Modified Z-Score</h3>
-                    <div class="card-sub">Robust · outlier-resistant</div>
-                    <div class="card-desc">Uses median and MAD. Doesn't get fooled by the outliers it's trying to find.</div>
+                    <h3 class="card-title">Modified Z-score</h3>
+                    <div class="card-sub">Robust</div>
+                    <div class="card-desc">Median and MAD instead of mean and standard deviation, so the outliers do not distort the baseline.</div>
                     <div class="card-formula">M = 0.6745(x − x̃) / MAD</div>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">IQR fencing</h3>
-                    <div class="card-sub">Non-parametric · quartile-based</div>
-                    <div class="card-desc">Quartile bounds, no distribution assumption. Good default for skewed data.</div>
+                    <h3 class="card-title">IQR fences</h3>
+                    <div class="card-sub">Non-parametric</div>
+                    <div class="card-desc">Quartile bounds with no distribution assumption. The default for skewed data.</div>
                     <div class="card-formula">[Q1 − 1.5·IQR, Q3 + 1.5·IQR]</div>
                 </div>
                 <div class="card">
                     <h3 class="card-title">Rolling CV</h3>
-                    <div class="card-sub">Time-aware · volatility</div>
-                    <div class="card-desc">Coefficient of variation over a moving window. Flags regime changes.</div>
+                    <div class="card-sub">Volatility over time</div>
+                    <div class="card-desc">Coefficient of variation over a moving window. Flags a change in how volatile a series is.</div>
                     <div class="card-formula">CV = σ / μ (rolling)</div>
                 </div>
                 <div class="card">
                     <h3 class="card-title">Percentile bounds</h3>
-                    <div class="card-sub">Empirical · distribution-free</div>
-                    <div class="card-desc">Flags values outside a configured quantile pair. Crude, but the thresholds mean something to a planner, which matters when they have to act on the alert.</div>
+                    <div class="card-sub">Empirical</div>
+                    <div class="card-desc">Flags values outside a configured quantile pair. Crude, but a planner can understand the threshold.</div>
                     <div class="card-formula">x &lt; P₁ or x &gt; P₉₉</div>
                 </div>
                 <div class="card">
                     <h3 class="card-title">Spike / drop</h3>
-                    <div class="card-sub">Time-aware · period-over-period</div>
-                    <div class="card-desc">Compares the current period's total against the prior one and flags moves past a percentage threshold. Catches step changes that sit inside every static bound.</div>
+                    <div class="card-sub">Period over period</div>
+                    <div class="card-desc">Compares this period's total with the previous one and flags moves past a percentage threshold.</div>
                     <div class="card-formula">Δ% = (curr − prev) / prev</div>
                 </div>
             </div>
@@ -260,31 +249,31 @@
             <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Three tiers, not one smart model</span><span class="decision-tag">Decision 01</span></div>
+                    <div class="decision-head"><span class="decision-title">Three simple tiers instead of one model</span><span class="decision-tag">Decision 01</span></div>
                     <div class="decision-body">
-                        <p>An ML-based anomaly detector would have been impressive and wrong. Schema errors don't need a neural net; they need a fast, boolean gate. Three focused layers are cheaper to reason about, debug, and tune.</p>
-                        <em>Trade-off: each tier tuned separately. Easier than retuning one monolith.</em>
+                        <p>A schema error needs a fast yes/no check, not a learned model. Three small layers are easier to reason about and debug than one ML-based detector.</p>
+                        <em>Trade-off: each tier has to be tuned separately.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Quarantine, don't delete</span><span class="decision-tag">Decision 02</span></div>
+                    <div class="decision-head"><span class="decision-title">Quarantine flagged rows, don't delete them</span><span class="decision-tag">Decision 02</span></div>
                     <div class="decision-body">
-                        <p>Flagged rows go to a <code>quarantine/</code> partition, not <code>/dev/null</code>. Sometimes the "anomaly" is a real event worth investigating — a demand spike, a new promotion, a store opening.</p>
-                        <em>Trade-off: extra storage. Near-zero cost on Parquet.</em>
+                        <p>Flagged rows go to a <code>quarantine/</code> partition. Some "anomalies" are real events, such as a promotion or a store opening, and need to be looked at.</p>
+                        <em>Trade-off: extra storage, and the quarantine needs someone to review it.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Severity-aware alerting</span><span class="decision-tag">Decision 03</span></div>
+                    <div class="decision-head"><span class="decision-title">Severity levels on alerts</span><span class="decision-tag">Decision 03</span></div>
                     <div class="decision-body">
-                        <p>Day one of Tier 3 produced 100+ Teams alerts. I tuned thresholds per-metric and tagged severity (<code>INFO</code>, <code>WARN</code>, <code>PAGE</code>), collapsing noise by 90%. If everyone's getting paged, no one is.</p>
-                        <em>Trade-off: severity mapping is manual and per-metric. Worth the discipline.</em>
+                        <p>On its first day, tier 3 sent 100+ chat alerts. I tuned thresholds per metric and tagged each alert <code>INFO</code>, <code>WARN</code> or <code>PAGE</code>, which brought it down to about 10 a day that needed action.</p>
+                        <em>Trade-off: the severity mapping is manual and per metric.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Context over constants</span><span class="decision-tag">Decision 04</span></div>
+                    <div class="decision-head"><span class="decision-title">Thresholds that depend on the calendar</span><span class="decision-tag">Decision 04</span></div>
                     <div class="decision-body">
-                        <p>A 50% sales spike on Black Friday is the point. Time-aware thresholds — per weekday, per holiday, per season — dropped false positives by 60%.</p>
-                        <em>Trade-off: needs a calendar of events. Maintained as a CSV checked into the repo.</em>
+                        <p>A large sales spike during a promotion is expected. Thresholds vary by weekday, holiday and season, which cut false positives.</p>
+                        <em>Trade-off: it needs an events calendar that someone has to maintain.</em>
                     </div>
                 </div>
             </div>
@@ -293,91 +282,47 @@
         <section class="reveal" id="implementation">
             <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Implementation</h2></div>
             <div class="prose">
-                <p>The Tier 3 detector is a small, configurable core. Each metric gets a config; the detector picks the right method and returns a boolean mask. No surprises.</p>
+                <p>Each metric has a config. The detector picks the configured method and returns a boolean mask. A simplified version of one method:</p>
             </div>
 
             <div class="code">
                 <div class="code-head">
-                    <span class="code-file">quality/anomaly_detector.py</span>
+                    <span class="code-file">Simplified illustration</span>
                     <span class="code-lang">Python</span>
                 </div>
-<pre><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
-<span class="kw">from</span> enum <span class="kw">import</span> Enum
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<pre><span class="kw">import</span> numpy <span class="kw">as</span> np
 
-<span class="kw">class</span> <span class="cls">Method</span>(Enum):
-    ZSCORE = <span class="str">"zscore"</span>
-    MODIFIED_ZSCORE = <span class="str">"modified_zscore"</span>
-    IQR = <span class="str">"iqr"</span>
-
-<span class="dec">@dataclass</span>
-<span class="kw">class</span> <span class="cls">Config</span>:
-    method: <span class="cls">Method</span>
-    threshold: float = <span class="num">3.0</span>
-    min_samples: int = <span class="num">30</span>
-
-<span class="kw">class</span> <span class="cls">AnomalyDetector</span>:
-    <span class="str">"""Multi-method statistical anomaly detection."""</span>
-
-    <span class="kw">def</span> <span class="fn">__init__</span>(self, config: <span class="cls">Config</span>):
-        self.config = config
-        self._methods = {
-            <span class="cls">Method</span>.ZSCORE: self._zscore,
-            <span class="cls">Method</span>.MODIFIED_ZSCORE: self._modified_zscore,
-            <span class="cls">Method</span>.IQR: self._iqr_fence,
-        }
-
-    <span class="kw">def</span> <span class="fn">detect</span>(self, data: np.ndarray) -&gt; np.ndarray:
-        <span class="str">"""Return boolean mask of anomalies."""</span>
-        <span class="kw">if</span> len(data) &lt; self.config.min_samples:
-            <span class="kw">return</span> np.zeros(len(data), dtype=bool)
-        <span class="kw">return</span> self._methods[self.config.method](data)
-
-    <span class="kw">def</span> <span class="fn">_modified_zscore</span>(self, data: np.ndarray) -&gt; np.ndarray:
-        median = np.median(data)
-        mad = np.median(np.abs(data - median))
-        m = <span class="num">0.6745</span> * (data - median) / (mad + <span class="num">1e-10</span>)
-        <span class="kw">return</span> np.abs(m) &gt; self.config.threshold
-
-    <span class="kw">def</span> <span class="fn">_iqr_fence</span>(self, data: np.ndarray) -&gt; np.ndarray:
-        q1, q3 = np.percentile(data, [<span class="num">25</span>, <span class="num">75</span>])
-        iqr = q3 - q1
-        <span class="kw">return</span> (data &lt; q1 - <span class="num">1.5</span>*iqr) | (data &gt; q3 + <span class="num">1.5</span>*iqr)</pre>
+<span class="kw">def</span> <span class="fn">modified_zscore</span>(data: np.ndarray, threshold: float = <span class="num">3.0</span>,
+                    min_samples: int = <span class="num">30</span>) -&gt; np.ndarray:
+    <span class="str">"""Return a boolean mask of outliers."""</span>
+    <span class="kw">if</span> len(data) &lt; min_samples:
+        <span class="kw">return</span> np.zeros(len(data), dtype=bool)
+    median = np.median(data)
+    mad = np.median(np.abs(data - median))
+    m = <span class="num">0.6745</span> * (data - median) / (mad + <span class="num">1e-10</span>)
+    <span class="kw">return</span> np.abs(m) &gt; threshold</pre>
             </div>
 
             <div class="pills">
                 <span class="pill">Python</span>
                 <span class="pill">NumPy</span>
-                <span class="pill">Pandas</span>
-                <span class="pill">SciPy</span>
-                <span class="pill">DuckDB</span>
-                <span class="pill">Great Expectations</span>
-                <span class="pill">Streamlit</span>
             </div>
         </section>
 
         <section class="reveal" id="what-changed">
-            <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">What changed</h2></div>
+            <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">Results</h2></div>
             <div class="results">
                 <div class="result">
-                    <div class="result-value">500+</div>
-                    <div class="result-text">Dimension anomalies caught at the Silver gate — <strong>before</strong> they corrupted downstream facts or Power BI models.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">−70%</div>
-                    <div class="result-text">Analytics incidents dropped sharply after the 3-tier system was live across all 50+ pipelines.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">−60%</div>
-                    <div class="result-text">False positives removed by context-aware thresholds (per weekday, per season, per event).</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">3×</div>
-                    <div class="result-text">Detection coverage versus Z-score alone. Layers catch different classes of problems.</div>
-                </div>
-                <div class="result">
                     <div class="result-value">~10</div>
-                    <div class="result-text">Daily actionable alerts, down from 100+ at day one. Severity tagging killed the fatigue.</div>
+                    <div class="result-text">Alerts a day that need action, down from 100+ on day one, after per-metric thresholds and severity tagging.</div>
+                </div>
+                <div class="result">
+                    <div class="result-value">Earlier</div>
+                    <div class="result-text">Dimension problems are caught at the Silver gate instead of being found later in facts or reports.</div>
+                </div>
+                <div class="result">
+                    <div class="result-value">Traceable</div>
+                    <div class="result-text">Flagged rows sit in quarantine, so it is possible to say which records failed and why.</div>
                 </div>
             </div>
         </section>
@@ -387,19 +332,15 @@
             <div class="reflection">
                 <div class="reflect-card">
                     <h4>Declare rules as data</h4>
-                    <p>Tier-2 rules started as Python callables. Moving them to YAML earlier would have let analysts contribute without going through engineering.</p>
+                    <p>Tier-2 rules started as Python functions. Moving them to YAML earlier would have let analysts add rules themselves.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>Baselines from day one</h4>
-                    <p>I tuned thresholds reactively. A two-week baseline run with alerts muted would have given me better starting thresholds and fewer day-one pages.</p>
+                    <h4>Baseline before alerting</h4>
+                    <p>I tuned thresholds after the alerts started. A two-week run with alerts muted would have given better starting thresholds.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>SLOs, not thresholds</h4>
-                    <p>Framing detection as service level objectives ("99% of inventory rows pass schema") gave stakeholders clearer language than "z &gt; 3."</p>
-                </div>
-                <div class="reflect-card">
-                    <h4>Quarantine review loop</h4>
-                    <p>Quarantined rows accumulated. A weekly triage queue with labels ("real event" / "bad data" / "fix upstream") would have closed the feedback loop.</p>
+                    <h4>Review the quarantine</h4>
+                    <p>Quarantined rows piled up. A weekly triage with labels (real event, bad data, fix upstream) would have closed the loop.</p>
                 </div>
             </div>
         </section>
@@ -409,33 +350,18 @@
             <div class="related-grid">
                 <a href="medallion-lakehouse.html" class="related-card">
                     <span class="related-card-tag">Data Platform</span>
-                    <span class="related-card-title">Medallion lakehouse</span>
+                    <span class="related-card-title">Bronze/Silver/Gold lakehouse on Parquet</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
                 <a href="demand-forecasting.html" class="related-card">
                     <span class="related-card-tag">Machine Learning</span>
-                    <span class="related-card-title">Demand forecasting ensemble</span>
+                    <span class="related-card-title">Demand forecasting by demand pattern</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
                 <a href="pipeline-orchestration.html" class="related-card">
                     <span class="related-card-tag">Platform Engineering</span>
-                    <span class="related-card-title">Pipeline orchestration layer</span>
+                    <span class="related-card-title">Job scheduling with install-time validation</span>
                     <span class="related-card-arrow">Read →</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="cta">
-            <h3>Running into data quality fires?</h3>
-            <p>I'm happy to compare notes on detection tiers, alerting discipline, and where SLOs beat ad-hoc thresholds.</p>
-            <div class="cta-row">
-                <a href="mailto:godson.kurishinkal@gmail.com?subject=Anomaly%20detection%20conversation" class="cta-btn cta-btn-primary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    Get in touch
-                </a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-ghost">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    LinkedIn
                 </a>
             </div>
         </div>

@@ -1083,7 +1083,7 @@ footer {
 /* ---- Impact strip (before/after) ---- */
 .impact-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 .impact {
@@ -1571,4 +1571,15 @@ nav.landing-nav.scrolled {
 @media (max-width: 640px) {
     .hero-visual { order: -1; justify-self: start; margin-left: 10px; }
     .hero-image { width: 88px; height: 88px; }
+}
+
+/* Short note under a case-study header saying what the write-up is. */
+.case-note {
+    margin-top: 2rem;
+    padding: 0.875rem 1.125rem;
+    border-left: 3px solid var(--border-2);
+    background: var(--bg-card);
+    color: var(--text-2);
+    font-size: 0.9375rem;
+    line-height: 1.6;
 }

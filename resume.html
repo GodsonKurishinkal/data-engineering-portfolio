@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fafafa">
     <title>Godson Kurishinkal Antony — Data &amp; Analytics Engineering · Résumé</title>
-    <meta name="description" content="Résumé of Godson Kurishinkal Antony — data engineer in Dubai. 6+ years in UAE data &amp; analytics. Medallion lakehouses, ETL frameworks, ML forecasting.">
+    <meta name="description" content="Résumé of Godson Kurishinkal Antony, data engineer in Dubai. Six years in UAE retail and logistics data: ETL pipelines, data models and forecasting.">
     <meta name="author" content="Godson Kurishinkal Antony">
     <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/resume.html">
 
@@ -406,9 +406,9 @@
         <section>
             <h2 class="r-section-title">Summary</h2>
             <p class="r-summary">
-                Data engineer with <span class="metric">6+ years</span> in UAE data &amp; analytics, engineering supply chain data platforms across retail and logistics.
-                Built dimensional models with <span class="metric">10+ fact tables</span> and <span class="metric">6+ dimensions</span>, designed medallion lakehouses (Bronze→Silver→Gold) processing <span class="metric">30,000+ SKUs</span> daily.
-                Delivered semantic layers and reporting across <span class="metric">50+ reports</span> for <span class="metric">15+ strategic stakeholders</span>, achieving <span class="metric">87% faster</span> analytics delivery at <span class="metric">98%+ pipeline success rate</span>.
+                Data engineer with <span class="metric">6+ years</span> in UAE retail and logistics data.
+                I build and run ETL pipelines, a Bronze/Silver/Gold lakehouse on Parquet and dimensional models (<span class="metric">10+ fact tables</span>, <span class="metric">6+ dimensions</span>) covering <span class="metric">30,000+ SKUs</span> daily.
+                I deliver Power BI semantic models and reporting across <span class="metric">50+ reports</span>, and cut the daily ETL window from <span class="metric">4 hours to 30 minutes</span>.
             </p>
         </section>
 
@@ -451,7 +451,7 @@
                 <ul class="r-bullets">
                     <li>Designed dimensional models with <span class="metric">10+ fact tables</span> and <span class="metric">6+ dimensions</span> using Kimball star schema; built a <span class="metric">medallion lakehouse</span> (Bronze/Silver/Gold) processing <span class="metric">30,000+ SKUs</span> daily at a <span class="metric">99%+ data quality score</span>.</li>
                     <li>Engineered <span class="metric">50+ automated transformation pipelines</span> on a configuration-driven ETL framework using Polars and DuckDB — cut ETL from <span class="metric">4 hours to 30 minutes (87%)</span>.</li>
-                    <li>Built a demand forecasting engine with a <span class="metric">7+ algorithm</span> ensemble (Prophet, XGBoost, Croston, ARIMA) and ADI/CV² pattern classification for inventory optimisation.</li>
+                    <li>Built a demand forecasting engine that classifies each SKU by demand pattern (ADI/CV²) and selects a suitable model (Prophet, XGBoost, Croston, ARIMA) for inventory planning.</li>
                     <li>Delivered Power BI semantic models and Streamlit dashboards across <span class="metric">50+ reports</span> for <span class="metric">15+ strategic stakeholders</span>, reducing ad-hoc query time by <span class="metric">60%</span>.</li>
                     <li>Improved data freshness from <span class="metric">48 hours to 2–4 hours (90%)</span>, enabling same-day supply chain decisions.</li>
                     <li>Developed a 3-tier data quality framework (schema → business rules → statistical outliers) catching <span class="metric">500+ issues</span>, reducing analytics incidents by <span class="metric">70%</span>.</li>
@@ -512,24 +512,24 @@
             <div class="r-projects">
                 <article class="r-project">
                     <div class="r-project-head">
-                        <span class="r-project-name">Analytics Lakehouse Architecture</span>
+                        <span class="r-project-name">Bronze/Silver/Gold Lakehouse on Parquet</span>
                         <span class="r-project-tech">Python · Polars · DuckDB · Parquet · Star schema</span>
                     </div>
-                    <p class="r-project-desc">Dimensional data platform with Bronze/Silver/Gold layers, <span class="metric">10+ fact tables</span>, <span class="metric">6+ dimensions</span>, and semantic layers ensuring consistent business logic across analytics.</p>
+                    <p class="r-project-desc">Raw, cleaned and reporting layers on partitioned Parquet with a star schema: <span class="metric">10+ fact tables</span>, <span class="metric">6+ dimensions</span>, and Power BI semantic models on top.</p>
                 </article>
                 <article class="r-project">
                     <div class="r-project-head">
-                        <span class="r-project-name">Demand Forecasting Engine</span>
+                        <span class="r-project-name">Demand Forecasting by Demand Pattern</span>
                         <span class="r-project-tech">Python · Scikit-learn · Prophet · XGBoost · Streamlit</span>
                     </div>
-                    <p class="r-project-desc">Ensemble forecasting with ADI/CV² pattern classification and automatic algorithm selection, plus inventory optimisation with safety-stock calculations — reducing stockouts by <span class="metric">30%</span>.</p>
+                    <p class="r-project-desc">ADI/CV² pattern classification with per-SKU model selection, feeding safety-stock calculations for inventory planning.</p>
                 </article>
                 <article class="r-project">
                     <div class="r-project-head">
-                        <span class="r-project-name">Transformation Layer Framework</span>
+                        <span class="r-project-name">ETL Framework Components (public code)</span>
                         <span class="r-project-tech">Python · YAML · Data quality · Logging</span>
                     </div>
-                    <p class="r-project-desc">Configuration-driven transformation framework with schema validation, data quality checks, and FULL / INCREMENTAL modes. Production-grade code with type hints and documentation.</p>
+                    <p class="r-project-desc">Python component library: extractors, schema enforcement, loaders and data-quality detectors, with tests on the schema and detector modules. github.com/GodsonKurishinkal/data-engineering-portfolio</p>
                 </article>
             </div>
         </section>

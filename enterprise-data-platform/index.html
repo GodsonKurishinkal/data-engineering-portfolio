@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fafafa">
 
-    <title>Enterprise Data Platform — Godson Kurishinkal Antony</title>
-    <meta name="description" content="Production-grade medallion lakehouse codebase: configuration-driven ETL framework, 3-tier data quality, Polars + DuckDB. Source on GitHub.">
+    <title>ETL framework components (public code) — Godson Kurishinkal Antony</title>
+    <meta name="description" content="A Python component library for ETL: extractors, a schema enforcer, Parquet and DuckDB loaders, and data-quality detectors. 33 tests. Source on GitHub.">
     <meta name="author" content="Godson Kurishinkal Antony">
     <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/enterprise-data-platform/">
 
-    <meta property="og:title" content="Enterprise Data Platform — Source Code">
-    <meta property="og:description" content="Production-grade medallion lakehouse codebase: configuration-driven ETL, 3-tier quality, Polars + DuckDB.">
+    <meta property="og:title" content="ETL framework components (public code)">
+    <meta property="og:description" content="A Python component library for ETL: extractors, a schema enforcer, loaders and data-quality detectors. 33 tests.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/enterprise-data-platform/">
     <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
@@ -23,7 +23,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
     <link rel="stylesheet" href="../assets/css/tokens.css?v=2bb3148a">
-    <link rel="stylesheet" href="../assets/css/app.css?v=02437586">
+    <link rel="stylesheet" href="../assets/css/app.css?v=afe324a9">
     <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -62,45 +62,26 @@
         </a>
 
         <header>
-            <span class="case-category">Open Source · Reference Implementation</span>
-            <h1 class="case-title">Enterprise data platform — the codebase.</h1>
-            <p class="case-pitch">A production-grade, configuration-driven ETL framework that pairs with the <a href="../projects/medallion-lakehouse.html" style="text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">medallion lakehouse</a> and <a href="../projects/anomaly-detection.html" style="text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;">3-tier quality</a> case studies. Python · Polars · DuckDB · Parquet. Source on GitHub.</p>
+            <span class="case-category">Public code · Component library</span>
+            <h1 class="case-title">ETL framework components (public code)</h1>
+            <p class="case-pitch">A Python library of the building blocks I use for ETL: extractors, a schema enforcer, Parquet and DuckDB loaders, and data-quality detectors. Built on Polars and DuckDB.</p>
 
             <div class="case-meta">
-                <div class="case-meta-item"><span class="case-meta-label">Status</span><span class="case-meta-value">Production · v1.0</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Status</span><span class="case-meta-value">Alpha · partly tested</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Stack</span><span class="case-meta-value">Python · Polars · DuckDB</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Tests</span><span class="case-meta-value">31 · CI on every push</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Tests</span><span class="case-meta-value">33 · run in CI</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">License</span><span class="case-meta-value">MIT</span></div>
             </div>
-
-            <div class="kpi-grid">
-                <div class="kpi">
-                    <div class="kpi-value">5k+</div>
-                    <div class="kpi-label">Lines of code</div>
-                    <div class="kpi-detail">Type-hinted, documented</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">50+</div>
-                    <div class="kpi-label">Pipelines supported</div>
-                    <div class="kpi-detail">Config-driven onboarding</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">3-Tier</div>
-                    <div class="kpi-label">Quality framework</div>
-                    <div class="kpi-detail">Schema · rules · stats</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">95%+</div>
-                    <div class="kpi-label">Pipeline reliability</div>
-                    <div class="kpi-detail">In production</div>
-                </div>
-            </div>
         </header>
+
+        <p class="case-note">This is the only write-up with public code. It is a component library, not a running platform: the repository has no pipeline entry point, sample data or pipeline configs, and the extractors and loaders are untested.</p>
 
         <nav class="toc" aria-label="On this page">
             <span class="toc-label">On this page</span>
             <ol>
                 <li><a href="#whats-in-the-repo">What's in the repo</a></li>
+                <li><a href="#what-is-tested">What is tested</a></li>
+                <li><a href="#known-gaps">Known gaps</a></li>
                 <li><a href="#architecture-decisions">Architecture decisions</a></li>
             </ol>
         </nav>
@@ -108,70 +89,99 @@
         <section class="reveal" id="whats-in-the-repo">
             <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">What's in the repo</h2></div>
             <div class="prose">
-                <p>The reference implementation behind my medallion lakehouse and data quality case studies — a set of composable modules you can read end-to-end. It's organised for navigation, not marketing.</p>
+                <p>About 5,000 lines of Python in two packages, plus design documents. The source is on <a href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/tree/main/enterprise-data-platform" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
             </div>
             <div class="card-grid">
                 <div class="card">
                     <h3 class="card-title">etl_framework/</h3>
-                    <div class="card-sub">Core pipelines</div>
-                    <div class="card-desc">Abstract Base Class extractors, transformers, loaders. Configuration-driven behaviour. FULL and INCREMENTAL modes.</div>
+                    <div class="card-sub">Extract, transform, load</div>
+                    <div class="card-desc">Base classes and implementations for database, API and browser-automation extractors; a schema enforcer and a data cleaner; a Hive-partitioned Parquet writer and a DuckDB loader.</div>
                 </div>
                 <div class="card">
                     <h3 class="card-title">data_quality/</h3>
-                    <div class="card-sub">3-tier validation</div>
-                    <div class="card-desc">Schema enforcement, business-rule checks, statistical outlier detection (Z-Score, Modified Z, IQR, percentile).</div>
+                    <div class="card-sub">Validation and outliers</div>
+                    <div class="card-desc">A rule-based validation engine and an anomaly detector with z-score, modified z-score, IQR and percentile methods, plus spike and volume checks.</div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">docs/architecture-decisions/</h3>
+                    <div class="card-sub">Seven ADRs</div>
+                    <div class="card-desc">Polars over Pandas, DuckDB for analytics, the Bronze/Silver/Gold layout, Parquet with Hive partitioning, config-driven pipelines, browser automation, and Task Scheduler.</div>
                 </div>
                 <div class="card">
                     <h3 class="card-title">architecture/</h3>
-                    <div class="card-sub">Diagrams &amp; ADRs</div>
-                    <div class="card-desc">Architecture decision records covering Polars vs. Pandas, DuckDB for analytics, medallion structure, partitioning.</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">docs/</h3>
-                    <div class="card-sub">Runbooks &amp; benchmarks</div>
-                    <div class="card-desc">Deployment guide, reliability metrics, performance benchmarks — the operational reality of running this in production.</div>
+                    <div class="card-sub">Design notes</div>
+                    <div class="card-desc">Layer specifications and a data-flow description. These describe a design; the pipelines they describe are not in this repository.</div>
                 </div>
             </div>
         </section>
 
-        <section class="reveal" id="architecture-decisions">
-            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">Architecture decisions</h2></div>
+        <section class="reveal" id="what-is-tested">
+            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">What is tested</h2></div>
             <div class="prose">
-                <p>Every non-obvious choice is recorded as a lightweight ADR in <code>docs/architecture-decisions/</code>. The pattern — <em>Context · Decision · Consequences</em> — makes future-me (and future-you) able to argue with past-me.</p>
+                <p>33 tests cover the schema enforcer and the anomaly detector. Coverage on those two modules is 67%. Across the whole package it is 20%. The tests run in GitHub Actions on every pull request.</p>
+                <p>To reproduce, from the <code>enterprise-data-platform</code> folder:</p>
+            </div>
+            <div class="code">
+                <div class="code-head">
+                    <span class="code-file">Run the tests</span>
+                    <span class="code-lang">shell</span>
+                </div>
+<pre>pip install -e ".[dev]"
+pytest tests/ --cov=etl_framework --cov=data_quality</pre>
+            </div>
+        </section>
+
+        <section class="reveal" id="known-gaps">
+            <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Known gaps</h2></div>
+            <div class="prose">
+                <ul>
+                    <li>The extractors, the loaders and the validation engine have no tests. They need a live database, portal or browser to exercise, and none is provided here.</li>
+                    <li>Nothing runs end to end. There is no entry point, sample data or pipeline config.</li>
+                    <li>The lint and type checks configured in the Makefile currently fail.</li>
+                    <li>Dependencies are not pinned and there is no lock file.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="reveal" id="architecture-decisions">
+            <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Architecture decisions</h2></div>
+            <div class="prose">
+                <p>Each decision is recorded as an ADR in <code>docs/architecture-decisions/</code> with its context, the alternatives and what it cost. Three of the seven:</p>
             </div>
             <div class="decisions">
                 <div class="decision">
                     <div class="decision-head"><span class="decision-title">Polars over Pandas</span><span class="decision-tag">ADR-001</span></div>
                     <div class="decision-body">
-                        <p>Arrow-backed, expression-based, 5–10× faster on our Silver transforms. Narrower API means fewer ways to write the wrong query.</p>
+                        <p>Arrow-backed, multi-threaded and lazy, with native Parquet scans. Cost: a smaller ecosystem, and a learning curve for anyone used to Pandas.</p>
                     </div>
                 </div>
                 <div class="decision">
                     <div class="decision-head"><span class="decision-title">DuckDB for analytics</span><span class="decision-tag">ADR-002</span></div>
                     <div class="decision-body">
-                        <p>Zero-copy Parquet reads, columnar engine, single-binary deployment. The right tool for ad-hoc Gold-layer exploration without spinning up a warehouse.</p>
+                        <p>Queries Parquet files in place with standard SQL and needs no server. Cost: single-user, with limited support for concurrent writes.</p>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Medallion over alternatives</span><span class="decision-tag">ADR-003</span></div>
+                    <div class="decision-head"><span class="decision-title">Parquet with Hive partitioning, not Delta</span><span class="decision-tag">ADR-004</span></div>
                     <div class="decision-body">
-                        <p>Bronze / Silver / Gold gave us the separation we needed without the Spark dependency Delta Lake demanded. Data Vault was overkill for the scale.</p>
+                        <p>Plain files that both Polars and DuckDB read, with no Spark runtime. Cost: no ACID guarantees and no time travel.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="cta">
-            <h3>Read the source.</h3>
-            <p>The full codebase, ADRs, runbooks, and benchmarks live on GitHub.</p>
-            <div class="cta-row">
-                <a href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/tree/main/enterprise-data-platform" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-primary">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                    View on GitHub
+        <div class="related">
+            <div class="related-heading">Related case studies</div>
+            <div class="related-grid">
+                <a href="../projects/medallion-lakehouse.html" class="related-card">
+                    <span class="related-card-tag">Data Platform</span>
+                    <span class="related-card-title">Bronze/Silver/Gold lakehouse on Parquet</span>
+                    <span class="related-card-arrow">Read →</span>
                 </a>
-                <a href="../projects/medallion-lakehouse.html" class="cta-btn cta-btn-ghost">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    Lakehouse case study
+                <a href="../projects/anomaly-detection.html" class="related-card">
+                    <span class="related-card-tag">Data Quality</span>
+                    <span class="related-card-title">Three-tier data-quality checks</span>
+                    <span class="related-card-arrow">Read →</span>
                 </a>
             </div>
         </div>
