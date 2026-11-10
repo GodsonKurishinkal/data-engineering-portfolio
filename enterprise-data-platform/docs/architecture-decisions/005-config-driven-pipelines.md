@@ -1,7 +1,7 @@
 # ADR-005: Configuration-Driven Pipeline Design
 
 ## Status
-**Accepted** (March 2024)
+**Accepted**
 
 ## Context
 

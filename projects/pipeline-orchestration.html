@@ -8,13 +8,13 @@
     <title>Job scheduling with install-time validation — Godson Kurishinkal</title>
     <meta name="description" content="Case study: a scheduling layer over Windows Task Scheduler that checks the whole job graph for cycles, time conflicts and dependency order before anything is installed.">
     <meta name="author" content="Godson Kurishinkal Antony">
-    <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/pipeline-orchestration.html">
+    <link rel="canonical" href="https://godsonkurishinkal.github.io/portfolio/projects/pipeline-orchestration.html">
 
     <meta property="og:title" content="Job scheduling with install-time validation — Case Study">
     <meta property="og:description" content="A scheduling layer over Windows Task Scheduler: nine checks on the job graph before install, and freshness checks before each job runs.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/pipeline-orchestration.html">
-    <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
+    <meta property="og:url" content="https://godsonkurishinkal.github.io/portfolio/projects/pipeline-orchestration.html">
+    <meta property="og:image" content="https://godsonkurishinkal.github.io/portfolio/assets/images/og-image.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,7 +169,7 @@
             <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Build the graph layer, keep Task Scheduler for execution</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/007-task-scheduler-orchestration.md" target="_blank" rel="noopener noreferrer">ADR-007</a></div>
+                    <div class="decision-head"><span class="decision-title">Build the graph layer, keep Task Scheduler for execution</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/007-task-scheduler-orchestration.md" target="_blank" rel="noopener noreferrer">ADR-007</a></div>
                     <div class="decision-body">
                         <p>Task Scheduler already runs things reliably. What was missing was a way to express dependencies and check them. I built that part and left execution alone.</p>
                         <em>Trade-off: I wrote cycle detection and topological ordering myself, which an orchestration framework provides. They need their own tests; most of the 43 tests in the private work code cover this.</em>

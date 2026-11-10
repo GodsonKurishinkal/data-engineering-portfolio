@@ -1,7 +1,7 @@
 # ADR-002: Use DuckDB for Analytical Queries
 
 ## Status
-**Accepted** (April 2024)
+**Accepted**
 
 ## Context
 
@@ -152,11 +152,3 @@ result_polars = conn.execute("...").pl()
 - [DuckDB Documentation](https://duckdb.org/docs/)
 - [DuckDB vs Pandas Benchmark](https://duckdb.org/2021/05/14/sql-on-pandas.html)
 - [Parquet Integration Guide](https://duckdb.org/docs/data/parquet/overview)
-
-## Revision History
-
-| Date | Change | Author |
-|------|--------|--------|
-| 2024-04-10 | Initial decision | Godson K. |
-| 2024-08-15 | Added cost analysis | Godson K. |
-| 2026-11-10 | Removed benchmark table: the benchmark is not published here | Godson K. |

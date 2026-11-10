@@ -1,7 +1,7 @@
 # ADR-004: Use Parquet with Hive Partitioning (not Delta Lake)
 
 ## Status
-**Accepted** (February 2024)
+**Accepted**
 
 ## Context
 

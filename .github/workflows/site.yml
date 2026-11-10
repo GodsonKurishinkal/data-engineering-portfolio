@@ -30,12 +30,12 @@ jobs:
           bash scripts/bump-css-version.sh
           git diff --exit-code -- '*.html'
 
-      # 404.html uses absolute /data-engineering-portfolio/ paths, so the site
+      # 404.html uses absolute /portfolio/ paths, so the site
       # is staged under that prefix before links are checked.
       - name: Stage site under its published path
         run: |
-          mkdir -p _site/data-engineering-portfolio
-          git archive HEAD | tar -x -C _site/data-engineering-portfolio
+          mkdir -p _site/portfolio
+          git archive HEAD | tar -x -C _site/portfolio
 
       - name: Check internal links
         uses: lycheeverse/lychee-action@v2

@@ -2,7 +2,7 @@
 
 Data and analytics engineer in Dubai. I build data pipelines and analytics models for retail supply chain.
 
-- Site: https://godsonkurishinkal.github.io/data-engineering-portfolio/
+- Site: https://godsonkurishinkal.github.io/portfolio/
 - LinkedIn: https://linkedin.com/in/godsonkurishinkal
 - Email: godson.kurishinkal@gmail.com
 

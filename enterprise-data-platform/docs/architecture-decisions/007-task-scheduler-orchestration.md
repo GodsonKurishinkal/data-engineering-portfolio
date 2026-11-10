@@ -1,7 +1,7 @@
 # ADR-007: Windows Task Scheduler for Orchestration
 
 ## Status
-**Accepted** (March 2024)
+**Accepted**
 
 ## Context
 
