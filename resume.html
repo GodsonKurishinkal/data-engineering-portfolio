@@ -12,103 +12,29 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
-    <link rel="stylesheet" href="assets/css/tokens.css?v=721bab3b">
+    <link rel="stylesheet" href="assets/css/tokens.css?v=6ff5aee7">
+    <link rel="stylesheet" href="assets/css/app.css?v=ebb3c138">
 
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        /* Tokens come from assets/css/tokens.css.
-           Only the two values specific to a printed page are set here. */
+        /* The shared shell (header, action row, end block, footer) is styled by
+           assets/css/app.css. Everything below belongs to the sheet (.resume). */
         :root {
-            --bg: #f1f5f9;   /* cooler desk behind the sheet, not the site background */
+            --desk: #f1f5f9;   /* cooler desk behind the sheet, not the site background */
             --paper: #ffffff;
         }
 
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--font-sans);
-            font-size: 15px;
-            line-height: 1.55;
-            color: var(--ink);
-            background: var(--bg);
-            -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
-            padding: 2rem 1rem;
-        }
-
-        /* ---- Screen toolbar (hidden in print) ---- */
-        .toolbar {
-            max-width: 8.5in;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 0.75rem 1rem;
-            background: var(--paper);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 0.8125rem;
-            color: var(--text-2);
-        }
-        .toolbar-brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            color: var(--ink);
-        }
-        .toolbar-brand-mark {
-            width: 24px;
-            height: 24px;
-            border-radius: 5px;
-            background: var(--ink);
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.625rem;
-        }
-        .toolbar-links { display: flex; gap: 1rem; }
-        .toolbar-links a { color: var(--text-3); text-decoration: none; transition: color 150ms; }
-        .toolbar-links a:hover { color: var(--ink); }
-        .toolbar-print {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.375rem;
-            padding: 0.375rem 0.75rem;
-            border: 1px solid var(--border-2);
-            border-radius: 6px;
-            background: transparent;
-            font-family: inherit;
-            font-size: inherit;
-            color: var(--ink);
-            cursor: pointer;
-            transition: all 150ms;
-        }
-        .toolbar-print:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
-        .toolbar-print svg { width: 14px; height: 14px; }
-        .toolbar-actions { display: flex; gap: 0.5rem; }
-        a.toolbar-print { text-decoration: none; }
-
-        :where(a, button):focus-visible {
-            outline: 2px solid var(--ink);
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            *, *::before, *::after { transition-duration: 0.01ms !important; }
-        }
+        body { background: var(--desk); }
 
         /* ---- Page ---- */
         .resume {
-            max-width: 8.5in;
+            /* same outer width as the action row above and the end block below */
+            width: min(8.5in, 100% - 2 * var(--gutter));
             margin: 0 auto;
-            padding: 0.6in 0.7in;
+            /* phone padding up to 480px, then a ramp to the full margins at 8.5in */
+            padding: clamp(1.25rem, 9.4vw - 1.57rem, 0.6in) clamp(1rem, 12.8vw - 2.84rem, 0.7in);
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--ink);
             background: var(--paper);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -172,7 +98,7 @@
             color: var(--text-2);
             line-height: 1.65;
         }
-        .r-summary strong, .metric {
+        .metric {
             font-weight: 600;
             color: var(--ink);
         }
@@ -328,17 +254,15 @@
             gap: 1rem;
         }
         .r-cert-name { color: var(--ink); font-weight: 500; }
-        .r-cert-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-3); }
+        .r-cert-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-3); white-space: nowrap; flex-shrink: 0; }
 
         /* ---- Print styles ---- */
         @media print {
             @page { size: A4; margin: 0.4in; }
-            .skip-link { display: none !important; }
             html { font-size: 13.5px; }
-            body { background: #fff; padding: 0; }
-            .toolbar, .no-print { display: none !important; }
+            body { background: #fff; }
             .resume {
-                max-width: none;
+                width: auto;
                 margin: 0;
                 padding: 0;
                 border: none;
@@ -352,41 +276,51 @@
             .r-bullets li, .r-project-desc { font-size: 0.75rem; }
         }
 
+        /* ---- Screen ---- */
+        /* The contact line wraps on screen; a wrapped row must not start with
+           a separator dot, so the dots are for print, where it is one row. */
+        @media screen {
+            .r-contact { column-gap: 1.25rem; row-gap: 1.5rem; }
+            .r-contact-item + .r-contact-item::before { content: none; }
+            /* 44px targets without moving the text. */
+            .r-contact a { display: inline-block; padding-block: 12px; margin-block: -12px; }
+        }
+
         /* ---- Responsive ---- */
-        @media screen and (max-width: 640px) {
-            body { padding: 1rem 0.5rem; }
-            .resume { padding: 1.25rem 1rem; border-radius: 6px; }
+        @media screen and (max-width: 39.99em) {
+            .resume { border-radius: 6px; }
+            .r-contact { flex-direction: column; align-items: flex-start; gap: 0; }
+            .r-contact a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; margin-block: 0; }
             .r-name { font-size: 1.5rem; }
             .r-skills { grid-template-columns: 1fr; gap: 0.125rem; }
             .r-skills dt { margin-top: 0.375rem; }
             .r-skills dt:first-child { margin-top: 0; }
-            .toolbar { flex-direction: column; align-items: stretch; gap: 0.5rem; }
         }
     </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <div class="toolbar no-print">
-        <a href="index.html" class="toolbar-brand">
-            <span class="toolbar-brand-mark">GK</span>
-            Back to portfolio
-        </a>
-        <div class="toolbar-links">
-            <a href="mailto:godson.kurishinkal@gmail.com">Email</a>
-            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+            <a href="index.html" class="nav-brand">
+                <span class="nav-brand-mark" aria-hidden="true">GK</span>
+                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#projects">Case studies</a></li>
+                <li><a href="resume.html" aria-current="page">Résumé</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <nav class="resume-actions" aria-label="Résumé actions">
+        <a href="index.html#projects" class="back-link"><span aria-hidden="true">←</span> All case studies</a>
+        <div class="resume-actions-buttons">
+            <a href="Godson_Kurishinkal_Antony_Resume.pdf" download class="btn btn-ink">Download PDF</a>
+            <button type="button" class="btn btn-ghost" id="print-button" hidden>Print</button>
         </div>
-        <div class="toolbar-actions">
-        <a class="toolbar-print" href="Godson_Kurishinkal_Antony_Resume.pdf" download>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download PDF
-        </a>
-        <button type="button" class="toolbar-print" onclick="window.print()" aria-label="Print or save as PDF">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-            Print
-        </button>
-        </div>
-    </div>
+    </nav>
 
     <main class="resume" id="main">
         <header class="r-head">
@@ -559,5 +493,33 @@
             </div>
         </section>
     </main>
+
+    <nav class="resume-end" aria-label="After the résumé">
+        <a href="mailto:godson.kurishinkal@gmail.com" class="btn btn-ink">Email</a>
+        <a href="enterprise-data-platform/" class="text-link"><span aria-hidden="true">←</span> Previous: ETL framework components (public code)</a>
+        <a href="index.html#projects" class="text-link">All case studies</a>
+    </nav>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>© 2026 Godson Kurishinkal Antony · Dubai</p>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resume.html">Résumé</a></li>
+                <li><a href="mailto:godson.kurishinkal@gmail.com">Email</a></li>
+                <li><a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var button = document.getElementById('print-button');
+            if (!button) return;
+            button.hidden = false;
+            button.addEventListener('click', function () { window.print(); });
+        })();
+    </script>
 </body>
 </html>

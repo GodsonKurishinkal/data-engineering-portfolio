@@ -1,6 +1,6 @@
 /* ================================================================
    Design tokens — single source of truth
-   Imported by: assets/css/app.css (site) and resume.html (print page)
+   Linked before assets/css/app.css on every page, résumé included.
    Change a colour here, not in two places.
    ================================================================ */
 
@@ -44,7 +44,7 @@
     --bg-card:    #ffffff;
     --bg-code:    #0f172a;
 
-    /* Ink and text */
+    /* Ink and text. --text-4 is for rules and dots only, never for text. */
     --ink:        #0f172a;
     --ink-2:      #1e293b;
     --text-2:     #334155;
@@ -55,25 +55,47 @@
     --border:     #e5e7eb;
     --border-2:   #d1d5db;
 
-    /* Accents */
-    --accent:     #0f172a;
-    --live:       #10b981;
+    /* Status */
+    --live:       #10b981;   /* rules and borders */
+    --live-text:  #047857;   /* status text */
     --live-bg:    rgba(16, 185, 129, 0.08);
-
-    /* Elevation */
-    --shadow-sm:  0 1px 2px rgba(15, 23, 42, 0.04);
-    --shadow-md:  0 4px 12px -2px rgba(15, 23, 42, 0.06);
-    --shadow-lg:  0 12px 32px -8px rgba(15, 23, 42, 0.08);
 
     /* Type */
     --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
+    /* Spacing */
+    --s1: 4px;
+    --s2: 8px;
+    --s3: 12px;
+    --s4: 16px;
+    --s5: 24px;
+    --s6: 32px;
+    --s7: 48px;
+    --s8: 64px;
+
+    /* Layout. Three width ranges only: small, medium (40em), wide (64em). */
+    --gutter:      20px;     /* one left edge for header, main and footer */
+    --section-pad: 40px;     /* top and bottom padding of a section */
+    --container:   1120px;   /* shell and home page */
+    --content:     760px;    /* case-study content column */
+    --prose:       65ch;
+    --header-h:    56px;
+    --anchor-gap:  72px;     /* where an anchored section stops under the sticky header */
+
     /* Geometry */
     --radius:     12px;
     --radius-sm:  8px;
-    --radius-lg:  16px;
-    --container:      880px;
-    --container-wide: 1120px;
-    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 150ms ease;
+}
+
+@media (min-width: 40em) {
+    :root { --gutter: 32px; --section-pad: 56px; }
+}
+@media (min-width: 64em) {
+    :root { --section-pad: 64px; }
+}
+/* On a short screen the header is not sticky, so anchors need less room. */
+@media (max-height: 30em) {
+    :root { --anchor-gap: 16px; }
 }

@@ -19,56 +19,38 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
-    <link rel="stylesheet" href="../assets/css/tokens.css?v=721bab3b">
-    <link rel="stylesheet" href="../assets/css/app.css?v=afe324a9">
-    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="../assets/css/tokens.css?v=6ff5aee7">
+    <link rel="stylesheet" href="../assets/css/app.css?v=ebb3c138">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <nav aria-label="Primary">
-        <div class="nav-inner">
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
             <a href="../index.html" class="nav-brand">
-                <span class="nav-brand-mark">GK</span>
-                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span> <span class="nav-brand-meta">· Data &amp; Analytics Engineering</span>
+                <span class="nav-brand-mark" aria-hidden="true">GK</span>
+                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span>
             </a>
-            <div class="nav-sections">
-                <a href="../index.html#projects">Case studies</a>
-                <a href="../index.html#approach">Approach</a>
-                <a href="../index.html#about">About</a>
-                <a href="../index.html#roadmap">Roadmap</a>
-            </div>
-            <div class="nav-links">
-                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="../resume.html" class="nav-cta">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                    Résumé
-                </a>
-            </div>
-        </div>
-    </nav>
+            <ul class="nav-links">
+                <li><a href="../index.html#projects" aria-current="page">Case studies</a></li>
+                <li><a href="../resume.html">Résumé</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <main id="main">
-        <a href="../index.html#projects" class="back-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            All case studies
-        </a>
-
-        <header>
-            <span class="case-category">Data Platform · 2025</span>
+    <main id="main" class="case">
+        <header class="case-header">
+            <a href="../index.html#projects" class="back-link"><span aria-hidden="true">←</span> All case studies</a>
+            <p class="case-category">Case study 1 of 6 · Data pipeline</p>
             <h1 class="case-title">Bronze/Silver/Gold lakehouse on Parquet</h1>
             <p class="case-pitch">A single-machine pipeline and Parquet layout that I designed, built and run. It takes data from four source systems to a star schema used for daily reporting on 30,000+ SKUs.</p>
 
-            <div class="case-meta">
-                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Design, build, operations</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Industry</span><span class="case-meta-value">Retail · Supply Chain</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Duration</span><span class="case-meta-value">6 months</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Data Scale</span><span class="case-meta-value">30,000+ SKUs daily</span></div>
-            </div>
+            <dl class="case-meta">
+                <div class="case-meta-item"><dt class="case-meta-label">Role</dt><dd class="case-meta-value">Design, build, operations</dd></div>
+                <div class="case-meta-item"><dt class="case-meta-label">Industry</dt><dd class="case-meta-value">Retail · Supply Chain</dd></div>
+                <div class="case-meta-item"><dt class="case-meta-label">Duration</dt><dd class="case-meta-value">6 months</dd></div>
+                <div class="case-meta-item"><dt class="case-meta-label">Data Scale</dt><dd class="case-meta-value">30,000+ SKUs daily</dd></div>
+            </dl>
 
             <div class="kpi-grid">
                 <div class="kpi">
@@ -87,12 +69,13 @@
                     <div class="kpi-detail">Share of analyst time</div>
                 </div>
             </div>
+
+            <p class="case-note">This describes a system I built at work. The code is not public; the snippets below are simplified illustrations. Figures are my own measurements and the underlying data is not public.</p>
         </header>
 
-        <p class="case-note">This describes a system I built at work. The code is not public; the snippets below are simplified illustrations. Figures are my own measurements and the underlying data is not public.</p>
-
         <nav class="toc" aria-label="On this page">
-            <span class="toc-label">On this page</span>
+            <a href="../index.html#projects" class="back-link toc-back"><span aria-hidden="true">←</span> All case studies</a>
+            <p class="toc-label">On this page</p>
             <ol>
                 <li><a href="#the-problem">The problem</a></li>
                 <li><a href="#the-architecture">What I built</a></li>
@@ -103,113 +86,120 @@
             </ol>
         </nav>
 
-        <section class="reveal" id="the-problem">
-            <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">The problem</h2></div>
-            <div class="prose">
-                <p>Supply chain reporting was assembled by hand from ERP, WMS, BI reports, POS and Excel exports. Each source had its own format and schedule.</p>
-                <ul>
-                    <li>Daily extraction took <strong>4+ hours</strong> before any analysis could start.</li>
-                    <li>Reports were <strong>24–48 hours</strong> behind the source systems.</li>
-                    <li>Analysts spent about <strong>60% of their time</strong> reconciling fields.</li>
-                    <li>There was no lineage, so every data issue had to be traced by hand.</li>
-                </ul>
-            </div>
-        </section>
+        <div class="case-body">
+            <section id="the-problem">
+                <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">The problem</h2></div>
+                <div class="prose">
+                    <p>Supply chain reporting was assembled by hand from ERP, WMS, BI reports, POS and Excel exports. Each source had its own format and schedule.</p>
+                    <ul>
+                        <li>Daily extraction took <strong>4+ hours</strong> before any analysis could start.</li>
+                        <li>Reports were <strong>24–48 hours</strong> behind the source systems.</li>
+                        <li>Analysts spent about <strong>60% of their time</strong> reconciling fields.</li>
+                        <li>There was no lineage, so every data issue had to be traced by hand.</li>
+                    </ul>
+                </div>
+            </section>
 
-        <section class="reveal" id="the-architecture">
-            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">What I built</h2></div>
-            <div class="prose">
-                <p>Three layers of Parquet files on one Windows machine, processed with Polars and queried with DuckDB. Each layer has one job.</p>
-            </div>
+            <section id="the-architecture">
+                <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">What I built</h2></div>
+                <div class="prose">
+                    <p>Three layers of Parquet files on one Windows machine, processed with Polars and queried with DuckDB. Each layer has one job.</p>
+                </div>
 
-            <div class="arch">
-                <div class="arch-row">
-                    <div class="arch-node">
-                        <div class="arch-node-num">01</div>
-                        <div class="arch-node-label">Sources</div>
-                        <div class="arch-node-sub">ERP · WMS · BI reports · POS</div>
-                    </div>
-                    <span class="arch-arrow">→</span>
-                    <div class="arch-node bronze">
-                        <div class="arch-node-num">02</div>
-                        <div class="arch-node-label">Bronze</div>
-                        <div class="arch-node-sub">Raw · Immutable · Parquet</div>
-                    </div>
-                    <span class="arch-arrow">→</span>
-                    <div class="arch-node silver">
-                        <div class="arch-node-num">03</div>
-                        <div class="arch-node-label">Silver</div>
-                        <div class="arch-node-sub">Clean · Validated · Typed</div>
-                    </div>
-                    <span class="arch-arrow">→</span>
-                    <div class="arch-node gold">
-                        <div class="arch-node-num">04</div>
-                        <div class="arch-node-label">Gold</div>
-                        <div class="arch-node-sub">Star schema · 10+ facts</div>
-                    </div>
-                    <span class="arch-arrow">→</span>
-                    <div class="arch-node">
-                        <div class="arch-node-num">05</div>
-                        <div class="arch-node-label">Consumers</div>
-                        <div class="arch-node-sub">Power BI · Streamlit · ML</div>
+                <div class="arch">
+                    <div class="arch-row">
+                        <div class="arch-node">
+                            <div class="arch-node-num">01</div>
+                            <div class="arch-node-label">Sources</div>
+                            <div class="arch-node-sub">ERP · WMS · BI reports · POS</div>
+                        </div>
+                        <span class="arch-arrow" aria-hidden="true">→</span>
+                        <div class="arch-node bronze">
+                            <div class="arch-node-num">02</div>
+                            <div class="arch-node-label">Bronze</div>
+                            <div class="arch-node-sub">Raw · Immutable · Parquet</div>
+                        </div>
+                        <span class="arch-arrow" aria-hidden="true">→</span>
+                        <div class="arch-node silver">
+                            <div class="arch-node-num">03</div>
+                            <div class="arch-node-label">Silver</div>
+                            <div class="arch-node-sub">Clean · Validated · Typed</div>
+                        </div>
+                        <span class="arch-arrow" aria-hidden="true">→</span>
+                        <div class="arch-node gold">
+                            <div class="arch-node-num">04</div>
+                            <div class="arch-node-label">Gold</div>
+                            <div class="arch-node-sub">Star schema · 10+ facts</div>
+                        </div>
+                        <span class="arch-arrow" aria-hidden="true">→</span>
+                        <div class="arch-node">
+                            <div class="arch-node-num">05</div>
+                            <div class="arch-node-label">Consumers</div>
+                            <div class="arch-node-sub">Power BI · Streamlit · ML</div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="prose">
-                <p><strong>Bronze</strong> holds each source extract as it arrived, untransformed. It is the record I reprocess from.</p>
-                <p><strong>Silver</strong> is schema-enforced, deduplicated and typed. The <a href="anomaly-detection.html">three-tier data-quality checks</a> run here, before anything reaches Gold.</p>
-                <p><strong>Gold</strong> is a Kimball star schema with 10+ fact tables and 6+ conformed dimensions. Business logic lives here, and Power BI models and forecasting read from it.</p>
-                <p>50+ pipelines feed these layers. Each one is a YAML config run by a shared extract, transform and load framework, so a behaviour change is a text diff.</p>
-            </div>
-        </section>
+                <div class="prose">
+                    <p><strong>Bronze</strong> holds each source extract as it arrived, untransformed. It is the record I reprocess from.</p>
+                    <p><strong>Silver</strong> is schema-enforced, deduplicated and typed. The <a href="anomaly-detection.html">three-tier data-quality checks</a> run here, before anything reaches Gold.</p>
+                    <p><strong>Gold</strong> is a Kimball star schema with 10+ fact tables and 6+ conformed dimensions. Business logic lives here, and Power BI models and forecasting read from it.</p>
+                    <p>50+ pipelines feed these layers. Each one is a YAML config run by a shared extract, transform and load framework, so a behaviour change is a text diff.</p>
+                </div>
+            </section>
 
-        <section class="reveal" id="key-decisions">
-            <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Key decisions</h2></div>
-            <div class="decisions">
-                <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Polars over Pandas</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/001-polars-over-pandas.md" target="_blank" rel="noopener noreferrer">ADR-001</a></div>
-                    <div class="decision-body">
-                        <p>The nightly Silver transforms had to finish inside a fixed window. Polars was faster than Pandas on these workloads and used less memory through lazy evaluation.</p>
-                        <em>Trade-off: a smaller community and fewer worked examples to lean on.</em>
+            <section id="key-decisions">
+                <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Key decisions</h2></div>
+                <div class="decisions">
+                    <div class="decision">
+                        <p class="decision-tag"><a href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/001-polars-over-pandas.md" target="_blank" rel="noopener noreferrer">ADR-001 on GitHub</a></p>
+                        <h3 class="decision-title">Polars over Pandas</h3>
+                        <div class="decision-body">
+                            <p>The nightly Silver transforms had to finish inside a fixed window. Polars was faster than Pandas on these workloads and used less memory through lazy evaluation.</p>
+                        </div>
+                        <p class="decision-tradeoff">Trade-off: a smaller community and fewer worked examples to lean on.</p>
+                    </div>
+                    <div class="decision">
+                        <p class="decision-tag"><a href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/004-parquet-hive-partitioning.md" target="_blank" rel="noopener noreferrer">ADR-004 on GitHub</a></p>
+                        <h3 class="decision-title">Hive-partitioned Parquet, not Delta</h3>
+                        <div class="decision-body">
+                            <p>There was no Spark or Databricks runtime. Plain Parquet partitioned by <code>extract_date</code> was fast enough with DuckDB and Polars and needed no extra platform.</p>
+                        </div>
+                        <p class="decision-tradeoff">Trade-off: no time travel or ACID guarantees on Bronze. Backfills are explicit partition overwrites.</p>
+                    </div>
+                    <div class="decision">
+                        <p class="decision-tag"><a href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/005-config-driven-pipelines.md" target="_blank" rel="noopener noreferrer">ADR-005 on GitHub</a></p>
+                        <h3 class="decision-title">Configuration-driven ETL</h3>
+                        <div class="decision-body">
+                            <p>Each pipeline is a YAML config on top of a shared base class. Schema, quality rules and load mode (FULL or INCREMENTAL) are declared, not coded per pipeline.</p>
+                        </div>
+                        <p class="decision-tradeoff">Trade-off: a steeper start for anyone new to the framework. Templates and reviewed changes reduce it.</p>
+                    </div>
+                    <div class="decision">
+                        <p class="decision-tag"><a href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/007-task-scheduler-orchestration.md" target="_blank" rel="noopener noreferrer">ADR-007 on GitHub</a></p>
+                        <h3 class="decision-title">Windows Task Scheduler for orchestration</h3>
+                        <div class="decision-body">
+                            <p>Airflow needs infrastructure this setup did not have. I used the OS scheduler that was already there, with structured logs and Teams alerts on failure. The scheduling layer is described in <a href="pipeline-orchestration.html">Job scheduling with install-time validation</a>.</p>
+                        </div>
+                        <p class="decision-tradeoff">Trade-off: no DAG view. A small Streamlit status board reads the pipeline log table instead.</p>
                     </div>
                 </div>
-                <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Hive-partitioned Parquet, not Delta</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/004-parquet-hive-partitioning.md" target="_blank" rel="noopener noreferrer">ADR-004</a></div>
-                    <div class="decision-body">
-                        <p>There was no Spark or Databricks runtime. Plain Parquet partitioned by <code>extract_date</code> was fast enough with DuckDB and Polars and needed no extra platform.</p>
-                        <em>Trade-off: no time travel or ACID guarantees on Bronze. Backfills are explicit partition overwrites.</em>
-                    </div>
-                </div>
-                <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Configuration-driven ETL</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/005-config-driven-pipelines.md" target="_blank" rel="noopener noreferrer">ADR-005</a></div>
-                    <div class="decision-body">
-                        <p>Each pipeline is a YAML config on top of a shared base class. Schema, quality rules and load mode (FULL or INCREMENTAL) are declared, not coded per pipeline.</p>
-                        <em>Trade-off: a steeper start for anyone new to the framework. Templates and reviewed changes reduce it.</em>
-                    </div>
-                </div>
-                <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Windows Task Scheduler for orchestration</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/007-task-scheduler-orchestration.md" target="_blank" rel="noopener noreferrer">ADR-007</a></div>
-                    <div class="decision-body">
-                        <p>Airflow needs infrastructure this setup did not have. I used the OS scheduler that was already there, with structured logs and Teams alerts on failure. The scheduling layer is described in <a href="pipeline-orchestration.html">Job scheduling with install-time validation</a>.</p>
-                        <em>Trade-off: no DAG view. A small Streamlit status board reads the pipeline log table instead.</em>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="reveal" id="implementation">
-            <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Example pipeline config</h2></div>
-            <div class="prose">
-                <p>A simplified example of one pipeline definition. The engine reads the file and runs extract, validate, transform and load.</p>
-            </div>
-
-            <div class="code">
-                <div class="code-head">
-                    <span class="code-file">pipelines/inventory_daily.yaml</span>
-                    <span class="code-lang">YAML</span>
+            <section id="implementation">
+                <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Example pipeline config</h2></div>
+                <div class="prose">
+                    <p>A simplified example of one pipeline definition. The engine reads the file and runs extract, validate, transform and load.</p>
                 </div>
-<pre><span class="cm"># Simplified illustration, not the production file.</span>
+
+                <div class="code">
+                    <div class="code-head">
+                        <span class="code-file">pipelines/inventory_daily.yaml</span>
+                        <span class="code-lang">YAML</span>
+                        <span class="code-scroll" aria-hidden="true">scroll →</span>
+                    </div>
+<!-- [html-validate-disable-next prefer-native-element -- a scrolling code block is a named, focusable region] -->
+<pre tabindex="0" role="region" aria-label="pipelines/inventory_daily.yaml"><span class="cm"># Simplified illustration, not the production file.</span>
 <span class="kw">pipeline</span>:
   <span class="kw">name</span>: <span class="str">"inventory_daily"</span>
   <span class="kw">source</span>:
@@ -226,104 +216,139 @@
       - <span class="str">"extract_date &lt;= today"</span>
   <span class="kw">load_mode</span>: <span class="str">"INCREMENTAL"</span>
   <span class="kw">schedule</span>: <span class="str">"0 6 * * *"</span>   <span class="cm"># 06:00 daily</span></pre>
-            </div>
+                </div>
 
-            <div class="pills">
-                <span class="pill">Python</span>
-                <span class="pill">Polars</span>
-                <span class="pill">DuckDB</span>
-                <span class="pill">Parquet (Hive)</span>
-                <span class="pill">SQL Server</span>
-                <span class="pill">Power BI + DAX</span>
-                <span class="pill">Streamlit</span>
-                <span class="pill">YAML configs</span>
-            </div>
-        </section>
+                <div class="pills">
+                    <span class="pill">Python</span>
+                    <span class="pill">Polars</span>
+                    <span class="pill">DuckDB</span>
+                    <span class="pill">Parquet (Hive)</span>
+                    <span class="pill">SQL Server</span>
+                    <span class="pill">Power BI + DAX</span>
+                    <span class="pill">Streamlit</span>
+                    <span class="pill">YAML configs</span>
+                </div>
+            </section>
 
-        <section class="reveal" id="what-changed">
-            <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Results</h2></div>
-            <div class="results">
-                <div class="result">
-                    <div class="result-value">4h → 30m</div>
-                    <div class="result-text">Daily ETL window, from manual extracts to scheduled pipelines.</div>
+            <section id="what-changed">
+                <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Results</h2></div>
+                <div class="results">
+                    <div class="result">
+                        <div class="result-value">4h → 30m</div>
+                        <div class="result-text">Daily ETL window, from manual extracts to scheduled pipelines.</div>
+                    </div>
+                    <div class="result">
+                        <div class="result-value">48h → 2–4h</div>
+                        <div class="result-text">Data freshness. Reports now reflect the same day.</div>
+                    </div>
+                    <div class="result">
+                        <div class="result-value">60% → 15%</div>
+                        <div class="result-text">Share of analyst time spent on data wrangling.</div>
+                    </div>
                 </div>
-                <div class="result">
-                    <div class="result-value">48h → 2–4h</div>
-                    <div class="result-text">Data freshness. Reports now reflect the same day.</div>
+                <div class="prose">
+                    <p>Schema and quality problems are now caught at the Silver gate instead of in reports.</p>
                 </div>
-                <div class="result">
-                    <div class="result-value">60% → 15%</div>
-                    <div class="result-text">Share of analyst time spent on data wrangling.</div>
-                </div>
-            </div>
-            <div class="prose">
-                <p>Schema and quality problems are now caught at the Silver gate instead of in reports.</p>
-            </div>
-        </section>
+            </section>
 
-        <section class="reveal" id="what-id-do-differently">
-            <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">What I'd do differently</h2></div>
-            <div class="reflection">
-                <div class="reflect-card shipped">
-                    <div class="reflect-card-head"><h4>Start with the data contract</h4><span class="shipped-chip">Shipped</span></div>
-                    <span class="reflect-then">I built Bronze first and wrote schemas later, then spent time on downstream fixes that a declared schema would have caught at the boundary.</span>
-                    <p class="reflect-now">Schemas are now declared up front as typed column specs and enforced at the Bronze&#8202;→&#8202;Silver gate. Trade-off: each new source needs an extra declaration, and the registry can drift from reality.</p>
+            <section id="what-id-do-differently">
+                <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">What I'd do differently</h2></div>
+                <div class="reflection">
+                    <div class="reflect-card shipped">
+                        <div class="reflect-card-head"><h3>Start with the data contract</h3><span class="shipped-chip">Shipped</span></div>
+                        <span class="reflect-then">I built Bronze first and wrote schemas later, then spent time on downstream fixes that a declared schema would have caught at the boundary.</span>
+                        <p class="reflect-now">Schemas are now declared up front as typed column specs and enforced at the Bronze&#8202;→&#8202;Silver gate. Trade-off: each new source needs an extra declaration, and the registry can drift from reality.</p>
+                    </div>
+                    <div class="reflect-card">
+                        <h3>Add lineage earlier</h3>
+                        <p>Lineage is still local to each pipeline. An OpenLineage-compatible emitter from the start would have made cross-pipeline debugging cheaper.</p>
+                    </div>
+                    <div class="reflect-card">
+                        <h3>Delta, with the right runtime</h3>
+                        <p>Plain Parquet fits this runtime, but time travel and ACID on Bronze would remove some reprocessing risk.</p>
+                    </div>
+                    <div class="reflect-card">
+                        <h3>Semantic layer as code</h3>
+                        <p>Business definitions live in Power BI DAX. A dbt-style layer above Gold would make them reusable and testable outside BI.</p>
+                    </div>
                 </div>
-                <div class="reflect-card">
-                    <h4>Add lineage earlier</h4>
-                    <p>Lineage is still local to each pipeline. An OpenLineage-compatible emitter from the start would have made cross-pipeline debugging cheaper.</p>
-                </div>
-                <div class="reflect-card">
-                    <h4>Delta, with the right runtime</h4>
-                    <p>Plain Parquet fits this runtime, but time travel and ACID on Bronze would remove some reprocessing risk.</p>
-                </div>
-                <div class="reflect-card">
-                    <h4>Semantic layer as code</h4>
-                    <p>Business definitions live in Power BI DAX. A dbt-style layer above Gold would make them reusable and testable outside BI.</p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <div class="related">
-            <div class="related-heading">Related case studies</div>
-            <div class="related-grid">
-                <a href="anomaly-detection.html" class="related-card">
-                    <span class="related-card-tag">Data Quality</span>
-                    <span class="related-card-title">Three-tier data-quality checks</span>
-                    <span class="related-card-arrow">Read →</span>
+            <nav class="pager" aria-label="Case studies">
+                <a href="pipeline-orchestration.html" class="pager-next">
+                    <span class="pager-text">
+                        <span class="pager-label">Next · Case study 2 of 6</span>
+                        <span class="pager-title">Job scheduling with install-time validation</span>
+                    </span>
+                    <span class="pager-arrow" aria-hidden="true">→</span>
                 </a>
-                <a href="demand-forecasting.html" class="related-card">
-                    <span class="related-card-tag">Machine Learning</span>
-                    <span class="related-card-title">Demand forecasting by demand pattern</span>
-                    <span class="related-card-arrow">Read →</span>
-                </a>
-                <a href="pipeline-orchestration.html" class="related-card">
-                    <span class="related-card-tag">Platform Engineering</span>
-                    <span class="related-card-title">Job scheduling with install-time validation</span>
-                    <span class="related-card-arrow">Read →</span>
-                </a>
-            </div>
+                <ul class="pager-links">
+                    <li><a href="../index.html#projects">All case studies</a></li>
+                    <li><a href="mailto:godson.kurishinkal@gmail.com">Email</a></li>
+                </ul>
+            </nav>
         </div>
     </main>
 
-    <footer>
+    <footer class="site-footer">
         <div class="footer-inner">
-            <div>© 2026 Godson Kurishinkal Antony · Dubai</div>
-            <div class="footer-links">
-                <a href="../index.html">Home</a>
-                <a href="../resume.html">Résumé</a>
-                <a href="mailto:godson.kurishinkal@gmail.com">Email</a>
-                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </div>
+            <p>© 2026 Godson Kurishinkal Antony · Dubai</p>
+            <ul class="footer-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../resume.html">Résumé</a></li>
+                <li><a href="mailto:godson.kurishinkal@gmail.com">Email</a></li>
+                <li><a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
         </div>
     </footer>
 
     <script>
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        /* Contents rail: mark the section in view. The page works without it. */
+        (function () {
+            var links = document.querySelectorAll('.toc ol a[href^="#"]');
+            if (!links.length || !('IntersectionObserver' in window)) return;
+            var current = '';
+            var hold = 0;
+            function mark(id) {
+                current = id;
+                links.forEach(function (a) {
+                    if (id && a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true');
+                    else a.removeAttribute('aria-current');
+                });
+            }
+            /* A clicked link stays marked until its own scroll has settled. */
+            function pin() {
+                clearTimeout(hold);
+                hold = setTimeout(function () { hold = 0; }, 250);
+            }
+            /* Sections that enter the band while a click is pinned are noted,
+               then applied on the reader's next scroll. */
+            var seen = '';
+            var pinned = false;
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) seen = entry.target.id;
+                    else if (entry.target.id === seen) seen = '';
+                });
+                if (hold) return;
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) mark(entry.target.id);
+                    /* Left the marked section with no other in view: above the first or below the last. */
+                    else if (entry.target.id === current) mark('');
+                });
+            }, { rootMargin: '-40% 0px -55% 0px' });
+            window.addEventListener('scroll', function () {
+                if (hold) pin();
+                else if (pinned) { pinned = false; if (seen !== current) mark(seen); }
+            }, { passive: true });
+            links.forEach(function (a) {
+                var section = document.getElementById(a.getAttribute('href').slice(1));
+                if (!section) return;
+                io.observe(section);
+                a.addEventListener('click', function () { mark(section.id); pinned = true; pin(); });
+            });
+        })();
     </script>
 </body>
 </html>

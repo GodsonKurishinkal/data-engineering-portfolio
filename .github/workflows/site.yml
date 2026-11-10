@@ -25,6 +25,11 @@ jobs:
           index.html resume.html 404.html
           'projects/*.html' enterprise-data-platform/index.html
 
+      # Shared header and footer, reading order, one h1 per page,
+      # no external resources, internal links.
+      - name: Site consistency
+        run: python3 scripts/check_site.py
+
       - name: Stylesheet version stamps are current
         run: |
           bash scripts/bump-css-version.sh
