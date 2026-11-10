@@ -87,10 +87,10 @@ all = [
 packages = ["etl_framework", "data_quality"]
 
 [project.urls]
-Homepage = "https://godsonkurishinkal.github.io/data-engineering-portfolio/"
-Documentation = "https://github.com/GodsonKurishinkal/data-engineering-portfolio/tree/main/enterprise-data-platform/docs"
-Repository = "https://github.com/GodsonKurishinkal/data-engineering-portfolio"
-Issues = "https://github.com/GodsonKurishinkal/data-engineering-portfolio/issues"
+Homepage = "https://godsonkurishinkal.github.io/portfolio/"
+Documentation = "https://github.com/GodsonKurishinkal/portfolio/tree/main/enterprise-data-platform/docs"
+Repository = "https://github.com/GodsonKurishinkal/portfolio"
+Issues = "https://github.com/GodsonKurishinkal/portfolio/issues"
 
 # ============================================================================
 # Tool Configuration

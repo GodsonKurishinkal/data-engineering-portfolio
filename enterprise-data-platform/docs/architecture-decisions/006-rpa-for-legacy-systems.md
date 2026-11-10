@@ -1,7 +1,7 @@
 # ADR-006: Use RPA for Legacy System Extraction
 
 ## Status
-**Accepted** (May 2024) · **Amended** (2026-02) — see *Amendment: Playwright* below.
+**Accepted** · **Amended** — see *Amendment: Playwright* below.
 
 ## Context
 

@@ -8,13 +8,13 @@
     <title>Bronze/Silver/Gold lakehouse on Parquet — Godson Kurishinkal Antony</title>
     <meta name="description" content="Case study: a single-machine Bronze/Silver/Gold pipeline on Hive-partitioned Parquet that cut the daily ETL window from 4 hours to 30 minutes.">
     <meta name="author" content="Godson Kurishinkal Antony">
-    <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/medallion-lakehouse.html">
+    <link rel="canonical" href="https://godsonkurishinkal.github.io/portfolio/projects/medallion-lakehouse.html">
 
     <meta property="og:title" content="Bronze/Silver/Gold lakehouse on Parquet — Case study">
     <meta property="og:description" content="A single-machine Bronze/Silver/Gold pipeline on Hive-partitioned Parquet for retail supply chain data. Daily ETL window went from 4 hours to 30 minutes.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/medallion-lakehouse.html">
-    <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
+    <meta property="og:url" content="https://godsonkurishinkal.github.io/portfolio/projects/medallion-lakehouse.html">
+    <meta property="og:image" content="https://godsonkurishinkal.github.io/portfolio/assets/images/og-image.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,28 +171,28 @@
             <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Polars over Pandas</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/001-polars-over-pandas.md" target="_blank" rel="noopener noreferrer">ADR-001</a></div>
+                    <div class="decision-head"><span class="decision-title">Polars over Pandas</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/001-polars-over-pandas.md" target="_blank" rel="noopener noreferrer">ADR-001</a></div>
                     <div class="decision-body">
                         <p>The nightly Silver transforms had to finish inside a fixed window. Polars was faster than Pandas on these workloads and used less memory through lazy evaluation.</p>
                         <em>Trade-off: a smaller community and fewer worked examples to lean on.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Hive-partitioned Parquet, not Delta</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/004-parquet-hive-partitioning.md" target="_blank" rel="noopener noreferrer">ADR-004</a></div>
+                    <div class="decision-head"><span class="decision-title">Hive-partitioned Parquet, not Delta</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/004-parquet-hive-partitioning.md" target="_blank" rel="noopener noreferrer">ADR-004</a></div>
                     <div class="decision-body">
                         <p>There was no Spark or Databricks runtime. Plain Parquet partitioned by <code>extract_date</code> was fast enough with DuckDB and Polars and needed no extra platform.</p>
                         <em>Trade-off: no time travel or ACID guarantees on Bronze. Backfills are explicit partition overwrites.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Configuration-driven ETL</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/005-config-driven-pipelines.md" target="_blank" rel="noopener noreferrer">ADR-005</a></div>
+                    <div class="decision-head"><span class="decision-title">Configuration-driven ETL</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/005-config-driven-pipelines.md" target="_blank" rel="noopener noreferrer">ADR-005</a></div>
                     <div class="decision-body">
                         <p>Each pipeline is a YAML config on top of a shared base class. Schema, quality rules and load mode (FULL or INCREMENTAL) are declared, not coded per pipeline.</p>
                         <em>Trade-off: a steeper start for anyone new to the framework. Templates and reviewed changes reduce it.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Windows Task Scheduler for orchestration</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/data-engineering-portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/007-task-scheduler-orchestration.md" target="_blank" rel="noopener noreferrer">ADR-007</a></div>
+                    <div class="decision-head"><span class="decision-title">Windows Task Scheduler for orchestration</span><a class="decision-tag decision-tag-link" href="https://github.com/GodsonKurishinkal/portfolio/blob/main/enterprise-data-platform/docs/architecture-decisions/007-task-scheduler-orchestration.md" target="_blank" rel="noopener noreferrer">ADR-007</a></div>
                     <div class="decision-body">
                         <p>Airflow needs infrastructure this setup did not have. I used the OS scheduler that was already there, with structured logs and Teams alerts on failure. The scheduling layer is described in <a href="pipeline-orchestration.html">Job scheduling with install-time validation</a>.</p>
                         <em>Trade-off: no DAG view. A small Streamlit status board reads the pipeline log table instead.</em>

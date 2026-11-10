@@ -17,8 +17,8 @@ Server and an Oracle client if you intend to exercise `DatabaseExtractor`
 against a real source.
 
 ```bash
-git clone https://github.com/GodsonKurishinkal/data-engineering-portfolio.git
-cd data-engineering-portfolio/enterprise-data-platform
+git clone https://github.com/GodsonKurishinkal/portfolio.git
+cd portfolio/enterprise-data-platform
 
 python -m venv .venv
 source .venv/bin/activate      # Windows: .venv\Scripts\activate

@@ -31,15 +31,15 @@ What other options were evaluated? Why were they rejected?
 
 ## Index of ADRs
 
-| ID | Title | Status | Date |
-|----|-------|--------|------|
-| [ADR-001](001-polars-over-pandas.md) | Choose Polars over Pandas for ETL | Accepted | 2024-03 |
-| [ADR-002](002-duckdb-for-analytics.md) | Use DuckDB for analytical queries | Accepted | 2024-04 |
-| [ADR-003](003-medallion-architecture.md) | Adopt Medallion (Bronze/Silver/Gold) architecture | Accepted | 2024-02 |
-| [ADR-004](004-parquet-hive-partitioning.md) | Use Parquet with Hive partitioning (not Delta) | Accepted | 2024-02 |
-| [ADR-005](005-config-driven-pipelines.md) | Configuration-driven pipeline design | Accepted | 2024-03 |
-| [ADR-006](006-rpa-for-legacy-systems.md) | Use RPA for legacy system extraction | Accepted | 2024-05 |
-| [ADR-007](007-task-scheduler-orchestration.md) | Windows Task Scheduler for orchestration | Accepted | 2024-03 |
+| ID | Title | Status |
+|----|-------|--------|
+| [ADR-001](001-polars-over-pandas.md) | Choose Polars over Pandas for ETL | Accepted |
+| [ADR-002](002-duckdb-for-analytics.md) | Use DuckDB for analytical queries | Accepted |
+| [ADR-003](003-medallion-architecture.md) | Adopt Medallion (Bronze/Silver/Gold) architecture | Accepted |
+| [ADR-004](004-parquet-hive-partitioning.md) | Use Parquet with Hive partitioning (not Delta) | Accepted |
+| [ADR-005](005-config-driven-pipelines.md) | Configuration-driven pipeline design | Accepted |
+| [ADR-006](006-rpa-for-legacy-systems.md) | Use RPA for legacy system extraction | Accepted |
+| [ADR-007](007-task-scheduler-orchestration.md) | Windows Task Scheduler for orchestration | Accepted |
 
 ## When to Write an ADR
 

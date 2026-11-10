@@ -11,6 +11,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 - This changelog.
 
 ### Changed
+- Repository renamed to `portfolio`; the site address is now `godsonkurishinkal.github.io/portfolio/`. All internal addresses updated.
+- Dates removed from the decision records.
 - Whole-site plain-language pass: home page, all six write-ups, résumé summary, repository README and the ETL component docs. Titles now describe what each thing is; the public code is presented as a component library.
 - Home page shortened: results reduced to two before/after figures with a stated baseline; card metrics, the key-numbers row and the specialisations and tools sections removed.
 - Write-ups state that work code is not public and snippets are simplified; figures without a definition or baseline removed.

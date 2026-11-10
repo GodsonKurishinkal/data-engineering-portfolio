@@ -1,7 +1,7 @@
 # ADR-001: Choose Polars over Pandas for ETL Processing
 
 ## Status
-**Accepted** (March 2024)
+**Accepted**
 
 ## Context
 
@@ -113,11 +113,3 @@ result = (
 
 - [Polars Documentation](https://pola.rs/)
 - [Polars vs Pandas Benchmark (H2O)](https://h2oai.github.io/db-benchmark/)
-
-## Revision History
-
-| Date | Change | Author |
-|------|--------|--------|
-| 2024-03-15 | Initial decision | Godson K. |
-| 2024-06-01 | Added 3-month retrospective | Godson K. |
-| 2026-11-10 | Removed benchmark table: the benchmark is not published here | Godson K. |

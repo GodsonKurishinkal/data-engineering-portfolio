@@ -1,7 +1,7 @@
 # ADR-003: Adopt Medallion (Bronze/Silver/Gold) Architecture
 
 ## Status
-**Accepted** (February 2024)
+**Accepted**
 
 ## Context
 
@@ -189,10 +189,3 @@ def validate_silver_to_gold(silver_df: pl.DataFrame, dim_tables: dict) -> bool:
 - [Databricks: Medallion Architecture](https://www.databricks.com/glossary/medallion-architecture)
 - [Delta Lake: Multi-Hop Architecture](https://docs.delta.io/latest/delta-medallion.html)
 - [Kimball Group: Dimensional Modeling](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/)
-
-## Revision History
-
-| Date | Change | Author |
-|------|--------|--------|
-| 2024-02-15 | Initial decision | Godson K. |
-| 2024-05-01 | Added storage retention policies | Godson K. |
