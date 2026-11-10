@@ -167,8 +167,8 @@ data-engineering-portfolio/
 
 | Technology | Status | Goal |
 |------------|--------|------|
-| **Microsoft Fabric** | In progress | DP-700 certification |
-| **Databricks** | Next | Associate → Professional certification |
+| **Databricks** | Next | Data Engineer Associate certification |
+| **Microsoft Fabric / Azure** | After Databricks | Microsoft data engineering certification |
 | **Apache Spark** | Studying | Distributed processing at scale |
 | **dbt** | Studying | Transformation layer |
 
