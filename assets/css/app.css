@@ -71,6 +71,17 @@ nav {
 }
 .nav-brand-name { white-space: nowrap; }
 .nav-brand-meta { color: var(--text-3); font-weight: 400; }
+.nav-sections { display: flex; align-items: center; gap: 0.25rem; margin-left: auto; }
+.nav-sections a {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    color: var(--text-2);
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+.nav-sections a:hover { color: var(--ink); background: rgba(15, 23, 42, 0.04); }
 .nav-links { display: flex; align-items: center; gap: 0.25rem; }
 .nav-link {
     display: inline-flex;
@@ -129,7 +140,6 @@ section:first-of-type { margin-top: 3rem; }
     text-transform: uppercase;
     margin-bottom: 1.5rem;
 }
-.case-category::before { content: '//'; margin-right: 0.5rem; color: var(--text-4); }
 
 .case-title {
     font-size: clamp(2rem, 4.5vw, 3.25rem);
@@ -863,22 +873,6 @@ footer {
 .footer-inner a { color: var(--text-2); transition: var(--transition); }
 .footer-inner a:hover { color: var(--ink); }
 .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-.footer-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-3);
-}
-.footer-status::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--live);
-    box-shadow: 0 0 0 3px var(--live-bg);
-}
 
 /* ---- Responsive ---- */
 @media (max-width: 640px) {
@@ -899,8 +893,9 @@ footer {
 }
 
 /* ---- Scroll reveal ---- */
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms, transform 500ms; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* Content is hidden for the reveal only once the page script has run. */
+.js .reveal { opacity: 0; transform: translateY(12px); transition: opacity 500ms, transform 500ms; }
+.js .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ================================================================
    Landing-page components (index.html)
@@ -926,11 +921,10 @@ footer {
     color: var(--text-3);
     margin-bottom: 1.25rem;
 }
-.hero-eyebrow::before { content: '//'; color: var(--text-4); margin-right: 0.5rem; }
 .hero-title {
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
-    line-height: 1.02;
+    line-height: 1.08;
     letter-spacing: -0.035em;
     margin-bottom: 1.5rem;
     color: var(--ink);
@@ -1021,7 +1015,6 @@ footer {
     color: var(--text-3);
     margin-bottom: 0.875rem;
 }
-.section-eyebrow::before { content: '//'; color: var(--text-4); margin-right: 0.5rem; }
 .section-title-lg {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 700;
@@ -1506,5 +1499,76 @@ nav.landing-nav.scrolled {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-    .reveal { opacity: 1; transform: none; }
+    .js .reveal { opacity: 1; transform: none; }
+}
+
+
+/* ================================================================
+   Navigation: section links and in-page contents
+   ================================================================ */
+/* Anchored sections stop below the sticky bar instead of under it. */
+[id] { scroll-margin-top: 5.5rem; }
+
+@media (max-width: 1080px) {
+    .nav-brand-meta { display: none; }
+}
+@media (max-width: 760px) {
+    /* Section links move to their own row and scroll sideways if needed. */
+    .nav-inner { flex-wrap: wrap; row-gap: 0.25rem; }
+    .nav-sections {
+        order: 3;
+        flex-basis: 100%;
+        margin-left: -0.75rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .nav-sections::-webkit-scrollbar { display: none; }
+    [id] { scroll-margin-top: 7.5rem; }
+}
+
+.toc {
+    /* undo the sticky site-nav styles that apply to every <nav> */
+    position: static;
+    z-index: auto;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    margin-top: 2.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+}
+.toc-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 0.5rem;
+}
+.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    counter-reset: toc;
+}
+.toc li { counter-increment: toc; font-size: 0.875rem; }
+.toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-4);
+    margin-right: 0.4rem;
+}
+.toc a { color: var(--text-2); }
+.toc a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Phone: portrait sits above the text, small, so the first screen is the claim. */
+@media (max-width: 640px) {
+    .hero-visual { order: -1; justify-self: start; margin-left: 10px; }
+    .hero-image { width: 88px; height: 88px; }
 }

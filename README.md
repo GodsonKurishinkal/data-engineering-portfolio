@@ -151,6 +151,7 @@ data-engineering-portfolio/
 │   └── images/
 ├── projects/                    # Case studies
 │   ├── medallion-lakehouse.html
+│   ├── pipeline-orchestration.html
 │   ├── anomaly-detection.html
 │   ├── demand-forecasting.html
 │   └── rpa-bot-framework.html

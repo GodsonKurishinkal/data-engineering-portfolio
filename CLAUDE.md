@@ -9,6 +9,10 @@ These apply to anyone, human or AI, changing this repo.
 - Check and record the licence of every dataset, font, icon, image and library before adding it.
 - No secrets in git, logs or PR text. Use GitHub Actions secrets and a git-ignored `.env`.
 
+## Writing and design
+- Write the way an engineer writes: plain, honest, concise. Say what the thing is and what was done.
+- No slogans, no sales language, no decorative marks. Polished and presentable, not embellished.
+
 ## Workflow
 - `main` is protected and deploys the live site. Work on a branch, open a pull request, and let the repository owner merge. Do not merge or approve your own PR, force-push, or disable checks.
 - One unit of work per branch. Conventional commit messages. Small PRs that say what changed and how it was verified.
