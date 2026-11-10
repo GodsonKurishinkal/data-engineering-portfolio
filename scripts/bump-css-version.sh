@@ -25,10 +25,12 @@ files=(
 for f in "${files[@]}"; do
   [ -f "$f" ] || continue
   # Strip any existing ?v=... then re-stamp, so the script is idempotent.
-  sed -i '' -E \
+  # -i.bak works with both GNU and BSD sed; the backup is removed below.
+  sed -i.bak -E \
     -e "s|(href=\"[^\"]*assets/css/app\.css)(\?v=[0-9a-f]+)?\"|\1?v=${app}\"|g" \
     -e "s|(href=\"[^\"]*assets/css/tokens\.css)(\?v=[0-9a-f]+)?\"|\1?v=${tok}\"|g" \
     "$f"
+  rm -f "$f.bak"
 done
 
 echo "app.css    v=${app}"

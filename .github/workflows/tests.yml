@@ -3,9 +3,7 @@ name: tests
 on:
   push:
     branches: [main]
-    paths: ['enterprise-data-platform/**', '.github/workflows/tests.yml']
   pull_request:
-    paths: ['enterprise-data-platform/**', '.github/workflows/tests.yml']
   workflow_dispatch:
 
 jobs:
