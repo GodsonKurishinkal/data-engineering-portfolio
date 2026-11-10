@@ -34,7 +34,7 @@ pipeline:
   name: "inventory_daily"
   source:
     type: "oracle_obi"
-    query: "SELECT * FROM vw_inventory_snapshot WHERE snapshot_date = :d"
+    query: "SELECT * FROM inventory_snapshot WHERE snapshot_date = :d"
   destination:
     layer: "bronze"
     format: "parquet"
