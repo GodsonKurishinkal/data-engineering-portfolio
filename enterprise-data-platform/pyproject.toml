@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "enterprise-data-platform"
 version = "1.0.0"
-description = "Production-grade Medallion data lakehouse for supply chain analytics"
+description = "ETL components for a Bronze/Silver/Gold Parquet lakehouse: extractors, schema enforcement, loaders and data-quality checks"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [
@@ -21,7 +21,7 @@ keywords = [
     "supply-chain",
 ]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",

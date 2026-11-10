@@ -28,7 +28,7 @@ Store every layer as **Parquet, Hive-partitioned by `extract_date`**.
 
 **Why Parquet + Hive partitioning:**
 
-- **Columnar and compressed** — roughly 80% smaller than the equivalent CSV.
+- **Columnar and compressed** — much smaller than the equivalent CSV.
 - **Predicate pushdown** — `scan_parquet()` and DuckDB both prune partitions from
   the path before reading a byte.
 - **Zero lock-in** — plain files. Any engine that reads Parquet reads this
@@ -57,7 +57,7 @@ Store every layer as **Parquet, Hive-partitioned by `extract_date`**.
 | **Delta Lake** | Requires a Spark runtime we do not have. The ACID and time-travel guarantees are genuinely better, but not at the cost of the whole platform. |
 | **Apache Iceberg** | Same catalogue and engine overhead; the Python-only story was immature at the time of the decision. |
 | **SQL Server tables** | Row-based storage, licence cost per volume, and no cheap immutable Bronze. |
-| **CSV** | 5× the storage, no types, no pushdown. |
+| **CSV** | More storage, no types, no pushdown. |
 
 ## Migration Path
 

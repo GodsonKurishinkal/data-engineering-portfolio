@@ -56,6 +56,9 @@ Don't write an ADR for:
 
 ## Numbering
 
+Benchmark figures were removed from ADR-001 and ADR-002 in November 2026 because the
+benchmarks are not published in this repository.
+
 ADR numbers are **global to this repository** and never reused. Case studies on
 the portfolio site cite these numbers directly; a decision without a file here
 does not get an ADR number.

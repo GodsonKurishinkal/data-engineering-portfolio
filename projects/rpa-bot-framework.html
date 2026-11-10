@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fafafa">
 
-    <title>RPA Bot Framework — Godson Kurishinkal Antony</title>
-    <meta name="description" content="Case study: a resilient Selenium + PyAutoGUI framework extracting data from legacy systems without APIs. 4 bots in production, four systems extracted unattended.">
+    <title>Browser automation for systems without APIs — Godson Kurishinkal</title>
+    <meta name="description" content="Case study: four bots that export data from systems with no API and land it in Bronze, built on one shared base class with Selenium, Playwright and PyAutoGUI.">
     <meta name="author" content="Godson Kurishinkal Antony">
     <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/rpa-bot-framework.html">
 
-    <meta property="og:title" content="RPA Bot Framework — Case Study">
-    <meta property="og:description" content="Legacy-system data extraction without APIs. 4 production bots, shared ABC framework, zero manual steps.">
+    <meta property="og:title" content="Browser automation for systems without APIs — Case Study">
+    <meta property="og:description" content="Four bots that export data from systems with no API and land it in Bronze, built on one shared base class.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/rpa-bot-framework.html">
     <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
@@ -23,7 +23,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
     <link rel="stylesheet" href="../assets/css/tokens.css?v=2bb3148a">
-    <link rel="stylesheet" href="../assets/css/app.css?v=02437586">
+    <link rel="stylesheet" href="../assets/css/app.css?v=afe324a9">
     <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -63,47 +63,25 @@
 
         <header>
             <span class="case-category">Automation · 2025</span>
-            <h1 class="case-title">When there's no API, build one.</h1>
-            <p class="case-pitch">A resilient RPA framework that treats legacy systems as data sources. One shared base class, four bots, and every extract landed in Bronze before anyone is at their desk.</p>
+            <h1 class="case-title">Browser automation for systems without APIs</h1>
+            <p class="case-pitch">Four bots that log in to systems with no API, run the exports a person used to run by hand, and land the files in Bronze. They share one base class for retries, failure screenshots and alerts.</p>
 
             <div class="case-meta">
-                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Data Engineer</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Design, build, operations</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Industry</span><span class="case-meta-value">Retail · Supply Chain</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Duration</span><span class="case-meta-value">4 months</span></div>
-                <div class="case-meta-item"><span class="case-meta-label">Bots deployed</span><span class="case-meta-value">4</span></div>
-            </div>
-
-            <div class="kpi-grid">
-                <div class="kpi">
-                    <div class="kpi-value">4</div>
-                    <div class="kpi-label">Bots in production</div>
-                    <div class="kpi-detail">WMS · OBI · ERP · POS</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">0</div>
-                    <div class="kpi-label">Manual steps left</div>
-                    <div class="kpi-detail">Unattended before 06:30</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">24/7</div>
-                    <div class="kpi-label">Scheduled runs</div>
-                    <div class="kpi-detail">Hourly to daily cadence</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">95%+</div>
-                    <div class="kpi-label">Run reliability</div>
-                    <div class="kpi-detail">With retry + alert</div>
-                </div>
+                <div class="case-meta-item"><span class="case-meta-label">Bots</span><span class="case-meta-value">4</span></div>
             </div>
         </header>
+
+        <p class="case-note">This describes a system I built at work. The code is not public; the snippets below are simplified illustrations. Figures are my own measurements and the underlying data is not public.</p>
 
         <nav class="toc" aria-label="On this page">
             <span class="toc-label">On this page</span>
             <ol>
                 <li><a href="#the-problem">The problem</a></li>
-                <li><a href="#the-system">The system</a></li>
-                <li><a href="#bots-in-production">Bots in production</a></li>
-                <li><a href="#framework-features">Framework features</a></li>
+                <li><a href="#the-system">What I built</a></li>
+                <li><a href="#bots-in-production">The four bots</a></li>
                 <li><a href="#key-decisions">Key decisions</a></li>
                 <li><a href="#implementation">Implementation</a></li>
                 <li><a href="#what-changed">What changed</a></li>
@@ -114,22 +92,29 @@
         <section class="reveal" id="the-problem">
             <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">The problem</h2></div>
             <div class="prose">
-                <p>Enterprise supply chains don't run on modern APIs. They run on 2000s-era ERPs, Java-applet warehouse systems, and reporting portals that only export to Excel. That data is critical — and it's locked behind screens.</p>
+                <p>Four source systems (WMS, BI reporting server, ERP and a POS reporting portal) had no API. The only way to get data out was to log in and export a report from the screen.</p>
                 <ul>
-                    <li>Every morning, someone logged into <strong>four separate systems</strong>.</li>
-                    <li>Each system needed a specific <strong>click-and-export dance</strong> to produce a report.</li>
-                    <li>Exported files landed in <strong>Downloads</strong>, got dragged to <strong>SharePoint</strong>, got manually imported.</li>
-                    <li>Total: <strong>4+ hours of glorified copying</strong> before actual analysis could start.</li>
-                    <li>Human errors silently broke reports downstream.</li>
+                    <li>Every morning someone logged in to all <strong>four systems</strong> and ran the exports by hand.</li>
+                    <li>The files went from Downloads to shared folders and were then imported manually.</li>
+                    <li>This took <strong>4+ hours</strong> before any analysis could start.</li>
+                    <li>Mistakes in the manual steps broke reports downstream without anyone noticing.</li>
                 </ul>
-                <p>APIs were not coming. The systems couldn't be replaced. But a robot could do the clicking — and do it more reliably than a sleepy analyst at 06:30.</p>
+                <p>The systems were not going to be replaced and APIs were not planned, so I automated the screen steps.</p>
             </div>
         </section>
 
         <section class="reveal" id="the-system">
-            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">The system</h2></div>
+            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">What I built</h2></div>
             <div class="prose">
-                <p>A single abstract base class defines the shape of a bot: login, extract, persist, clean up. Each concrete bot fills in the system-specific parts. Retries, screenshots on failure, credential handling, and Teams alerts are inherited — not rewritten per bot.</p>
+                <p>One abstract base class defines what every bot does: log in, extract, save, clean up. Each bot implements only the parts specific to its system. The base class provides the rest:</p>
+                <ul>
+                    <li><strong>Retries</strong> with backoff for network errors, slow pages and session timeouts.</li>
+                    <li><strong>A screenshot and page capture on every failure</strong>, so a changed screen can be seen instead of guessed at.</li>
+                    <li><strong>Waits on element visibility</strong> with a timeout per step, instead of fixed sleeps.</li>
+                    <li><strong>Credentials</strong> read from an encrypted store and kept out of logs.</li>
+                    <li><strong>An alert</strong> on failure, and an execution log of steps, timings and record counts.</li>
+                </ul>
+                <p>The bots were built on Selenium. The ones that drive a web page have since moved to Playwright. PyAutoGUI handles the desktop UI that has no DOM.</p>
             </div>
 
             <div class="arch">
@@ -142,19 +127,19 @@
                     <span class="arch-arrow">→</span>
                     <div class="arch-node highlight">
                         <div class="arch-node-num">02</div>
-                        <div class="arch-node-label">Bot engine</div>
-                        <div class="arch-node-sub">BaseBot · ABC</div>
+                        <div class="arch-node-label">Bot</div>
+                        <div class="arch-node-sub">Shared base class</div>
                     </div>
                     <span class="arch-arrow">→</span>
                     <div class="arch-node">
                         <div class="arch-node-num">03</div>
-                        <div class="arch-node-label">Legacy system</div>
-                        <div class="arch-node-sub">WMS · OBI · ERP · POS</div>
+                        <div class="arch-node-label">Source system</div>
+                        <div class="arch-node-sub">WMS · BI · ERP · POS</div>
                     </div>
                     <span class="arch-arrow">→</span>
                     <div class="arch-node">
                         <div class="arch-node-num">04</div>
-                        <div class="arch-node-label">Extract</div>
+                        <div class="arch-node-label">Export</div>
                         <div class="arch-node-sub">Excel · CSV · HTML</div>
                     </div>
                     <span class="arch-arrow">→</span>
@@ -168,103 +153,69 @@
         </section>
 
         <section class="reveal" id="bots-in-production">
-            <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">Bots in production</h2></div>
+            <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">The four bots</h2></div>
             <div class="card-grid">
                 <div class="card">
-                    <h3 class="card-title">WMS Extractor</h3>
+                    <h3 class="card-title">WMS extractor</h3>
                     <div class="card-sub">Warehouse management system</div>
-                    <div class="card-desc">Pulls inventory snapshots, receiving logs, shipment data from a Java-based WMS. Runs daily, before the working day starts.</div>
-                    <span class="card-tag">Selenium · Java applet</span>
+                    <div class="card-desc">Inventory snapshots, receiving logs and shipment data. Runs daily before the working day starts.</div>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">OBI Reporter</h3>
-                    <div class="card-sub">Oracle BI Publisher</div>
-                    <div class="card-desc">Navigates parameterised reports, schedules exports, downloads the Excel output. Several reports per run.</div>
-                    <span class="card-tag">Selenium · downloads</span>
+                    <h3 class="card-title">BI report extractor</h3>
+                    <div class="card-sub">BI reporting server</div>
+                    <div class="card-desc">Opens parameterised reports, runs the export and downloads the Excel output. Several reports per run.</div>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">ERP Scraper</h3>
-                    <div class="card-sub">Legacy ERP · green-screen</div>
-                    <div class="card-desc">Extracts purchase orders, vendor data, pricing from a terminal-style UI. Runs on a recurring sync.</div>
-                    <span class="card-tag">PyAutoGUI · OCR</span>
+                    <h3 class="card-title">ERP extractor</h3>
+                    <div class="card-sub">ERP with a terminal-style UI</div>
+                    <div class="card-desc">Purchase orders, vendor data and pricing. Runs on a recurring sync.</div>
                 </div>
                 <div class="card">
-                    <h3 class="card-title">Sales Aggregator</h3>
+                    <h3 class="card-title">Sales collector</h3>
                     <div class="card-sub">POS reporting portal</div>
-                    <div class="card-desc">Collects end-of-day sales from the store portals and unifies the shape. EOD batch, one file per store.</div>
-                    <span class="card-tag">Selenium · normalisation</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="reveal" id="framework-features">
-            <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Framework features</h2></div>
-            <div class="card-grid">
-                <div class="card">
-                    <h3 class="card-title">Retry with backoff</h3>
-                    <div class="card-desc">Exponential backoff around transient failures — network blips, slow renders, session timeouts.</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Screenshot on failure</h3>
-                    <div class="card-desc">Every failure captures the browser DOM + a PNG. UI-drift debugging went from guesswork to pattern matching.</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Credential vault</h3>
-                    <div class="card-desc">Encrypted at rest, rotated on schedule, never in logs. Per-bot role, least-privilege.</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Smart waits</h3>
-                    <div class="card-desc">Element-visibility waits with per-step timeouts. Hard sleeps banned.</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Alerts</h3>
-                    <div class="card-desc">Teams + email on failure or anomaly. Severity mapped to channel; pagers are for pages.</div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Audit trail</h3>
-                    <div class="card-desc">Full execution log — steps, timings, resulting records — written to a pipeline-log table for post-hoc review.</div>
+                    <div class="card-desc">End-of-day sales from the store portals, one file per store, converted to one common layout.</div>
                 </div>
             </div>
         </section>
 
         <section class="reveal" id="key-decisions">
-            <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Key decisions</h2></div>
+            <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">ABC pattern over copy-paste</span><span class="decision-tag">Decision 01</span></div>
+                    <div class="decision-head"><span class="decision-title">A shared base class instead of four scripts</span><span class="decision-tag">Decision 01</span></div>
                     <div class="decision-body">
-                        <p>The first bot was a single script. By the fourth we'd have had four copies of retry logic, four ways of handling credentials, four debugging conventions. A shared abstract base class forced the right abstractions early.</p>
-                        <em>Trade-off: writing a new bot requires knowing the framework. Mitigated with a template bot and docs.</em>
+                        <p>The first bot was a single script. Four scripts would have meant four copies of the retry logic, credential handling and debugging conventions. A base class keeps those in one place.</p>
+                        <em>Trade-off: writing a new bot means learning the framework first. A template bot and notes reduce that.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Selenium for browsers, PyAutoGUI for the rest</span><span class="decision-tag">Decision 02</span></div>
+                    <div class="decision-head"><span class="decision-title">Browser automation where there is a DOM, PyAutoGUI where there is not</span><span class="decision-tag">Decision 02</span></div>
                     <div class="decision-body">
-                        <p>Selenium is precise when the target is a DOM. For Java applets and green-screen terminals, it gives up — PyAutoGUI + image matching fills the gap. Same bot shape, different engines.</p>
-                        <em>Trade-off: PyAutoGUI bots are more fragile to UI redesigns. Caught quickly by the screenshot-on-failure hook.</em>
+                        <p>A browser driver is precise when the target is a web page. It cannot drive a desktop or terminal-style UI, so those screens use PyAutoGUI with image matching. The bot structure is the same either way.</p>
+                        <em>Trade-off: screen automation is fragile. A UI redesign breaks a bot, and the PyAutoGUI bots break most easily. The failure screenshot shows what changed.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Headless only when it helps</span><span class="decision-tag">Decision 03</span></div>
+                    <div class="decision-head"><span class="decision-title">Headless only where it works</span><span class="decision-tag">Decision 03</span></div>
                     <div class="decision-body">
-                        <p>Tempting to default everything to headless. Some legacy Java applets literally refuse to render without a visible window. The framework detects the target and switches mode; headless is a hint, not a contract.</p>
-                        <em>Trade-off: a dedicated Windows runner instead of a container. Worth it for reliability.</em>
+                        <p>Some of the older screens do not render without a visible window. Each bot sets whether it runs headless.</p>
+                        <em>Trade-off: the bots need a dedicated Windows machine with a desktop session and cannot run in a container.</em>
                     </div>
                 </div>
                 <div class="decision">
                     <div class="decision-head"><span class="decision-title">Land raw, transform later</span><span class="decision-tag">Decision 04</span></div>
                     <div class="decision-body">
-                        <p>Bots write exactly what they extract to Bronze, with metadata. All shaping and cleaning happens in the lakehouse. That way a single bot change doesn't ripple through every downstream model.</p>
-                        <em>Trade-off: more columns to maintain at Bronze. The lineage benefit is worth it.</em>
+                        <p>A bot writes exactly what it extracted to Bronze, with metadata, and stops. Parsing and cleaning happen downstream, where a failure is cheap to re-run. A change to a bot does not change every model that depends on it.</p>
+                        <em>Trade-off: Bronze carries more columns than the models need.</em>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="reveal" id="implementation">
-            <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">Implementation</h2></div>
+            <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Implementation</h2></div>
             <div class="prose">
-                <p>The base class owns lifecycle and error handling. Subclasses provide the system-specific verbs. The pattern makes the <em>shape</em> of a bot uniform while letting the contents be as weird as the system requires.</p>
+                <p>The base class owns the run order and the error handling. A subclass supplies the login and the extract.</p>
             </div>
 
             <div class="code">
@@ -273,25 +224,23 @@
                     <span class="code-lang">Python</span>
                 </div>
 <pre><span class="kw">from</span> abc <span class="kw">import</span> ABC, abstractmethod
-<span class="kw">from</span> selenium <span class="kw">import</span> webdriver
-<span class="kw">from</span> selenium.webdriver.support.ui <span class="kw">import</span> WebDriverWait
+
+<span class="cm"># BotConfig and ExtractResult are small dataclasses defined elsewhere.</span>
 
 <span class="kw">class</span> <span class="cls">BaseBot</span>(ABC):
-    <span class="str">"""Shared lifecycle for all RPA bots."""</span>
+    <span class="str">"""Shared run order for all bots."""</span>
 
     <span class="kw">def</span> <span class="fn">__init__</span>(self, config: <span class="cls">BotConfig</span>):
         self.config = config
         self.driver = <span class="kw">None</span>
-        self.logger = setup_logger(self.__class__.__name__)
 
     <span class="kw">def</span> <span class="fn">run</span>(self) -&gt; <span class="cls">ExtractResult</span>:
-        <span class="str">"""Main execution — initialise, login, extract, land, clean up."""</span>
         <span class="kw">try</span>:
             self._initialize_driver()
             self._login()
-            data = self._extract()
-            self._save_to_bronze(data)
-            <span class="kw">return</span> <span class="cls">ExtractResult</span>(success=<span class="kw">True</span>, records=len(data))
+            rows = self._extract()
+            self._save_to_bronze(rows)
+            <span class="kw">return</span> <span class="cls">ExtractResult</span>(success=<span class="kw">True</span>, records=len(rows))
         <span class="kw">except</span> <span class="cls">Exception</span> <span class="kw">as</span> e:
             self._capture_screenshot()
             self._send_alert(str(e))
@@ -303,71 +252,45 @@
     <span class="kw">def</span> <span class="fn">_login</span>(self) -&gt; <span class="kw">None</span>: ...
 
     <span class="dec">@abstractmethod</span>
-    <span class="kw">def</span> <span class="fn">_extract</span>(self) -&gt; pd.DataFrame: ...
-
-    <span class="kw">def</span> <span class="fn">_wait_for</span>(self, locator, timeout: int = <span class="num">30</span>):
-        <span class="str">"""Smart wait with element-visibility check."""</span>
-        <span class="kw">return</span> WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_element_located(locator)
-        )</pre>
+    <span class="kw">def</span> <span class="fn">_extract</span>(self) -&gt; list[dict]: ...</pre>
             </div>
 
             <div class="pills">
                 <span class="pill">Python</span>
                 <span class="pill">Selenium</span>
+                <span class="pill">Playwright</span>
                 <span class="pill">PyAutoGUI</span>
-                <span class="pill">ChromeDriver</span>
                 <span class="pill">Windows Task Scheduler</span>
-                <span class="pill">Pandas</span>
                 <span class="pill">Parquet</span>
             </div>
         </section>
 
         <section class="reveal" id="what-changed">
-            <div class="sh"><span class="sh-num">07</span><h2 class="sh-title">What changed</h2></div>
-            <div class="results">
-                <div class="result">
-                    <div class="result-value">06:30</div>
-                    <div class="result-text">The four-hour morning collection ritual is <strong>gone</strong>. Every extract lands in Bronze before the first analyst sits down.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">4</div>
-                    <div class="result-text">Bots live — WMS, OBI, ERP, Sales. Each fed directly into Bronze without a human in the loop.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">−60%</div>
-                    <div class="result-text">Bot-maintenance time after moving to semantic selectors and fallback locators.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">10×</div>
-                    <div class="result-text">Debugging speed once screenshot-on-failure was standard. Seeing the error is not the same as reading about it.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">95%+</div>
-                    <div class="result-text">Run reliability across all four bots — retry + alert + audit trail catches the tail.</div>
-                </div>
+            <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">What changed</h2></div>
+            <div class="prose">
+                <ul>
+                    <li>The <strong>4+ hours</strong> of manual collection each morning no longer happens. The four bots run unattended and the extracts are in Bronze before the working day starts.</li>
+                    <li>A failed run produces a screenshot and an alert, so a changed screen is found the same day.</li>
+                    <li>Moving to selectors based on labels and roles, with fallback locators, reduced how often a small UI change broke a bot. I did not measure by how much.</li>
+                </ul>
             </div>
         </section>
 
         <section class="reveal" id="what-id-do-differently">
-            <div class="sh"><span class="sh-num">08</span><h2 class="sh-title">What I'd do differently</h2></div>
+            <div class="sh"><span class="sh-num">07</span><h2 class="sh-title">What I'd do differently</h2></div>
             <div class="reflection">
                 <div class="reflect-card shipped">
-                    <div class="reflect-card-head"><h4>Playwright over Selenium</h4><span class="shipped-chip">Shipped</span></div>
-                    <span class="reflect-then">Selenium's implicit waits meant a shelf of sleep-and-retry workarounds around every slow-rendering report.</span>
-                    <p class="reflect-now">The browser-driven bots run on Playwright now — auto-waiting removed most of those workarounds, and network interception made it possible to catch a server error page before it was ever written to disk as a CSV. The applet bot stays on PyAutoGUI; there is no DOM there to drive. Trade-off: two automation libraries to keep current instead of one.</p>
+                    <div class="reflect-card-head"><h4>Playwright instead of Selenium</h4><span class="shipped-chip">Shipped</span></div>
+                    <span class="reflect-then">With Selenium, every slow-rendering report needed sleep-and-retry workarounds.</span>
+                    <p class="reflect-now">The bots that drive a web page now run on Playwright. Its auto-waiting removed most of those workarounds, and network interception lets a bot detect a server error page before it is saved as data. The desktop-UI bot stays on PyAutoGUI. Trade-off: two automation libraries to keep current.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>Containerised runners</h4>
-                    <p>Running on a shared Windows host meant one bot's flakiness could starve another. Container-per-bot with pinned Chrome versions would have isolated failures.</p>
+                    <h4>Isolate the bots from each other</h4>
+                    <p>All four run on one shared Windows host, so one stuck bot can hold up another. Separate runners with pinned browser versions would contain a failure.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>Record, don't click</h4>
-                    <p>For stable flows, recording and replaying HAR traces would have been more reliable than UI automation. Reserve real clicking for actually dynamic UIs.</p>
-                </div>
-                <div class="reflect-card">
-                    <h4>Push for real integrations</h4>
-                    <p>Bots are a pragmatic stopgap. I used the time they bought to push harder for proper APIs with the vendors — should have started that conversation on day one.</p>
+                    <h4>Ask for real integrations earlier</h4>
+                    <p>Bots are a stopgap. I should have started asking the system owners for proper exports or APIs on day one.</p>
                 </div>
             </div>
         </section>
@@ -377,33 +300,18 @@
             <div class="related-grid">
                 <a href="medallion-lakehouse.html" class="related-card">
                     <span class="related-card-tag">Data Platform</span>
-                    <span class="related-card-title">Medallion lakehouse</span>
+                    <span class="related-card-title">Bronze/Silver/Gold lakehouse on Parquet</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
                 <a href="anomaly-detection.html" class="related-card">
                     <span class="related-card-tag">Data Quality</span>
-                    <span class="related-card-title">3-Tier anomaly detection</span>
+                    <span class="related-card-title">Three-tier data-quality checks</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
                 <a href="pipeline-orchestration.html" class="related-card">
                     <span class="related-card-tag">Platform Engineering</span>
-                    <span class="related-card-title">Pipeline orchestration layer</span>
+                    <span class="related-card-title">Job scheduling with install-time validation</span>
                     <span class="related-card-arrow">Read →</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="cta">
-            <h3>Stuck behind a legacy UI?</h3>
-            <p>I'm happy to compare RPA patterns — when it's the right tool, and when it really, really isn't.</p>
-            <div class="cta-row">
-                <a href="mailto:godson.kurishinkal@gmail.com?subject=RPA%20framework%20conversation" class="cta-btn cta-btn-primary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    Get in touch
-                </a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-ghost">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    LinkedIn
                 </a>
             </div>
         </div>

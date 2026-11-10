@@ -1,202 +1,47 @@
-# Godson Kurishinkal Antony | Data Engineer
+# Godson Kurishinkal Antony
 
-> **Retail Supply Chain Analytics · Demand Forecasting · ML**
-> Python · SQL · Polars · DuckDB · Power BI
->
-> Building production data infrastructure that powers supply chain decisions for 30,000+ SKUs daily.
+Data and analytics engineer in Dubai. I build data pipelines and analytics models for retail supply chain.
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live-success?style=for-the-badge)](https://godsonkurishinkal.github.io/data-engineering-portfolio/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/godsonkurishinkal)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:godson.kurishinkal@gmail.com)
+- Site: https://godsonkurishinkal.github.io/data-engineering-portfolio/
+- LinkedIn: https://linkedin.com/in/godsonkurishinkal
+- Email: godson.kurishinkal@gmail.com
 
----
+## What is in this repository
 
-## About
+| Path | What it is |
+|---|---|
+| `index.html`, `resume.html`, `404.html` | The site's home page, résumé page and error page |
+| `projects/` | Five write-ups of systems I built at work. The work code is not public, so these pages show simplified snippets |
+| `enterprise-data-platform/` | ETL framework components: a public Python library with extractors, schema enforcement, loaders and data-quality detectors. See its [README](enterprise-data-platform/README.md) for what is tested and what is not |
+| `assets/` | Stylesheets and images |
+| `scripts/` | `bump-css-version.sh`, which stamps stylesheet links with a content hash |
+| `.github/workflows/` | CI: HTML validation, link check and stylesheet stamps (`site`), pytest (`tests`) |
 
-**Assistant Manager – MIS & Analytics, DC Operations** at **Landmark Group**, Dubai, UAE.
-**6+ years in UAE data & analytics** across retail and logistics.
+## Write-ups
 
-I design and build data platforms that solve real business problems. Not proof-of-concepts—production systems that 15+ strategic stakeholders depend on daily for inventory, forecasting, and operational decisions.
+- [Bronze/Silver/Gold lakehouse on Parquet](projects/medallion-lakehouse.html)
+- [Job scheduling with install-time validation](projects/pipeline-orchestration.html)
+- [Three-tier data-quality checks](projects/anomaly-detection.html)
+- [Demand forecasting by demand pattern](projects/demand-forecasting.html)
+- [Browser automation for systems without APIs](projects/rpa-bot-framework.html)
+- [ETL framework components (public code)](enterprise-data-platform/)
 
-**My Philosophy:** Choose the simplest architecture that solves the problem. Complexity should be a last resort, not a flex.
+Figures on the write-up pages are my own measurements of systems at work. The underlying data is not public.
 
----
+## Working on the site
 
-## Production Impact
+The site is plain HTML and CSS, served by GitHub Pages from `main`.
 
-| Metric | Before | After | Impact |
-|--------|--------|-------|--------|
-| **ETL Processing Time** | 4 hours | 30 minutes | **87% faster** |
-| **Data Freshness** | 48 hours | 2-4 hours | **90% improvement** |
-| **Pipeline Reliability** | ~70% | 95%+ | **+25 points** |
-| **Analyst Time on Wrangling** | 60% | 15% | **45% time reclaimed** |
-| **Data Quality Issues** | Unknown | 500+ caught | **Automated detection** |
+```bash
+# validate the pages
+npx --yes html-validate@9.7.1 index.html resume.html 404.html 'projects/*.html' enterprise-data-platform/index.html
 
----
-
-## Featured Projects
-
-### [Medallion Data Lakehouse](enterprise-data-platform/)
-A Bronze/Silver/Gold architecture processing data from 4 source systems (ERP, WMS, OBI, POS) into analytics-ready star schema models.
-
-**Scale:** 30,000+ SKUs | 50+ pipelines | 10+ fact tables | 6+ dimensions
-
-**Key Decision:** Chose Polars over Pandas after benchmarks showed 5-10x speedup on our data volumes. Chose DuckDB over PostgreSQL for analytics because zero-copy Parquet reads eliminated query latency.
-
-[Full Case Study →](enterprise-data-platform/)
-
----
-
-### [3-Tier Anomaly Detection System](enterprise-data-platform/data_quality/)
-Multi-layer validation framework that caught 500+ data quality issues before they reached reports.
-
-**Architecture:**
-```
-Schema gate    → Block the batch    (SchemaEnforcer, strict by default)
-Business rules → Flag + continue    (detector tier 1)
-Statistical    → Alert + log        (detector tiers 2–3)
+# after changing assets/css/*.css
+bash scripts/bump-css-version.sh
 ```
 
-Layers are named for what they do on failure. The detector module numbers its
-own tiers by method (validation / outliers / volatility), which is a different
-axis — see the [platform README](enterprise-data-platform/README.md#data-quality).
+Changes go through a pull request; see [CLAUDE.md](CLAUDE.md) for the working rules and [CHANGELOG.md](CHANGELOG.md) for what changed.
 
-**Result:** 70% reduction in data-related incidents after deployment.
+## Licence
 
----
-
-### [RPA Bot Framework](enterprise-data-platform/etl_framework/extractors/)
-4 browser-and-desktop automation bots for legacy systems without API access (WMS, OBI, ERP, POS). Built on Selenium, since migrated to Playwright for the DOM-driven targets. Fragile by nature, but better than manual exports.
-
-**Why RPA?** WMS had no API. Options were: (1) manual exports daily forever, (2) convince vendor to add API (6+ months), or (3) automate the clicks. I chose pragmatism over purity.
-
----
-
-### [Demand Forecasting Engine](enterprise-data-platform/)
-7+ algorithm ensemble with automatic pattern classification (ADI/CV² method) to select optimal forecasting approach per SKU.
-
-**Algorithms:** ARIMA, Prophet, Exponential Smoothing, Croston's Method (intermittent demand), and more.
-
----
-
-## Technical Stack
-
-### Core Technologies
-| Layer | Technology | Why This Choice |
-|-------|------------|-----------------|
-| **Processing** | Polars | 5-10x faster than Pandas, lazy evaluation, native Parquet support |
-| **Analytics** | DuckDB | Zero-copy Parquet reads, embedded (no server), vectorized execution |
-| **Storage** | Parquet | Columnar, compressed (80% smaller than CSV), schema evolution |
-| **Visualization** | Power BI | Enterprise dashboards, DAX measures, supply chain KPIs |
-| **Automation** | Selenium / Playwright / PyAutoGUI | Only route into legacy systems with no API |
-| **Orchestration** | Task Scheduler | Enterprise constraint; would use Airflow in greenfield |
-
-### Architecture Patterns
-- **Medallion Lakehouse** (Bronze → Silver → Gold)
-- **Star Schema** dimensional modeling (Kimball methodology)
-- **Configuration-Driven ETL** (YAML configs, ABC patterns)
-- **3-Tier Data Validation** (Schema → Business → Statistical)
-
-### Languages & Tools
-```
-Python 3.10+     SQL (T-SQL, PL/SQL)     Git
-Polars           DuckDB                   Power BI
-Pandas           SQL Server               Streamlit
-Selenium         Oracle                   GitHub Actions
-PyAutoGUI        Parquet/Hive             Docker (learning)
-Scikit-learn     statsmodels              Prophet
-```
-
----
-
-## Architecture Decisions
-
-I document major technical decisions. Here's a sample:
-
-### Why Polars Over Pandas?
-
-**Context:** Processing 30,000+ SKUs with 4-hour batch windows
-
-**Decision:** Polars with lazy evaluation
-
-**Rationale:**
-- 5-10x faster on our data volume (benchmarked)
-- 60% less memory via lazy evaluation
-- Native multi-threading (no GIL)
-- First-class Parquet support
-
-**Trade-offs:**
-- Spark: Overkill for single-machine workloads
-- Pandas: Memory issues at 500MB+ DataFrames
-- Polars: Sweet spot for our 2-5GB daily volume
-
-**Migration Path:** If daily volume exceeds 50GB, migrate to Spark/Databricks.
-
-[More ADRs →](enterprise-data-platform/docs/architecture-decisions/)
-
----
-
-## Project Structure
-
-```
-data-engineering-portfolio/
-├── index.html                   # Landing page
-├── resume.html                  # Print-ready résumé
-├── 404.html
-├── sitemap.xml  ·  robots.txt
-├── LICENSE
-├── assets/
-│   ├── css/tokens.css           # Design tokens (single source of truth)
-│   ├── css/app.css              # Shared component styles
-│   └── images/
-├── projects/                    # Case studies
-│   ├── medallion-lakehouse.html
-│   ├── pipeline-orchestration.html
-│   ├── anomaly-detection.html
-│   ├── demand-forecasting.html
-│   └── rpa-bot-framework.html
-└── enterprise-data-platform/    # The codebase behind the case studies
-    ├── etl_framework/           # Extractors, transformers, loaders
-    ├── data_quality/            # 3-tier validation and anomaly detection
-    ├── architecture/            # Layer specs and data flow
-    └── docs/                    # ADRs, benchmarks, reliability, deployment
-```
-
----
-
-## What I'm Learning
-
-| Technology | Status | Goal |
-|------------|--------|------|
-| **Databricks** | Next | Data Engineer Associate certification |
-| **Microsoft Fabric / Azure** | After Databricks | Microsoft data engineering certification |
-| **Apache Spark** | Studying | Distributed processing at scale |
-| **dbt** | Studying | Transformation layer |
-
-**Why these?** My current stack works for single-machine workloads. Cloud data platforms are the next scale tier.
-
----
-
-## Education & Certifications
-
-**BS in Data Science & Applications** — Indian Institute of Technology, Madras *(Jan 2023 – Present)*
-**Diploma in Mechanical Engineering** — Carmel Polytechnic College *(2014 – 2017, CGPA 8.46)*
-
-**Completed certifications:**
-- Google Business Intelligence Certificate *(May 2024)*
-- Google Data Analytics Professional Certificate *(Apr 2024)*
-
----
-
-## Contact
-
-- **Portfolio:** [godsonkurishinkal.github.io/data-engineering-portfolio](https://godsonkurishinkal.github.io/data-engineering-portfolio/)
-- **LinkedIn:** [linkedin.com/in/godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)
-- **Email:** godson.kurishinkal@gmail.com
-- **GitHub:** [github.com/GodsonKurishinkal](https://github.com/GodsonKurishinkal)
-
----
-
-## License
-
-MIT License - See [LICENSE](LICENSE) for details
+MIT. See [LICENSE](LICENSE).

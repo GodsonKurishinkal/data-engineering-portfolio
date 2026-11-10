@@ -1,5 +1,5 @@
 # ============================================================================
-# Enterprise Data Platform — Makefile
+# ETL framework components — Makefile
 # ============================================================================
 # Every target here runs against what is actually in this repository.
 # Usage: make <target>
@@ -8,7 +8,7 @@
 .PHONY: help install install-dev install-all lint format check clean
 
 help:
-	@echo "Enterprise Data Platform — development commands"
+	@echo "ETL framework components — development commands"
 	@echo ""
 	@echo "Setup:"
 	@echo "  make install      Install runtime dependencies"

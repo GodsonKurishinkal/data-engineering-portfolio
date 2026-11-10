@@ -5,15 +5,15 @@
 
 ## Context
 
-Our ETL pipelines process 30,000+ SKUs daily across multiple source systems (ERP, WMS, OBI, POS). The existing Pandas-based pipelines had several issues:
+Our ETL pipelines process 30,000+ SKUs daily across multiple source systems (ERP, WMS, a BI reporting server, POS). The existing Pandas-based pipelines had several issues:
 
-1. **Memory pressure**: DataFrames exceeding 500MB caused OOM errors on 16GB workstations
+1. **Memory pressure**: large DataFrames caused out-of-memory errors on analyst workstations
 2. **Single-threaded bottleneck**: GIL prevented parallel processing within transformations
-3. **Slow aggregations**: GroupBy operations on 2M+ rows took 15+ seconds
+3. **Slow aggregations**: GroupBy operations on large tables were slow
 4. **CSV intermediate files**: Pandas I/O forced us to use CSV, adding overhead
 
 **Requirements:**
-- Process 2-5GB daily data within 30-minute batch window
+- Process the daily data within the batch window
 - Run on single-machine infrastructure (no cluster budget approved)
 - Maintain SQL-like expressiveness for analyst handoff
 - First-class Parquet support (our target storage format)
@@ -23,28 +23,20 @@ Our ETL pipelines process 30,000+ SKUs daily across multiple source systems (ERP
 Replace Pandas with **Polars** for all new ETL development. Migrate critical existing pipelines.
 
 **Polars advantages for our use case:**
-- **Lazy evaluation**: Build query plan, execute once (60% memory reduction)
+- **Lazy evaluation**: Build query plan, execute once, with lower peak memory
 - **Multi-threaded by default**: Utilizes all CPU cores without GIL constraints
 - **Native Parquet**: `scan_parquet()` with predicate pushdown
 - **Expressive API**: Method chaining feels like SQL
 - **Rust backend**: Compiled performance, not interpreted Python
 
-## Benchmarks (Our Data)
+## Benchmarks
 
-Tested on actual production datasets:
-
-| Operation | Pandas | Polars | Improvement |
-|-----------|--------|--------|-------------|
-| Read CSV (1.2GB) | 52s | 9s | **5.8x faster** |
-| GroupBy + Agg | 18s | 1.4s | **12.9x faster** |
-| Join (2 tables, 1M rows each) | 11s | 1.1s | **10x faster** |
-| Filter + Select | 3.2s | 0.2s | **16x faster** |
-| Memory (same operation) | 4.8GB | 1.2GB | **4x less** |
+Polars was faster and used less memory than Pandas on our workloads. The benchmark is not published here, so no figures are quoted.
 
 ## Consequences
 
 ### Positive
-- Batch processing now completes in 30 minutes (was 4 hours)
+- Batch processing time dropped (my own measurement at work: about 4 hours to about 30 minutes; not reproducible from this repository)
 - No more OOM errors on analyst workstations
 - Code is more readable (`.pipe()` chains vs. nested assignments)
 - Parquet read/write is seamless
@@ -69,11 +61,11 @@ Tested on actual production datasets:
 
 ### 2. Dask
 - ✅ Pandas-compatible API
-- ❌ **Slower than Polars** in our benchmarks (7x slower on groupby)
+- ❌ **Slower than Polars** on our workloads
 - ❌ **Less mature** lazy evaluation
 - ❌ **Debugging complexity** with task graphs
 
-**Verdict:** Polars outperformed on every metric we tested
+**Verdict:** Polars was the better fit
 
 ### 3. Vaex
 - ✅ Memory-mapped for huge files
@@ -88,7 +80,7 @@ Tested on actual production datasets:
 - ❌ **Fundamental GIL limitation** can't be optimized away
 - ❌ **Memory model** requires full DataFrame in RAM
 
-**Verdict:** Optimizing Pandas yielded 20% improvement; Polars gave 500%+
+**Verdict:** Optimizing Pandas helped a little; switching engine helped much more
 
 ## Implementation Notes
 
@@ -121,11 +113,11 @@ result = (
 
 - [Polars Documentation](https://pola.rs/)
 - [Polars vs Pandas Benchmark (H2O)](https://h2oai.github.io/db-benchmark/)
-- [Measured Polars vs Pandas comparison](../performance-benchmarks.md#polars-vs-pandas-comparison)
 
 ## Revision History
 
 | Date | Change | Author |
 |------|--------|--------|
 | 2024-03-15 | Initial decision | Godson K. |
-| 2024-06-01 | Added 3-month retrospective metrics | Godson K. |
+| 2024-06-01 | Added 3-month retrospective | Godson K. |
+| 2026-11-10 | Removed benchmark table: the benchmark is not published here | Godson K. |

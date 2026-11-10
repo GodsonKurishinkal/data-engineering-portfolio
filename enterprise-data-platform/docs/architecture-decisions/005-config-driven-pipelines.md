@@ -25,7 +25,7 @@ handling.
 
 ## Decision
 
-Every pipeline is a **YAML configuration plus an Abstract Base Class**. The
+Every pipeline is a **YAML configuration plus an Abstract Base Class**. (The base classes are in this repository; the YAML configs and the engine that reads them are not.) The
 engine reads the config and runs the pipeline; the subclass supplies only what is
 genuinely source-specific.
 
@@ -33,7 +33,7 @@ genuinely source-specific.
 pipeline:
   name: "inventory_daily"
   source:
-    type: "oracle_obi"
+    type: "bi_server"
     query: "SELECT * FROM inventory_snapshot WHERE snapshot_date = :d"
   destination:
     layer: "bronze"
@@ -55,7 +55,7 @@ extractor implements `extract()` and nothing else.
 ## Consequences
 
 **Easier:**
-- 50+ pipelines behave identically in every respect that isn't the query.
+- Pipelines behave identically in every respect that isn't the query.
 - Quality rules and load modes are declarative and diffable.
 - A behavioural change ships as a YAML diff a reviewer can read in 10 seconds.
 - Cross-cutting improvements (retry backoff, screenshot-on-failure) land once.

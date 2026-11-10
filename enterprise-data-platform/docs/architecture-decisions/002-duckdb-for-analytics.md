@@ -19,7 +19,7 @@ Our Gold layer contains 10+ fact tables and 6+ dimension tables in star schema f
 
 **Requirements:**
 - Query Parquet files directly without ETL to database
-- Handle 10GB+ analytical queries in under 10 seconds
+- Answer analytical queries over the Gold layer interactively
 - Support standard SQL (analysts know SQL, not Python)
 - Embedded solution (no server infrastructure)
 - Low operational overhead
@@ -30,31 +30,20 @@ Use **DuckDB** as the analytical query engine for Gold layer consumption.
 
 **Key capabilities:**
 - **Zero-copy Parquet reads**: Queries Parquet without loading into memory
-- **Vectorized execution**: Column-at-a-time processing, 20-100x faster than row-based
+- **Vectorized execution**: Column-at-a-time processing
 - **Embedded**: Single file, no server process, starts instantly
 - **Full SQL support**: Window functions, CTEs, complex joins
 - **Python integration**: `duckdb.sql()` returns Polars/Pandas DataFrames
 
-## Benchmarks (Gold Layer Queries)
+## Benchmarks
 
-Tested on production Gold layer data:
-
-| Query Type | SQL Server | DuckDB | Improvement |
-|------------|------------|--------|-------------|
-| Fact table scan (5M rows) | 45s | 2.1s | **21x faster** |
-| Star schema join (4 tables) | 38s | 1.8s | **21x faster** |
-| Window function (ranking) | 22s | 0.9s | **24x faster** |
-| GroupBy + Having | 15s | 0.6s | **25x faster** |
-| Memory (same query) | 8GB | 1.5GB | **5x less** |
-
-**Note:** SQL Server comparison is staging database, not production OLTP.
+DuckDB was faster than the staging SQL Server database on our Gold-layer queries. The benchmark is not published here, so no figures are quoted.
 
 ## Consequences
 
 ### Positive
 - **Analysts unblocked**: Can query entire Gold layer from laptops
 - **No infrastructure**: Zero server costs, zero maintenance
-- **Performance**: P95 query time under 3 seconds
 - **Portability**: Database file can be shared/copied
 
 ### Negative
@@ -81,7 +70,7 @@ Tested on production Gold layer data:
 - ✅ Handles massive datasets
 - ❌ **Startup latency**: 30+ seconds before first query
 - ❌ **Cluster requirement**: Need infrastructure
-- ❌ **Overkill**: Our Gold layer is 10-20GB
+- ❌ **Overkill**: Our Gold layer fits on one machine
 
 **Verdict:** Right tool for petabyte scale, not our scale
 
@@ -154,8 +143,7 @@ result_polars = conn.execute("...").pl()
 |------|-------------------------|-----------------|
 | Server license | Recurring licence fee | None |
 | Storage | Separate database storage | None (uses existing Parquet) |
-| Maintenance | 4 hrs/month | 0 hrs/month |
-| Query performance | Baseline | 20x faster |
+| Maintenance | A server to patch and back up | None |
 
 **Net effect:** no licence or separate storage cost, plus analyst productivity gains
 
@@ -171,3 +159,4 @@ result_polars = conn.execute("...").pl()
 |------|--------|--------|
 | 2024-04-10 | Initial decision | Godson K. |
 | 2024-08-15 | Added cost analysis | Godson K. |
+| 2026-11-10 | Removed benchmark table: the benchmark is not published here | Godson K. |

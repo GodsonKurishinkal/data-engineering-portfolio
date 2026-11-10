@@ -4,6 +4,9 @@
 
 ## Overview
 
+> This is a design specification. The component code is in `etl_framework/` and
+> `data_quality/`; the pipelines and Gold-layer build described here are not in this repository.
+
 The Medallion architecture provides a structured approach to data management, organizing data into three distinct layers based on quality and readiness for consumption.
 
 ---
@@ -38,7 +41,7 @@ Raw data landing zone. Captures data exactly as received from source systems.
 │   └── locations/
 ├── crm/
 │   └── customers/
-└── obi/
+└── bi_server/
     └── reports/
 ```
 
@@ -247,7 +250,7 @@ CREATE TABLE dim_product (
 ### Inventory Pipeline
 
 ```
-ERP.INVENTORY_SNAPSHOT
+ERP inventory snapshot
         │
         ▼ [Extract]
 ┌─────────────────────────────────────────────┐
@@ -307,18 +310,7 @@ rebuild_gold_fact("fact_inventory", from_date="2026-01-01")
 
 ---
 
-## Storage Estimates
-
-| Layer | Daily Ingest | Retention | Total Storage |
-|-------|--------------|-----------|---------------|
-| Bronze | 5 GB | Forever | ~1.8 TB/year |
-| Silver | 2 GB | 2 years | ~1.5 TB |
-| Gold | 500 MB | 5 years | ~900 GB |
-
----
-
 ## Related Documentation
 
 - [Data Flow](data-flow.md) - End-to-end pipeline documentation
-- [Performance Benchmarks](../docs/performance-benchmarks.md) - Processing times
-- [Deployment Guide](../docs/deployment-guide.md) - Production setup
+- [Architecture decisions](../docs/architecture-decisions/README.md) - Why each choice was made

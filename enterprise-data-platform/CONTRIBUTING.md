@@ -1,6 +1,6 @@
 # Working on this codebase
 
-This is a reference implementation, not a staffed open-source project. There is
+This is a component library, not a staffed open-source project. There is
 no review queue and no roadmap to contribute to. What follows is how to run it
 locally and the conventions the code holds itself to — useful if you are reading
 the source, forking it, or evaluating it.
@@ -26,9 +26,8 @@ source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"        # runtime + ruff, mypy, black
 ```
 
-Optional extras, installed the same way: `.[rpa]` for the Selenium/PyAutoGUI
-bots, `.[viz]` for Streamlit, `.[ml]` for the forecasting stack, `.[all]` for
-everything.
+Optional extra: `.[rpa]` installs Selenium for `rpa_extractor.py`. The `viz` and
+`ml` extras are declared in `pyproject.toml`, but no code in this repository uses them.
 
 Verify:
 
@@ -68,8 +67,8 @@ The same holds for transformers and loaders. See
 in a pipeline's YAML config. If a config starts growing conditionals, that logic
 belongs in Python instead.
 
-**Types are not optional.** `mypy` runs in strict mode. Every public function is
-annotated, including the return type.
+**Types are the target.** `mypy` is configured in strict mode and public functions are
+annotated. The check does not pass yet.
 
 **Polars, not Pandas,** for anything in the transform path — see
 [ADR-001](docs/architecture-decisions/001-polars-over-pandas.md). Pandas remains
@@ -91,7 +90,8 @@ make format     # black + ruff --fix
 make check      # ruff, mypy, and a black --check pass
 ```
 
-Both run against `etl_framework/` and `data_quality/`.
+Both run against `etl_framework/` and `data_quality/`. `make check` currently
+fails: the existing code has open ruff, mypy and black findings.
 
 ```bash
 pytest tests/ -q

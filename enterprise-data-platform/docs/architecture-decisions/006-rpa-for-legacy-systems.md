@@ -8,7 +8,7 @@
 Four source systems carry data the platform needs. Two of them have no
 programmatic interface of any kind:
 
-- **WMS** — a Java-applet warehouse system. No API, no direct database access
+- **WMS** — an applet-based warehouse system. No API, no direct database access
   granted, export only through the UI.
 - **POS sales portal** — a vendor reporting portal whose only output is a
   browser-triggered Excel download.
@@ -26,8 +26,11 @@ mis-clicked.
 
 ## Decision
 
+> In this repository: `rpa_extractor.py` implements the Selenium path only. The
+> PyAutoGUI and Playwright work described below is not in the public code.
+
 Build a **shared RPA framework** — Selenium for browser-based systems, PyAutoGUI
-for the Java applet — behind the same `BaseExtractor` interface every other
+for the applet — behind the same `BaseExtractor` interface every other
 source uses ([ADR-005](005-config-driven-pipelines.md)).
 
 The bots are treated as extractors, not as a separate category of automation:
@@ -42,13 +45,13 @@ debug a transform.
 ## Consequences
 
 **Easier:**
-- Four systems extract unattended before 06:30, with no human in the loop.
+- Four systems extract unattended, with no human in the loop.
 - The manual morning ritual is eliminated, along with its silent error class.
 - RPA sources look exactly like database sources to everything downstream.
 
 **Harder:**
 - **UI fragility is real and permanent.** A vendor redesign breaks a bot; this
-  happened in production (December 2025, WMS login page, 45 minutes to fix).
+  has happened in production.
   Mitigated with semantic selectors, fallback locators, and page validation
   before every action.
 - **Credential handling** needs care — service accounts and environment
@@ -63,7 +66,7 @@ debug a transform.
 | **Wait for vendor APIs** | 6+ months quoted with no commitment, against a daily cost being paid now. |
 | **Direct database access** | Requested and declined by the WMS vendor; would have voided support. |
 | **Keep manual exports** | Four hours a day, indefinitely, with an error mode nobody could detect. |
-| **Screen-scraping the rendered HTML only** | Insufficient — the WMS is a Java applet with no DOM to scrape. |
+| **Screen-scraping the rendered HTML only** | Insufficient — the WMS is an applet with no DOM to scrape. |
 
 ## Amendment: Playwright for DOM-driven targets (2026-02)
 

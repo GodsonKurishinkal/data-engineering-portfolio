@@ -11,6 +11,9 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 - This changelog.
 
 ### Changed
+- Whole-site plain-language pass: home page, all six write-ups, résumé summary, repository README and the ETL component docs. Titles now describe what each thing is; the public code is presented as a component library.
+- Home page shortened: results reduced to two before/after figures with a stated baseline; card metrics, the key-numbers row and the specialisations and tools sections removed.
+- Write-ups state that work code is not public and snippets are simplified; figures without a definition or baseline removed.
 - Home page copy rewritten in plain language: headline, intro, section headings and contact line.
 - Home page order: case studies now come directly after the introduction.
 - Résumé link opens in the same tab. Phone layout puts the portrait above the headline.
@@ -21,6 +24,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 - `scripts/bump-css-version.sh` works with GNU sed as well as BSD sed.
 
 ### Removed
+- `docs/performance-benchmarks.md`, `docs/reliability-metrics.md` and `docs/deployment-guide.md` from the ETL components: not reproducible from this repository, or describing scripts that are not in it.
+- Closing call-to-action blocks on the write-ups.
 - Static "All pipelines operational" footer text and decorative `//` marks.
 
 ### Fixed

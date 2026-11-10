@@ -1,451 +1,109 @@
-# Enterprise Data Platform
+# ETL framework components
 
-> Production-grade data lakehouse powering supply chain operations at scale
+A Python library of ETL building blocks for a Bronze/Silver/Gold Parquet
+lakehouse: extractors, a schema enforcer, loaders and data-quality checks.
+Built on Polars and DuckDB.
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
-[![Polars](https://img.shields.io/badge/Polars-Latest-orange.svg)](https://pola.rs)
-[![DuckDB](https://img.shields.io/badge/DuckDB-Latest-yellow.svg)](https://duckdb.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![tests](https://github.com/GodsonKurishinkal/data-engineering-portfolio/actions/workflows/tests.yml/badge.svg)](https://github.com/GodsonKurishinkal/data-engineering-portfolio/actions/workflows/tests.yml)
+This is a component library, not a running platform. Read "What is not included"
+before relying on it.
 
----
+## What is included
 
-## Executive Summary
+| Package | Contents |
+|---------|----------|
+| `etl_framework/extractors/` | `BaseExtractor`, plus database (ODBC), REST API and Selenium implementations |
+| `etl_framework/transformers/` | `BaseTransformer`, `SchemaEnforcer`, `DataCleaner` |
+| `etl_framework/loaders/` | Hive-partitioned Parquet writer, DuckDB loader |
+| `data_quality/validation_rules/` | Rule-based validation engine |
+| `data_quality/anomaly_detection/` | Outlier detection: z-score, modified z-score, IQR, percentile, spike and volume checks |
 
-A **Medallion architecture data lakehouse** processing 30,000+ SKUs daily from 4 source systems (ERP, WMS, OBI, POS). Reduced data latency from 48 hours to 2–4 hours, enabling same-day supply chain decisions.
+About 5,000 lines of source and 33 tests.
 
-### Impact at a Glance
+## What is not included
 
-| Metric | Before | After | Business Impact |
-|--------|--------|-------|-----------------|
-| **Processing Time** | 4 hours | 30 minutes | Team can iterate faster on reports |
-| **Data Freshness** | 48 hours | 2-4 hours | Same-day inventory decisions |
-| **Pipeline Reliability** | ~70% | 95%+ | Fewer morning firefights |
-| **Analyst Time on Wrangling** | 60% | 15% | 45% more time for actual analysis |
-| **Data Quality Issues** | Discovered in reports | 500+ caught at source | No more "bad data" escalations |
+- No pipeline entry point, no sample data and no pipeline configs. Nothing here
+  runs end to end.
+- No Gold-layer build, forecasting, dashboard or alerting code. The design
+  documents mention them; the code is not in this repository.
+- No lock file. Dependencies are declared with lower bounds only.
 
----
-
-## The Problem
-
-### Business Context
-
-The supply chain operations team at a major retail company made decisions on **stale data**. Inventory positions were only knowable after they had already become a problem, and analysts spent most of their week cleaning rather than analysing.
-
-### Technical Pain Points
-
-1. **Fragmented data**: 4 source systems (ERP, WMS, OBI, POS) with no integration
-2. **Manual exports**: Daily 4-hour Excel extraction ritual (fragile, error-prone)
-3. **No historical tracking**: Only point-in-time snapshots, no trend analysis
-4. **Quality discovered late**: Issues found in reports, not at data ingestion
-5. **Single point of failure**: One person knew the Excel macros
-
-### What Was at Stake
-
-- **Inventory decisions** based on 48-hour-old data
-- **Stockouts** from delayed visibility into inventory levels
-- **Analyst burnout** from repetitive data wrangling
-
----
-
-## The Solution
-
-### Architecture Choice: Medallion (Bronze/Silver/Gold)
-
-**Why Medallion over alternatives?**
-
-| Alternative | Why Not |
-|-------------|---------|
-| Single-hop ETL | No recovery from source issues; can't debug transformations |
-| Lambda Architecture | Overkill; we don't have real-time requirements |
-| Data Vault | Modeling complexity not justified for our scale |
-| Delta Lake | Requires Spark; our volume fits single-machine processing |
-
-**Decision documented:** [ADR-003: Medallion Architecture](docs/architecture-decisions/003-medallion-architecture.md)
-
-### Technology Choices
-
-| Component | Technology | Why |
-|-----------|------------|-----|
-| Processing | Polars | 5-10x faster than Pandas ([ADR-001](docs/architecture-decisions/001-polars-over-pandas.md)) |
-| Analytics | DuckDB | Zero-copy Parquet reads ([ADR-002](docs/architecture-decisions/002-duckdb-for-analytics.md)) |
-| Storage | Parquet | Columnar, 80% smaller than CSV |
-| Extraction | Abstract Base Classes | Reusable patterns for 50+ pipelines |
-
-### Key Implementation Details
-
-**Configuration-driven pipelines** — Adding a new data source is YAML, not code:
-
-```yaml
-pipeline:
-  name: new_source_daily
-  source:
-    type: database
-    connection: ${NEW_SOURCE_CONN}
-    query: "SELECT * FROM table WHERE modified > :last_run"
-  destination:
-    layer: bronze
-    partition_by: [extract_date]
-```
-
-**Data quality, by response** — Catch issues early, not in reports. Each layer
-is defined by what it *does* when it finds something, because that is the part
-that matters at 6am:
-
-```
-Schema gate      → BLOCKS. Batch refused, nothing lands.      (SchemaEnforcer)
-Business rules   → FLAGS. Rows quarantined, batch continues.  (detector tier 1)
-Statistical      → ALERTS. Logged and paged, nothing halted.  (detector tiers 2–3)
-```
-
-The detector's own tier numbering is different from this ladder and is set out
-under [Data Quality](#data-quality) below.
-
----
-
-## Results & Impact
-
-### Quantified Business Outcomes
-
-| Outcome | Measurement |
-|---------|-------------|
-| **Same-day reporting enabled** | Previously next-day |
-| **Analyst productivity** | +45% time on insights vs. cleaning |
-| **Data incidents** | 70% reduction in "bad data" escalations |
-| **Quality automation** | 500+ anomalies auto-detected in 12 months |
-| **Reusable framework** | 5 additional pipelines built from template |
-
-### Technical Metrics
-
-| Metric | Value |
-|--------|-------|
-| Pipeline success rate | 98.2% (30-day, see reliability-metrics.md) |
-| Test suite | 33 tests, 67% coverage on the modules under test |
-| P95 query latency | < 3 seconds |
-| Storage efficiency | 80% savings (Parquet vs CSV) |
-
----
-
-## What I Learned (Failures Included)
-
-### What Didn't Work
-
-1. **Over-engineering initially**: Started with Airflow + Spark. Killed 2 weeks before realizing Task Scheduler + Polars was simpler and sufficient.
-
-2. **Building in isolation**: Spent 3 weeks on features nobody asked for. Started weekly demos after that.
-
-3. **No monitoring at first**: Silent failures went unnoticed for days. Added observability from day 1 on subsequent projects.
-
-### What I'd Do Differently
-
-- Start with monitoring infrastructure, not ETL code
-- Involve stakeholders in schema design (not just final review)
-- Budget 30% time for documentation (was 5%, caused painful onboarding)
-
----
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           DATA SOURCES                                       │
-├─────────────┬─────────────┬─────────────┬─────────────┬─────────────────────┤
-│     ERP     │     POS     │     WMS     │     OBI     │   External APIs     │
-└──────┬──────┴──────┬──────┴──────┬──────┴──────┬──────┴──────────┬──────────┘
-       │             │             │             │                 │
-       ▼             ▼             ▼             ▼                 ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        EXTRACTION LAYER                                      │
-│  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐                 │
-│  │  DB Conn  │  │  API      │  │  RPA Bot  │  │  File     │                 │
-│  │  Extractor│  │  Extractor│  │  Extractor│  │  Extractor│                 │
-│  └───────────┘  └───────────┘  └───────────┘  └───────────┘                 │
-└────────────────────────────────────┬────────────────────────────────────────┘
-                                     │
-                                     ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         BRONZE LAYER                                      │
-│                                                                              │
-│  • Raw data landing zone                                                    │
-│  • Immutable historical record                                              │
-│  • Hive-partitioned Parquet (by extract_date)                              │
-│  • Full audit trails                                                        │
-│                                                                              │
-│  /lakehouse/bronze/{source}/{table}/extract_date={YYYY-MM-DD}/          │
-└────────────────────────────────────┬────────────────────────────────────────┘
-                                     │
-                                     ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         SILVER LAYER                                      │
-│                                                                              │
-│  • Cleaned & validated data                                                 │
-│  • Schema enforcement                                                       │
-│  • Deduplication & null handling                                           │
-│  • 3-tier anomaly detection                                                │
-│                                                                              │
-│  /lakehouse/silver/{domain}/{entity}/                                    │
-└────────────────────────────────────┬────────────────────────────────────────┘
-                                     │
-                                     ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         GOLD LAYER                                        │
-│                                                                              │
-│  • Business-ready star schema                                               │
-│  • 10+ fact tables, 6+ dimension tables                                    │
-│  • Optimized for analytical queries                                         │
-│  • Powers ML models & dashboards                                           │
-│                                                                              │
-│  /lakehouse/gold/facts/ & /lakehouse/gold/dimensions/                   │
-└────────────────────────────────────┬────────────────────────────────────────┘
-                                     │
-                                     ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        CONSUMPTION LAYER                                     │
-├─────────────────┬─────────────────┬─────────────────┬───────────────────────┤
-│   Streamlit     │   Power BI      │   ML Models     │   Ad-hoc Analysis     │
-│   Dashboards    │   Reports       │   (Forecasting) │   (DuckDB)            │
-└─────────────────┴─────────────────┴─────────────────┴───────────────────────┘
-```
-
----
-
-## Project Structure
+## Layout
 
 ```
 enterprise-data-platform/
-├── README.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── Makefile                            # lint / format / clean
-├── pyproject.toml
-├── architecture/
-│   ├── medallion-architecture.md       # Layer specifications
-│   └── data-flow.md                    # End-to-end data flow
 ├── etl_framework/
-│   ├── __init__.py
 │   ├── extractors/
-│   │   ├── base_extractor.py           # Abstract base class
-│   │   ├── database_extractor.py       # SQL Server, Oracle
-│   │   ├── api_extractor.py            # REST APIs, auth, pagination
-│   │   └── rpa_extractor.py            # Selenium / PyAutoGUI bots
 │   ├── transformers/
-│   │   ├── base_transformer.py         # Abstract base class
-│   │   ├── schema_enforcer.py          # Schema specs and registry
-│   │   └── data_cleaner.py             # Nulls, dedupe, type coercion
 │   └── loaders/
-│       ├── parquet_writer.py           # Hive-partitioned Parquet
-│       └── duckdb_loader.py            # Analytical query access
 ├── data_quality/
 │   ├── validation_rules/
-│   │   └── validation_engine.py        # Tiers 1–2: schema + business rules
 │   └── anomaly_detection/
-│       └── anomaly_detector.py         # Tier 3: statistical outliers
-└── docs/
-    ├── architecture-decisions/         # ADR-001 … ADR-007
-    ├── performance-benchmarks.md
-    ├── reliability-metrics.md
-    └── deployment-guide.md
+├── tests/
+├── architecture/                  # layer specification, data flow (design notes)
+├── docs/architecture-decisions/   # ADR-001 to ADR-007
+├── Makefile
+└── pyproject.toml
 ```
 
-## Quick Start
+## Install and run the tests
 
-### Prerequisites
+Python 3.10 or newer.
 
 ```bash
-# Python 3.10+
-python --version
-
-# Create virtual environment
+cd enterprise-data-platform
 python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-.venv\Scripts\activate     # Windows
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -e ".[dev]"
+pytest tests/
 ```
 
-### Installation
+Expected result: 33 passed.
+
+## Test and coverage status
 
 ```bash
-# Install the package and its runtime dependencies
-pip install -e .
-
-# Or with the dev tooling (ruff, mypy, black)
-pip install -e ".[dev]"
-
-# Verify
-python -c "import etl_framework; print(etl_framework.__version__)"
+pytest tests/ --cov=etl_framework --cov=data_quality
 ```
 
-### Run a Pipeline
+| Scope | Coverage |
+|-------|----------|
+| Whole package | 20% |
+| `schema_enforcer.py` | 81% |
+| `anomaly_detector.py` | 60% |
+| The two modules above together (what CI reports) | 67% |
+| Extractors, loaders, `validation_engine.py` | 0% |
 
-The framework in this repository is the reusable component layer — extractors,
-transformers, loaders and the quality engine. It does not include an orchestration entry point or pipeline YAML configs; what
-follows is how the pieces compose.
+CI runs the tests on Python 3.10 and 3.12 for every pull request
+(`.github/workflows/tests.yml`).
 
-```python
-from etl_framework.extractors import create_oracle_extractor
-from etl_framework.transformers import SchemaEnforcer, INVENTORY_SCHEMA
-from etl_framework.loaders import write_to_bronze
+## Known gaps
 
-extractor = create_oracle_extractor(query="SELECT * FROM inventory_snapshot")
-df = extractor.extract()
+- **Extractors and loaders are untested.** They need a live database, API or
+  browser session, and no stand-in is provided.
+- **The validation engine is untested**, and the third detector tier
+  (volatility) has no tests.
+- **`make lint` and `make check` fail.** Ruff and mypy both report errors, and
+  black would reformat most files. CI does not run them.
+- **No end-to-end run.** The pieces compose in principle; that is not
+  demonstrated here.
+- **`rpa_extractor.py` uses Selenium only.** The `rpa` extra also lists
+  PyAutoGUI, which the code does not import.
 
-df = SchemaEnforcer(INVENTORY_SCHEMA).apply(df)
-write_to_bronze(df, source="obi", table="inventory", partition_by=["extract_date"])
-```
+## Using the pieces
 
----
+The tested path is schema enforcement followed by outlier detection. The tests
+are the best usage examples:
 
-## Key Design Decisions
+- `tests/test_schema_enforcer.py`
+- `tests/test_anomaly_detection.py`
 
-### Why Polars over Pandas?
+## Design documents
 
-| Operation | Pandas | Polars | Speedup |
-|-----------|--------|--------|---------|
-| CSV Read (1GB) | 45s | 8s | **5.6x** |
-| GroupBy Agg | 12s | 1.2s | **10x** |
-| Join (2 tables) | 8s | 0.9s | **8.9x** |
-| Memory Usage | 4GB | 1.1GB | **3.6x** |
-
-### Why Parquet with Hive Partitioning?
-
-- **Columnar storage** → Only read columns you need
-- **Compression** → 80% smaller than CSV
-- **Partition pruning** → Query only relevant date ranges
-- **Schema evolution** → Add columns without breaking readers
-
-### Why Configuration-Driven Pipelines?
-
-```yaml
-# New data source? Just add config:
-pipelines:
-  - name: new_source_daily
-    source:
-      type: database
-      connection: ${NEW_SOURCE_CONN}
-      query: "SELECT * FROM table"
-    destination:
-      layer: bronze
-      partition_by: [extract_date]
-    schedule: "0 6 * * *"
-```
-
----
-
-## Data Model
-
-### Fact Tables (Gold Layer)
-
-| Table | Grain | Key Metrics |
-|-------|-------|-------------|
-| `fact_sales` | Transaction | Revenue, Quantity, Discount |
-| `fact_inventory` | SKU × Location × Day | On-hand, In-transit, Reserved |
-| `fact_orders` | Order Line | Order qty, Fulfilled qty, Lead time |
-| `fact_replenishment` | SKU × Day | Reorder point, Safety stock, EOQ |
-| `fact_forecast` | SKU × Week | Predicted demand, Confidence |
-
-### Dimension Tables
-
-| Table | Attributes |
-|-------|------------|
-| `dim_product` | SKU, Category, Brand, Supplier |
-| `dim_location` | Store, Warehouse, Region, Country |
-| `dim_time` | Date, Week, Month, Quarter, Year |
-| `dim_supplier` | Supplier, Lead time, MOQ |
-| `dim_customer` | Customer segment, Loyalty tier |
-| `dim_channel` | Online, Retail, Wholesale |
-
----
-
-## Data Quality
-
-### 3-Tier Anomaly Detection
-
-Two things sit under this heading, and they are not the same three tiers.
-
-**The gate** runs first, at the Bronze→Silver boundary, and is implemented by
-`SchemaEnforcer` — not by the detector below. It blocks: a schema violation
-raises and the batch does not land.
-
-```
-SchemaEnforcer (strict=True by default)
-├── Required columns present
-├── Declared types, with coercion
-├── Constraint checks
-└── Violation → SchemaViolationError, batch refused
-```
-
-**The detector** runs after the gate, over data that already conforms. Its three
-tiers are named for the *method* each one uses, and they flag or alert rather
-than block — see `data_quality/anomaly_detection/anomaly_detector.py`:
-
-```
-Tier 1: VALIDATION          → AnomalyDetector.tier1  (TierOneValidator)
-├── Required-field nulls
-├── Non-negative checks
-├── Non-future dates
-└── Custom business rules
-
-Tier 2: OUTLIER DETECTION   → AnomalyDetector.tier2  (TierTwoOutlierDetector)
-├── IQR fencing
-├── Z-score
-├── Modified Z-score (MAD)
-└── Percentile bounds
-
-Tier 3: VOLATILITY          → AnomalyDetector.tier3  (TierThreeVolatilityAnalyzer)
-├── Spike and drop detection
-├── Volume anomalies
-└── Rolling-average deviation
-```
-
-The response ladder quoted earlier — block, flag, alert — describes the quality
-system end to end: the gate blocks, detector tier 1 flags, detector tiers 2–3
-alert. The tier numbers above are the detector's own and do not line up with
-that ladder one-for-one.
-
-### Results
-
-- **500+ dimension anomalies** identified and fixed
-- **70% reduction** in data-related incidents
-- **Automated alerting** for critical issues
-
----
-
-## Performance Benchmarks
-
-| Pipeline | Records/Day | Avg Runtime | P95 Runtime |
-|----------|-------------|-------------|-------------|
-| Inventory Sync | 2.5M | 12 min | 18 min |
-| Sales Transactions | 500K | 8 min | 12 min |
-| Replenishment Calc | 10K SKUs | 25 min | 35 min |
-| Forecast Generation | 10K SKUs | 45 min | 60 min |
-
----
-
-## Tech Stack
-
-| Category | Technology |
-|----------|------------|
-| **Language** | Python 3.10+ |
-| **Data Processing** | Polars, DuckDB |
-| **Storage Format** | Parquet (Hive-partitioned) |
-| **Databases** | SQL Server, Oracle |
-| **Automation** | Selenium, PyAutoGUI |
-| **Visualization** | Streamlit, Power BI |
-| **Orchestration** | Windows Task Scheduler |
-| **Version Control** | Git |
-
----
+- [Architecture decision records](docs/architecture-decisions/README.md):
+  seven ADRs, each with context, alternatives and cost
+- [Medallion architecture](architecture/medallion-architecture.md): layer specification
+- [Data flow](architecture/data-flow.md): how the components are meant to fit together
 
 ## License
 
-MIT License - See [LICENSE](LICENSE) for details.
-
----
-
-## Author
-
-**Godson Kurishinkal Antony**  
-Data Engineer | Dubai, UAE
-
-- GitHub: [@GodsonKurishinkal](https://github.com/GodsonKurishinkal)
-- LinkedIn: [godsonkurishinkal](https://linkedin.com/in/godsonkurishinkal)
-- Portfolio: [godsonkurishinkal.github.io](https://godsonkurishinkal.github.io/data-engineering-portfolio)
+MIT. See [LICENSE](LICENSE).

@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fafafa">
 
-    <title>Demand Forecasting Ensemble — Godson Kurishinkal Antony</title>
-    <meta name="description" content="Case study: a pattern-aware forecasting engine. 7+ algorithms, ADI/CV² classification, one auto-selected model per SKU across 30,000+ items.">
+    <title>Demand forecasting by demand pattern — Godson Kurishinkal Antony</title>
+    <meta name="description" content="Case study: each SKU is classified by ADI/CV² into one of four demand patterns, and a forecasting model is selected per SKU from a set of nine. 30,000+ SKUs.">
     <meta name="author" content="Godson Kurishinkal Antony">
     <link rel="canonical" href="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/demand-forecasting.html">
 
-    <meta property="og:title" content="Demand Forecasting Ensemble — Case Study">
-    <meta property="og:description" content="Pattern classification + 7+ algorithm ensemble for 30,000+ SKUs. One model per SKU, picked by ADI/CV² signature.">
+    <meta property="og:title" content="Demand forecasting by demand pattern — Case study">
+    <meta property="og:description" content="ADI/CV² classification into four demand patterns, then one model per SKU chosen from a set of nine. 30,000+ SKUs.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/projects/demand-forecasting.html">
     <meta property="og:image" content="https://godsonkurishinkal.github.io/data-engineering-portfolio/assets/images/og-image.png">
@@ -23,7 +23,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
 
     <link rel="stylesheet" href="../assets/css/tokens.css?v=2bb3148a">
-    <link rel="stylesheet" href="../assets/css/app.css?v=02437586">
+    <link rel="stylesheet" href="../assets/css/app.css?v=afe324a9">
     <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -63,11 +63,11 @@
 
         <header>
             <span class="case-category">Machine Learning · 2025 – 2026</span>
-            <h1 class="case-title">One model per SKU, chosen by its demand signature.</h1>
-            <p class="case-pitch">Pattern-aware forecasting for 30,000+ SKUs. ADI/CV² classifies each item as smooth, erratic, intermittent, or lumpy — and an ensemble of 7+ algorithms picks the right tool for each shape.</p>
+            <h1 class="case-title">Demand forecasting by demand pattern</h1>
+            <p class="case-pitch">Each SKU is classified by ADI/CV² as smooth, erratic, intermittent or lumpy. The class decides which models are tried, and backtesting picks one model per SKU. Runs on one machine for 30,000+ SKUs.</p>
 
             <div class="case-meta">
-                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Data Engineer</span></div>
+                <div class="case-meta-item"><span class="case-meta-label">Role</span><span class="case-meta-value">Design, build, operations</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Industry</span><span class="case-meta-value">Retail · Supply Chain</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Duration</span><span class="case-meta-value">6 months</span></div>
                 <div class="case-meta-item"><span class="case-meta-label">Scale</span><span class="case-meta-value">30,000+ SKUs</span></div>
@@ -75,38 +75,30 @@
 
             <div class="kpi-grid">
                 <div class="kpi">
-                    <div class="kpi-value">7+</div>
-                    <div class="kpi-label">Algorithms in ensemble</div>
-                    <div class="kpi-detail">Auto-selected per SKU</div>
-                </div>
-                <div class="kpi">
                     <div class="kpi-value">4</div>
                     <div class="kpi-label">Demand patterns</div>
                     <div class="kpi-detail">ADI/CV² classification</div>
                 </div>
                 <div class="kpi">
-                    <div class="kpi-value">+25%</div>
-                    <div class="kpi-label">Accuracy uplift</div>
-                    <div class="kpi-detail">vs. one-size-fits-all</div>
-                </div>
-                <div class="kpi">
-                    <div class="kpi-value">−30%</div>
-                    <div class="kpi-label">Stockouts</div>
-                    <div class="kpi-detail">After rollout</div>
+                    <div class="kpi-value">9</div>
+                    <div class="kpi-label">Models in the set</div>
+                    <div class="kpi-detail">One selected per SKU</div>
                 </div>
             </div>
         </header>
+
+        <p class="case-note">This describes a system I built at work. The code is not public; the snippets below are simplified illustrations. Figures are my own measurements and the underlying data is not public.</p>
 
         <nav class="toc" aria-label="On this page">
             <span class="toc-label">On this page</span>
             <ol>
                 <li><a href="#the-problem">The problem</a></li>
-                <li><a href="#the-system">The system</a></li>
+                <li><a href="#the-system">What I built</a></li>
                 <li><a href="#adi-cv2-pattern-classification">ADI / CV² pattern classification</a></li>
-                <li><a href="#the-ensemble">The ensemble</a></li>
+                <li><a href="#the-ensemble">The model set</a></li>
                 <li><a href="#key-decisions">Key decisions</a></li>
                 <li><a href="#implementation">Implementation</a></li>
-                <li><a href="#what-changed">What changed</a></li>
+                <li><a href="#what-changed">Results</a></li>
                 <li><a href="#what-id-do-differently">What I'd do differently</a></li>
             </ol>
         </nav>
@@ -114,21 +106,20 @@
         <section class="reveal" id="the-problem">
             <div class="sh"><span class="sh-num">01</span><h2 class="sh-title">The problem</h2></div>
             <div class="prose">
-                <p>Retail supply chains don't have one forecasting problem. They have 30,000 of them. A best-seller with steady daily demand is a different statistical beast than a spare part ordered once a month — and yet the legacy system applied the same simple moving average to all of them.</p>
+                <p>The previous process applied one simple moving average to every SKU. A product that sells every day and a part ordered once a month behave differently, and one method does not fit both.</p>
                 <ul>
-                    <li>Frequent stockouts on <strong>fast movers</strong> — lost sales.</li>
-                    <li>Excess inventory on <strong>slow movers</strong> — capital tied up in dead stock.</li>
-                    <li>Planners overriding forecasts manually, <strong>hours per day</strong>.</li>
-                    <li>No visibility into <strong>why</strong> a forecast missed.</li>
+                    <li>Stockouts on <strong>fast movers</strong>.</li>
+                    <li>Excess stock on <strong>slow movers</strong>.</li>
+                    <li>Planners overriding forecasts <strong>by hand</strong>.</li>
+                    <li>No record of <strong>why</strong> a forecast missed.</li>
                 </ul>
-                <p>The insight: pick the algorithm <em>per SKU</em> based on what its demand actually looks like, not what we wish it looked like.</p>
             </div>
         </section>
 
         <section class="reveal" id="the-system">
-            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">The system</h2></div>
+            <div class="sh"><span class="sh-num">02</span><h2 class="sh-title">What I built</h2></div>
             <div class="prose">
-                <p>Every SKU flows through the same pipeline: history in, classification, model selection, forecast out. The classifier is cheap to run; the ensemble is big enough to cover every demand shape we see.</p>
+                <p>Every SKU goes through the same steps: read two years of daily sales, classify the demand pattern, select a model, forecast 30 days ahead with an interval, and pass the result to planning.</p>
             </div>
 
             <div class="arch">
@@ -148,7 +139,7 @@
                     <div class="arch-node highlight">
                         <div class="arch-node-num">03</div>
                         <div class="arch-node-label">Select</div>
-                        <div class="arch-node-sub">Best algorithm</div>
+                        <div class="arch-node-sub">Backtested model</div>
                     </div>
                     <span class="arch-arrow">→</span>
                     <div class="arch-node">
@@ -169,92 +160,51 @@
         <section class="reveal" id="adi-cv2-pattern-classification">
             <div class="sh"><span class="sh-num">03</span><h2 class="sh-title">ADI / CV² pattern classification</h2></div>
             <div class="prose">
-                <p>Two numbers describe any demand series well enough to pick a modelling approach:</p>
+                <p>Two measures describe a demand series well enough to choose a modelling approach:</p>
                 <ul>
-                    <li><strong>ADI</strong> — Average Demand Interval. How <em>often</em> does demand occur?</li>
-                    <li><strong>CV²</strong> — Squared coefficient of variation. How <em>variable</em> is the size when it does?</li>
+                    <li><strong>ADI</strong>, average demand interval: how often demand occurs.</li>
+                    <li><strong>CV²</strong>, squared coefficient of variation: how much the size varies when it does.</li>
                 </ul>
-                <p>Crossing the two thresholds (1.32 and 0.49) gives four quadrants — four patterns, each with its own winning algorithms.</p>
+                <p>The standard thresholds (ADI 1.32, CV² 0.49) split SKUs into four patterns. Each pattern has its own shortlist of models.</p>
             </div>
             <div class="card-grid">
                 <div class="card">
                     <h3 class="card-title">Smooth</h3>
                     <div class="card-sub">ADI &lt; 1.32 · CV² &lt; 0.49</div>
-                    <div class="card-desc">Regular, predictable demand. Classic time-series territory.</div>
+                    <div class="card-desc">Regular demand with stable size.</div>
                     <span class="card-tag">ARIMA · Prophet · Holt-Winters</span>
                 </div>
                 <div class="card">
                     <h3 class="card-title">Erratic</h3>
                     <div class="card-sub">ADI &lt; 1.32 · CV² ≥ 0.49</div>
-                    <div class="card-desc">Frequent but highly variable. Needs robust, non-parametric methods.</div>
+                    <div class="card-desc">Frequent demand with highly variable size.</div>
                     <span class="card-tag">Random Forest · XGBoost</span>
                 </div>
                 <div class="card">
                     <h3 class="card-title">Intermittent</h3>
                     <div class="card-sub">ADI ≥ 1.32 · CV² &lt; 0.49</div>
-                    <div class="card-desc">Infrequent but consistent size. Croston and friends.</div>
+                    <div class="card-desc">Infrequent demand with consistent size.</div>
                     <span class="card-tag">Croston · SBA · TSB</span>
                 </div>
                 <div class="card">
                     <h3 class="card-title">Lumpy</h3>
                     <div class="card-sub">ADI ≥ 1.32 · CV² ≥ 0.49</div>
-                    <div class="card-desc">Rare and unpredictable. Plan safety stock; forecast humbly.</div>
-                    <span class="card-tag">TSB · Bootstrap · Safety stock</span>
+                    <div class="card-desc">Infrequent demand with variable size. Hard to forecast; safety stock carries most of the load.</div>
+                    <span class="card-tag">TSB · safety stock</span>
                 </div>
             </div>
         </section>
 
         <section class="reveal" id="the-ensemble">
-            <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">The ensemble</h2></div>
+            <div class="sh"><span class="sh-num">04</span><h2 class="sh-title">The model set</h2></div>
             <div class="prose">
-                <p>Nine algorithms in the bench. Each SKU's pattern maps to a shortlist; a cross-validated score picks the winner. The mapping is explicit — no mystery-meat ensembles.</p>
-            </div>
-            <div class="card-grid">
-                <div class="card">
-                    <h3 class="card-title">ARIMA</h3>
-                    <div class="card-desc">Auto-regressive integrated moving average for stationary series.</div>
-                    <span class="card-tag">Time series</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Prophet</h3>
-                    <div class="card-desc">Additive model with seasonality and holiday effects.</div>
-                    <span class="card-tag">Seasonality</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Holt-Winters</h3>
-                    <div class="card-desc">Triple exponential smoothing for trend and seasonality.</div>
-                    <span class="card-tag">Trending</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">XGBoost</h3>
-                    <div class="card-desc">Gradient boosting with engineered calendar and lag features.</div>
-                    <span class="card-tag">ML</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Random Forest</h3>
-                    <div class="card-desc">Tree ensemble — robust to noisy, erratic demand.</div>
-                    <span class="card-tag">ML</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Croston</h3>
-                    <div class="card-desc">Purpose-built for intermittent demand series.</div>
-                    <span class="card-tag">Intermittent</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">SBA</h3>
-                    <div class="card-desc">Syntetos-Boylan Approximation — bias-corrected Croston.</div>
-                    <span class="card-tag">Intermittent</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">TSB</h3>
-                    <div class="card-desc">Teunter-Syntetos-Babai — adapts to demand probability changes.</div>
-                    <span class="card-tag">Lumpy</span>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">Simple Exponential</h3>
-                    <div class="card-desc">Baseline smoothing — the honest comparison.</div>
-                    <span class="card-tag">Baseline</span>
-                </div>
+                <p>Nine models. A SKU's pattern maps to a shortlist, and a rolling-origin backtest picks one model from it. The mapping from pattern to shortlist is written down, not learned.</p>
+                <ul>
+                    <li><strong>ARIMA</strong>, <strong>Prophet</strong>, <strong>Holt-Winters</strong>: time-series models for smooth demand with trend and seasonality.</li>
+                    <li><strong>XGBoost</strong>, <strong>Random Forest</strong>: tree models on calendar and lag features, for erratic demand.</li>
+                    <li><strong>Croston</strong>, <strong>SBA</strong>, <strong>TSB</strong>: methods designed for intermittent and lumpy demand.</li>
+                    <li><strong>Simple exponential smoothing</strong>: the baseline every other model is compared against.</li>
+                </ul>
             </div>
         </section>
 
@@ -262,31 +212,31 @@
             <div class="sh"><span class="sh-num">05</span><h2 class="sh-title">Key decisions</h2></div>
             <div class="decisions">
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Pattern first, model second</span><span class="decision-tag">Decision 01</span></div>
+                    <div class="decision-head"><span class="decision-title">Classify first, then model</span><span class="decision-tag">Decision 01</span></div>
                     <div class="decision-body">
-                        <p>Stacking everything into one deep model would have been a PR headline and an operational nightmare. Classifying first makes selection auditable — planners can see <em>why</em> Croston, not ARIMA, was chosen.</p>
-                        <em>Trade-off: loses some accuracy from pattern misclassification. Caught by the fallback ensemble.</em>
+                        <p>A single large model for all SKUs would be harder to run and harder to explain. Classifying first makes the selection auditable: a planner can see why a SKU got Croston and not ARIMA.</p>
+                        <em>Trade-off: a SKU near a threshold can land in the wrong class and get a worse shortlist.</em>
                     </div>
                 </div>
                 <div class="decision">
                     <div class="decision-head"><span class="decision-title">Explainability over accuracy</span><span class="decision-tag">Decision 02</span></div>
                     <div class="decision-body">
-                        <p>A 0.5% accuracy gain from a black-box model wouldn't have been worth the adoption penalty. Planners trust forecasts they can understand; surfacing pattern + model + drivers moved adoption far more than tuning ever could.</p>
-                        <em>Trade-off: I leave a little accuracy on the table. Stockout reductions say it's fine.</em>
+                        <p>Planners use forecasts they understand. Each forecast is shown with its pattern and the model that produced it.</p>
+                        <em>Trade-off: some accuracy is given up compared with a less transparent model.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Safety stock as a first-class output</span><span class="decision-tag">Decision 03</span></div>
+                    <div class="decision-head"><span class="decision-title">Safety stock as an output</span><span class="decision-tag">Decision 03</span></div>
                     <div class="decision-body">
-                        <p>Every forecast ships with a prediction interval and a recommended safety stock. Point forecasts alone don't survive contact with real supply chain uncertainty.</p>
-                        <em>Trade-off: more columns in the consumer table. Worth every byte.</em>
+                        <p>Every forecast comes with a prediction interval and a recommended safety stock, because planning needs the range and not only the point.</p>
+                        <em>Trade-off: more columns in the output table for consumers to handle.</em>
                     </div>
                 </div>
                 <div class="decision">
-                    <div class="decision-head"><span class="decision-title">Backtesting, always</span><span class="decision-tag">Decision 04</span></div>
+                    <div class="decision-head"><span class="decision-title">Backtest every release</span><span class="decision-tag">Decision 04</span></div>
                     <div class="decision-body">
-                        <p>Rolling-origin backtests run on every release. A model can't win selection on training metrics alone — it has to beat the bench on the last N holdout windows.</p>
-                        <em>Trade-off: slower release cadence. Caught a regression before it reached planners.</em>
+                        <p>Rolling-origin backtests run on every release. A model is selected on holdout windows, not on training metrics.</p>
+                        <em>Trade-off: releases are slower.</em>
                     </div>
                 </div>
             </div>
@@ -295,7 +245,7 @@
         <section class="reveal" id="implementation">
             <div class="sh"><span class="sh-num">06</span><h2 class="sh-title">Implementation</h2></div>
             <div class="prose">
-                <p>The classifier is small, pure, and testable. Given a demand series, it emits a pattern label. Selection and forecasting are downstream of this one function.</p>
+                <p>The classifier is one small function: a demand series in, a pattern label out. Selection and forecasting depend on it. Simplified illustration:</p>
             </div>
 
             <div class="code">
@@ -350,28 +300,14 @@
         </section>
 
         <section class="reveal" id="what-changed">
-            <div class="sh"><span class="sh-num">07</span><h2 class="sh-title">What changed</h2></div>
-            <div class="results">
-                <div class="result">
-                    <div class="result-value">+25%</div>
-                    <div class="result-text">Forecast accuracy uplift versus the prior one-size-fits-all moving average, averaged across all patterns.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">−30%</div>
-                    <div class="result-text">Stockouts dropped after the first full planning cycle with the new forecasts live.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">40%</div>
-                    <div class="result-text">Of the SKU base lives in intermittent or lumpy patterns. Croston and TSB finally gave them a real model instead of a smoothed zero.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">+15%</div>
-                    <div class="result-text">Additional ML accuracy from feature engineering — promotional calendars, seasonality flags, lead-time features.</div>
-                </div>
-                <div class="result">
-                    <div class="result-value">Higher</div>
-                    <div class="result-text">Planner adoption — surfacing <em>pattern</em> and <em>model</em> alongside the number made the forecast legible.</div>
-                </div>
+            <div class="sh"><span class="sh-num">07</span><h2 class="sh-title">Results</h2></div>
+            <div class="prose">
+                <ul>
+                    <li>Each SKU is forecast by a model chosen for its demand pattern, replacing one moving average for everything.</li>
+                    <li>Intermittent and lumpy SKUs are forecast with Croston, SBA or TSB.</li>
+                    <li>Every forecast carries its pattern, its model, a prediction interval and a recommended safety stock.</li>
+                </ul>
+                <p>Accuracy and stockout figures are not published here because the metric definitions and baselines are not yet written up.</p>
             </div>
         </section>
 
@@ -380,19 +316,19 @@
             <div class="reflection">
                 <div class="reflect-card">
                     <h4>Hierarchical forecasts</h4>
-                    <p>Some SKUs are too sparse to model on their own. Forecasting at category level and reconciling with MinT would have helped the long tail.</p>
+                    <p>Some SKUs are too sparse to model alone. Forecasting at category level and reconciling downwards would help the long tail.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>Champion / challenger</h4>
-                    <p>Model selection was per-release. A continuous challenger framework shadow-running the next-best model would have caught drift faster.</p>
+                    <h4>Continuous model comparison</h4>
+                    <p>Selection happens per release. Running the next-best model in shadow between releases would show drift sooner.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>Intervals before points</h4>
-                    <p>Planners care more about "what's the worst case" than the point forecast. Leading with intervals from day one would have reframed the product.</p>
+                    <h4>Lead with intervals</h4>
+                    <p>Planners ask about the worst case more than the point forecast. The interval should have been the main output from the start.</p>
                 </div>
                 <div class="reflect-card">
-                    <h4>Treat promotions as features</h4>
-                    <p>Promotional effects were layered as post-processing. Pushing them into the model as features earlier would have cleaned up the pipeline.</p>
+                    <h4>Promotions as features</h4>
+                    <p>Promotional effects are applied after the forecast. They belong in the model as features.</p>
                 </div>
             </div>
         </section>
@@ -402,33 +338,18 @@
             <div class="related-grid">
                 <a href="medallion-lakehouse.html" class="related-card">
                     <span class="related-card-tag">Data Platform</span>
-                    <span class="related-card-title">Medallion lakehouse</span>
+                    <span class="related-card-title">Bronze/Silver/Gold lakehouse on Parquet</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
                 <a href="anomaly-detection.html" class="related-card">
                     <span class="related-card-tag">Data Quality</span>
-                    <span class="related-card-title">3-Tier anomaly detection</span>
+                    <span class="related-card-title">Three-tier data-quality checks</span>
                     <span class="related-card-arrow">Read →</span>
                 </a>
                 <a href="pipeline-orchestration.html" class="related-card">
                     <span class="related-card-tag">Platform Engineering</span>
-                    <span class="related-card-title">Pipeline orchestration layer</span>
+                    <span class="related-card-title">Job scheduling with install-time validation</span>
                     <span class="related-card-arrow">Read →</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="cta">
-            <h3>Forecasting tangled demand?</h3>
-            <p>Intermittent and lumpy SKUs need the right tools. Happy to trade notes on ADI/CV² in practice.</p>
-            <div class="cta-row">
-                <a href="mailto:godson.kurishinkal@gmail.com?subject=Demand%20forecasting%20conversation" class="cta-btn cta-btn-primary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    Get in touch
-                </a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="cta-btn cta-btn-ghost">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    LinkedIn
                 </a>
             </div>
         </div>
