@@ -1,8 +1,42 @@
 /* ================================================================
    Design tokens — single source of truth
-   Imported by: assets/css/app.css (site) and resume.html (print page)
+   Linked before assets/css/app.css on every page, résumé included.
    Change a colour here, not in two places.
    ================================================================ */
+
+/* Fonts are served from this site (assets/fonts). Licences: assets/fonts/LICENSES.md */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('../fonts/inter-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('../fonts/inter-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400 600;
+    font-display: swap;
+    src: url('../fonts/jetbrains-mono-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400 600;
+    font-display: swap;
+    src: url('../fonts/jetbrains-mono-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root {
     /* Surfaces */
@@ -10,7 +44,7 @@
     --bg-card:    #ffffff;
     --bg-code:    #0f172a;
 
-    /* Ink and text */
+    /* Ink and text. --text-4 is for rules and dots only, never for text. */
     --ink:        #0f172a;
     --ink-2:      #1e293b;
     --text-2:     #334155;
@@ -21,25 +55,47 @@
     --border:     #e5e7eb;
     --border-2:   #d1d5db;
 
-    /* Accents */
-    --accent:     #0f172a;
-    --live:       #10b981;
+    /* Status */
+    --live:       #10b981;   /* rules and borders */
+    --live-text:  #047857;   /* status text */
     --live-bg:    rgba(16, 185, 129, 0.08);
-
-    /* Elevation */
-    --shadow-sm:  0 1px 2px rgba(15, 23, 42, 0.04);
-    --shadow-md:  0 4px 12px -2px rgba(15, 23, 42, 0.06);
-    --shadow-lg:  0 12px 32px -8px rgba(15, 23, 42, 0.08);
 
     /* Type */
     --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
 
+    /* Spacing */
+    --s1: 4px;
+    --s2: 8px;
+    --s3: 12px;
+    --s4: 16px;
+    --s5: 24px;
+    --s6: 32px;
+    --s7: 48px;
+    --s8: 64px;
+
+    /* Layout. Three width ranges only: small, medium (40em), wide (64em). */
+    --gutter:      20px;     /* one left edge for header, main and footer */
+    --section-pad: 40px;     /* top and bottom padding of a section */
+    --container:   1120px;   /* shell and home page */
+    --content:     760px;    /* case-study content column */
+    --prose:       65ch;
+    --header-h:    56px;
+    --anchor-gap:  72px;     /* where an anchored section stops under the sticky header */
+
     /* Geometry */
     --radius:     12px;
     --radius-sm:  8px;
-    --radius-lg:  16px;
-    --container:      880px;
-    --container-wide: 1120px;
-    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 150ms ease;
+}
+
+@media (min-width: 40em) {
+    :root { --gutter: 32px; --section-pad: 56px; }
+}
+@media (min-width: 64em) {
+    :root { --section-pad: 64px; }
+}
+/* On a short screen the header is not sticky, so anchors need less room. */
+@media (max-height: 30em) {
+    :root { --anchor-gap: 16px; }
 }

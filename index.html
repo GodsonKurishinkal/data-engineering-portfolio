@@ -27,10 +27,6 @@
     <meta name="twitter:description" content="Data pipelines and analytics models for retail supply chain. Write-ups and public code.">
     <meta name="twitter:image" content="https://godsonkurishinkal.github.io/portfolio/assets/images/og-image.png">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50' y='66' font-family='Inter,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%23ffffff'>GK</text></svg>">
@@ -60,356 +56,311 @@
     }
     </script>
 
-    <link rel="stylesheet" href="assets/css/tokens.css?v=2bb3148a">
-    <link rel="stylesheet" href="assets/css/app.css?v=afe324a9">
-    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="assets/css/tokens.css?v=6ff5aee7">
+    <link rel="stylesheet" href="assets/css/app.css?v=ebb3c138">
 </head>
 <body>
-    <a href="#top" class="skip-link">Skip to content</a>
-    <nav aria-label="Primary" class="landing-nav" id="navbar">
-        <div class="nav-inner">
-            <a href="#top" class="nav-brand">
-                <span class="nav-brand-mark">GK</span>
-                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span> <span class="nav-brand-meta">· Data &amp; Analytics Engineering</span>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+            <a href="index.html" class="nav-brand">
+                <span class="nav-brand-mark" aria-hidden="true">GK</span>
+                <span class="nav-brand-name">Godson<span class="nav-brand-name-last"> Kurishinkal</span></span>
             </a>
-            <div class="nav-sections">
-                <a href="#projects">Case studies</a>
-                <a href="#approach">Approach</a>
-                <a href="#about">About</a>
-                <a href="#roadmap">Roadmap</a>
-            </div>
-            <div class="nav-links">
-                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="GitHub">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="resume.html" class="nav-cta">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                    Résumé
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero" id="top">
-        <div>
-            <p class="hero-eyebrow">Data &amp; Analytics Engineering · Dubai</p>
-            <h1 class="hero-title">I build data pipelines and analytics models for retail supply chain.</h1>
-            <p class="hero-pitch">At Landmark Group in Dubai I design, build and run the data behind distribution-centre operations: ETL pipelines, a Bronze/Silver/Gold lakehouse on Parquet, data-quality checks and demand forecasts across 30,000+ SKUs. Python, SQL, Polars, DuckDB and Power BI, on a single machine. Six years in UAE retail and logistics data.</p>
-            <div class="hero-cta-row">
-                <a href="mailto:godson.kurishinkal@gmail.com?subject=Interested%20in%20working%20with%20you" class="btn btn-ink">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    Get in touch
-                </a>
-                <a href="#projects" class="btn btn-ghost">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    Case studies
-                </a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <img src="assets/images/profile.jpg" alt="Godson Kurishinkal Antony" class="hero-image" width="640" height="640" loading="eager" decoding="async" fetchpriority="high">
-        </div>
+            <ul class="nav-links">
+                <li><a href="index.html#projects">Case studies</a></li>
+                <li><a href="resume.html">Résumé</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section class="section-wide reveal" id="results" aria-labelledby="impact-title">
-        <h2 class="section-title-lg" id="impact-title">Results</h2>
-        <p class="section-sub">Two changes I measured on the system at work. The figures are my own; the underlying data is not public.</p>
-        <div class="impact-grid">
-            <div class="impact">
-                <span class="impact-label-row">Daily ETL window</span>
-                <h3 class="impact-title">Manual extracts replaced by scheduled pipelines</h3>
-                <div class="impact-compare">
-                    <div class="impact-old">
-                        <span class="impact-old-val">4 hours</span>
-                        <span class="impact-sub">Manual extracts and Excel</span>
-                    </div>
-                    <span class="impact-arrow">→</span>
-                    <div class="impact-new">
-                        <span class="impact-new-val">30 min</span>
-                        <span class="impact-sub">Polars and partitioned Parquet</span>
-                    </div>
-                </div>
+    <main id="main" class="home">
+        <div class="hero" id="top">
+            <p class="hero-eyebrow">Godson Kurishinkal Antony · Data &amp; Analytics Engineering · Dubai</p>
+            <h1 class="hero-title">I build data pipelines and analytics models for retail supply chain.</h1>
+            <p class="hero-pitch">At Landmark Group in Dubai I design, build and run the data behind distribution-centre operations: ETL pipelines, a Bronze/Silver/Gold lakehouse on Parquet, data-quality checks and demand forecasts across 30,000+ SKUs. Python, SQL, Polars, DuckDB and Power BI, on a single machine. Six years in UAE retail and logistics data.</p>
+            <div class="btn-row">
+                <a href="#projects" class="btn btn-ink">Read the case studies</a>
+                <a href="resume.html" class="btn btn-ghost">Résumé</a>
             </div>
-            <div class="impact">
-                <span class="impact-label-row">Data freshness</span>
-                <h3 class="impact-title">Next-day data became same-day data</h3>
-                <div class="impact-compare">
-                    <div class="impact-old">
-                        <span class="impact-old-val">48 hrs</span>
-                        <span class="impact-sub">Next-day reporting</span>
-                    </div>
-                    <span class="impact-arrow">→</span>
-                    <div class="impact-new">
-                        <span class="impact-new-val">2–4 hrs</span>
-                        <span class="impact-sub">Incremental loads</span>
+            <img src="assets/images/profile.jpg" alt="Godson Kurishinkal Antony" class="hero-image" width="640" height="640" loading="eager" decoding="async" fetchpriority="high">
+        </div>
+
+        <section id="results" aria-labelledby="impact-title">
+            <h2 class="section-title-lg" id="impact-title">Results</h2>
+            <p class="section-sub">Two changes I measured on the system at work. The figures are my own; the underlying data is not public.</p>
+            <div class="impact-grid">
+                <div class="impact">
+                    <p class="impact-label-row">Daily ETL window</p>
+                    <h3 class="impact-title">Manual extracts replaced by scheduled pipelines</h3>
+                    <div class="impact-compare">
+                        <div class="impact-old">
+                            <span class="impact-old-val">4 hours</span>
+                            <span class="impact-sub">Manual extracts and Excel</span>
+                        </div>
+                        <span class="impact-arrow" aria-hidden="true">→</span>
+                        <div class="impact-new">
+                            <span class="impact-new-val">30 min</span>
+                            <span class="impact-sub">Polars and partitioned Parquet</span>
+                        </div>
                     </div>
                 </div>
+                <div class="impact">
+                    <p class="impact-label-row">Data freshness</p>
+                    <h3 class="impact-title">Next-day data became same-day data</h3>
+                    <div class="impact-compare">
+                        <div class="impact-old">
+                            <span class="impact-old-val">48 hrs</span>
+                            <span class="impact-sub">Next-day reporting</span>
+                        </div>
+                        <span class="impact-arrow" aria-hidden="true">→</span>
+                        <div class="impact-new">
+                            <span class="impact-new-val">2–4 hrs</span>
+                            <span class="impact-sub">Incremental loads</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section-wide reveal" id="projects" aria-labelledby="projects-title">
-        <h2 class="section-title-lg" id="projects-title">Case studies</h2>
-        <p class="section-sub">Five write-ups of systems I built at work, and one public code library. The work code is not public, so those pages show simplified snippets.</p>
-        <div class="projects-grid">
-            <a href="projects/medallion-lakehouse.html" class="project-card">
-                <div class="project-card-head">
-                    <span class="project-card-tag">Data pipeline</span>
-                    <span class="project-card-arrow">→</span>
-                </div>
-                <h3 class="project-card-title">Bronze/Silver/Gold lakehouse on Parquet</h3>
-                <p class="project-card-desc">Raw, cleaned and reporting layers on Hive-partitioned Parquet, built with Polars and DuckDB on one machine. 30,000+ SKUs, 50+ pipelines.</p>
-                <div class="project-card-pills">
-                    <span class="project-card-pill">Polars</span>
-                    <span class="project-card-pill">DuckDB</span>
-                    <span class="project-card-pill">Parquet</span>
-                    <span class="project-card-pill">Star schema</span>
-                </div>
-            </a>
-            <a href="projects/pipeline-orchestration.html" class="project-card">
-                <div class="project-card-head">
-                    <span class="project-card-tag">Scheduling</span>
-                    <span class="project-card-arrow">→</span>
-                </div>
-                <h3 class="project-card-title">Job scheduling with install-time validation</h3>
-                <p class="project-card-desc">150+ scheduled jobs defined in one YAML file. A validator rejects cycles, time collisions and bad dependency order before anything is installed.</p>
-                <div class="project-card-pills">
-                    <span class="project-card-pill">Python</span>
-                    <span class="project-card-pill">YAML</span>
-                    <span class="project-card-pill">Topological sort</span>
-                    <span class="project-card-pill">pytest</span>
-                </div>
-            </a>
-            <a href="projects/anomaly-detection.html" class="project-card">
-                <div class="project-card-head">
-                    <span class="project-card-tag">Data quality</span>
-                    <span class="project-card-arrow">→</span>
-                </div>
-                <h3 class="project-card-title">Three-tier data-quality checks</h3>
-                <p class="project-card-desc">Schema checks block the batch, business rules flag rows, and statistical checks raise alerts. Runs between the raw and reporting layers.</p>
-                <div class="project-card-pills">
-                    <span class="project-card-pill">Z-score</span>
-                    <span class="project-card-pill">Modified Z</span>
-                    <span class="project-card-pill">IQR</span>
-                    <span class="project-card-pill">Percentile</span>
-                </div>
-            </a>
-            <a href="projects/demand-forecasting.html" class="project-card">
-                <div class="project-card-head">
-                    <span class="project-card-tag">Forecasting</span>
-                    <span class="project-card-arrow">→</span>
-                </div>
-                <h3 class="project-card-title">Demand forecasting by demand pattern</h3>
-                <p class="project-card-desc">Each SKU is classified as smooth, erratic, intermittent or lumpy using ADI/CV², then forecast with a model suited to that pattern.</p>
-                <div class="project-card-pills">
-                    <span class="project-card-pill">ADI/CV²</span>
-                    <span class="project-card-pill">Croston</span>
-                    <span class="project-card-pill">Prophet</span>
-                    <span class="project-card-pill">Scikit-learn</span>
-                </div>
-            </a>
-            <a href="projects/rpa-bot-framework.html" class="project-card">
-                <div class="project-card-head">
-                    <span class="project-card-tag">Automation</span>
-                    <span class="project-card-arrow">→</span>
-                </div>
-                <h3 class="project-card-title">Browser automation for systems without APIs</h3>
-                <p class="project-card-desc">Four bots that export data from systems with no API. They only download files; parsing and cleaning happen later in the pipeline.</p>
-                <div class="project-card-pills">
-                    <span class="project-card-pill">Selenium</span>
-                    <span class="project-card-pill">Playwright</span>
-                    <span class="project-card-pill">PyAutoGUI</span>
-                </div>
-            </a>
-            <a href="enterprise-data-platform/" class="project-card">
-                <div class="project-card-head">
-                    <span class="project-card-tag">Public code</span>
-                    <span class="project-card-arrow">→</span>
-                </div>
-                <h3 class="project-card-title">ETL framework components (public code)</h3>
-                <p class="project-card-desc">A Python component library: extractors, schema enforcement, loaders and data-quality detectors. 33 tests cover the schema and detector modules. The rest is untested and it does not run end to end.</p>
-                <div class="project-card-pills">
-                    <span class="project-card-pill">Python</span>
-                    <span class="project-card-pill">Polars</span>
-                    <span class="project-card-pill">DuckDB</span>
-                </div>
-            </a>
-        </div>
-    </section>
+        <section id="projects" aria-labelledby="projects-title">
+            <h2 class="section-title-lg" id="projects-title">Case studies</h2>
+            <p class="section-sub">Five write-ups of systems I built at work, and one public code library. The work code is not public, so those pages show simplified snippets.</p>
+            <ol class="projects-grid">
+                <li class="project-card">
+                    <div class="project-card-head">
+                        <p class="project-card-tag"><span class="project-card-num">1</span> Data pipeline</p>
+                        <span class="project-card-arrow" aria-hidden="true">→</span>
+                    </div>
+                    <h3 class="project-card-title"><a href="projects/medallion-lakehouse.html">Bronze/Silver/Gold lakehouse on Parquet</a></h3>
+                    <p class="project-card-desc">Raw, cleaned and reporting layers on Hive-partitioned Parquet, built with Polars and DuckDB on one machine. 30,000+ SKUs, 50+ pipelines.</p>
+                    <div class="project-card-pills">
+                        <span class="project-card-pill">Polars</span>
+                        <span class="project-card-pill">DuckDB</span>
+                        <span class="project-card-pill">Parquet</span>
+                        <span class="project-card-pill">Star schema</span>
+                    </div>
+                </li>
+                <li class="project-card">
+                    <div class="project-card-head">
+                        <p class="project-card-tag"><span class="project-card-num">2</span> Scheduling</p>
+                        <span class="project-card-arrow" aria-hidden="true">→</span>
+                    </div>
+                    <h3 class="project-card-title"><a href="projects/pipeline-orchestration.html">Job scheduling with install-time validation</a></h3>
+                    <p class="project-card-desc">150+ scheduled jobs defined in one YAML file. A validator rejects cycles, time collisions and bad dependency order before anything is installed.</p>
+                    <div class="project-card-pills">
+                        <span class="project-card-pill">Python</span>
+                        <span class="project-card-pill">YAML</span>
+                        <span class="project-card-pill">Topological sort</span>
+                        <span class="project-card-pill">pytest</span>
+                    </div>
+                </li>
+                <li class="project-card">
+                    <div class="project-card-head">
+                        <p class="project-card-tag"><span class="project-card-num">3</span> Data quality</p>
+                        <span class="project-card-arrow" aria-hidden="true">→</span>
+                    </div>
+                    <h3 class="project-card-title"><a href="projects/anomaly-detection.html">Three-tier data-quality checks</a></h3>
+                    <p class="project-card-desc">Schema checks block the batch, business rules flag rows, and statistical checks raise alerts. Runs between the raw and reporting layers.</p>
+                    <div class="project-card-pills">
+                        <span class="project-card-pill">Z-score</span>
+                        <span class="project-card-pill">Modified Z</span>
+                        <span class="project-card-pill">IQR</span>
+                        <span class="project-card-pill">Percentile</span>
+                    </div>
+                </li>
+                <li class="project-card">
+                    <div class="project-card-head">
+                        <p class="project-card-tag"><span class="project-card-num">4</span> Forecasting</p>
+                        <span class="project-card-arrow" aria-hidden="true">→</span>
+                    </div>
+                    <h3 class="project-card-title"><a href="projects/demand-forecasting.html">Demand forecasting by demand pattern</a></h3>
+                    <p class="project-card-desc">Each SKU is classified as smooth, erratic, intermittent or lumpy using ADI/CV², then forecast with a model suited to that pattern.</p>
+                    <div class="project-card-pills">
+                        <span class="project-card-pill">ADI/CV²</span>
+                        <span class="project-card-pill">Croston</span>
+                        <span class="project-card-pill">Prophet</span>
+                        <span class="project-card-pill">Scikit-learn</span>
+                    </div>
+                </li>
+                <li class="project-card">
+                    <div class="project-card-head">
+                        <p class="project-card-tag"><span class="project-card-num">5</span> Automation</p>
+                        <span class="project-card-arrow" aria-hidden="true">→</span>
+                    </div>
+                    <h3 class="project-card-title"><a href="projects/rpa-bot-framework.html">Browser automation for systems without APIs</a></h3>
+                    <p class="project-card-desc">Four bots that export data from systems with no API. They only download files; parsing and cleaning happen later in the pipeline.</p>
+                    <div class="project-card-pills">
+                        <span class="project-card-pill">Selenium</span>
+                        <span class="project-card-pill">Playwright</span>
+                        <span class="project-card-pill">PyAutoGUI</span>
+                    </div>
+                </li>
+                <li class="project-card">
+                    <div class="project-card-head">
+                        <p class="project-card-tag"><span class="project-card-num">6</span> Public code</p>
+                        <span class="project-card-arrow" aria-hidden="true">→</span>
+                    </div>
+                    <h3 class="project-card-title"><a href="enterprise-data-platform/">ETL framework components (public code)</a></h3>
+                    <p class="project-card-desc">A Python component library: extractors, schema enforcement, loaders and data-quality detectors. 33 tests cover the schema and detector modules. The rest is untested and it does not run end to end.</p>
+                    <div class="project-card-pills">
+                        <span class="project-card-pill">Python</span>
+                        <span class="project-card-pill">Polars</span>
+                        <span class="project-card-pill">DuckDB</span>
+                    </div>
+                </li>
+            </ol>
+            <div class="btn-row">
+                <a href="projects/medallion-lakehouse.html" class="btn btn-ink">Start reading: Bronze/Silver/Gold lakehouse on Parquet</a>
+            </div>
+        </section>
 
-    <section class="section-wide reveal" id="approach" aria-labelledby="principles-title">
-        <h2 class="section-title-lg" id="principles-title">How I build</h2>
-        <p class="section-sub">Five rules I work by, each with the write-up where it applies.</p>
-        <div class="principles">
-            <div class="principle">
-                <div class="principle-num">01</div>
-                <div>
-                    <div class="principle-title">Block bad data instead of logging it</div>
-                    <p class="principle-text">A check that can be skipped will eventually be skipped. A schema violation stops the batch before it reaches the cleaned layer.</p>
-                </div>
-                <div class="principle-proof"><a href="projects/anomaly-detection.html">Three-tier data-quality checks</a></div>
-            </div>
-            <div class="principle">
-                <div class="principle-num">02</div>
-                <div>
-                    <div class="principle-title">Fail at install time</div>
-                    <p class="principle-text">A dependency cycle is visible in the config file. It should be rejected when the schedule is installed, not found at night through a wrong report.</p>
-                </div>
-                <div class="principle-proof"><a href="projects/pipeline-orchestration.html">Job scheduling with install-time validation</a></div>
-            </div>
-            <div class="principle">
-                <div class="principle-num">03</div>
-                <div>
-                    <div class="principle-title">Write down what each choice costs</div>
-                    <p class="principle-text">Every technical decision has a cost. Each decision record states the alternatives and what the choice gave up.</p>
-                </div>
-                <div class="principle-proof"><a href="https://github.com/GodsonKurishinkal/portfolio/tree/main/enterprise-data-platform/docs/architecture-decisions" target="_blank" rel="noopener noreferrer">Seven decision records</a></div>
-            </div>
-            <div class="principle">
-                <div class="principle-num">04</div>
-                <div>
-                    <div class="principle-title">Use the simple tool</div>
-                    <p class="principle-text">Task Scheduler instead of Airflow, plain Parquet instead of Delta, three simple validation tiers instead of one model. Each choice is written down with the condition for moving off it.</p>
-                </div>
-                <div class="principle-proof"><a href="projects/medallion-lakehouse.html">Bronze/Silver/Gold lakehouse on Parquet</a></div>
-            </div>
-            <div class="principle">
-                <div class="principle-num">05</div>
-                <div>
-                    <div class="principle-title">Keep fragile parts simple</div>
-                    <p class="principle-text">A screen-automation bot is the least reliable part of a pipeline, so it only downloads the file. Parsing and business logic run downstream, where a failure is cheap to re-run.</p>
-                </div>
-                <div class="principle-proof"><a href="projects/rpa-bot-framework.html">Browser automation for systems without APIs</a></div>
-            </div>
-        </div>
-    </section>
+        <section id="approach" aria-labelledby="principles-title">
+            <h2 class="section-title-lg" id="principles-title">How I build</h2>
+            <p class="section-sub">Five rules I work by, each with the write-up where it applies.</p>
+            <ol class="principles">
+                <li class="principle">
+                    <div class="principle-num" aria-hidden="true">01</div>
+                    <div>
+                        <h3 class="principle-title">Block bad data instead of logging it</h3>
+                        <p class="principle-text">A check that can be skipped will eventually be skipped. A schema violation stops the batch before it reaches the cleaned layer.</p>
+                    </div>
+                    <p class="principle-proof">In practice: <a href="projects/anomaly-detection.html">Three-tier data-quality checks</a></p>
+                </li>
+                <li class="principle">
+                    <div class="principle-num" aria-hidden="true">02</div>
+                    <div>
+                        <h3 class="principle-title">Fail at install time</h3>
+                        <p class="principle-text">A dependency cycle is visible in the config file. It should be rejected when the schedule is installed, not found at night through a wrong report.</p>
+                    </div>
+                    <p class="principle-proof">In practice: <a href="projects/pipeline-orchestration.html">Job scheduling with install-time validation</a></p>
+                </li>
+                <li class="principle">
+                    <div class="principle-num" aria-hidden="true">03</div>
+                    <div>
+                        <h3 class="principle-title">Write down what each choice costs</h3>
+                        <p class="principle-text">Every technical decision has a cost. Each decision record states the alternatives and what the choice gave up.</p>
+                    </div>
+                    <p class="principle-proof">In practice: <a href="https://github.com/GodsonKurishinkal/portfolio/tree/main/enterprise-data-platform/docs/architecture-decisions" target="_blank" rel="noopener noreferrer">Seven decision records on GitHub</a></p>
+                </li>
+                <li class="principle">
+                    <div class="principle-num" aria-hidden="true">04</div>
+                    <div>
+                        <h3 class="principle-title">Use the simple tool</h3>
+                        <p class="principle-text">Task Scheduler instead of Airflow, plain Parquet instead of Delta, three simple validation tiers instead of one model. Each choice is written down with the condition for moving off it.</p>
+                    </div>
+                    <p class="principle-proof">In practice: <a href="projects/medallion-lakehouse.html">Bronze/Silver/Gold lakehouse on Parquet</a></p>
+                </li>
+                <li class="principle">
+                    <div class="principle-num" aria-hidden="true">05</div>
+                    <div>
+                        <h3 class="principle-title">Keep fragile parts simple</h3>
+                        <p class="principle-text">A screen-automation bot is the least reliable part of a pipeline, so it only downloads the file. Parsing and business logic run downstream, where a failure is cheap to re-run.</p>
+                    </div>
+                    <p class="principle-proof">In practice: <a href="projects/rpa-bot-framework.html">Browser automation for systems without APIs</a></p>
+                </li>
+            </ol>
+        </section>
 
-    <section class="section-wide reveal" id="about" aria-labelledby="about-title">
-        <h2 class="section-title-lg" id="about-title">About</h2>
-        <div class="about-grid">
-            <div class="about-prose">
-                <p>I work on data for distribution-centre operations at <strong>Landmark Group</strong> in Dubai, since December 2024: the pipelines, data models and reporting used for warehouse and delivery decisions, across <strong>30,000+ SKUs</strong> and <strong>50+ ETL jobs</strong>.</p>
-                <p>Before that, nearly five years in UAE retail and logistics at Al Behar and Danube Home, building dashboards, forecasts and the pipelines underneath them.</p>
-                <p>Everything I have built so far runs on a single machine. I am studying for a BS in Data Science at IIT Madras, and cloud data platforms are what I am working towards next.</p>
+        <section id="about" aria-labelledby="about-title">
+            <h2 class="section-title-lg" id="about-title">About</h2>
+            <div class="about-grid">
+                <div class="about-prose">
+                    <p>I work on data for distribution-centre operations at <strong>Landmark Group</strong> in Dubai, since December 2024: the pipelines, data models and reporting used for warehouse and delivery decisions, across <strong>30,000+ SKUs</strong> and <strong>50+ ETL jobs</strong>.</p>
+                    <p>Before that, nearly five years in UAE retail and logistics at Al Behar and Danube Home, building dashboards, forecasts and the pipelines underneath them.</p>
+                    <p>Everything I have built so far runs on a single machine. I am studying for a BS in Data Science at IIT Madras, and cloud data platforms are what I am working towards next.</p>
+                </div>
+                <div class="about-side">
+                    <div class="about-chip">
+                        <span class="about-chip-label">Currently at</span>
+                        <span class="about-chip-value">Landmark Group</span>
+                        <span class="about-chip-sub">Dubai · Dec 2024 – Present</span>
+                    </div>
+                    <div class="about-chip">
+                        <span class="about-chip-label">Studying</span>
+                        <span class="about-chip-value">BS Data Science · IIT Madras</span>
+                        <span class="about-chip-sub">Diploma Level · ongoing</span>
+                    </div>
+                    <div class="about-chip">
+                        <span class="about-chip-label">Next</span>
+                        <span class="about-chip-value">Cloud data platforms</span>
+                        <span class="about-chip-sub">Databricks · Azure · dbt</span>
+                    </div>
+                </div>
             </div>
-            <aside class="about-side">
-                <div class="about-chip">
-                    <span class="about-chip-label">Currently at</span>
-                    <span class="about-chip-value">Landmark Group</span>
-                    <span class="about-chip-sub">Dubai · Dec 2024 – Present</span>
-                </div>
-                <div class="about-chip">
-                    <span class="about-chip-label">Studying</span>
-                    <span class="about-chip-value">BS Data Science · IIT Madras</span>
-                    <span class="about-chip-sub">Diploma Level · ongoing</span>
-                </div>
-                <div class="about-chip">
-                    <span class="about-chip-label">Next</span>
-                    <span class="about-chip-value">Cloud data platforms</span>
-                    <span class="about-chip-sub">Databricks · Azure · dbt</span>
-                </div>
-            </aside>
-        </div>
-    </section>
+        </section>
 
-    <section class="section-wide reveal" id="roadmap" aria-labelledby="focus-title">
-        <h2 class="section-title-lg" id="focus-title">Roadmap</h2>
-        <p class="section-sub">Gaps I know about, with target dates. Nothing in this section is finished yet.</p>
-        <div class="commits">
-            <div class="commit">
-                <div>
-                    <div class="commit-name">Tests for the public ETL components</div>
-                    <div class="commit-why">33 tests cover the schema gate and the detectors (67% of those modules) and run in CI. Extraction and loading are untested.</div>
-                </div>
-                <div class="commit-by">Q1 2027</div>
-                <div class="commit-state state-active">In progress</div>
-            </div>
-            <div class="commit">
-                <div>
-                    <div class="commit-name">Databricks Data Engineer Associate</div>
-                    <div class="commit-why">Everything I have built is single-machine. Cloud platforms are the next step, and I want the certification to back it.</div>
-                </div>
-                <div class="commit-by">To be dated</div>
-                <div class="commit-state state-queued">Queued</div>
-            </div>
-            <div class="commit">
-                <div>
-                    <div class="commit-name">Operations write-up</div>
-                    <div class="commit-why">I keep a dated incident log with root cause and prevention for each entry. I have not yet written about running the system.</div>
-                </div>
-                <div class="commit-by">Q1 2027</div>
-                <div class="commit-state state-queued">Queued</div>
-            </div>
-            <div class="commit">
-                <div>
-                    <div class="commit-name">Lineage across the layers (OpenLineage)</div>
-                    <div class="commit-why">Lineage is currently tracked per pipeline only.</div>
-                </div>
-                <div class="commit-by">Q1 2027</div>
-                <div class="commit-state state-queued">Queued</div>
-            </div>
-            <div class="commit">
-                <div>
-                    <div class="commit-name">Semantic layer as code</div>
-                    <div class="commit-why">Business definitions live in Power BI DAX, so they cannot be reused, tested or diffed outside BI.</div>
-                </div>
-                <div class="commit-by">Q2 2027</div>
-                <div class="commit-state state-queued">Queued</div>
-            </div>
-        </div>
-        <p class="commit-note">Dates are targets. If one slips, it stays here with a new date.</p>
-    </section>
+        <section id="roadmap" aria-labelledby="focus-title">
+            <h2 class="section-title-lg" id="focus-title">Roadmap</h2>
+            <p class="section-sub">Gaps I know about, with target dates. Nothing in this section is finished yet.</p>
+            <ul class="commits">
+                <li class="commit">
+                    <div class="commit-main">
+                        <h3 class="commit-name">Tests for the public ETL components</h3>
+                        <p class="commit-why">33 tests cover the schema gate and the detectors (67% of those modules) and run in CI. Extraction and loading are untested.</p>
+                    </div>
+                    <span class="commit-by">Q1 2027</span>
+                    <span class="commit-state state-active">In progress</span>
+                </li>
+                <li class="commit">
+                    <div class="commit-main">
+                        <h3 class="commit-name">Databricks Data Engineer Associate</h3>
+                        <p class="commit-why">Everything I have built is single-machine. Cloud platforms are the next step, and I want the certification to back it.</p>
+                    </div>
+                    <span class="commit-by">To be dated</span>
+                    <span class="commit-state state-queued">Queued</span>
+                </li>
+                <li class="commit">
+                    <div class="commit-main">
+                        <h3 class="commit-name">Operations write-up</h3>
+                        <p class="commit-why">I keep a dated incident log with root cause and prevention for each entry. I have not yet written about running the system.</p>
+                    </div>
+                    <span class="commit-by">Q1 2027</span>
+                    <span class="commit-state state-queued">Queued</span>
+                </li>
+                <li class="commit">
+                    <div class="commit-main">
+                        <h3 class="commit-name">Lineage across the layers (OpenLineage)</h3>
+                        <p class="commit-why">Lineage is currently tracked per pipeline only.</p>
+                    </div>
+                    <span class="commit-by">Q1 2027</span>
+                    <span class="commit-state state-queued">Queued</span>
+                </li>
+                <li class="commit">
+                    <div class="commit-main">
+                        <h3 class="commit-name">Semantic layer as code</h3>
+                        <p class="commit-why">Business definitions live in Power BI DAX, so they cannot be reused, tested or diffed outside BI.</p>
+                    </div>
+                    <span class="commit-by">Q2 2027</span>
+                    <span class="commit-state state-queued">Queued</span>
+                </li>
+            </ul>
+            <p class="commit-note">Dates are targets. If one slips, it stays here with a new date.</p>
+        </section>
 
-    <section class="contact-strip reveal" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <p>Questions about anything here, or want to compare notes? Email is the fastest way to reach me.</p>
-        <div class="contact-row">
-            <a href="mailto:godson.kurishinkal@gmail.com?subject=Hello%20Godson" class="btn btn-ink">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Email
-            </a>
-            <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                LinkedIn
-            </a>
-            <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                GitHub
-            </a>
-        </div>
-    </section>
+        <section id="contact" aria-labelledby="contact-title">
+            <h2 class="section-title-lg" id="contact-title">Contact</h2>
+            <p class="section-sub">Questions about anything here, or want to compare notes? Email is the fastest way to reach me.</p>
+            <div class="btn-row">
+                <a href="mailto:godson.kurishinkal@gmail.com?subject=Hello%20Godson" class="btn btn-ink">Email</a>
+                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">LinkedIn</a>
+                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">GitHub</a>
+            </div>
+        </section>
+    </main>
 
-    <footer>
+    <footer class="site-footer">
         <div class="footer-inner">
-            <div>© 2026 Godson Kurishinkal Antony · Dubai</div>
-            <div class="footer-links">
-                <a href="#top">Home</a>
-                <a href="resume.html">Résumé</a>
-                <a href="mailto:godson.kurishinkal@gmail.com">Email</a>
-                <a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </div>
+            <p>© 2026 Godson Kurishinkal Antony · Dubai</p>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="resume.html">Résumé</a></li>
+                <li><a href="mailto:godson.kurishinkal@gmail.com">Email</a></li>
+                <li><a href="https://github.com/GodsonKurishinkal" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://linkedin.com/in/godsonkurishinkal" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
         </div>
     </footer>
-
-    <script>
-        // Nav scroll background
-        const navbar = document.getElementById('navbar');
-        const onScroll = () => {
-            if (window.scrollY > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-
-        // Scroll reveal
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    </script>
 </body>
 </html>

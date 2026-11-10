@@ -21,15 +21,18 @@ These apply to anyone, human or AI, changing this repo.
 
 ## Checks
 CI runs on every pull request (`.github/workflows/`):
-- `site`: HTML validation, stylesheet version stamps, internal links.
+- `site`: HTML validation, site consistency (`scripts/check_site.py`), stylesheet version stamps, internal links.
 - `tests`: pytest for `enterprise-data-platform/`.
 
 Run locally before pushing:
 
 ```bash
 npx --yes html-validate@9.7.1 index.html resume.html 404.html 'projects/*.html' enterprise-data-platform/index.html
+python3 scripts/check_site.py      # after any change to an HTML page
 bash scripts/bump-css-version.sh   # after any change to assets/css/*.css
 ```
+
+`scripts/check_site.py` (Python 3, standard library only) fails when the pages drift apart. The header, skip link and footer are copied by hand into all nine pages, so it checks that they are identical once paths are resolved; that `aria-current` marks the right header link; that each case study has the right "Case study N of 6" line and a pager matching the fixed reading order; that every page has one `h1`; that nothing loads from another host; that no `reveal` class is left; and that every internal `href` and `src` resolves. When a case study is added, renamed or reordered, update the `CASE_STUDIES` list at the top of the script.
 
 ## Environment
 Linux first. Pin versions and commit lock files for anything new.
