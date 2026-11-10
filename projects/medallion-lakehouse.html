@@ -202,7 +202,7 @@
   <span class="kw">name</span>: <span class="str">"inventory_daily"</span>
   <span class="kw">source</span>:
     <span class="kw">type</span>: <span class="str">"oracle_obi"</span>
-    <span class="kw">query</span>: <span class="str">"SELECT * FROM vw_inventory_snapshot WHERE snapshot_date = :d"</span>
+    <span class="kw">query</span>: <span class="str">"SELECT * FROM inventory_snapshot WHERE snapshot_date = :d"</span>
   <span class="kw">destination</span>:
     <span class="kw">layer</span>: <span class="str">"bronze"</span>
     <span class="kw">format</span>: <span class="str">"parquet"</span>

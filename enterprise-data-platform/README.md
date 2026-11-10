@@ -42,7 +42,7 @@ The supply chain operations team at a major retail company made decisions on **s
 
 ### What Was at Stake
 
-- **$2M+ inventory decisions** based on 48-hour-old data
+- **Inventory decisions** based on 48-hour-old data
 - **Stockouts** from delayed visibility into inventory levels
 - **Analyst burnout** from repetitive data wrangling
 
@@ -277,16 +277,15 @@ python -c "import etl_framework; print(etl_framework.__version__)"
 ### Run a Pipeline
 
 The framework in this repository is the reusable component layer — extractors,
-transformers, loaders and the quality engine. The orchestration entry point and
-the pipeline YAML configs live in the private production repository; what follows
-is how the pieces compose.
+transformers, loaders and the quality engine. It does not include an orchestration entry point or pipeline YAML configs; what
+follows is how the pieces compose.
 
 ```python
 from etl_framework.extractors import create_oracle_extractor
 from etl_framework.transformers import SchemaEnforcer, INVENTORY_SCHEMA
 from etl_framework.loaders import write_to_bronze
 
-extractor = create_oracle_extractor(query="SELECT * FROM vw_inventory_snapshot")
+extractor = create_oracle_extractor(query="SELECT * FROM inventory_snapshot")
 df = extractor.extract()
 
 df = SchemaEnforcer(INVENTORY_SCHEMA).apply(df)

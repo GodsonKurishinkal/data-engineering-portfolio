@@ -304,14 +304,18 @@ def create_oracle_extractor(
     username: str,
     password: str,
     query: str,
+    driver: str,
     **kwargs,
 ) -> DatabaseExtractor:
-    """Factory function for Oracle extraction."""
+    """Factory function for Oracle extraction.
+
+    ``driver`` is the name of the Oracle ODBC driver installed on the host.
+    """
     config = DatabaseConfig(
         source_name=source_name,
         target_table=target_table,
         bronze_path=bronze_path,
-        driver="Oracle in OraClient19Home1",
+        driver=driver,
         host=host,
         port=1521,
         database=database,
